@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
@@ -8,8 +10,8 @@ using UnityEngine.Rendering;
 public class Draggable : MonoBehaviour
 {
     public Action hidePreview, click, dropCancelled, pick;
-    public Action<Draggable> preview;
-    public Action<Collider2D> droppedOn;
+    public Action<List<Card>> preview;
+    public Action<List<Collider2D>> droppedOn;
 
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
@@ -44,7 +46,7 @@ public class Draggable : MonoBehaviour
         dragging = true;
         start = transform.position;
         offset = start - GetMousePos();
-        // layerId = go.layer;
+        layerId = go.layer;
         // go.layer = 0;
         
         pick?.Invoke();
@@ -70,6 +72,8 @@ public class Draggable : MonoBehaviour
 
     private void OnMouseUp()
     {
+        hidePreview?.Invoke();
+        
         if (Vector3.Distance(transform.position, start) < 0.1f)
         {
             click?.Invoke();   
@@ -78,15 +82,16 @@ public class Draggable : MonoBehaviour
 
     private void Update()
     {
+        if (dragging && Input.GetMouseButtonUp(0))
+        {
+            StopDrag();
+            return;
+        }
+        
         if (dragging)
         {
             transform.position = GetMousePos() + offset;
             InvokePreview();
-        }
-
-        if (dragging && Input.GetMouseButtonUp(0))
-        {
-            StopDrag();
         }
     }
 
@@ -97,19 +102,13 @@ public class Draggable : MonoBehaviour
 
     private void InvokePreview()
     {
-        preview?.Invoke(this);
-        // var rounded = GetRoundedPos();
-        // if (CanDrop(rounded))
-        // {
-        //     preview?.Invoke(this);
-        //     return;
-        // }
-        //
-        // hidePreview?.Invoke();
+        var hits = TryDrop(transform.position).Select(h => h.GetComponent<Card>()).Where(h => h).ToList();
+        preview?.Invoke(hits);
     }
 
     private void StopDrag()
     {
+        hidePreview?.Invoke();
         var rounded = GetRoundedPos();
         DropOn(rounded);
     }
@@ -124,11 +123,10 @@ public class Draggable : MonoBehaviour
     {
         dragging = false;
 
-        var hit = TryDrop(pos);
-        if (hit)
+        var hits = TryDrop(pos);
+        if (hits.Any())
         {
-            droppedOn?.Invoke(hit);
-            NormalizeSortOrder();
+            droppedOn?.Invoke(hits.ToList());
             return;
         }
 
@@ -147,12 +145,12 @@ public class Draggable : MonoBehaviour
         dropCancelled?.Invoke();
     }
 
-    private Collider2D TryDrop(Vector2 pos)
+    private Collider2D[] TryDrop(Vector2 pos)
     {
         gameObject.layer++;
-        var hit = Physics2D.OverlapBox(pos, new Vector2(1f, 1.5f), 0, dropMask);
+        var hits = Physics2D.OverlapBoxAll(pos, new Vector2(1f, 1.5f), 0, dropMask);
         gameObject.layer--;
-        return hit;
+        return hits;
     }
 
     private Vector3 GetMousePos()

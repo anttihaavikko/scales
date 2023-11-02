@@ -6,6 +6,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 public class Card : MonoBehaviour, IPointerClickHandler
 {
@@ -14,6 +15,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text numberLabel;
     [SerializeField] private Collider2D coll;
     [SerializeField] private AutoSpriteOrderOnStart sorter;
+    [SerializeField] private GameObject outline;
+    [SerializeField] private SortingGroup sortingGroup;
 
     private bool wasSelected;
     private bool selected;
@@ -22,6 +25,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private bool removed;
     
     private readonly List<Card> covers = new();
+    private List<Card> marked = new();
 
     public bool IsSelected => selected;
     public int Number => number;
@@ -40,7 +44,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public void SetDepth()
     {
-        sorter.Apply();
+        sortingGroup.sortingOrder = -Mathf.RoundToInt(transform.position.y * 10);
     }
 
     public void AddCover(Card other)
@@ -73,28 +77,48 @@ public class Card : MonoBehaviour, IPointerClickHandler
         draggable.click += OnClick;
         draggable.pick += OnPick;
         draggable.droppedOn += OnDrop;
+        draggable.preview += OnPreview;
+        draggable.hidePreview += OnHidePreview;
     }
 
-    private void OnDrop(Collider2D obj)
+    private void OnHidePreview()
     {
-        var slot = obj.GetComponent<Slot>();
-        if (slot && slot.IsEmpty)
+        marked.ForEach(t => t.ToggleOutline(false));
+        ToggleOutline(false);
+    }
+
+    private void OnPreview(List<Card> targets)
+    {
+        marked.ForEach(t => t.ToggleOutline(false));
+        marked = targets.Where(t => deck.CanCombine(this, t)).ToList();
+        ToggleOutline(marked.Any());
+        marked.ForEach(t => t.ToggleOutline(true));
+        // Debug.Log($"Preview for {number} => {string.Join(",", marked.Select(m => m.number))}");
+    }
+
+    private void OnDrop(List<Collider2D> objects)
+    {
+        foreach (var obj in objects)
         {
-            deck.DropToSlot(this, slot);
-            return;
+            var slot = obj.GetComponent<Slot>();
+            if (slot && slot.IsEmpty)
+            {
+                deck.DropToSlot(this, slot);
+                return;
+            }
+
+            if (slot && deck.TryCombine(this, slot.TopCard))
+            {
+                return;
+            } 
+        
+            var card = obj.GetComponent<Card>();
+            if (card && deck.TryCombine(this, card))
+            {
+                return;
+            }
         }
 
-        if (slot && deck.TryCombine(this, slot.TopCard))
-        {
-            return;
-        } 
-        
-        var card = obj.GetComponent<Card>();
-        if (card && deck.TryCombine(this, card))
-        {
-            return;
-        }
-        
         draggable.CancelDrop();
     }
 
@@ -127,5 +151,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
         {
             deck.RightClick(this);
         }
+    }
+
+    public void ToggleOutline(bool state)
+    {
+        outline.SetActive(state);
     }
 }

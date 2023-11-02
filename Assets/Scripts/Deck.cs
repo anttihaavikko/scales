@@ -41,6 +41,11 @@ public class Deck : MonoBehaviour
         gameMode.DropToSlot(card, slot);
     }
 
+    public bool CanCombine(Card first, Card second)
+    {
+        return first != second && gameMode.CanCombine(first, second);
+    }
+
     public bool TryCombine(Card first, Card second)
     {
         return first != second && gameMode.TryCombine(first, second);

@@ -60,6 +60,7 @@ public class Mountain : GameMode
     
     public override void DropToSlot(Card card, Slot slot)
     {
+        DeselectAll();
         slots.ForEach(s => s.Remove(card));
         card.ChangeSelection(false);
         slot.Add(card);
@@ -67,10 +68,15 @@ public class Mountain : GameMode
         deck.Cards.ToList().ForEach(c => c.RemoveCover(card));
         FlipCards();
     }
+    
+    public override bool CanCombine(Card first, Card second)
+    {
+        return first.Number + second.Number == 10;
+    }
 
     public override bool TryCombine(Card first, Card second)
     {
-        var ok = first.Number + second.Number == 10;
+        var ok = CanCombine(first, second);
         if (ok)
         {
             deck.Kill(new List<Card>{ first, second });
@@ -81,12 +87,17 @@ public class Mountain : GameMode
 
     public override void RightClick(Card card)
     {
-        deck.Cards.Where(c => c.IsSelected).ToList().ForEach(c => c.ChangeSelection(false));
+        DeselectAll();
         var slot = slots.FirstOrDefault(s => s.IsEmpty);
         if (slot)
         {
             DropToSlot(card, slot);
         }
+    }
+
+    private void DeselectAll()
+    {
+        deck.Cards.Where(c => c.IsSelected).ToList().ForEach(c => c.ChangeSelection(false));
     }
 
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
