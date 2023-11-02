@@ -43,7 +43,7 @@ public class Deck : MonoBehaviour
 
     public bool TryCombine(Card first, Card second)
     {
-        return gameMode.TryCombine(first, second);
+        return first != second && gameMode.TryCombine(first, second);
     }
 
     public void RightClick(Card card)

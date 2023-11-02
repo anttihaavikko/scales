@@ -25,7 +25,7 @@ public class Mountain : GameMode
             for (var col = 0; col < row + 1; col++)
             {
                 if(row == 3) shuffled[index].Flip();
-                shuffled[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, rows - row * 0.9f);
+                shuffled[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, -1 + rows - row * 0.9f);
                 shuffled[index].SetDepth();
 
                 ApplyCover(shuffled, shuffled[index], index - row - 1, row);
@@ -81,6 +81,7 @@ public class Mountain : GameMode
 
     public override void RightClick(Card card)
     {
+        deck.Cards.Where(c => c.IsSelected).ToList().ForEach(c => c.ChangeSelection(false));
         var slot = slots.FirstOrDefault(s => s.IsEmpty);
         if (slot)
         {
