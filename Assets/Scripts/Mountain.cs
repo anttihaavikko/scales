@@ -51,8 +51,7 @@ public class Mountain : GameMode
     private void SlotClicked(Slot slot)
     {
         var card = deck.Cards.FirstOrDefault(c => c.IsSelected);
-        slots.ForEach(s => s.Remove(card));
-        
+
         if (slot.IsEmpty && card)
         {
             DropToSlot(card, slot);
@@ -61,6 +60,7 @@ public class Mountain : GameMode
     
     public override void DropToSlot(Card card, Slot slot)
     {
+        slots.ForEach(s => s.Remove(card));
         card.ChangeSelection(false);
         slot.Add(card);
         Tweener.MoveToBounceOut(card.transform, slot.transform.position.WhereZ(0), 0.1f);
