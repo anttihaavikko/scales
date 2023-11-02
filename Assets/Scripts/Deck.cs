@@ -14,15 +14,15 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
-        for (var i = 1; i < 11; i++)
-        {
-            var card = Instantiate(cardPrefab, transform);
-            card.Setup(i, this);
-            card.transform.position += Vector3.right * (i - 5);
-            cards.Add(card);
-        }
-        
+        new List<int>{ 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.ForEach(AddCard);
         gameMode.Setup();
+    }
+
+    private void AddCard(int i)
+    {
+        var card = Instantiate(cardPrefab, transform);
+        card.Setup(i, this);
+        cards.Add(card);
     }
 
     public void Kill(List<Card> targets)
@@ -31,8 +31,23 @@ public class Deck : MonoBehaviour
         cards.RemoveAll(targets.Contains);
     }
 
-    public void Select()
+    public void Select(Card card)
     {
-        gameMode.Select();
+        gameMode.Select(card);
+    }
+
+    public void DropToSlot(Card card, Slot slot)
+    {
+        gameMode.DropToSlot(card, slot);
+    }
+
+    public bool TryCombine(Card first, Card second)
+    {
+        return gameMode.TryCombine(first, second);
+    }
+
+    public void RightClick(Card card)
+    {
+        gameMode.RightClick(card);
     }
 }

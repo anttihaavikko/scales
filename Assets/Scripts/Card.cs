@@ -1,14 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Visuals;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Draggable draggable;
     [SerializeField] private SpriteRenderer backSprite;
     [SerializeField] private TMP_Text numberLabel;
+    [SerializeField] private Collider2D coll;
+    [SerializeField] private AutoSpriteOrderOnStart sorter;
 
     private bool wasSelected;
     private bool selected;
@@ -20,6 +25,7 @@ public class Card : MonoBehaviour
 
     public bool IsSelected => selected;
     public int Number => number;
+    public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
 
     public void Setup(int n, Deck d)
@@ -29,17 +35,31 @@ public class Card : MonoBehaviour
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
+        backSprite.color = Color.red;
+    }
+
+    public void SetDepth()
+    {
+        sorter.Apply();
     }
 
     public void AddCover(Card other)
     {
         covers.Add(other);
     }
+    
+    public void RemoveCover(Card other)
+    {
+        covers.Remove(other);
+    }
 
     public void Flip()
     {
+        if (draggable.CanDrag) return;
         draggable.CanDrag = true;
+        backSprite.color = Color.white;
         numberLabel.gameObject.SetActive(true);
+        coll.enabled = true;
     }
 
     public void Kill()
@@ -52,23 +72,60 @@ public class Card : MonoBehaviour
     {
         draggable.click += OnClick;
         draggable.pick += OnPick;
+        draggable.droppedOn += OnDrop;
+    }
+
+    private void OnDrop(Collider2D obj)
+    {
+        var slot = obj.GetComponent<Slot>();
+        if (slot && slot.IsEmpty)
+        {
+            deck.DropToSlot(this, slot);
+            return;
+        }
+
+        if (slot && deck.TryCombine(this, slot.TopCard))
+        {
+            return;
+        } 
+        
+        var card = obj.GetComponent<Card>();
+        if (card && deck.TryCombine(this, card))
+        {
+            return;
+        }
+        
+        draggable.CancelDrop();
     }
 
     private void OnPick()
     {
         wasSelected = selected;
-        ChangeSelection(false);
+        UpdateSelection(false);
     }
 
     private void OnClick()
     {
-        ChangeSelection(!wasSelected);
+        UpdateSelection(!wasSelected);
     }
 
-    private void ChangeSelection(bool state)
+    private void UpdateSelection(bool state)
+    {
+        ChangeSelection(state);
+        deck.Select(this);
+    }
+    
+    public void ChangeSelection(bool state)
     {
         selected = state;
         backSprite.color = selected ? Color.yellow : Color.white;
-        deck.Select();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            deck.RightClick(this);
+        }
     }
 }

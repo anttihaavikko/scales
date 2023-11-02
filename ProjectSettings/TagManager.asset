@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Slots
+  - Cards
+  - Held
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Slots
+    uniqueID: 2715265499
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

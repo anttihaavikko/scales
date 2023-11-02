@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 562345696741259793}
   - component: {fileID: 562345696741259792}
   - component: {fileID: 3634038568260914187}
-  - component: {fileID: 5752057082106510450}
-  m_Layer: 0
+  - component: {fileID: 3135322520503334253}
+  m_Layer: 7
   m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562345696741259804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -79,14 +79,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 192
   blockMask:
     serializedVersion: 2
     m_Bits: 0
   lockAfterDrop: 0
-  sortingGroup: {fileID: 0}
+  sortingGroup: {fileID: 3634038568260914187}
   normalSortOrder: 0
-  dragSortOrder: 0
+  dragSortOrder: 1000
 --- !u!114 &562345696741259792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,6 +102,8 @@ MonoBehaviour:
   draggable: {fileID: 562345696741259793}
   backSprite: {fileID: 562345696912880281}
   numberLabel: {fileID: 562345698481174751}
+  coll: {fileID: 562345696741259794}
+  sorter: {fileID: 3135322520503334253}
 --- !u!210 &3634038568260914187
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5752057082106510450
+--- !u!114 &3135322520503334253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,7 +124,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 562345696741259804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bef04a66e413c4d29a6b89a8c6ac96b7, type: 3}
+  m_Script: {fileID: 11500000, guid: bef774f5dc8348a9b244a49fb25a0a29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0

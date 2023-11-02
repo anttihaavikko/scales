@@ -8,8 +8,9 @@ using UnityEngine.Rendering;
 public class Draggable : MonoBehaviour
 {
     public Action hidePreview, click, dropCancelled, pick;
-    public Action<Draggable> preview, dropped;
-    
+    public Action<Draggable> preview;
+    public Action<Collider2D> droppedOn;
+
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
     [SerializeField] private SortingGroup sortingGroup;
@@ -65,10 +66,11 @@ public class Draggable : MonoBehaviour
     {
         SetSortOrder(normalSortOrder);
     }
+    
 
     private void OnMouseUp()
     {
-        if (Vector3.Distance(transform.position, start) < 0.01f)
+        if (Vector3.Distance(transform.position, start) < 0.1f)
         {
             click?.Invoke();   
         }
@@ -122,34 +124,35 @@ public class Draggable : MonoBehaviour
     {
         dragging = false;
 
-        if (CanDrop(pos))
+        var hit = TryDrop(pos);
+        if (hit)
         {
-            // transform.position = pos;
-            dropped?.Invoke(this);
-            // enabled = !lockAfterDrop;
-            // gameObject.layer = layerId;
-            
+            droppedOn?.Invoke(hit);
+            NormalizeSortOrder();
             return;
         }
-        
-        Tweener.MoveToBounceOut(transform, start, 0.3f);
+
+        CancelDrop();
+    }
+
+    public void CancelDrop()
+    {
+        SetSortOrder(dragSortOrder);
+        Tweener.MoveToBounceOut(transform, start, 0.1f);
         this.StartCoroutine(() =>
         {
             gameObject.layer = layerId;
+            NormalizeSortOrder();
         }, 0.3f);
         dropCancelled?.Invoke();
     }
 
-    private bool CanDrop(Vector2 pos)
+    private Collider2D TryDrop(Vector2 pos)
     {
-        return true;
-        
-        if (DropLocked) return false;
-        
-        var allowed = Physics2D.OverlapCircle(pos, 0.1f, dropMask);
-        var blocked = Physics2D.OverlapCircle(pos, 0.1f, blockMask);
-
-        return allowed && !blocked;
+        gameObject.layer++;
+        var hit = Physics2D.OverlapBox(pos, new Vector2(1f, 1.5f), 0, dropMask);
+        gameObject.layer--;
+        return hit;
     }
 
     private Vector3 GetMousePos()
