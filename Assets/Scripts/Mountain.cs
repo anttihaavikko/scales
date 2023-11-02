@@ -62,9 +62,3 @@ public class Mountain : GameMode
         });
     }
 }
-
-public abstract class GameMode : MonoBehaviour
-{
-    public abstract void Setup();
-    public abstract void Select();
-}
