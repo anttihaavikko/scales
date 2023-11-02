@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a8eed48f-92cf-445c-acfd-1835f30a955c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Appearer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Appearer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/ButtonStyle.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Face.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Face.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/FlyingText.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/FlyingText.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/FollowCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/FollowCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Mover.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Mover.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Pulsate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Pulsate.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Rotator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Rotator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/TweenAction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/TweenAction.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/TweenEasings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/TweenEasings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Tweener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Animations/Tweener.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Camera.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Camera.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Material.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Material.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Pulse.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displace Pulse.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/DisplaceCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/DisplaceCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displacement Texture.renderTexture" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/Displacement Texture.renderTexture.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/World Displace.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/World Displace.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/WorldDisplaceShader.shader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/WorldDisplaceShader.shader.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/pulse-ring-displacement.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Displaces/pulse-ring-displacement.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Extensions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Extensions/MonoBehaviourExtension.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Extensions/MonoBehaviourExtension.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/AudioManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/AudioManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/AutoEnd.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/AutoEnd.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/EffectManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/EffectManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/HudManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/HudManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/InputMagic.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/InputMagic.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/Manager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/Manager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/ObjectPool.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/ObjectPool.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/SoundEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Managers/SoundEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomMirror.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomMirror.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomPosition.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomPosition.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomRotation.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomRotation.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomScale.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Randomizers/RandomScale.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/StarterKit.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/StarterKit.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/DebugDraw.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/HoldEscToQuit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/HoldEscToQuit.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/SafeArea.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/SafeArea.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/TextUtils.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Utils/TextUtils.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Blit.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Blit.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/BoxOutlinerScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/BoxOutlinerScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/EffectCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/EffectCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/GeometryFromColliderScript.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/GeometryFromColliderScript.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Shine.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Shine.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Triangulator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StarterKit/Visuals/Triangulator.cs.meta" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Animations/Appearer.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1pmejOxlKbS5rXXKKuZgrYSGirK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a8eed48f-92cf-445c-acfd-1835f30a955c" name="Default Changelist" comment="" />
+      <created>1615792827549</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1615792827549</updated>
+      <workItem from="1615792832395" duration="51000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
