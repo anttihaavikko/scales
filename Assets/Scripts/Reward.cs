@@ -92,4 +92,9 @@ public class Reward : GameMode
     public override void RightClick(Card card)
     {
     }
+    
+    public override int GetJokerValue()
+    {
+        return deck.Cards.Where(c => !c.IsJoker && c.IsOpen).Sum(c => c.Number);
+    }
 }

@@ -59,6 +59,11 @@ public class Mountain : GameMode
         return first.Number + second.Number == 10;
     }
 
+    public override int GetJokerValue()
+    {
+        return deck.Cards.Where(c => !c.IsJoker && c.IsOpen).Sum(c => c.Number);
+    }
+
     protected override void Combine(Card first, Card second)
     {
         deck.Kill(new List<Card>{ first, second });

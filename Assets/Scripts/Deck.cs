@@ -66,4 +66,9 @@ public class Deck : MonoBehaviour
     {
         gameMode.RightClick(card);
     }
+
+    public int GetTotal()
+    {
+        return gameMode.GetJokerValue();
+    }
 }

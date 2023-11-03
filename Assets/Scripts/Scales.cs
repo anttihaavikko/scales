@@ -1,3 +1,4 @@
+using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using TMPro;
@@ -31,10 +32,11 @@ public class Scales : GameMode
         slot.Add(card);
         var pos = slot.transform.position.WhereZ(0) + Vector3.up * (0.2f * (slot.Count - 1));
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
-        hand.Draw();
 
         var leftSum = slots[0].Sum;
         var rightSum = slots[1].Sum;
+        
+        hand.Draw();
 
         left.text = leftSum.ToString();
         right.text = rightSum.ToString();
@@ -58,5 +60,10 @@ public class Scales : GameMode
 
     public override void RightClick(Card card)
     {
+    }
+    
+    public override int GetJokerValue()
+    {
+        return slots.Sum(s => s.TopCard && !s.TopCard.IsJoker ? s.TopCard.Number : 0) + hand.Cards.Where(c => !c.IsJoker).Sum(c => c.Number);
     }
 }

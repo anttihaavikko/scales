@@ -27,6 +27,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private int number;
     private bool removed;
     private CardModifier modifier;
+    private CardType cardType;
+    private bool open;
     
     private readonly List<Card> covers = new();
     private List<Card> marked = new();
@@ -34,18 +36,22 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public Action click;
 
     public bool IsSelected => selected;
-    public int Number => number;
+    public int Number => IsJoker ? deck.GetTotal() : number;
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
     public bool IsModifier => modifier != CardModifier.None;
     public Guid Id => id;
+    public bool IsJoker => cardType == CardType.Joker;
+    public bool IsOpen => open;
 
     public void Setup(CardData data, Deck d)
     {
         id = data.id;
+        cardType = data.type;
         number = data.number;
         modifier = data.modifier;
         numberLabel.text = data.GetPrefix() + number;
+        if (cardType == CardType.Joker) numberLabel.text = "J";
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
@@ -56,7 +62,8 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         return new CardData(modifier, number)
         {
-            id = id
+            id = id,
+            type = cardType
         };
     }
 
@@ -84,6 +91,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void Flip()
     {
         if (draggable.CanDrag) return;
+        open = true;
         draggable.CanDrag = true;
         backSprite.color = Color.white;
         numberLabel.gameObject.SetActive(true);
@@ -206,17 +214,30 @@ public enum CardModifier
     Multiply
 }
 
+public enum CardType
+{
+    Normal,
+    Joker
+}
+
 public class CardData
 {
     public Guid id;
     public int number;
     public CardModifier modifier;
+    public CardType type;
 
     public CardData(int value)
     {
         id = Guid.NewGuid();
         number = value;
         modifier = CardModifier.None;
+        type = CardType.Normal;
+    }
+
+    public CardData(CardType specialType) : this(0)
+    {
+        type = specialType;
     }
     
     public CardData(CardModifier mod, int value) : this(value)
@@ -254,7 +275,8 @@ public class CardData
             new CardData(0),
             new CardData(99),
             new CardData(Random.Range(1, 99)),
-            new CardData(Random.Range(1, 20))
+            new CardData(Random.Range(1, 20)),
+            new CardData(CardType.Joker)
         }.Random();
     }
     

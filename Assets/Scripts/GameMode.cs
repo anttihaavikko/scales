@@ -37,6 +37,7 @@ public abstract class GameMode : MonoBehaviour
         return true;
     }
 
+    public abstract int GetJokerValue();
     protected abstract void Combine(Card first, Card second);
     public abstract void Setup();
     public abstract void Select(Card card);
