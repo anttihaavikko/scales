@@ -7,16 +7,9 @@ using UnityEngine;
 
 public class Mountain : GameMode
 {
-    [SerializeField] private Deck deck;
-    [SerializeField] private List<Slot> slots;
-
-    private void Start()
-    {
-        slots.ForEach(slot => slot.click += SlotClicked);
-    }
     public override void Setup()
     {
-        var shuffled = deck.Cards.RandomOrder().ToList();
+        var cards = deck.Cards.Reverse().ToList();
 
         var rows = 4;
         var index = 0;
@@ -24,18 +17,18 @@ public class Mountain : GameMode
         {
             for (var col = 0; col < row + 1; col++)
             {
-                if(row == 3) shuffled[index].Flip();
-                shuffled[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, -1 + rows - row * 0.9f);
-                shuffled[index].SetDepth();
+                if(row == 3) cards[index].Flip();
+                cards[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, -1 + rows - row * 0.9f);
+                cards[index].SetDepth();
 
-                ApplyCover(shuffled, shuffled[index], index - row - 1, row);
-                ApplyCover(shuffled, shuffled[index], index - row, row);
+                ApplyCover(cards, cards[index], index - row - 1, row);
+                ApplyCover(cards, cards[index], index - row, row);
                 
                 index++;
             }
         }
         
-        shuffled.Skip(index).ToList().ForEach(c =>
+        cards.Skip(index).ToList().ForEach(c =>
         {
             var slot = slots.FirstOrDefault(s => s.IsEmpty);
 
@@ -48,15 +41,7 @@ public class Mountain : GameMode
         });
     }
     
-    private void SlotClicked(Slot slot)
-    {
-        var card = deck.Cards.FirstOrDefault(c => c.IsSelected);
-
-        if (slot.IsEmpty && card)
-        {
-            DropToSlot(card, slot);
-        }
-    }
+    
     
     public override void DropToSlot(Card card, Slot slot)
     {
@@ -93,11 +78,6 @@ public class Mountain : GameMode
         {
             DropToSlot(card, slot);
         }
-    }
-
-    private void DeselectAll()
-    {
-        deck.Cards.Where(c => c.IsSelected).ToList().ForEach(c => c.ChangeSelection(false));
     }
 
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)

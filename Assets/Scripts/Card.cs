@@ -42,6 +42,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
         backSprite.color = Color.red;
     }
 
+    public void SetDepth(Card target, int dir)
+    {
+        if (!target) return;
+        sortingGroup.sortingOrder = target.sortingGroup.sortingOrder + dir;
+    }
+
     public void SetDepth()
     {
         sortingGroup.sortingOrder = -Mathf.RoundToInt(transform.position.y * 10);
@@ -101,7 +107,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         foreach (var obj in objects)
         {
             var slot = obj.GetComponent<Slot>();
-            if (slot && slot.IsEmpty)
+            if (slot && slot.Accepts)
             {
                 deck.DropToSlot(this, slot);
                 return;
@@ -156,5 +162,15 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void ToggleOutline(bool state)
     {
         outline.SetActive(state);
+    }
+
+    public void Lock()
+    {
+        draggable.CanDrag = false;
+    }
+
+    public void DisableCollider()
+    {
+        coll.enabled = false;
     }
 }

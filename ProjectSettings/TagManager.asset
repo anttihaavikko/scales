@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Picked
+    uniqueID: 3136479429
+    locked: 0
   - name: Card Outlines
     uniqueID: 3702743983
     locked: 0

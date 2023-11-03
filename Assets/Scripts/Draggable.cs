@@ -16,7 +16,6 @@ public class Draggable : MonoBehaviour
     [SerializeField] private LayerMask dropMask, blockMask;
     [SerializeField] private bool lockAfterDrop = true;
     [SerializeField] private SortingGroup sortingGroup;
-    [SerializeField] private int normalSortOrder, dragSortOrder;
 
     public bool CanDrag { get; set; } = true;
     public bool DropLocked { get; set; }
@@ -26,6 +25,7 @@ public class Draggable : MonoBehaviour
     private Vector3 offset;
     private Vector3 start;
     private int layerId;
+    private int normalLayer;
 
     public bool IsDragging => dragging;
 
@@ -48,30 +48,31 @@ public class Draggable : MonoBehaviour
         offset = start - GetMousePos();
         layerId = go.layer;
         // go.layer = 0;
+
+        SetSortOrder("Picked");
         
         pick?.Invoke();
         
         // AudioManager.Instance.PlayEffectAt(0, start, 1f);
-
-        SetSortOrder(dragSortOrder);
     }
 
-    private void SetSortOrder(int order)
+    private void SetSortOrder(string layer)
     {
         if (sortingGroup)
         {
-            sortingGroup.sortingOrder = order;
+            sortingGroup.sortingLayerName = layer;
         }
     }
 
     public void NormalizeSortOrder()
     {
-        SetSortOrder(normalSortOrder);
+        SetSortOrder("Defult");
     }
     
 
     private void OnMouseUp()
     {
+        NormalizeSortOrder();
         hidePreview?.Invoke();
         
         if (Vector3.Distance(transform.position, start) < 0.1f)
@@ -135,7 +136,7 @@ public class Draggable : MonoBehaviour
 
     public void CancelDrop()
     {
-        SetSortOrder(dragSortOrder);
+        SetSortOrder("Picked");
         Tweener.MoveToBounceOut(transform, start, 0.1f);
         this.StartCoroutine(() =>
         {

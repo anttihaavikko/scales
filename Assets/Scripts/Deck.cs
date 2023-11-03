@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Extensions;
 using UnityEngine;
 
 public class Deck : MonoBehaviour
@@ -14,13 +15,21 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
-        new List<int>{ 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.ForEach(AddCard);
+        new List<int>{ 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.RandomOrder().ToList().ForEach(AddCard);
         gameMode.Setup();
+    }
+
+    public Card Draw()
+    {
+        var card = cards.LastOrDefault();
+        cards.Remove(card);
+        return card;
     }
 
     private void AddCard(int i)
     {
         var card = Instantiate(cardPrefab, transform);
+        card.transform.position += Vector3.up * 0.2f * cards.Count;
         card.Setup(i, this);
         cards.Add(card);
     }
