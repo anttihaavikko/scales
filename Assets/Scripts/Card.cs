@@ -57,7 +57,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         draggable.CanDrag = false;
         backSprite.color = Color.red;
     }
-    
+
     public CardData GetData()
     {
         return new CardData(modifier, number)

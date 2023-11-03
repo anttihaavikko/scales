@@ -77,6 +77,11 @@ public class Reward : GameMode
     {
         var data = State.Instance.GetCard(second.Id);
         if (data == default) return;
+        if (data.type == CardType.Joker)
+        {
+            data.type = CardType.Normal;
+            data.number = second.Number;
+        }
         data.Modify(first.GetData());
         second.Setup(data, deck);
         second.Flip();
