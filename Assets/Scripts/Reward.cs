@@ -11,7 +11,7 @@ public class Reward : GameMode
     public override void Setup()
     {
         var index = 0;
-        var cards = deck.Cards.OrderByDescending(c => c.Number).ToList();
+        var cards = deck.Cards.OrderByDescending(c => c.SortValue).ToList();
         cards.ForEach(c =>
         {
             c.Flip();

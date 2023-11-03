@@ -24,6 +24,8 @@ public class Scales : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        card.Flatten();
+        
         card.SetDepth(slot.TopCard, 1);
         card.Lock();
         card.DisableCollider();

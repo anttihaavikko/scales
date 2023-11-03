@@ -43,6 +43,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public Guid Id => id;
     public bool IsJoker => cardType == CardType.Joker;
     public bool IsOpen => open;
+    public int SortValue => IsJoker ? 999 : number;
 
     public void Setup(CardData data, Deck d)
     {
@@ -56,6 +57,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
         backSprite.color = Color.red;
+    }
+
+    public void Flatten()
+    {
+        number = Number;
+        cardType = CardType.Normal;
     }
 
     public CardData GetData()
