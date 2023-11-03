@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using AnttiStarterKit.Animations;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class Hand : MonoBehaviour
     private readonly List<Card> cards = new();
     
     public IEnumerable<Card> Cards => cards;
+
+    public bool IsEmpty => !cards.Any();
 
     public void Draw()
     {

@@ -40,6 +40,11 @@ public class Scales : GameMode
         right.text = rightSum.ToString();
 
         diff.text = Mathf.Abs(leftSum - rightSum).ToString();
+
+        if (hand.IsEmpty)
+        {
+            SceneChanger.Instance.ChangeScene("Reward");
+        }
     }
 
     public override bool TryCombine(Card first, Card second)

@@ -67,6 +67,7 @@ public class Mountain : GameMode
             deck.Kill(new List<Card>{ first, second });
             FlipCards();
         }
+
         return ok;
     }
 
@@ -123,5 +124,10 @@ public class Mountain : GameMode
                 c.Flip();
             }
         });
+        
+        if (deck.Cards.All(c => !c.IsCovered))
+        {
+            SceneChanger.Instance.ChangeScene("Reward");
+        }
     }
 }

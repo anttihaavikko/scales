@@ -13,9 +13,11 @@ public class Deck : MonoBehaviour
 
     public IEnumerable<Card> Cards => cards;
 
+    public bool IsEmpty => cards.All(c => c.IsRemoved);
+
     private void Start()
     {
-        new List<int>{ 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.RandomOrder().ToList().ForEach(AddCard);
+        State.Instance.Cards.RandomOrder().ToList().ForEach(AddCard);
         gameMode.Setup();
     }
 
@@ -26,11 +28,11 @@ public class Deck : MonoBehaviour
         return card;
     }
 
-    private void AddCard(int i)
+    private void AddCard(CardData data)
     {
         var card = Instantiate(cardPrefab, transform);
         card.transform.position += Vector3.up * 0.2f * cards.Count;
-        card.Setup(i, this);
+        card.Setup(data, this);
         cards.Add(card);
     }
 

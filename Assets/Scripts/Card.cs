@@ -27,15 +27,17 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private readonly List<Card> covers = new();
     private List<Card> marked = new();
 
+    public Action click;
+
     public bool IsSelected => selected;
     public int Number => number;
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
 
-    public void Setup(int n, Deck d)
+    public void Setup(CardData data, Deck d)
     {
-        number = n;
-        numberLabel.text = n.ToString();
+        number = data.number;
+        numberLabel.text = number.ToString();
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
@@ -95,6 +97,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     private void OnPreview(List<Card> targets)
     {
+        if (!deck) return;
         marked.ForEach(t => t.ToggleOutline(false));
         marked = targets.Where(t => deck.CanCombine(this, t)).ToList();
         ToggleOutline(marked.Any());
@@ -107,19 +110,19 @@ public class Card : MonoBehaviour, IPointerClickHandler
         foreach (var obj in objects)
         {
             var slot = obj.GetComponent<Slot>();
-            if (slot && slot.Accepts)
+            if (slot && slot.Accepts && deck)
             {
                 deck.DropToSlot(this, slot);
                 return;
             }
 
-            if (slot && deck.TryCombine(this, slot.TopCard))
+            if (slot && deck &&deck.TryCombine(this, slot.TopCard))
             {
                 return;
             } 
         
             var card = obj.GetComponent<Card>();
-            if (card && deck.TryCombine(this, card))
+            if (card && deck && deck.TryCombine(this, card))
             {
                 return;
             }
@@ -132,6 +135,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         wasSelected = selected;
         UpdateSelection(false);
+        click?.Invoke();
     }
 
     private void OnClick()
@@ -142,6 +146,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private void UpdateSelection(bool state)
     {
         ChangeSelection(state);
+        if (!deck) return;
         deck.Select(this);
     }
     
@@ -172,5 +177,15 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void DisableCollider()
     {
         coll.enabled = false;
+    }
+}
+
+public class CardData
+{
+    public int number;
+
+    public CardData(int value)
+    {
+        number = value;
     }
 }
