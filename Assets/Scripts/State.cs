@@ -39,4 +39,9 @@ public class State : Manager<State>
         var scene = new List<string> { "Mountain", "Scale" }.Random();
         SceneChanger.Instance.ChangeScene(scene);
     }
+
+    public CardData GetCard(Guid cardId)
+    {
+        return cards.FirstOrDefault(c => c.id == cardId);
+    }
 }

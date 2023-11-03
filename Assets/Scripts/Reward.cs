@@ -5,6 +5,9 @@ public class Reward : GameMode
 {
     [SerializeField] private Card cardPrefab;
 
+    private Card modifier;
+    private int picks = 3;
+
     public override void Setup()
     {
         var index = 0;
@@ -19,24 +22,55 @@ public class Reward : GameMode
             index++;
         });
 
-        for (var i = 0; i < 3; i++)
+        var optionCount = 5;
+        for (var i = 0; i < optionCount; i++)
         {
             var option = Instantiate(cardPrefab, transform);
-            var data = new CardData(Random.Range(1, 11));
-            option.Setup(data, null);
-            option.transform.position += Vector3.right * 1.2f * i;
+            var data = CardData.GetRandom();
+            option.Setup(data, deck);
+            option.transform.position += Vector3.right * 1.2f * (i - (optionCount - 1) * 0.5f);
             option.Flip();
 
             option.click += () =>
             {
+                if (option.IsModifier)
+                {
+                    DeselectAll();
+                    modifier = option;
+                    return;
+                }
+                
+                option.Kill();
                 State.Instance.Add(data);
-                State.Instance.NextLevel();
+                CheckEnd();
             };
+        }
+    }
+
+    private void CheckEnd()
+    {
+        picks--;
+        
+        if (picks == 0)
+        {
+            State.Instance.NextLevel();
         }
     }
 
     public override void Select(Card card)
     {
+        var data = State.Instance.GetCard(card.Id);
+        
+        if (modifier != default && data != default)
+        {
+            data.Modify(modifier.GetData());
+            card.Setup(data, deck);
+            card.Flip();
+            modifier.Kill();
+            CheckEnd();
+        }
+        
+        modifier = default;
         DeselectAll();
     }
 

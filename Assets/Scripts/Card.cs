@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Visuals;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using Random = UnityEngine.Random;
 
 public class Card : MonoBehaviour, IPointerClickHandler
 {
@@ -18,11 +20,13 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject outline;
     [SerializeField] private SortingGroup sortingGroup;
 
+    private Guid id;
     private bool wasSelected;
     private bool selected;
     private Deck deck;
     private int number;
     private bool removed;
+    private CardModifier modifier;
     
     private readonly List<Card> covers = new();
     private List<Card> marked = new();
@@ -33,15 +37,27 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public int Number => number;
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
+    public bool IsModifier => modifier != CardModifier.None;
+    public Guid Id => id;
 
     public void Setup(CardData data, Deck d)
     {
+        id = data.id;
         number = data.number;
-        numberLabel.text = number.ToString();
+        modifier = data.modifier;
+        numberLabel.text = data.GetPrefix() + number;
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
         backSprite.color = Color.red;
+    }
+    
+    public CardData GetData()
+    {
+        return new CardData(modifier, number)
+        {
+            id = id
+        };
     }
 
     public void SetDepth(Card target, int dir)
@@ -135,12 +151,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         wasSelected = selected;
         UpdateSelection(false);
-        click?.Invoke();
     }
 
     private void OnClick()
     {
         UpdateSelection(!wasSelected);
+        click?.Invoke();
     }
 
     private void UpdateSelection(bool state)
@@ -180,12 +196,77 @@ public class Card : MonoBehaviour, IPointerClickHandler
     }
 }
 
+public enum CardModifier
+{
+    None,
+    Plus,
+    Minus,
+    Multiply
+}
+
 public class CardData
 {
+    public Guid id;
     public int number;
+    public CardModifier modifier;
 
     public CardData(int value)
     {
+        id = Guid.NewGuid();
         number = value;
+        modifier = CardModifier.None;
+    }
+    
+    public CardData(CardModifier mod, int value) : this(value)
+    {
+        modifier = mod;
+    }
+
+    public string GetPrefix()
+    {
+        return modifier switch
+        {
+            CardModifier.None => "",
+            CardModifier.Plus => "+",
+            CardModifier.Minus => "-",
+            CardModifier.Multiply => "x",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+
+    public static CardData GetRandomModifier()
+    {
+        return new []
+        {
+            new CardData(CardModifier.Plus, 1),
+            new CardData(CardModifier.Plus, 2),
+            new CardData(CardModifier.Minus, 1),
+            new CardData(CardModifier.Multiply, 2)
+        }.Random();
+    }
+    
+    public static CardData GetRandomSpecial()
+    {
+        return new []
+        {
+            new CardData(0),
+            new CardData(99),
+            new CardData(Random.Range(1, 99)),
+            new CardData(Random.Range(1, 20))
+        }.Random();
+    }
+    
+    public static CardData GetRandom()
+    {
+        if (Random.value < 0.5f) return new CardData(Random.Range(1, 11));
+        if (Random.value < 0.5f) return GetRandomModifier();
+        return GetRandomSpecial();
+    }
+
+    public void Modify(CardData card)
+    {
+        if(card.modifier == CardModifier.Plus) number += card.number;
+        if(card.modifier == CardModifier.Minus) number -= card.number;
+        if(card.modifier == CardModifier.Multiply) number *= card.number;
     }
 }
