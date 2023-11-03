@@ -59,16 +59,10 @@ public class Mountain : GameMode
         return first.Number + second.Number == 10;
     }
 
-    public override bool TryCombine(Card first, Card second)
+    protected override void Combine(Card first, Card second)
     {
-        var ok = CanCombine(first, second);
-        if (ok)
-        {
-            deck.Kill(new List<Card>{ first, second });
-            FlipCards();
-        }
-
-        return ok;
+        deck.Kill(new List<Card>{ first, second });
+        FlipCards();
     }
 
     public override void RightClick(Card card)

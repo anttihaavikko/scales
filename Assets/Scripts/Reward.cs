@@ -59,15 +59,10 @@ public class Reward : GameMode
 
     public override void Select(Card card)
     {
-        var data = State.Instance.GetCard(card.Id);
-        
-        if (modifier != default && data != default)
+        if (modifier != default)
         {
-            data.Modify(modifier.GetData());
-            card.Setup(data, deck);
-            card.Flip();
-            modifier.Kill();
-            CheckEnd();
+            modifier.ChangeSelection(false);
+            Combine(modifier, card);
         }
         
         modifier = default;
@@ -78,14 +73,20 @@ public class Reward : GameMode
     {
     }
 
-    public override bool TryCombine(Card first, Card second)
+    protected override void Combine(Card first, Card second)
     {
-        return false;
+        var data = State.Instance.GetCard(second.Id);
+        if (data == default) return;
+        data.Modify(first.GetData());
+        second.Setup(data, deck);
+        second.Flip();
+        first.Kill();
+        CheckEnd();
     }
 
     public override bool CanCombine(Card first, Card second)
     {
-        return false;
+        return first.IsModifier && State.Instance.Has(second.Id);
     }
 
     public override void RightClick(Card card)

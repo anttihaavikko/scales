@@ -29,11 +29,18 @@ public abstract class GameMode : MonoBehaviour
             DropToSlot(card, slot);
         }
     }
-    
+
+    public bool TryCombine(Card first, Card second)
+    {
+        if (!CanCombine(first, second)) return false;
+        Combine(first, second);
+        return true;
+    }
+
+    protected abstract void Combine(Card first, Card second);
     public abstract void Setup();
     public abstract void Select(Card card);
     public abstract void DropToSlot(Card card, Slot slot);
-    public abstract bool TryCombine(Card first, Card second);
     public abstract bool CanCombine(Card first, Card second);
     public abstract void RightClick(Card card);
 }

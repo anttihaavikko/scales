@@ -47,9 +47,8 @@ public class Scales : GameMode
         }
     }
 
-    public override bool TryCombine(Card first, Card second)
+    protected override void Combine(Card first, Card second)
     {
-        return false;
     }
 
     public override bool CanCombine(Card first, Card second)

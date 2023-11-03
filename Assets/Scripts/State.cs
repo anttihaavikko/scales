@@ -26,6 +26,11 @@ public class State : Manager<State>
         {
             NextLevel();
         }
+        
+        if (DevKey.Down(KeyCode.M))
+        {
+            SceneChanger.Instance.ChangeScene("Reward");
+        }
     }
 
     public void Add(CardData card)
@@ -40,8 +45,13 @@ public class State : Manager<State>
         SceneChanger.Instance.ChangeScene(scene);
     }
 
-    public CardData GetCard(Guid cardId)
+    public CardData GetCard(Guid id)
     {
-        return cards.FirstOrDefault(c => c.id == cardId);
+        return cards.FirstOrDefault(c => c.id == id);
+    }
+
+    public bool Has(Guid id)
+    {
+        return GetCard(id) != default;
     }
 }

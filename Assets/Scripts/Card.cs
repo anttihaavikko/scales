@@ -117,13 +117,15 @@ public class Card : MonoBehaviour, IPointerClickHandler
         marked.ForEach(t => t.ToggleOutline(false));
         marked = targets.Where(t => deck.CanCombine(this, t)).ToList();
         ToggleOutline(marked.Any());
-        marked.ForEach(t => t.ToggleOutline(true));
+        var p = transform.position;
+        marked.OrderBy(c => Vector3.Distance(c.transform.position, p)).Take(1).ToList().ForEach(t => t.ToggleOutline(true));
         // Debug.Log($"Preview for {number} => {string.Join(",", marked.Select(m => m.number))}");
     }
 
     private void OnDrop(List<Collider2D> objects)
     {
-        foreach (var obj in objects)
+        var p = transform.position;
+        foreach (var obj in objects.OrderBy(c => Vector3.Distance(c.transform.position, p)))
         {
             var slot = obj.GetComponent<Slot>();
             if (slot && slot.Accepts && deck)
