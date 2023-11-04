@@ -40,7 +40,10 @@ public class Reward : GameMode
             {
                 if (option.IsModifier)
                 {
+                    var wasSelected = option.IsSelected;
                     DeselectAll();
+                    if (wasSelected) return;
+                    option.ChangeSelection(true);
                     modifier = option;
                     return;
                 }
@@ -93,6 +96,7 @@ public class Reward : GameMode
         data.Modify(first.GetData());
         second.Setup(data, deck);
         second.Flip();
+        hand.Remove(first);
         first.Kill();
         CheckEnd();
     }
