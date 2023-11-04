@@ -139,7 +139,6 @@ public class Uno : GameMode
         hand.Add(Pile.Cards);
         Pile.Clear();
         Flip();
-        EndTurn();
     }
 
     private void DoMove()
