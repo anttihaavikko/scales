@@ -56,7 +56,7 @@ public class Draggable : MonoBehaviour
         // AudioManager.Instance.PlayEffectAt(0, start, 1f);
     }
 
-    private void SetSortOrder(string layer)
+    public void SetSortOrder(string layer)
     {
         if (sortingGroup)
         {
@@ -64,15 +64,10 @@ public class Draggable : MonoBehaviour
         }
     }
 
-    public void NormalizeSortOrder()
-    {
-        SetSortOrder("Defult");
-    }
-    
 
     private void OnMouseUp()
     {
-        NormalizeSortOrder();
+        SetSortOrder("Default");
         hidePreview?.Invoke();
         
         if (Vector3.Distance(transform.position, start) < 0.1f)
@@ -141,7 +136,7 @@ public class Draggable : MonoBehaviour
         this.StartCoroutine(() =>
         {
             gameObject.layer = layerId;
-            NormalizeSortOrder();
+            SetSortOrder("Default");
         }, 0.3f);
         dropCancelled?.Invoke();
     }

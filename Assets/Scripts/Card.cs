@@ -228,6 +228,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
         Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
     }
 
+    public void Lift(float delay = 1f)
+    {
+        draggable.SetSortOrder("Picked");
+        this.StartCoroutine(() => draggable.SetSortOrder("Default"), 0.1f * delay);
+    }
+
     public void Detach()
     {
         transform.SetParent(null);

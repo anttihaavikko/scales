@@ -26,10 +26,10 @@ public class State : Manager<State>
             NextLevel();
         }
         
-        if (DevKey.Down(KeyCode.M))
-        {
-            SceneChanger.Instance.ChangeScene("Reward");
-        }
+        if (DevKey.Down(KeyCode.M)) SceneChanger.Instance.ChangeScene("Reward");
+        if (DevKey.Down(KeyCode.Alpha1)) SceneChanger.Instance.ChangeScene("Mountain");
+        if (DevKey.Down(KeyCode.Alpha2)) SceneChanger.Instance.ChangeScene("Scale");
+        if (DevKey.Down(KeyCode.Alpha3)) SceneChanger.Instance.ChangeScene("Uno");
     }
 
     public void Add(CardData card)
