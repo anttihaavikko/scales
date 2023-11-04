@@ -1,5 +1,6 @@
 using System.Linq;
 using AnttiStarterKit.Animations;
+using AnttiStarterKit.Extensions;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,7 @@ public class Scales : GameMode
     
     public override void Setup()
     {
-        hand.Draw();
-        hand.Draw();
-        hand.Draw();
+        this.StartCoroutine(() => hand.Fill(), 0.5f);
     }
 
     public override void Select(Card card)
@@ -23,6 +22,7 @@ public class Scales : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        card.transform.SetParent(null);
         card.Flatten();
         
         card.SetDepth(slot.TopCard, 1);

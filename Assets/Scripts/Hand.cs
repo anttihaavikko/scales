@@ -66,7 +66,7 @@ public class Hand : MonoBehaviour
 
     private void RepositionAll()
     {
-        var handCards = Cards.ToList();
+        var handCards = Cards.OrderBy(c => c.transform.position.x).ToList();
         var p = -(handCards.Count - 1) * 0.5f;
         Tweener.MoveToBounceOut(deck.transform, transform.position + Vector3.right * Mathf.Min(-2f, 1.2f * (p - 1.2f)), 0.1f);
         handCards.ForEach(c => Reposition(c, p++));
