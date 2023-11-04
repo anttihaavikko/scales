@@ -3,14 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Mountain : GameMode
 {
+    [SerializeField] private TMP_Text helpText;
+
+    private MountainOperator operation;
+    private int target;
+
     public override void Setup()
     {
+        SetupLevel();
+
         var cards = deck.Cards.Reverse().ToList();
-        
+
         var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slots.Count) + 1)));
         var top = (rows - 1) * 0.5f;
 
@@ -25,7 +34,7 @@ public class Mountain : GameMode
 
                 ApplyCover(cards, cards[index], index - row - 1, row);
                 ApplyCover(cards, cards[index], index - row, row);
-                
+
                 index++;
 
                 if (index >= cards.Count) break;
@@ -48,8 +57,52 @@ public class Mountain : GameMode
                 c.SetDepth();
             }
         });
-        
+
         FlipCards();
+    }
+
+    private void SetupLevel()
+    {
+        var level = State.Instance.Level;
+
+        if (level == 0)
+        {
+            SetLevel(new MountainType(MountainOperator.Plus, 10));
+            return;
+        }
+
+        if (level < 5)
+        {
+            SetLevel(new[]
+            {
+                new MountainType(MountainOperator.Plus, Random.Range(9, 13)),
+                new MountainType(MountainOperator.Minus, Random.Range(0, 2))
+            }.Random());
+            return;
+        }
+        
+        SetLevel(new[]
+        {
+            new MountainType(MountainOperator.Plus, Random.Range(9, 25)),
+            new MountainType(MountainOperator.Minus, Random.Range(0, 5))
+        }.Random());
+    }
+
+    private void SetLevel(MountainType type)
+    {
+        operation = type.operation;
+        target = type.target;
+        helpText.text = $"Combine cards that {GetOperation()} to {target}...";
+    }
+
+    private string GetOperation()
+    {
+        return operation switch
+        {
+            MountainOperator.Plus => "add up",
+            MountainOperator.Minus => "subtract",
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     public override void DropToSlot(Card card, Slot slot)
@@ -63,10 +116,20 @@ public class Mountain : GameMode
         deck.Cards.ToList().ForEach(c => c.RemoveCover(card));
         FlipCards();
     }
+
+    private bool Operate(int a, int b)
+    {
+        return operation switch
+        {
+            MountainOperator.Plus => a + b == target,
+            MountainOperator.Minus => a - b == target || b - a == target,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
     
     public override bool CanCombine(Card first, Card second)
     {
-        return first.Number + second.Number == 10;
+        return Operate(first.Number, second.Number);
     }
 
     public override int GetJokerValue()
@@ -114,13 +177,15 @@ public class Mountain : GameMode
     public override void Select(Card card)
     {
         var selected = deck.Cards.Where(c => c.IsSelected).ToList();
-        var sum = selected.Sum(c => c.Number);
-        if (sum == 10)
+        var numbers = selected.Select(c => c.Number).ToList();
+        var sum = numbers.Sum();
+        
+        if (CanCalcTo(numbers, target, true))
         {
             deck.Kill(selected);
         }
 
-        if (sum > 10)
+        if (sum > target && operation == MountainOperator.Plus)
         {
             selected.ForEach(c => c.ChangeSelection(false));
             card.ChangeSelection(true);
@@ -143,7 +208,7 @@ public class Mountain : GameMode
         var allOpen = deck.Cards.All(c => !c.IsCovered);
         var noOpenSlots = slots.All(s => !s.IsEmpty);
 
-        if ((allOpen || noOpenSlots) && !CanSumTo(numbers, 10))
+        if ((allOpen || noOpenSlots) && !CanCalcTo(numbers, target))
         {
             Invoke(nameof(RoundEnded), 0.5f);
         }
@@ -153,20 +218,61 @@ public class Mountain : GameMode
     {
         SceneChanger.Instance.ChangeScene("Reward");
     }
+
+    private bool CanCalcTo(IList<int> set, int sum, bool exact = false)
+    {
+        return operation == MountainOperator.Plus ? 
+            CanAddTo(set, sum, exact) : 
+            CanSubTo(set, 0, exact);
+    }
     
-    private static bool CanSumTo(List<int> set, int sum)
+    private bool CanSubTo(IList<int> set, int sum, bool exact = false)
+    {
+        return set.Any(num =>
+        {
+            var left = num - sum;
+            if (left == 0 && (!exact || set.Count == 1))
+            {
+                return true;
+            }
+
+            var index = set.IndexOf(num);
+            var possible = set.Where((n, i) => i != index).ToList();
+            return possible.Any() && CanAddTo(possible, left);
+        });
+    }
+
+    private static bool CanAddTo(IList<int> set, int sum, bool exact = false)
     {
         return set.Any(num =>
         {
             var left = sum - num;
-            if (left == 0)
+            if (left == 0 && (!exact || set.Count == 1))
             {
                 return true;
             }
 
             var index = set.IndexOf(num);
             var possible = set.Where((n, i) => n <= sum && i != index).ToList();
-            return possible.Any() && CanSumTo(possible, left);
+            return possible.Any() && CanAddTo(possible, left);
         });
     }
+}
+
+public struct MountainType
+{
+    public MountainOperator operation;
+    public int target;
+
+    public MountainType(MountainOperator operation, int target)
+    {
+        this.target = target;
+        this.operation = operation;
+    }
+}
+
+public enum MountainOperator
+{
+    Plus,
+    Minus
 }
