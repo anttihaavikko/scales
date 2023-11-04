@@ -38,7 +38,6 @@ public class Uno : GameMode
     {
         if (!hasTurn || !CanPlay(card.Number))
         {
-            Debug.Log($"Return card {card.Number}, pile {PileValue}, {hasTurn}");
             card.ReturnToPrevious();
             return;
         }
