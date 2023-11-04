@@ -223,7 +223,7 @@ public class Mountain : GameMode
     {
         return operation == MountainOperator.Plus ? 
             CanAddTo(set, sum, exact) : 
-            CanSubTo(set, 0, exact);
+            CanSubTo(set, sum, exact);
     }
     
     private bool CanSubTo(IList<int> set, int sum, bool exact = false)
@@ -238,7 +238,7 @@ public class Mountain : GameMode
 
             var index = set.IndexOf(num);
             var possible = set.Where((n, i) => i != index).ToList();
-            return possible.Any() && CanAddTo(possible, left);
+            return possible.Any() && CanAddTo(possible, left, exact);
         });
     }
 
@@ -254,7 +254,7 @@ public class Mountain : GameMode
 
             var index = set.IndexOf(num);
             var possible = set.Where((n, i) => n <= sum && i != index).ToList();
-            return possible.Any() && CanAddTo(possible, left);
+            return possible.Any() && CanAddTo(possible, left, exact);
         });
     }
 }
