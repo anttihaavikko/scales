@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="2381.2982"
-     inkscape:cy="624.04061"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="1827.0125"
+     inkscape:cy="-150.44094"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -68,7 +68,8 @@
        d="m 496.01758,68.462891 c -7.75179,97.331679 -0.0201,146.564019 47.08008,146.580079 49.48466,0.0169 55.61126,-48.47137 49.46484,-146.580079 z"
        transform="translate(29.482143,-2.2678571)"
        inkscape:export-xdpi="93"
-       inkscape:export-ydpi="93" />
+       inkscape:export-ydpi="93"
+       inkscape:export-filename="/Users/anttih/card-lined.png" />
     <path
        id="path835-7"
        style="fill:#ffffff;stroke:#ffffff;stroke-width:12;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:50;stroke-dasharray:none;stroke-opacity:1"
@@ -79,5 +80,26 @@
        inkscape:export-xdpi="93"
        inkscape:export-ydpi="93"
        d="m 496.01758,68.462891 c -7.75179,97.331679 -0.0201,146.564019 47.08008,146.580079 49.48466,0.0169 55.61126,-48.47137 49.46484,-146.580079 z" />
+    <path
+       id="path835-5"
+       style="fill:#ffffff;stroke:#000000;stroke-width:5.86434;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:50;stroke-dasharray:none;stroke-opacity:1"
+       sodipodi:type="inkscape:offset"
+       inkscape:radius="0"
+       inkscape:original="M 496.01758 68.462891 C 488.26579 165.79457 495.99744 215.02691 543.09766 215.04297 C 592.58232 215.05987 598.70892 166.5716 592.5625 68.462891 L 496.01758 68.462891 z "
+       transform="matrix(0.69853592,0,0,0.79707966,193.46844,26.032612)"
+       inkscape:export-xdpi="93"
+       inkscape:export-ydpi="93"
+       d="m 496.01758,68.462891 c -7.75179,97.331679 -0.0201,146.564019 47.08008,146.580079 49.48466,0.0169 55.61126,-48.47137 49.46484,-146.580079 z"
+       inkscape:export-filename="/Users/anttih/card-lined.png" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:10.00000028;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:13.00000028,20.00000056;stroke-dashoffset:23.00000064"
+       id="rect833-6"
+       width="96.584892"
+       height="146.5849"
+       x="406.06577"
+       y="-165.76772"
+       ry="14.432554"
+       inkscape:export-xdpi="93"
+       inkscape:export-ydpi="93" />
   </g>
 </svg>

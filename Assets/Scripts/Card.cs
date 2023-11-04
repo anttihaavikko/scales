@@ -20,6 +20,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private AutoSpriteOrderOnStart sorter;
     [SerializeField] private GameObject outline;
     [SerializeField] private SortingGroup sortingGroup;
+    [SerializeField] private Color backColor;
 
     private Guid id;
     private bool wasSelected;
@@ -57,7 +58,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
-        backSprite.color = Color.red;
+        backSprite.color = backColor;
     }
 
     public void SetDeck(Deck d)
@@ -222,6 +223,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void MoveTo(Vector3 pos, float speed = 1f)
     {
         Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
+    }
+
+    public void Detach()
+    {
+        transform.SetParent(null);
     }
 }
 

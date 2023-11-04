@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class Reward : GameMode
         cards.ForEach(c =>
         {
             c.Flip();
+            c.Detach();
             var perRow = 8;
             var x = index % perRow;
             var y = Mathf.FloorToInt(index * 1f / perRow);
@@ -23,9 +25,12 @@ public class Reward : GameMode
         });
 
         var optionCount = 5;
+        var options = new List<Card>();
         for (var i = 0; i < optionCount; i++)
         {
             var option = Instantiate(cardPrefab, transform);
+            option.Detach();
+            options.Add(option);
             var data = CardData.GetRandom();
             option.Setup(data, deck);
             option.transform.position += Vector3.right * 1.2f * (i - (optionCount - 1) * 0.5f);
@@ -40,11 +45,14 @@ public class Reward : GameMode
                     return;
                 }
                 
+                hand.Remove(option);
                 option.Kill();
                 State.Instance.Add(data);
                 CheckEnd();
             };
         }
+        
+        hand.Add(options);
     }
 
     private void CheckEnd()
