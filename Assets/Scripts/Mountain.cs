@@ -40,9 +40,7 @@ public class Mountain : GameMode
             }
         });
     }
-    
-    
-    
+
     public override void DropToSlot(Card card, Slot slot)
     {
         DeselectAll();
@@ -123,10 +121,35 @@ public class Mountain : GameMode
                 c.Flip();
             }
         });
-        
-        if (deck.Cards.All(c => !c.IsCovered))
+
+        var numbers = deck.Cards.Where(c => !c.IsCovered).Select(c => c.Number).ToList();
+        var allOpen = deck.Cards.All(c => !c.IsCovered);
+        var noOpenSlots = slots.All(s => !s.IsEmpty);
+
+        if ((allOpen || noOpenSlots) && !CanSumTo(numbers, 10))
         {
-            SceneChanger.Instance.ChangeScene("Reward");
+            Invoke(nameof(RoundEnded), 1f);
         }
+    }
+
+    private void RoundEnded()
+    {
+        SceneChanger.Instance.ChangeScene("Reward");
+    }
+    
+    private static bool CanSumTo(List<int> set, int sum)
+    {
+        return set.Any(num =>
+        {
+            var left = sum - num;
+            if (left == 0)
+            {
+                return true;
+            }
+
+            var index = set.IndexOf(num);
+            var possible = set.Where((n, i) => n <= sum && i != index).ToList();
+            return possible.Any() && CanSumTo(possible, left);
+        });
     }
 }
