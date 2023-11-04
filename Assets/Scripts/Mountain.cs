@@ -14,6 +14,8 @@ public class Mountain : GameMode
     private MountainOperator operation;
     private int target;
 
+    private const float Overlap = 0.75f;
+
     public override void Setup()
     {
         SetupLevel();
@@ -28,7 +30,7 @@ public class Mountain : GameMode
         {
             for (var col = 0; col < row + 1; col++)
             {
-                var y = (top - row) * 0.9f;
+                var y = (top - row) * Overlap;
                 cards[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, y);
                 cards[index].SetDepth();
 
@@ -41,10 +43,10 @@ public class Mountain : GameMode
             }
         }
 
-        slots[0].transform.position = new Vector3(-(rows * 0.5f + 1) * 1.2f, -top * 0.9f, 0.1f);
-        slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * 0.9f, 0.1f);
-        slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * 0.9f, 0.1f);
-        slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * 0.9f, 0.1f);
+        slots[0].transform.position = new Vector3(-(rows * 0.5f + 1) * 1.2f, -top * Overlap, 0.1f);
+        slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * Overlap, 0.1f);
+        slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * Overlap, 0.1f);
+        slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * Overlap, 0.1f);
 
         cards.Skip(index).ToList().ForEach(c =>
         {
