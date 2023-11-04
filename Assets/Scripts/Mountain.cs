@@ -15,14 +15,17 @@ public class Mountain : GameMode
     private int target;
 
     private const float Overlap = 0.75f;
+    private const float SlotOffset = 0.75f;
 
     public override void Setup()
     {
         SetupLevel();
+        SetupSlots();
 
         var cards = deck.Cards.Reverse().ToList();
 
-        var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slots.Count) + 1)));
+        var slotCount = slots.Count(s => s.gameObject.activeSelf);
+        var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slotCount) + 1)));
         var top = (rows - 1) * 0.5f;
 
         var index = 0;
@@ -43,14 +46,15 @@ public class Mountain : GameMode
             }
         }
 
-        slots[0].transform.position = new Vector3(-(rows * 0.5f + 1) * 1.2f, -top * Overlap, 0.1f);
-        slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * Overlap, 0.1f);
-        slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * Overlap, 0.1f);
-        slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * Overlap, 0.1f);
+        slots[0].transform.position = new Vector3(-(rows * 0.5f + 1) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
+        slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
+        slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
+        slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
+        slots[4].transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset, 0.1f);
 
         cards.Skip(index).ToList().ForEach(c =>
         {
-            var slot = slots.FirstOrDefault(s => s.IsEmpty);
+            var slot = slots.FirstOrDefault(s => s.IsEmpty && s.gameObject.activeSelf);
 
             if (slot)
             {
@@ -61,6 +65,36 @@ public class Mountain : GameMode
         });
 
         FlipCards();
+    }
+
+    private void SetupSlots()
+    {
+        var level = State.Instance.Level;
+        if(level == 0)
+        {
+            slots[4].gameObject.SetActive(false);
+            return;
+        }
+
+        if (level < 5)
+        {
+            slots[2].gameObject.SetActive(false);
+            slots[3].gameObject.SetActive(false);
+            return;
+        }
+
+        if (level >= 9)
+        {
+            slots[0].gameObject.SetActive(false);
+            slots[1].gameObject.SetActive(false);
+            slots[2].gameObject.SetActive(false);
+            slots[3].gameObject.SetActive(false);
+            return;
+        }
+        
+        slots[2].gameObject.SetActive(false);
+        slots[3].gameObject.SetActive(false);
+        slots[4].gameObject.SetActive(false);
     }
 
     private void SetupLevel()
@@ -153,7 +187,7 @@ public class Mountain : GameMode
     public override void RightClick(Card card)
     {
         DeselectAll();
-        var slot = slots.FirstOrDefault(s => s.IsEmpty);
+        var slot = slots.FirstOrDefault(s => s.IsEmpty && s.gameObject.activeSelf);
         if (slot)
         {
             DropToSlot(card, slot);
