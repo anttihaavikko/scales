@@ -4,7 +4,6 @@ using System.Linq;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class State : Manager<State>

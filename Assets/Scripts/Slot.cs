@@ -9,6 +9,7 @@ public class Slot : MonoBehaviour
 {
     [SerializeField] private bool unlimited;
     [SerializeField] private bool pile;
+    [SerializeField] private Collider2D coll;
 
     private readonly List<Card> cards = new();
 
@@ -31,6 +32,7 @@ public class Slot : MonoBehaviour
         }
         
         cards.Add(card);
+        // coll.enabled = false;
     }
 
     public void Clear()
@@ -41,6 +43,7 @@ public class Slot : MonoBehaviour
     public void Remove(Card card)
     {
         cards.Remove(card);
+        // coll.enabled = true;
     }
     
     private void OnMouseDown()

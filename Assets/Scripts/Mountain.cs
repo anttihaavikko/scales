@@ -10,24 +10,33 @@ public class Mountain : GameMode
     public override void Setup()
     {
         var cards = deck.Cards.Reverse().ToList();
+        
+        var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slots.Count) + 1)));
+        var top = (rows - 1) * 0.5f;
 
-        var rows = 4;
         var index = 0;
         for (var row = 0; row < rows; row++)
         {
             for (var col = 0; col < row + 1; col++)
             {
-                if(row == 3) cards[index].Flip();
-                cards[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, -1 + rows - row * 0.9f);
+                var y = (top - row) * 0.9f;
+                cards[index].transform.position = new Vector3(-row * 0.6f + col * 1.2f, y);
                 cards[index].SetDepth();
 
                 ApplyCover(cards, cards[index], index - row - 1, row);
                 ApplyCover(cards, cards[index], index - row, row);
                 
                 index++;
+
+                if (index >= cards.Count) break;
             }
         }
-        
+
+        slots[0].transform.position = new Vector3(-(rows * 0.5f + 1) * 1.2f, -top * 0.9f, 0.1f);
+        slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * 0.9f, 0.1f);
+        slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * 0.9f, 0.1f);
+        slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * 0.9f, 0.1f);
+
         cards.Skip(index).ToList().ForEach(c =>
         {
             var slot = slots.FirstOrDefault(s => s.IsEmpty);
@@ -36,9 +45,11 @@ public class Mountain : GameMode
             {
                 slot.Add(c);
                 c.transform.position = slot.transform.position.WhereZ(0);
-                c.Flip();
+                c.SetDepth();
             }
         });
+        
+        FlipCards();
     }
 
     public override void DropToSlot(Card card, Slot slot)
@@ -65,6 +76,11 @@ public class Mountain : GameMode
     protected override void Combine(Card first, Card second)
     {
         deck.Kill(new List<Card>{ first, second });
+        slots.ForEach(s =>
+        {
+            s.Remove(first);
+            s.Remove(second);
+        });
         FlipCards();
     }
 
@@ -128,7 +144,7 @@ public class Mountain : GameMode
 
         if ((allOpen || noOpenSlots) && !CanSumTo(numbers, 10))
         {
-            Invoke(nameof(RoundEnded), 1f);
+            Invoke(nameof(RoundEnded), 0.5f);
         }
     }
 
