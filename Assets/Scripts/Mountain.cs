@@ -49,7 +49,7 @@ public class Mountain : GameMode
         slots.ForEach(s => s.Remove(card));
         card.ChangeSelection(false);
         slot.Add(card);
-        Tweener.MoveToBounceOut(card.transform, slot.transform.position.WhereZ(0), 0.1f);
+        Tweener.MoveToBounceOut(card.transform, slot.GetPosition(), 0.1f);
         deck.Cards.ToList().ForEach(c => c.RemoveCover(card));
         FlipCards();
     }

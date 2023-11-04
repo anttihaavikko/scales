@@ -1,6 +1,5 @@
 using System.Linq;
 using AnttiStarterKit.Animations;
-using AnttiStarterKit.Extensions;
 using TMPro;
 using UnityEngine;
 
@@ -28,16 +27,15 @@ public class Scales : GameMode
         
         card.SetDepth(slot.TopCard, 1);
         card.Lock();
-        card.DisableCollider();
         hand.Remove(card);
         card.ChangeSelection(false);
         slot.Add(card);
-        var pos = slot.transform.position.WhereZ(0) + Vector3.up * (0.2f * (slot.Count - 1));
+        var pos = slot.GetPosition();
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
 
         var leftSum = slots[0].Sum;
         var rightSum = slots[1].Sum;
-        
+
         hand.Draw();
 
         left.text = leftSum.ToString();

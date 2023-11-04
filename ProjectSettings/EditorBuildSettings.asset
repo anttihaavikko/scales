@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scale.unity
     guid: 6f3e5686b0905435ab8045b800b2fe50
   - enabled: 1
+    path: Assets/Scenes/Uno.unity
+    guid: 98e87785e18584570b1599329c3d07c7
+  - enabled: 1
     path: Assets/Scenes/Reward.unity
     guid: 4fd1584ca131145e7adffc46862f38ad
   m_configObjects: {}

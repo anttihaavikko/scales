@@ -114,6 +114,7 @@ namespace AnttiStarterKit.Animations
         public void OnPointerClick(PointerEventData eventData)
         {
             DoSound(clickSound, clickVolume);
+            Reset();
         }
 
         private void DoSound(int index, float volume)

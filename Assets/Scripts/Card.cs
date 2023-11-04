@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Visuals;
 using TMPro;
@@ -57,6 +58,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
         backSprite.color = Color.red;
+    }
+
+    public void SetDeck(Deck d)
+    {
+        deck = d;
     }
 
     public void Flatten()
@@ -149,7 +155,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
                 return;
             }
 
-            if (slot && deck &&deck.TryCombine(this, slot.TopCard))
+            if (slot && deck && deck.TryCombine(this, slot.TopCard))
             {
                 return;
             } 
@@ -161,6 +167,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
             }
         }
 
+        draggable.CancelDrop();
+    }
+
+    public void ReturnToPrevious()
+    {
         draggable.CancelDrop();
     }
 
@@ -202,14 +213,15 @@ public class Card : MonoBehaviour, IPointerClickHandler
         outline.SetActive(state);
     }
 
-    public void Lock()
+    public void Lock(bool state = true)
     {
-        draggable.CanDrag = false;
+        draggable.CanDrag = !state;
+        coll.enabled = !state;
     }
 
-    public void DisableCollider()
+    public void MoveTo(Vector3 pos, float speed = 1f)
     {
-        coll.enabled = false;
+        Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
     }
 }
 
