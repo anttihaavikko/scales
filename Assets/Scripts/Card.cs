@@ -22,6 +22,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private SortingGroup sortingGroup;
     [SerializeField] private Color backColor;
     [SerializeField] private SpriteRenderer back;
+    [SerializeField] private Color selectColor;
 
     private Guid id;
     private bool wasSelected;
@@ -132,18 +133,19 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     private void OnHidePreview()
     {
-        marked.ForEach(t => t.ToggleOutline(false));
-        ToggleOutline(false);
+        // marked.ForEach(t => t.ToggleOutline(false));
+        // ToggleOutline(false);
     }
 
     private void OnPreview(List<Card> targets)
     {
         if (!deck) return;
-        marked.ForEach(t => t.ToggleOutline(false));
-        marked = targets.Where(t => deck.CanCombine(this, t)).ToList();
-        ToggleOutline(marked.Any());
+        var nextMarks = targets.Where(t => deck.CanCombine(this, t)).ToList();
+        marked.Where(m => !nextMarks.Contains(m)).ToList().ForEach(t => t.ToggleMarking(false));
+        marked = nextMarks;
+        ToggleMarking(marked.Any());
         var p = transform.position;
-        marked.OrderBy(c => Vector3.Distance(c.transform.position, p)).Take(1).ToList().ForEach(t => t.ToggleOutline(true));
+        marked.OrderBy(c => Vector3.Distance(c.transform.position, p)).Take(1).ToList().ForEach(t => t.ToggleMarking(true));
         // Debug.Log($"Preview for {number} => {string.Join(",", marked.Select(m => m.number))}");
     }
 
@@ -201,7 +203,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void ChangeSelection(bool state)
     {
         selected = state;
-        backSprite.color = selected ? Color.yellow : Color.white;
+        ToggleMarking(selected);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -212,9 +214,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void ToggleOutline(bool state)
+    private void ToggleMarking(bool state)
     {
         outline.SetActive(state);
+        backSprite.color = state ? selectColor : Color.white;
     }
 
     public void Lock(bool state = true)
