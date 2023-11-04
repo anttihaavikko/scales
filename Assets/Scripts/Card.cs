@@ -21,6 +21,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject outline;
     [SerializeField] private SortingGroup sortingGroup;
     [SerializeField] private Color backColor;
+    [SerializeField] private SpriteRenderer back;
 
     private Guid id;
     private bool wasSelected;
@@ -59,6 +60,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
         backSprite.color = backColor;
+        back.gameObject.SetActive(true);
     }
 
     public void SetDeck(Deck d)
@@ -110,6 +112,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         backSprite.color = Color.white;
         numberLabel.gameObject.SetActive(true);
         coll.enabled = true;
+        back.gameObject.SetActive(false);
     }
 
     public void Kill()
