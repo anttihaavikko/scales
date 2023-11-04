@@ -76,15 +76,15 @@ public class Mountain : GameMode
             SetLevel(new[]
             {
                 new MountainType(MountainOperator.Plus, Random.Range(9, 13)),
-                new MountainType(MountainOperator.Minus, Random.Range(0, 2))
+                new MountainType(MountainOperator.Minus, Random.Range(0, 3))
             }.Random());
             return;
         }
         
         SetLevel(new[]
         {
-            new MountainType(MountainOperator.Plus, Random.Range(9, 25)),
-            new MountainType(MountainOperator.Minus, Random.Range(0, 5))
+            new MountainType(MountainOperator.Plus, Random.Range(9, 26)),
+            new MountainType(MountainOperator.Minus, Random.Range(0, 6))
         }.Random());
     }
 
