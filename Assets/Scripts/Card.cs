@@ -134,7 +134,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private void OnHidePreview()
     {
         marked.ForEach(t => t.ToggleMarking(false));
-        ToggleMarking(false);
+        // ToggleMarking(false);
     }
 
     private void OnPreview(List<Card> targets)
