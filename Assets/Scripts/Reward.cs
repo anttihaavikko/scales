@@ -1,13 +1,18 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class Reward : GameMode
 {
     [SerializeField] private Card cardPrefab;
+    [SerializeField] private TMP_Text pageText, countText;
 
     private Card modifier;
     private int picks = 3;
+    
+    private const int PerRow = 12;
+    private const int PageSize = PerRow * 3;
 
     public override void Setup()
     {
@@ -60,12 +65,15 @@ public class Reward : GameMode
             c.Flip();
             c.Detach();
             c.Nudge();
-            var perRow = 12;
-            var x = index % perRow;
-            var y = Mathf.FloorToInt(index * 1f / perRow);
-            c.transform.position = new Vector3((-(perRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
+            var x = index % PerRow;
+            var y = Mathf.FloorToInt(index * 1f / PerRow);
+            c.transform.position = new Vector3((-(PerRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
             index++;
         });
+
+        var count = cards.Count;
+        pageText.text = $"{1}/{Mathf.CeilToInt(count * 1f / PageSize)}";
+        countText.text = $"{count} cards";
     }
 
     private void CheckEnd()

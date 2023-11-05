@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 12 cards
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
-  m_sharedMaterial: {fileID: -17284219407303723, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
+  m_sharedMaterial: {fileID: -17284219407303723, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -789,7 +789,10 @@ MonoBehaviour:
   hand: {fileID: 1817050996}
   slots: []
   cam: {fileID: 0}
+  scoreDisplay: {fileID: 0}
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
+  pageText: {fileID: 1634324694}
+  countText: {fileID: 56669366}
 --- !u!1 &988863996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,8 +1105,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: YOUR DECK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
-  m_sharedMaterial: {fileID: -17284219407303723, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
+  m_sharedMaterial: {fileID: -17284219407303723, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1305,8 +1308,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1/1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
-  m_sharedMaterial: {fileID: -17284219407303723, guid: 844222f76f1374c018bae58d4fc1e42e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
+  m_sharedMaterial: {fileID: -17284219407303723, guid: f30f9d07419aa4976b6019821869bae0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
