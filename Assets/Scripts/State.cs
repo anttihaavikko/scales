@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class State : Manager<State>
 {
-    private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10, 0, 0, 0, 0 }.Select(num => new CardData(num)).ToList();
+    private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
 
     public int Level { get; private set; } = 0;
 

@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class Mountain : GameMode
 {
     [SerializeField] private TMP_Text helpText;
+    [SerializeField] private Transform bg;
 
     private MountainOperator operation;
     private int target;
@@ -29,6 +30,10 @@ public class Mountain : GameMode
         var slotCount = slots.Count(s => s.gameObject.activeSelf);
         var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slotCount) + 1)));
         var top = (rows - 1) * 0.5f;
+
+        var scale = Mathf.Max(1f, rows / 4f * Overlap);
+        bg.localScale *= scale;
+        cam.orthographicSize *= scale;
 
         var index = 0;
         for (var row = 0; row < rows; row++)
@@ -52,7 +57,12 @@ public class Mountain : GameMode
         slots[1].transform.position = new Vector3((rows * 0.5f + 1) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
         slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
         slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
-        slots[4].transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset, 0.1f);
+        slots[4].transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset - 0.15f, 0.1f);
+        
+        if (slots[4].gameObject.activeSelf)
+        {
+            helpText.transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset - 2f, 0);
+        }
 
         cards.Skip(index).ToList().ForEach(c =>
         {
@@ -130,7 +140,7 @@ public class Mountain : GameMode
     {
         operation = type.operation;
         target = type.target;
-        helpText.text = $"Combine cards that {GetOperation()} to {target}...";
+        helpText.text = $"Select cards that {GetOperation()} to {target}...";
     }
 
     private string GetOperation()

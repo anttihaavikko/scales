@@ -7,6 +7,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Deck deck;
     [SerializeField] protected Hand hand;
     [SerializeField] protected List<Slot> slots;
+    [SerializeField] protected Camera cam;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 

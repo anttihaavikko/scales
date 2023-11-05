@@ -292,6 +292,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ea6879cc535745719cc7fc8a56da4b2, type: 3}
+--- !u!20 &236427600 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8714302033584269070, guid: bc2290af5cced4dd18f170eb3ec50e59, type: 3}
+  m_PrefabInstance: {fileID: 8714302033289846641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &289106336
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +456,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289106336}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -489,7 +494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 482584592}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.03, z: 0}
+  m_LocalPosition: {x: 0, y: 1.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -534,8 +539,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1579701797
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0eec15ced31074fa2abca366408e9991, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -776,7 +781,9 @@ MonoBehaviour:
   - {fileID: 1985106}
   - {fileID: 1201369662}
   - {fileID: 1239452732}
+  cam: {fileID: 236427600}
   helpText: {fileID: 289106337}
+  bg: {fileID: 1642419817}
 --- !u!1001 &1201369661
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -181,6 +181,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void ReturnToPrevious()
     {
         draggable.CancelDrop();
+        shadow.SetActive(false);
     }
 
     private void OnPick()
