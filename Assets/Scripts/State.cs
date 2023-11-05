@@ -13,6 +13,8 @@ public class State : Manager<State>
     public int Level { get; private set; }
     public int Score { get; private set; }
 
+    public int LevelMulti => Level + 1;
+
     public IEnumerable<CardData> Cards => cards;
 
     private void Start()

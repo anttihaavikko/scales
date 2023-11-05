@@ -137,7 +137,7 @@ namespace AnttiStarterKit.Animations
 		public void RotateTo(Transform obj, Quaternion rotation, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
 			ease ??= TweenEasings.LinearInterpolation;
 			var act = AddTween (obj, Vector3.zero, TweenAction.Type.Rotation, duration, delay, ease, easeIndex, removeOld);
-			act.startRot = act.theObject.rotation;
+			act.startRot = act.theObject.localRotation;
 			act.targetRot = rotation;
 			StartCoroutine(act.SetStartRot());
 		}

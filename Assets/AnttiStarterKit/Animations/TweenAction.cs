@@ -75,7 +75,7 @@ namespace AnttiStarterKit.Animations
 		{
 			yield return new WaitForSeconds(tweenDelay);
 			hasBeenInit = true;
-			startRot = theObject.transform.rotation;
+			startRot = theObject.transform.localRotation;
 		}
 
 		public IEnumerator SetStartScale()
@@ -117,7 +117,7 @@ namespace AnttiStarterKit.Animations
 				}
 
 				if (type == Type.Rotation) {
-					theObject.rotation = Lerp (startRot, targetRot, DoEase ());
+					theObject.localRotation = Lerp (startRot, targetRot, DoEase ());
 				}
 
 				if (type == Type.Scale) {

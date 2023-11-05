@@ -326,12 +326,12 @@ public class Mountain : GameMode
 
     private void Score(ICollection<Card> cards)
     {
-        var total = cards.Sum(c => c.ScoreValue);
+        var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
         var x = cards.Average(c => c.transform.position.x);
         var y = cards.Average(c => c.transform.position.y);
         var p = new Vector3(x, y);
         ShowScore(total, cards.Count, p);
-        scoreDisplay.Add(cards.Count * total * (State.Instance.Level + 1));
+        scoreDisplay.Add(cards.Count * total);
         scoreDisplay.AddMulti();
     }
 }
