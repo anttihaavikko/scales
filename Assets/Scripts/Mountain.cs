@@ -33,7 +33,7 @@ public class Mountain : GameMode
         var top = (rows - 1) * 0.5f;
 
         var scale = Mathf.Max(1f, rows / 4f * Overlap);
-        bg.localScale *= scale;
+        bg.localScale = new Vector3(operation == MountainOperator.Plus ? 1 : -1, 1, 1) * scale;
         cam.orthographicSize *= scale;
 
         var index = 0;
