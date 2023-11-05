@@ -48,4 +48,4 @@ MonoBehaviour:
   - {fileID: 5427275002781990538, guid: 151e945063c9543d287a3bb3c0ad8ef7, type: 3}
   - {fileID: 8914173635181715984, guid: 77c6032322e0d4cfaa4160c886690e7d, type: 3}
   - {fileID: 5901857389752271184, guid: 0de333698ebe8427ab8cfd0728e65e98, type: 3}
-  textPopupPrefab: {fileID: 0}
+  textPopupPrefab: {fileID: 2058714445950480008, guid: 736a4fdeedbf743279baa9f147e5e9e3, type: 3}

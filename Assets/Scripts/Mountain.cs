@@ -326,8 +326,14 @@ public class Mountain : GameMode
 
     private void Score(ICollection<Card> cards)
     {
-        var total = cards.Sum(c => c.ScoreValue) * cards.Count;
-        scoreDisplay.Add(total * (State.Instance.Level + 1));
+        var total = cards.Sum(c => c.ScoreValue);
+        var x = cards.Average(c => c.transform.position.x);
+        var y = cards.Average(c => c.transform.position.y);
+        var p = new Vector3(x, y);
+        var multi = $"<color=#CDE7B0><size=5>x{cards.Count}</size></color>";
+        if(cards.Count > 1) EffectManager.AddTextPopup(multi, p + Vector3.down * 0.3f + Vector3.right * 0.3f, 1);
+        EffectManager.AddTextPopup($"{total}", p);
+        scoreDisplay.Add(cards.Count * total * (State.Instance.Level + 1));
         scoreDisplay.AddMulti();
     }
 }

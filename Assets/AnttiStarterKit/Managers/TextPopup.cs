@@ -1,13 +1,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace AnttiStarterKit.Managers
 {
     public class TextPopup : MonoBehaviour
     {
         [SerializeField] private List<TMP_Text> texts;
-        
+        [SerializeField] private SortingGroup sortingGroup;
+
         private Animator anim;
         private int defaultState;
         private float duration = 5f;
@@ -22,8 +24,11 @@ namespace AnttiStarterKit.Managers
             // duration = info.length;
         }
 
-        public void Play(string content)
+        public void Play(string content, int depth)
         {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3f, 3f)));
+            anim.speed = Random.Range(0.9f, 1.1f);
+            sortingGroup.sortingOrder = depth;
             texts.ForEach(t => t.text = content);
             Invoke(nameof(Done), duration);
 

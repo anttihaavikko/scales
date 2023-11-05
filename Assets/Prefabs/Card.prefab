@@ -197,7 +197,7 @@ MonoBehaviour:
   icon: {fileID: 1942885751219337857}
   icons:
   - {fileID: 1408530074, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
-  - {fileID: 1002963949, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
+  - {fileID: -1434366877, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
   - {fileID: 1434826478, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
   cheatIcon: {fileID: 2879242572603771339}
   multiTexts:
