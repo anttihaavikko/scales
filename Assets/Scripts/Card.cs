@@ -22,7 +22,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private SortingGroup sortingGroup;
     [SerializeField] private Color backColor;
     [SerializeField] private SpriteRenderer back;
-    [SerializeField] private Color selectColor;
+    [SerializeField] private Color selectColor, darkerSelectColor;
     [SerializeField] private GameObject shadow;
 
     private Guid id;
@@ -36,7 +36,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private bool open;
     
     private readonly List<Card> covers = new();
-    private List<Card> marked = new();
+    private Card marked;
 
     public Action click;
 
@@ -130,23 +130,36 @@ public class Card : MonoBehaviour, IPointerClickHandler
         draggable.droppedOn += OnDrop;
         draggable.preview += OnPreview;
         draggable.hidePreview += OnHidePreview;
+        draggable.dropCancelled += OnDropCancel;
+    }
+
+    private void OnDropCancel()
+    {
+        shadow.SetActive(false);
     }
 
     private void OnHidePreview()
     {
-        marked.ForEach(t => t.ToggleMarking(false));
+        if (marked)
+        {
+            marked.ToggleMarking(false);
+            marked = null;
+        }
         // ToggleMarking(false);
     }
 
     private void OnPreview(List<Card> targets)
     {
         if (!deck) return;
-        var nextMarks = targets.Where(t => deck.CanCombine(this, t)).ToList();
-        marked.Where(m => !nextMarks.Contains(m)).ToList().ForEach(t => t.ToggleMarking(false));
-        marked = nextMarks;
-        ToggleMarking(marked.Any());
         var p = transform.position;
-        marked.OrderBy(c => Vector3.Distance(c.transform.position, p)).Take(1).ToList().ForEach(t => t.ToggleMarking(true));
+        var nextMark = targets
+            .Where(t => deck.CanCombine(this, t))
+            .OrderBy(c => Vector3.Distance(c.transform.position, p))
+            .FirstOrDefault();
+        if (marked && marked != nextMark) marked.ToggleMarking(false);
+        marked = nextMark;
+        ToggleMarking(marked);
+        if (marked) marked.ToggleMarking(true, true);
         // Debug.Log($"Preview for {number} => {string.Join(",", marked.Select(m => m.number))}");
     }
 
@@ -175,7 +188,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
             }
         }
 
-        draggable.CancelDrop();
+        ReturnToPrevious();
     }
 
     public void ReturnToPrevious()
@@ -219,10 +232,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void ToggleMarking(bool state)
+    private void ToggleMarking(bool state, bool dark = false)
     {
         outline.SetActive(state);
-        backSprite.color = state ? selectColor : Color.white;
+        var color = dark ? darkerSelectColor : selectColor;
+        backSprite.color = state ? color : Color.white;
     }
 
     public void Lock(bool state = true)
@@ -240,7 +254,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void Lift(float delay = 1f)
     {
         draggable.SetSortOrder("Picked");
-        this.StartCoroutine(() => draggable.SetSortOrder("Default"), 0.1f * delay);
+        shadow.SetActive(true);
+        this.StartCoroutine(() =>
+        {
+            draggable.SetSortOrder("Default");
+            shadow.SetActive(false);
+        }, 0.1f * delay);
     }
 
     public void Detach()

@@ -137,8 +137,8 @@ public class Draggable : MonoBehaviour
         {
             gameObject.layer = layerId;
             SetSortOrder("Default");
-        }, 0.3f);
-        dropCancelled?.Invoke();
+            dropCancelled?.Invoke();
+        }, 0.1f);
     }
 
     private Collider2D[] TryDrop(Vector2 pos)

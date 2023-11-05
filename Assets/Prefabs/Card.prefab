@@ -189,6 +189,7 @@ MonoBehaviour:
   backColor: {r: 0.74509805, g: 0.43137255, b: 0.27450982, a: 1}
   back: {fileID: 7237465338277606717}
   selectColor: {r: 0.8039216, g: 0.90588236, b: 0.6901961, a: 1}
+  darkerSelectColor: {r: 0.6392157, g: 0.7490196, b: 0.65882355, a: 1}
   shadow: {fileID: 5561221763919082240}
 --- !u!210 &7145405230318917625
 SortingGroup:
