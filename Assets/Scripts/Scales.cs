@@ -8,10 +8,29 @@ public class Scales : GameMode
 {
     [SerializeField] private TMP_Text left, right, diff;
     [SerializeField] private Transform beam, leftBasket, rightBasket;
+    [SerializeField] private GameObject leftMassVisuals, rightMassVisuals;
+    [SerializeField] private TMP_Text leftMassAmount, rightMassAmount;
+
+    private int leftMass = 1;
+    private int rightMass = 1;
 
     public override void Setup()
     {
         this.StartCoroutine(() => hand.Fill(), 0.5f);
+        SetupWeights();
+    }
+
+    private void SetupWeights()
+    {
+        var level = State.Instance.Level;
+        if (level > 1) rightMass = Random.Range(1, 4);
+        if (level > 5) leftMass = Random.Range(1, 4);
+
+        leftMassAmount.text = $"x{leftMass}";
+        rightMassAmount.text = $"x{rightMass}";
+        
+        leftMassVisuals.SetActive(leftMass > 1);
+        rightMassVisuals.SetActive(rightMass > 1);
     }
 
     public override void Select(Card card)
@@ -34,8 +53,8 @@ public class Scales : GameMode
         var pos = slot.GetPosition();
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
 
-        var leftSum = slots[0].Sum;
-        var rightSum = slots[1].Sum;
+        var leftSum = slots[0].Sum * leftMass;
+        var rightSum = slots[1].Sum * rightMass;
         var difference = leftSum - rightSum;
         var abs = Mathf.Abs(difference);
         
