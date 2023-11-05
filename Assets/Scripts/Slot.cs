@@ -27,7 +27,7 @@ public class Slot : MonoBehaviour
         if (TopCard && pile)
         {
             var t = TopCard.transform;
-            t.Rotate(new Vector3(0, 0, Random.Range(-5f, 5f)));
+            TopCard.Nudge();
             t.position = t.position.RandomOffset(0.1f);
         }
         

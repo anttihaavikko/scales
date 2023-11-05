@@ -185,6 +185,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     private void OnPick()
     {
+        Nudge();
         wasSelected = selected;
         UpdateSelection(false);
         shadow.SetActive(true);
@@ -232,6 +233,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void MoveTo(Vector3 pos, float speed = 1f)
     {
         Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
+        Nudge();
     }
 
     public void Lift(float delay = 1f)
@@ -243,6 +245,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void Detach()
     {
         transform.SetParent(null);
+    }
+
+    public void Nudge()
+    {
+        var rot = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3f, 3f)));
+        Tweener.RotateToBounceOut(transform, rot, 0.1f);
     }
 }
 

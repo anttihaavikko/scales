@@ -23,6 +23,8 @@ public class Mountain : GameMode
         SetupSlots();
 
         var cards = deck.Cards.Reverse().ToList();
+        
+        cards.ForEach(c => c.Nudge());
 
         var slotCount = slots.Count(s => s.gameObject.activeSelf);
         var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slotCount) + 1)));

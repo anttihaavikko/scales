@@ -17,6 +17,7 @@ public class Reward : GameMode
         {
             c.Flip();
             c.Detach();
+            c.Nudge();
             var perRow = 8;
             var x = index % perRow;
             var y = Mathf.FloorToInt(index * 1f / perRow);
@@ -34,6 +35,7 @@ public class Reward : GameMode
             var data = CardData.GetRandom();
             option.Setup(data, deck);
             option.transform.position += Vector3.right * 1.2f * (i - (optionCount - 1) * 0.5f);
+            option.Nudge();
             option.Flip();
 
             option.click += () =>
