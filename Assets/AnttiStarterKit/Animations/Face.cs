@@ -165,13 +165,18 @@ namespace AnttiStarterKit.Animations
 			Vector3 mouseInWorld = cam.ScreenToWorldPoint(mp);
 			Vector2 lookPos = (followMouse ? mouseInWorld : LookTarget) - transform.parent.position;
 
+			var len = Mathf.Min(1f, lookPos.magnitude);
 			lookPos = Quaternion.Euler(new Vector3(0, 0, -transform.parent.rotation.eulerAngles.z)) * lookPos;
 
-			transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.Scale(lookPos.normalized, faceRange), Time.deltaTime * lookSpeed);
+			transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.Scale(lookPos.normalized * len, faceRange), Time.deltaTime * lookSpeed);
 
-			if (pupils.Length > 0) {
-				for (int i = 0; i < pupils.Length; i++) {
-					pupils[i].localPosition = Vector2.MoveTowards(pupils[i].localPosition, Vector2.Scale(lookPos, pupilRange), Time.deltaTime * lookSpeed * 2f);
+			if (pupils.Length > 0)
+			{
+				var t = Vector2.Scale(lookPos.normalized * len, pupilRange);
+				for (var i = 0; i < pupils.Length; i++)
+				{
+					var dir = Vector2.MoveTowards(pupils[i].localPosition, t, Time.deltaTime * lookSpeed * 2f);
+					pupils[i].localPosition = dir;
 				}
 			}
 		}
