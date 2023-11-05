@@ -242,7 +242,7 @@ public class Mountain : GameMode
             deck.Kill(selected);
         }
 
-        if (sum > target && operation == MountainOperator.Plus)
+        if (sum > target && selected.Count > 1 && operation == MountainOperator.Plus)
         {
             selected.ForEach(c => c.ChangeSelection(false));
             card.ChangeSelection(true);
@@ -265,10 +265,11 @@ public class Mountain : GameMode
 
         var numbers = deck.Cards.Where(c => !c.IsCovered).Select(c => c.Number).ToList();
         var allOpen = deck.Cards.All(c => !c.IsCovered);
-        var noOpenSlots = slots.All(s => !s.IsEmpty);
+        var noOpenSlots = slots.All(s => !s.IsEmpty || !s.gameObject.activeSelf);
 
         var canCalc = CanCalcTo(numbers, target);
-        Debug.Log($"Calc: {string.Join(",", numbers)} => {canCalc}");
+        Debug.Log($"Calc: {string.Join(",", numbers)} => {canCalc}, all: {allOpen}, slots used: {noOpenSlots}");
+        
         if ((allOpen || noOpenSlots) && !canCalc)
         {
             Invoke(nameof(RoundEnded), 0.5f);

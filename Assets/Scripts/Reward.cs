@@ -11,19 +11,7 @@ public class Reward : GameMode
 
     public override void Setup()
     {
-        var index = 0;
-        var cards = deck.Cards.OrderByDescending(c => c.SortValue).ToList();
-        cards.ForEach(c =>
-        {
-            c.Flip();
-            c.Detach();
-            c.Nudge();
-            var perRow = 12;
-            var x = index % perRow;
-            var y = Mathf.FloorToInt(index * 1f / perRow);
-            c.transform.position = new Vector3((-(perRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
-            index++;
-        });
+        MoveDeck();
 
         var optionCount = 5;
         var options = new List<Card>();
@@ -50,14 +38,34 @@ public class Reward : GameMode
                     return;
                 }
                 
+                option.Pop();
                 hand.Remove(option);
+                deck.AddCard(data);
                 option.Kill();
                 State.Instance.Add(data);
+                MoveDeck();
                 CheckEnd();
             };
         }
         
         hand.Add(options);
+    }
+
+    private void MoveDeck()
+    {
+        var index = 0;
+        var cards = deck.Cards.OrderByDescending(c => c.SortValue).ToList();
+        cards.ForEach(c =>
+        {
+            c.Flip();
+            c.Detach();
+            c.Nudge();
+            var perRow = 12;
+            var x = index % perRow;
+            var y = Mathf.FloorToInt(index * 1f / perRow);
+            c.transform.position = new Vector3((-(perRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
+            index++;
+        });
     }
 
     private void CheckEnd()

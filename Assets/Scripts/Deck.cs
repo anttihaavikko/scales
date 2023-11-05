@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Deck : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
-        State.Instance.Cards.RandomOrder().ToList().ForEach(AddCard);
+        State.Instance.Cards.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).ToList().ForEach(AddCard);
         gameMode.Setup();
     }
 
@@ -28,8 +29,9 @@ public class Deck : MonoBehaviour
         return card;
     }
 
-    private void AddCard(CardData data)
+    public void AddCard(CardData data)
     {
+        data.Init();
         var card = Instantiate(cardPrefab, transform);
         card.transform.position += Vector3.up * 0.2f * cards.Count;
         card.Setup(data, this);

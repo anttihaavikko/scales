@@ -10,6 +10,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Card : MonoBehaviour, IPointerClickHandler
@@ -25,6 +26,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private SpriteRenderer back;
     [SerializeField] private Color selectColor, darkerSelectColor;
     [SerializeField] private GameObject shadow;
+    [SerializeField] private List<TMP_Text> cheatLabels;
+    [SerializeField] private SpriteRenderer icon;
+    [SerializeField] private List<Sprite> icons;
+    [SerializeField] private GameObject cheatIcon;
+    [SerializeField] private List<TMP_Text> multiTexts;
+    [SerializeField] private GameObject favourite;
 
     private Guid id;
     private bool wasSelected;
@@ -32,9 +39,10 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private Deck deck;
     private int number;
     private bool removed;
-    private CardModifier modifier;
-    private CardType cardType;
     private bool open;
+
+    private CardData stats;
+    private CardType cardType;
     
     private readonly List<Card> covers = new();
     private Card marked;
@@ -45,20 +53,42 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public int Number => IsJoker ? deck.GetTotal() : number;
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
-    public bool IsModifier => modifier != CardModifier.None;
+    public bool IsModifier => stats.modifier != CardModifier.None;
     public Guid Id => id;
-    public bool IsJoker => cardType == CardType.Joker;
+    public bool IsJoker => stats.type == CardType.Joker;
     public bool IsOpen => open;
-    public int SortValue => IsJoker ? 999 : number;
+    public int SortValue => GetSortValue();
+
+    private int GetSortValue()
+    {
+        var val = IsJoker ? 999 : stats.multiplier * number;
+        if (stats.favourite) val += 999;
+        if (stats.cheat) val += 999;
+        return val;
+    }
 
     public void Setup(CardData data, Deck d)
     {
-        id = data.id;
+        stats = new CardData(data);
         cardType = data.type;
+        id = data.id;
         number = data.number;
-        modifier = data.modifier;
         numberLabel.text = data.GetPrefix() + number;
-        if (cardType == CardType.Joker) numberLabel.text = "J";
+        if (stats.type == CardType.Joker) numberLabel.text = "J";
+        if (stats.icon >= 0)
+        {
+            numberLabel.text = "";
+            icon.sprite = icons[stats.icon];
+            icon.gameObject.SetActive(true);
+        }
+        cheatLabels[0].transform.localPosition = data.cheatPos;
+        cheatLabels.ForEach(t => t.text = data.cheat ? numberLabel.text : "");
+        cheatIcon.SetActive(stats.cheat);
+        favourite.SetActive(stats.favourite);
+        if (stats.multiplier > 1)
+        {
+            multiTexts.ForEach(t => t.text = $"x{stats.multiplier}");
+        }
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
@@ -79,11 +109,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public CardData GetData()
     {
-        return new CardData(modifier, number)
-        {
-            id = id,
-            type = cardType
-        };
+        return stats;
     }
 
     public void SetDepth(Card target, int dir)
@@ -286,7 +312,10 @@ public enum CardModifier
     None,
     Plus,
     Minus,
-    Multiply
+    Multiply,
+    Cheat,
+    Scorer,
+    Favourite
 }
 
 public enum CardType
@@ -301,6 +330,13 @@ public class CardData
     public int number;
     public CardModifier modifier;
     public CardType type;
+    public bool cheat;
+    public int icon;
+    public int multiplier;
+    public bool favourite;
+
+    public bool isInitialized;
+    public Vector2 cheatPos;
 
     public CardData(int value)
     {
@@ -308,14 +344,36 @@ public class CardData
         number = value;
         modifier = CardModifier.None;
         type = CardType.Normal;
+        cheatPos = Vector2.zero;
+        icon = -1;
+        multiplier = 1;
+    }
+    
+    public CardData(CardData from)
+    {
+        id = from.id;
+        number = from.number;
+        modifier = from.modifier;
+        type = from.type;
+        cheat = from.cheat;
+        icon = from.icon;
+        multiplier = from.multiplier;
+        favourite = from.favourite;
     }
 
-    public CardData(CardType specialType) : this(0)
+    public void Init()
+    {
+        if (isInitialized) return;
+        isInitialized = true;
+        cheatPos = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.9f, 1.4f));
+    }
+
+    private CardData(CardType specialType) : this(0)
     {
         type = specialType;
     }
-    
-    public CardData(CardModifier mod, int value) : this(value)
+
+    private CardData(CardModifier mod, int value) : this(value)
     {
         modifier = mod;
     }
@@ -328,22 +386,28 @@ public class CardData
             CardModifier.Plus => "+",
             CardModifier.Minus => "-",
             CardModifier.Multiply => "x",
+            CardModifier.Cheat => "!",
+            CardModifier.Scorer => "!",
+            CardModifier.Favourite => "!",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
-    public static CardData GetRandomModifier()
+    private static CardData GetRandomModifier()
     {
         return new []
         {
             new CardData(CardModifier.Plus, 1),
             new CardData(CardModifier.Plus, 2),
             new CardData(CardModifier.Minus, 1),
-            new CardData(CardModifier.Multiply, 2)
+            new CardData(CardModifier.Multiply, 2),
+            new CardData(CardModifier.Cheat, 0) { icon = 0 },
+            new CardData(CardModifier.Favourite, 0) { icon = 1 },
+            new CardData(CardModifier.Scorer, 2) { icon = 2 }
         }.Random();
     }
-    
-    public static CardData GetRandomSpecial()
+
+    private static CardData GetRandomSpecial()
     {
         return new []
         {
@@ -364,8 +428,30 @@ public class CardData
 
     public void Modify(CardData card)
     {
-        if(card.modifier == CardModifier.Plus) number += card.number;
-        if(card.modifier == CardModifier.Minus) number -= card.number;
-        if(card.modifier == CardModifier.Multiply) number *= card.number;
+        switch (card.modifier)
+        {
+            case CardModifier.Plus:
+                number += card.number;
+                break;
+            case CardModifier.Minus:
+                number -= card.number;
+                break;
+            case CardModifier.Multiply:
+                number *= card.number;
+                break;
+            case CardModifier.Cheat:
+                cheat = true;
+                break;
+            case CardModifier.None:
+                break;
+            case CardModifier.Scorer:
+                multiplier *= card.number;
+                break;
+            case CardModifier.Favourite:
+                favourite = true;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }
