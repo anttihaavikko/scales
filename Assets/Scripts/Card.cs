@@ -32,6 +32,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private GameObject cheatIcon;
     [SerializeField] private List<TMP_Text> multiTexts;
     [SerializeField] private GameObject favourite;
+    [SerializeField] private GameObject nub;
 
     private Guid id;
     private bool wasSelected;
@@ -91,6 +92,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         {
             multiTexts.ForEach(t => t.text = $"x{stats.multiplier}");
         }
+        nub.SetActive(false);
         deck = d;
         numberLabel.gameObject.SetActive(false);
         draggable.CanDrag = false;
