@@ -39,6 +39,7 @@ public class Hand : MonoBehaviour
             card.Flip();
             cards.Add(card);
             card.Lock(locked);
+            card.Nudge();
             RepositionAll();
         }
     }
