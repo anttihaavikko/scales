@@ -18,10 +18,10 @@ public class Reward : GameMode
             c.Flip();
             c.Detach();
             c.Nudge();
-            var perRow = 8;
+            var perRow = 12;
             var x = index % perRow;
             var y = Mathf.FloorToInt(index * 1f / perRow);
-            c.transform.position = new Vector3((-(perRow - 1) * 0.5f + x) * 1.2f, (2 - y) * 1.5f * 1.2f, 0);
+            c.transform.position = new Vector3((-(perRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
             index++;
         });
 
