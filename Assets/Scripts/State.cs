@@ -10,7 +10,8 @@ public class State : Manager<State>
 {
     private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
 
-    public int Level { get; private set; } = 0;
+    public int Level { get; private set; }
+    public int Score { get; private set; }
 
     public IEnumerable<CardData> Cards => cards;
 
@@ -52,5 +53,11 @@ public class State : Manager<State>
     public bool Has(Guid id)
     {
         return GetCard(id) != default;
+    }
+
+    public void RoundEnded(int score)
+    {
+        Score = score;
+        SceneChanger.Instance.ChangeScene("Reward");
     }
 }

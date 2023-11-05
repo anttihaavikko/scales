@@ -51,9 +51,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     public bool IsSelected => selected;
     public int Number => IsJoker ? deck.GetTotal() : number;
+    public int ScoreValue => (IsJoker ? deck.GetTotal() : number) * stats.multiplier;
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
     public bool IsModifier => stats.modifier != CardModifier.None;
+    public bool IsValueModifier => stats.modifier is CardModifier.Minus or CardModifier.Multiply or CardModifier.Plus; 
     public Guid Id => id;
     public bool IsJoker => stats.type == CardType.Joker;
     public bool IsOpen => open;

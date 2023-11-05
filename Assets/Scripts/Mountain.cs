@@ -156,6 +156,7 @@ public class Mountain : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        scoreDisplay.ResetMulti();
         DeselectAll();
         slots.ForEach(s => s.Remove(card));
         card.ChangeSelection(false);
@@ -188,7 +189,9 @@ public class Mountain : GameMode
 
     protected override void Combine(Card first, Card second)
     {
-        deck.Kill(new List<Card>{ first, second });
+        var both = new List<Card> { first, second };
+        Score(both);
+        deck.Kill(both);
         first.Pop();
         second.Pop();
         slots.ForEach(s =>
@@ -239,6 +242,7 @@ public class Mountain : GameMode
         if (CanCalcTo(numbers, target, true))
         {
             selected.ForEach(c => c.Pop());
+            Score(selected);
             deck.Kill(selected);
         }
 
@@ -278,7 +282,7 @@ public class Mountain : GameMode
 
     private void RoundEnded()
     {
-        SceneChanger.Instance.ChangeScene("Reward");
+        State.Instance.RoundEnded(scoreDisplay.Total);
     }
 
     private bool CanCalcTo(IList<int> set, int sum, bool exact = false)
@@ -318,6 +322,13 @@ public class Mountain : GameMode
             var possible = set.Where((n, i) => n <= sum && i != index).ToList();
             return possible.Any() && CanAddTo(possible, left, exact);
         });
+    }
+
+    private void Score(ICollection<Card> cards)
+    {
+        var total = cards.Sum(c => c.ScoreValue) * cards.Count;
+        scoreDisplay.Add(total * (State.Instance.Level + 1));
+        scoreDisplay.AddMulti();
     }
 }
 

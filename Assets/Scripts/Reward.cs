@@ -98,7 +98,7 @@ public class Reward : GameMode
     {
         var data = State.Instance.GetCard(second.Id);
         if (data == default) return;
-        if (data.type == CardType.Joker)
+        if (data.type == CardType.Joker && first.IsValueModifier)
         {
             data.type = CardType.Normal;
             data.number = second.Number;

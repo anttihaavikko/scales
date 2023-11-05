@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Game;
 using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
@@ -8,12 +9,18 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Hand hand;
     [SerializeField] protected List<Slot> slots;
     [SerializeField] protected Camera cam;
+    [SerializeField] protected ScoreDisplay scoreDisplay;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 
     private void Start()
     {
         slots.ForEach(slot => slot.click += SlotClicked);
+
+        if (scoreDisplay)
+        {
+            scoreDisplay.Set(State.Instance.Score);
+        }
     }
     
     protected void DeselectAll()

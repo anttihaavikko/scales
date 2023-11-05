@@ -45,7 +45,7 @@ public class Scales : GameMode
 
         if (hand.IsEmpty)
         {
-            SceneChanger.Instance.ChangeScene("Reward");
+            State.Instance.RoundEnded(scoreDisplay.Total);
         }
     }
 
