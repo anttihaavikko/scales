@@ -787,6 +787,7 @@ MonoBehaviour:
   deck: {fileID: 980671926}
   hand: {fileID: 1817050996}
   slots: []
+  cam: {fileID: 0}
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
 --- !u!1 &988863996
 GameObject:
@@ -954,7 +955,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1929409491
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1321633542
