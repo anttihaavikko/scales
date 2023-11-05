@@ -61,10 +61,12 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public bool IsJoker => stats.type == CardType.Joker;
     public bool IsOpen => open;
     public int SortValue => GetSortValue();
+    public bool NeedsFlattening => stats.type is CardType.Timer or CardType.Joker;
 
     private int GetSortValue()
     {
         var val = IsJoker ? 999 : stats.multiplier * number;
+        if (cardType == CardType.Timer) val = 60;
         if (stats.favourite) val += 999;
         if (stats.cheat) val += 999;
         return val;
@@ -98,6 +100,19 @@ public class Card : MonoBehaviour, IPointerClickHandler
         draggable.CanDrag = false;
         backSprite.color = backColor;
         back.gameObject.SetActive(true);
+
+        StartTimer();
+    }
+
+    private void StartTimer()
+    {
+        if (cardType != CardType.Timer) return;
+        number = DateTime.Now.Second;
+        numberLabel.fontSize = 2.5f;
+        numberLabel.enableAutoSizing = false;
+        numberLabel.transform.localPosition = new Vector3(0, 0.05f, 0);
+        numberLabel.text = number.ToString();
+        Invoke(nameof(StartTimer), 1f);
     }
 
     public void SetDeck(Deck d)
@@ -325,7 +340,8 @@ public enum CardModifier
 public enum CardType
 {
     Normal,
-    Joker
+    Joker,
+    Timer
 }
 
 public class CardData
@@ -419,7 +435,8 @@ public class CardData
             new CardData(99),
             new CardData(Random.Range(1, 99)),
             new CardData(Random.Range(1, 20)),
-            new CardData(CardType.Joker)
+            new CardData(CardType.Joker),
+            new CardData(CardType.Timer) { icon = 3 }
         }.Random();
     }
     

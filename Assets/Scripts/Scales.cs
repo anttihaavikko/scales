@@ -90,14 +90,8 @@ public class Scales : GameMode
         ShowScore(total, multi, pos);
         scoreDisplay.Add(total * multi);
 
-        if (difference <= 10)
-        {
-            scoreDisplay.AddMulti();
-        }
-        else
-        {
-            scoreDisplay.ResetMulti();
-        }
+        if (difference == 0) scoreDisplay.AddMulti();
+        if(difference > 10) scoreDisplay.ResetMulti();
     }
 
     private void RoundEnded()

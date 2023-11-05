@@ -106,10 +106,11 @@ public class Reward : GameMode
     {
         var data = State.Instance.GetCard(second.Id);
         if (data == default) return;
-        if (data.type == CardType.Joker && first.IsValueModifier)
+        if (second.NeedsFlattening && first.IsValueModifier)
         {
             data.type = CardType.Normal;
             data.number = second.Number;
+            data.icon = -1;
         }
         data.Modify(first.GetData());
         second.Setup(data, deck);
