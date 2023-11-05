@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Game;
+using AnttiStarterKit.Managers;
 using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
@@ -43,6 +44,16 @@ public abstract class GameMode : MonoBehaviour
         if (!CanCombine(first, second)) return false;
         Combine(first, second);
         return true;
+    }
+    
+    protected static void ShowScore(int total, int multi, Vector3 p)
+    {
+        var multiText = $"<color=#CDE7B0><size=5>x{multi}</size></color>";
+        if (multi > 1)
+        {
+            EffectManager.AddTextPopup(multiText, p + Vector3.down * 0.3f + Vector3.right * 0.3f, 1);
+        }
+        EffectManager.AddTextPopup($"{total}", p);
     }
 
     public abstract int GetJokerValue();
