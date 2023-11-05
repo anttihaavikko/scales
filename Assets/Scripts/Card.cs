@@ -23,6 +23,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Color backColor;
     [SerializeField] private SpriteRenderer back;
     [SerializeField] private Color selectColor;
+    [SerializeField] private GameObject shadow;
 
     private Guid id;
     private bool wasSelected;
@@ -151,6 +152,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     private void OnDrop(List<Collider2D> objects)
     {
+        shadow.SetActive(false);
         var p = transform.position;
         foreach (var obj in objects.OrderBy(c => Vector3.Distance(c.transform.position, p)))
         {
@@ -185,6 +187,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         wasSelected = selected;
         UpdateSelection(false);
+        shadow.SetActive(true);
     }
 
     private void OnClick()
