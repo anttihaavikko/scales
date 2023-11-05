@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -188,6 +189,8 @@ public class Mountain : GameMode
     protected override void Combine(Card first, Card second)
     {
         deck.Kill(new List<Card>{ first, second });
+        first.Pop();
+        second.Pop();
         slots.ForEach(s =>
         {
             s.Remove(first);
@@ -198,10 +201,15 @@ public class Mountain : GameMode
 
     public override void RightClick(Card card)
     {
+        var cp = card.transform.position;
         DeselectAll();
-        var slot = slots.FirstOrDefault(s => s.IsEmpty && s.gameObject.activeSelf);
+        var slot = slots
+            .Where(s => s.IsEmpty && s.gameObject.activeSelf)
+            .OrderBy(s => Vector3.Distance(s.transform.position, cp))
+            .FirstOrDefault();
         if (slot)
         {
+            EffectManager.AddEffect(2, cp);
             DropToSlot(card, slot);
         }
     }
@@ -230,6 +238,7 @@ public class Mountain : GameMode
         
         if (CanCalcTo(numbers, target, true))
         {
+            selected.ForEach(c => c.Pop());
             deck.Kill(selected);
         }
 
@@ -237,6 +246,8 @@ public class Mountain : GameMode
         {
             selected.ForEach(c => c.ChangeSelection(false));
             card.ChangeSelection(true);
+            Select(card);
+            return;
         }
         
         FlipCards();
@@ -256,7 +267,9 @@ public class Mountain : GameMode
         var allOpen = deck.Cards.All(c => !c.IsCovered);
         var noOpenSlots = slots.All(s => !s.IsEmpty);
 
-        if ((allOpen || noOpenSlots) && !CanCalcTo(numbers, target))
+        var canCalc = CanCalcTo(numbers, target);
+        Debug.Log($"Calc: {string.Join(",", numbers)} => {canCalc}");
+        if ((allOpen || noOpenSlots) && !canCalc)
         {
             Invoke(nameof(RoundEnded), 0.5f);
         }

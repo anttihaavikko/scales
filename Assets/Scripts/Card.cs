@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Visuals;
 using TMPro;
 using Unity.VisualScripting;
@@ -109,6 +110,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void Flip()
     {
         if (draggable.CanDrag) return;
+        EffectManager.AddEffect(2, transform.position);
         open = true;
         draggable.CanDrag = true;
         backSprite.color = Color.white;
@@ -271,6 +273,11 @@ public class Card : MonoBehaviour, IPointerClickHandler
     {
         var rot = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3f, 3f)));
         Tweener.RotateToBounceOut(transform, rot, 0.1f);
+    }
+
+    public void Pop()
+    {
+        EffectManager.AddEffects(new []{ 0, 1, 2 }, transform.position);
     }
 }
 
