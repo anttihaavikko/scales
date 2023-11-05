@@ -235,7 +235,7 @@ public class Mountain : GameMode
     
     public override void Select(Card card)
     {
-        var selected = deck.Cards.Where(c => c.IsSelected).ToList();
+        var selected = deck.Cards.Where(c => c.IsSelected && !c.IsRemoved).ToList();
         var numbers = selected.Select(c => c.Number).ToList();
         var sum = numbers.Sum();
         
