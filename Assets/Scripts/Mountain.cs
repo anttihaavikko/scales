@@ -266,7 +266,7 @@ public class Mountain : GameMode
                 c.Flip();
             }
         });
-
+        
         var numbers = deck.Cards.Where(c => !c.IsCovered).Select(c => c.Number).ToList();
         var allOpen = deck.Cards.All(c => !c.IsCovered);
         var noOpenSlots = slots.All(s => !s.IsEmpty || !s.gameObject.activeSelf);
@@ -276,6 +276,11 @@ public class Mountain : GameMode
         
         if ((allOpen || noOpenSlots) && !canCalc)
         {
+            if (numbers.Count == 0)
+            {
+                dragon.Hop();
+            }
+            
             Invoke(nameof(RoundEnded), 0.5f);
         }
     }
@@ -326,6 +331,7 @@ public class Mountain : GameMode
 
     private void Score(ICollection<Card> cards)
     {
+        dragon.Acknowledge();
         var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
         var x = cards.Average(c => c.transform.position.x);
         var y = cards.Average(c => c.transform.position.y);

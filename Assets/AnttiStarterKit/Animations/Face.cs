@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AnttiStarterKit.Extensions;
+using UnityEngine;
 
 namespace AnttiStarterKit.Animations
 {
@@ -18,6 +19,8 @@ namespace AnttiStarterKit.Animations
 		public Transform[] pupils;
 		public Transform[] brows;
 		public Transform mouth;
+
+		[SerializeField] private Transform mirrorParent;
 
 		private Vector3[] browsTargetPosition, browsOriginalPosition;
 		private float[] browsTargetAngle, browsOriginalAngle;
@@ -167,6 +170,8 @@ namespace AnttiStarterKit.Animations
 
 			var len = Mathf.Min(1f, lookPos.magnitude);
 			lookPos = Quaternion.Euler(new Vector3(0, 0, -transform.parent.rotation.eulerAngles.z)) * lookPos;
+
+			lookPos = lookPos.WhereX(lookPos.x * Mathf.Sign(mirrorParent.transform.localScale.x));
 
 			transform.localPosition = Vector2.MoveTowards(transform.localPosition, Vector2.Scale(lookPos.normalized * len, faceRange), Time.deltaTime * lookSpeed);
 
