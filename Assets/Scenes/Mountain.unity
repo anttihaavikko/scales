@@ -2666,7 +2666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textArea: {fileID: 1550356317}
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  highlightColor: {r: 0.74509805, g: 0.43137255, b: 0.27450982, a: 1}
   delayBetweenLetters: 0.02
   delayBetweenWords: 0.05
   staticPlacing: 1
