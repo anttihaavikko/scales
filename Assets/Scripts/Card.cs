@@ -33,6 +33,8 @@ public class Card : Markable, IPointerClickHandler
     [SerializeField] private List<TMP_Text> multiTexts;
     [SerializeField] private GameObject favourite;
     [SerializeField] private GameObject modifier;
+    [SerializeField] private SpriteRenderer cheatMarkIcon;
+    [SerializeField] private GameObject cheatMarkBg;
 
     private Guid id;
     private bool wasSelected;
@@ -85,6 +87,8 @@ public class Card : Markable, IPointerClickHandler
             numberLabel.text = "";
             icon.sprite = icons[stats.icon];
             icon.gameObject.SetActive(true);
+            cheatMarkIcon.sprite = icon.sprite;
+            cheatMarkBg.SetActive(stats.cheat);
         }
         cheatLabels[0].transform.localPosition = data.cheatPos;
         cheatLabels.ForEach(t => t.text = data.cheat ? numberLabel.text : "");
