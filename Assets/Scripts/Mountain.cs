@@ -281,7 +281,7 @@ public class Mountain : GameMode
                 dragon.Hop();
             }
             
-            Invoke(nameof(RoundEnded), 0.5f);
+            Invoke(nameof(RoundEnded), 1.5f);
         }
     }
 
@@ -331,7 +331,7 @@ public class Mountain : GameMode
 
     private void Score(ICollection<Card> cards)
     {
-        dragon.Acknowledge();
+        dragon.Acknowledge(cards.Count > 2);
         var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
         var x = cards.Average(c => c.transform.position.x);
         var y = cards.Average(c => c.transform.position.y);

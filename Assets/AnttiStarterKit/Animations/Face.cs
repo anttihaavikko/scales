@@ -202,7 +202,10 @@ namespace AnttiStarterKit.Animations
 			ChangeMouth (sprite, Vector3.one, Vector3.zero);
 		}
 
-		void ChangeMouth(Sprite sprite, Vector3 scale, Vector3 pos) {
+		void ChangeMouth(Sprite sprite, Vector3 scale, Vector3 pos)
+		{
+			if (!mouthSprite) return;
+			
 			if (sprite) {
 				mouthSprite.sprite = sprite;
 			} else {

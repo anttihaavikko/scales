@@ -9,9 +9,10 @@ using UnityEngine;
 
 namespace AnttiStarterKit.Animations
 {
+    [RequireComponent(typeof(Appearer))]
     public class SpeechBubble : MonoBehaviour
     {
-        public Action onVocal, onWord;
+        public Action onVocal, onWord, onHide;
         
         [SerializeField] private TMP_Text textArea;
         [SerializeField] private Color highlightColor = Color.red;
@@ -102,6 +103,8 @@ namespace AnttiStarterKit.Animations
                 return;
             }
 
+            if (!showing) return;
+
             Hide();
             PlaySound();
         }
@@ -110,6 +113,7 @@ namespace AnttiStarterKit.Animations
         {
             showing = false;
             appearer.Hide();
+            onHide?.Invoke();
         }
 
         private void CancelPrevious()

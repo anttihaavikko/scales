@@ -10,6 +10,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D snout;
     [SerializeField] private Transform head;
+    [SerializeField] private SpeechBubble speechBubble;
 
     private Vector3 start;
     
@@ -21,6 +22,15 @@ public class Dragon : MonoBehaviour
     {
         start = head.transform.position;
         Invoke(nameof(WingFlaps), 5f);
+        
+        speechBubble.onWord += Speak;
+        speechBubble.onHide += () => Nudge();
+        Invoke(nameof(ShowIntro), 1f);
+    }
+
+    private void ShowIntro()
+    {
+        speechBubble.Show("Combine cards that (total up to 10) to remove them. You can also place any cards on (empty spots).");
     }
 
     private void WingFlaps()
@@ -35,18 +45,23 @@ public class Dragon : MonoBehaviour
         if (DevKey.Down(KeyCode.T)) Nudge();
     }
 
-    public void Nudge()
+    private void Speak()
     {
-        snout.AddForce(Vector3.zero.RandomOffset(100f));
-        var x = Random.Range(-1f, 1f) * 0.5f;
-        var y = Random.Range(-1f, 1f) * 0.3f;
+        Nudge(Random.value);
+    }
+
+    public void Nudge(float amount = 1f)
+    {
+        snout.AddForce(Vector3.zero.RandomOffset(100f * amount));
+        var x = Random.Range(-1f, 1f) * 0.5f * amount;
+        var y = Random.Range(-1f, 1f) * 0.3f * amount;
         var pos = start + x * Vector3.right + Vector3.up * y;
         Tweener.MoveToBounceOut(head, pos, 0.2f);
     }
 
-    public void Acknowledge()
+    public void Acknowledge(bool hop)
     {
-        if (Random.value < 0.1f)
+        if (hop)
         {
             Hop();
             return;
