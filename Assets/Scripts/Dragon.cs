@@ -34,16 +34,18 @@ public class Dragon : MonoBehaviour
         
         speechBubble.onWord += Speak;
         speechBubble.onHide += () => Nudge();
-        Invoke(nameof(ShowIntro), 1f);
     }
 
     private string GetTutorialMessage(TutorialMessage message)
     {
         return message switch
         {
-            TutorialMessage.Intro => "Combine cards that (total up to 10) to remove them. You can also place any cards on (empty spots).",
+            TutorialMessage.Intro => "Combine cards that (total up to 10) to remove them. You can also store any cards on (empty spots).",
             TutorialMessage.Minus => "It's time to do some (subtractions) now. How's your (minus game)?",
             TutorialMessage.BigScore => "Oh yeah! The (more cards) you use, (bigger) the (score) you're awarded...",
+            TutorialMessage.ScaleIntro => "Now you need to (balance) these (scales) by loading the same amount of weight on (both sides).",
+            TutorialMessage.Overloaded => "Try to (avoid) letting the (scales tip) too much to one side as that will (reset) your (multiplier).",
+            TutorialMessage.ExtraWeights => "Notice that (extra weight) over there! It might make this a wee bit (trickier).",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -51,11 +53,6 @@ public class Dragon : MonoBehaviour
     private void ShowTutorial(TutorialMessage message)
     {
         speechBubble.Show(GetTutorialMessage(message));
-    }
-
-    private void ShowIntro()
-    {
-        Tutorial.Show(TutorialMessage.Intro);
     }
 
     private void WingFlaps()
@@ -83,7 +80,7 @@ public class Dragon : MonoBehaviour
         var x = Random.Range(-1f, 1f) * 0.5f * amount;
         var y = Random.Range(-1f, 1f) * 0.3f * amount;
         var pos = start + x * Vector3.right + Vector3.up * y;
-        Tweener.MoveToBounceOut(head, pos, 0.2f);
+        Tweener.MoveToBounceOut(head, pos, 0.3f);
     }
 
     public void Acknowledge(bool hop)
@@ -123,5 +120,8 @@ public enum TutorialMessage
 {
     Intro,
     Minus,
-    BigScore
+    BigScore,
+    ScaleIntro,
+    Overloaded,
+    ExtraWeights
 }

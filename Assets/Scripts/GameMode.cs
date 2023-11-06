@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
 using AnttiStarterKit.Game;
 using AnttiStarterKit.Managers;
 using UnityEngine;
@@ -12,6 +13,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Camera cam;
     [SerializeField] protected ScoreDisplay scoreDisplay;
     [SerializeField] protected Dragon dragon;
+    [SerializeField] protected Appearer continueButton;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 
@@ -25,6 +27,11 @@ public abstract class GameMode : MonoBehaviour
         }
     }
     
+    public void ToRewards()
+    {
+        State.Instance.RoundEnded(scoreDisplay.Total);
+    }
+
     protected void DeselectAll()
     {
         AllCards.Where(c => c.IsSelected).ToList().ForEach(c => c.ChangeSelection(false));

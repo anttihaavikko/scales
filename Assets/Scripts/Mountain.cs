@@ -12,7 +12,6 @@ public class Mountain : GameMode
 {
     [SerializeField] private TMP_Text helpText;
     [SerializeField] private Transform bg;
-    [SerializeField] private Appearer continueButton;
 
     private MountainOperator operation;
     private int target;
@@ -24,11 +23,6 @@ public class Mountain : GameMode
     {
         SetupLevel();
         SetupSlots();
-
-        if (operation == MountainOperator.Minus)
-        {
-            dragon.Tutorial.Show(TutorialMessage.Minus);
-        }
 
         var cards = deck.Cards.Reverse().ToList();
         
@@ -83,6 +77,13 @@ public class Mountain : GameMode
         });
 
         FlipCards();
+        
+        Invoke(nameof(ShowIntro), 1f);
+    }
+    
+    private void ShowIntro()
+    {
+        dragon.Tutorial.Show(TutorialMessage.Intro);
     }
 
     private void SetupSlots()
@@ -297,11 +298,6 @@ public class Mountain : GameMode
     private void RoundEnded()
     {
         continueButton.Show();
-    }
-
-    public void ToRewards()
-    {
-        State.Instance.RoundEnded(scoreDisplay.Total);
     }
 
     private bool CanCalcTo(IList<int> set, int sum, bool exact = false)

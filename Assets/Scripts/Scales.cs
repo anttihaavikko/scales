@@ -18,6 +18,12 @@ public class Scales : GameMode
     {
         this.StartCoroutine(() => hand.Fill(), 0.5f);
         SetupWeights();
+        Invoke(nameof(ShowIntro), 1f);
+    }
+
+    private void ShowIntro()
+    {
+        dragon.Tutorial.Show(TutorialMessage.ScaleIntro);
     }
 
     private void SetupWeights()
@@ -25,6 +31,11 @@ public class Scales : GameMode
         var level = State.Instance.Level;
         if (level > 1) rightMass = Random.Range(1, 4);
         if (level > 5) leftMass = Random.Range(1, 4);
+
+        if (rightMass > 1 || leftMass > 1)
+        {
+            dragon.Tutorial.Show(TutorialMessage.ExtraWeights);
+        }
 
         leftMassAmount.text = $"x{leftMass}";
         rightMassAmount.text = $"x{rightMass}";
@@ -79,7 +90,7 @@ public class Scales : GameMode
 
         if (hand.IsEmpty)
         {
-            Invoke(nameof(RoundEnded), 1f);
+            continueButton.Show();
         }
     }
 
@@ -90,8 +101,20 @@ public class Scales : GameMode
         ShowScore(total, multi, pos);
         scoreDisplay.Add(total * multi);
 
-        if (difference == 0) scoreDisplay.AddMulti();
-        if(difference > 10) scoreDisplay.ResetMulti();
+        if (difference == 0)
+        {
+            scoreDisplay.AddMulti();
+            dragon.Hop();
+            return;
+        }
+        
+        if(difference > 10)
+        {
+            dragon.Tutorial.Show(TutorialMessage.Overloaded);
+            scoreDisplay.ResetMulti();
+        }
+        
+        dragon.Nudge();
     }
 
     private void RoundEnded()
