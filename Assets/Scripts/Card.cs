@@ -196,6 +196,7 @@ public class Card : Markable, IPointerClickHandler
     {
         if (!deck) return;
         var p = transform.position;
+        Debug.Log($"Finding preview from {targets.Count}");
         var nextMark = targets
             .Select(GetCardOrSlot)
             .Where(t => t.AcceptsCard(this))
@@ -210,7 +211,7 @@ public class Card : Markable, IPointerClickHandler
 
     public override bool AcceptsCard(Card card)
     {
-        return deck.CanCombine(this, card);
+        return deck.CanCombine(card, this);
     }
 
     private Markable GetCardOrSlot(Component component)
