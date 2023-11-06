@@ -20,11 +20,14 @@ public class Dragon : MonoBehaviour
 
     public Tutorial<TutorialMessage> Tutorial { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         Tutorial = new Tutorial<TutorialMessage>("ScaleTutorials");
         Tutorial.onShow += ShowTutorial;
-        
+    }
+
+    private void Start()
+    {
         start = head.transform.position;
         Invoke(nameof(WingFlaps), 5f);
         

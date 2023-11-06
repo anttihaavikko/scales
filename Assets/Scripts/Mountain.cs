@@ -64,11 +64,10 @@ public class Mountain : GameMode
         slots[2].transform.position = new Vector3(-(rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
         slots[3].transform.position = new Vector3((rows * 0.5f + 2.5f) * 1.2f, -top * Overlap - SlotOffset, 0.1f);
         slots[4].transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset - 0.15f, 0.1f);
-        
-        if (slots[4].gameObject.activeSelf)
-        {
-            helpText.transform.position = new Vector3(0, -top - 1f * Overlap - SlotOffset - 2f, 0);
-        }
+
+        helpText.transform.position = slots[4].gameObject.activeSelf ? 
+            new Vector3(0, -top - 1f * Overlap - SlotOffset - 1.75f, 0) : 
+            new Vector3(0, -5f * scale, 0);
 
         cards.Skip(index).ToList().ForEach(c =>
         {
