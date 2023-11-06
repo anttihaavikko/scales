@@ -5,11 +5,14 @@ using AnttiStarterKit.Extensions;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Slot : MonoBehaviour
+public class Slot : Markable
 {
     [SerializeField] private bool unlimited;
     [SerializeField] private bool pile;
     [SerializeField] private Collider2D coll;
+    [SerializeField] private Color normalColor, markColor;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Pulsater pulsater;
 
     private readonly List<Card> cards = new();
 
@@ -22,8 +25,13 @@ public class Slot : MonoBehaviour
     public int Sum => cards.Where(c => c != default && !c.IsRemoved).Sum(c => c.Number);
     public List<Card> Cards => cards;
 
-    public void Add(Card card)
+    public void Add(Card card, bool pulsate = true)
     {
+        if (pulsate)
+        {
+            pulsater.Pulsate();
+        }
+        
         if (TopCard && pile)
         {
             var t = TopCard.transform;
@@ -33,6 +41,17 @@ public class Slot : MonoBehaviour
         
         cards.Add(card);
         // coll.enabled = false;
+    }
+
+    public override void Mark(bool state, bool dark)
+    {
+        sprite.color = state ? markColor : normalColor;
+        if(state) pulsater.Pulsate();
+    }
+
+    public override bool AcceptsCard(Card card)
+    {
+        return Accepts;
     }
 
     public void Clear()

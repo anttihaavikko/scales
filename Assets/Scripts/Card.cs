@@ -13,7 +13,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Card : MonoBehaviour, IPointerClickHandler
+public class Card : Markable, IPointerClickHandler
 {
     [SerializeField] private Draggable draggable;
     [SerializeField] private SpriteRenderer backSprite;
@@ -46,7 +46,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     private CardType cardType;
     
     private readonly List<Card> covers = new();
-    private Card marked;
+    private Markable marked;
 
     public Action click;
 
@@ -187,52 +187,61 @@ public class Card : MonoBehaviour, IPointerClickHandler
 
     private void OnHidePreview()
     {
-        if (marked)
-        {
-            marked.ToggleMarking(false);
-            marked = null;
-        }
-        // ToggleMarking(false);
+        if (!marked) return;
+        marked.Mark(false, false);
+        marked = default;
     }
 
-    private void OnPreview(List<Card> targets)
+    private void OnPreview(List<Collider2D> targets)
     {
         if (!deck) return;
         var p = transform.position;
         var nextMark = targets
-            .Where(t => deck.CanCombine(this, t))
+            .Select(GetCardOrSlot)
+            .Where(t => t.AcceptsCard(this))
             .OrderBy(c => Vector3.Distance(c.transform.position, p))
             .FirstOrDefault();
-        if (marked && marked != nextMark) marked.ToggleMarking(false);
+        if (marked && marked != nextMark) marked.Mark(false, false);
+        if (marked == nextMark) return;
         marked = nextMark;
-        ToggleMarking(marked);
-        if (marked) marked.ToggleMarking(true, true);
-        // Debug.Log($"Preview for {number} => {string.Join(",", marked.Select(m => m.number))}");
+        Mark(marked, false);
+        if(marked) marked.Mark(true, true);
+    }
+
+    public override bool AcceptsCard(Card card)
+    {
+        return deck.CanCombine(this, card);
+    }
+
+    private Markable GetCardOrSlot(Component component)
+    {
+        var card = component.GetComponent<Card>();
+        if (card) return card;
+        var slot = component.GetComponent<Slot>();
+        return slot;
     }
 
     private void OnDrop(List<Collider2D> objects)
     {
         shadow.SetActive(false);
-        var p = transform.position;
-        foreach (var obj in objects.OrderBy(c => Vector3.Distance(c.transform.position, p)))
-        {
-            var slot = obj.GetComponent<Slot>();
-            if (slot && slot.Accepts && deck)
-            {
-                deck.DropToSlot(this, slot);
-                return;
-            }
 
-            if (slot && deck && deck.TryCombine(this, slot.TopCard))
-            {
-                return;
-            } 
-        
-            var card = obj.GetComponent<Card>();
-            if (card && deck && deck.TryCombine(this, card))
-            {
-                return;
-            }
+        var markedSlot = marked as Slot;
+        var markedCard = marked as Card;
+
+        if (markedSlot && markedSlot.Accepts && deck)
+        {
+            deck.DropToSlot(this, markedSlot);
+            return;
+        }
+
+        if (markedSlot && deck && deck.TryCombine(this, markedSlot.TopCard))
+        {
+            return;
+        }
+
+        if (markedCard && deck && deck.TryCombine(this, markedCard))
+        {
+            return;
         }
 
         ReturnToPrevious();
@@ -268,7 +277,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
     public void ChangeSelection(bool state)
     {
         selected = state;
-        ToggleMarking(selected);
+        Mark(selected, false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -279,7 +288,7 @@ public class Card : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    private void ToggleMarking(bool state, bool dark = false)
+    public override void Mark(bool state, bool dark)
     {
         outline.SetActive(state);
         var color = dark ? darkerSelectColor : selectColor;
@@ -342,137 +351,4 @@ public enum CardType
     Normal,
     Joker,
     Timer
-}
-
-public class CardData
-{
-    public Guid id;
-    public int number;
-    public CardModifier modifier;
-    public CardType type;
-    public bool cheat;
-    public int icon;
-    public int multiplier;
-    public bool favourite;
-
-    public bool isInitialized;
-    public Vector2 cheatPos;
-
-    public CardData(int value)
-    {
-        id = Guid.NewGuid();
-        number = value;
-        modifier = CardModifier.None;
-        type = CardType.Normal;
-        cheatPos = Vector2.zero;
-        icon = -1;
-        multiplier = 1;
-    }
-    
-    public CardData(CardData from)
-    {
-        id = from.id;
-        number = from.number;
-        modifier = from.modifier;
-        type = from.type;
-        cheat = from.cheat;
-        icon = from.icon;
-        multiplier = from.multiplier;
-        favourite = from.favourite;
-    }
-
-    public void Init()
-    {
-        if (isInitialized) return;
-        isInitialized = true;
-        cheatPos = new Vector2(Random.Range(-0.75f, 0.75f), Random.Range(-0.9f, 1.4f));
-    }
-
-    private CardData(CardType specialType) : this(0)
-    {
-        type = specialType;
-    }
-
-    private CardData(CardModifier mod, int value) : this(value)
-    {
-        modifier = mod;
-    }
-
-    public string GetPrefix()
-    {
-        return modifier switch
-        {
-            CardModifier.None => "",
-            CardModifier.Plus => "+",
-            CardModifier.Minus => "-",
-            CardModifier.Multiply => "x",
-            CardModifier.Cheat => "!",
-            CardModifier.Scorer => "!",
-            CardModifier.Favourite => "!",
-            _ => throw new ArgumentOutOfRangeException()
-        };
-    }
-
-    private static CardData GetRandomModifier()
-    {
-        return new []
-        {
-            new CardData(CardModifier.Plus, 1),
-            new CardData(CardModifier.Plus, 2),
-            new CardData(CardModifier.Minus, 1),
-            new CardData(CardModifier.Multiply, 2),
-            new CardData(CardModifier.Cheat, 0) { icon = 0 },
-            new CardData(CardModifier.Favourite, 0) { icon = 1 },
-            new CardData(CardModifier.Scorer, 2) { icon = 2 }
-        }.Random();
-    }
-
-    private static CardData GetRandomSpecial()
-    {
-        return new []
-        {
-            new CardData(0),
-            new CardData(99),
-            new CardData(Random.Range(1, 99)),
-            new CardData(Random.Range(1, 20)),
-            new CardData(CardType.Joker),
-            new CardData(CardType.Timer) { icon = 3 }
-        }.Random();
-    }
-    
-    public static CardData GetRandom()
-    {
-        if (Random.value < 0.5f) return new CardData(Random.Range(1, 11));
-        if (Random.value < 0.5f) return GetRandomModifier();
-        return GetRandomSpecial();
-    }
-
-    public void Modify(CardData card)
-    {
-        switch (card.modifier)
-        {
-            case CardModifier.Plus:
-                number += card.number;
-                break;
-            case CardModifier.Minus:
-                number -= card.number;
-                break;
-            case CardModifier.Multiply:
-                number *= card.number;
-                break;
-            case CardModifier.Cheat:
-                cheat = true;
-                break;
-            case CardModifier.None:
-                break;
-            case CardModifier.Scorer:
-                multiplier *= card.number;
-                break;
-            case CardModifier.Favourite:
-                favourite = true;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
 }

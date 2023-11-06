@@ -173,6 +173,10 @@ MonoBehaviour:
   unlimited: 0
   pile: 0
   coll: {fileID: 7676871227263162668}
+  normalColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+  markColor: {r: 0.8039216, g: 0.90588236, b: 0.6901961, a: 1}
+  sprite: {fileID: 5815908020419172414}
+  pulsater: {fileID: 3813157997236129400}
 --- !u!1 &7676871227740645054
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6212349830401704051}
   - component: {fileID: 5815908020419172414}
+  - component: {fileID: 3813157997236129400}
   m_Layer: 0
   m_Name: Dashed
   m_TagString: Untagged
@@ -341,3 +346,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3813157997236129400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509388913467072567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a34521434044b8da4e730f3f4dcc95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.1
+  speed: 3

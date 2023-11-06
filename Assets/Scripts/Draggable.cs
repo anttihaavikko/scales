@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 public class Draggable : MonoBehaviour
 {
     public Action hidePreview, click, dropCancelled, pick;
-    public Action<List<Card>> preview;
+    public Action<List<Collider2D>> preview;
     public Action<List<Collider2D>> droppedOn;
 
     [SerializeField] private LayerMask dropMask, blockMask;
@@ -68,11 +68,10 @@ public class Draggable : MonoBehaviour
     private void OnMouseUp()
     {
         SetSortOrder("Default");
-        hidePreview?.Invoke();
-        
+
         if (Vector3.Distance(transform.position, start) < 0.1f)
         {
-            click?.Invoke();   
+            click?.Invoke();
         }
     }
 
@@ -98,15 +97,14 @@ public class Draggable : MonoBehaviour
 
     private void InvokePreview()
     {
-        var hits = TryDrop(transform.position).Select(h => h.GetComponent<Card>()).Where(h => h).ToList();
-        preview?.Invoke(hits);
+        preview?.Invoke(TryDrop(transform.position).ToList());
     }
 
     private void StopDrag()
     {
-        hidePreview?.Invoke();
         var rounded = GetRoundedPos();
         DropOn(rounded);
+        hidePreview?.Invoke();
     }
 
     public Vector2 GetRoundedPos()

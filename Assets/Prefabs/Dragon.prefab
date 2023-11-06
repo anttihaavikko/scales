@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 6357250262722474144}
   - component: {fileID: 6357250262722474147}
   m_Layer: 0
-  m_Name: wing_left sprite
+  m_Name: wing_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1148,7 +1148,7 @@ GameObject:
   - component: {fileID: 6357250262952185282}
   - component: {fileID: 6357250262952185293}
   m_Layer: 0
-  m_Name: wing_right sprite
+  m_Name: wing_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

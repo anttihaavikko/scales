@@ -70,7 +70,7 @@ public class Mountain : GameMode
 
             if (slot)
             {
-                slot.Add(c);
+                slot.Add(c, false);
                 c.transform.position = slot.transform.position.WhereZ(0);
                 c.SetDepth();
             }
