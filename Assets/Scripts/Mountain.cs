@@ -285,6 +285,10 @@ public class Mountain : GameMode
             {
                 dragon.Hop();
             }
+            else
+            {
+                dragon.Sit();
+            }
             
             Invoke(nameof(RoundEnded), 0.7f);
         }

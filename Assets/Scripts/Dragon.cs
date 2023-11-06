@@ -17,6 +17,7 @@ public class Dragon : MonoBehaviour
     private static readonly int HopAnim = Animator.StringToHash("Hop");
     private static readonly int FlapAnim = Animator.StringToHash("Flap");
     private static readonly int FlapTwiceAnim = Animator.StringToHash("DoubleFlap");
+    private static readonly int SitAnim = Animator.StringToHash("Sit");
 
     public Tutorial<TutorialMessage> Tutorial { get; private set; }
 
@@ -67,6 +68,7 @@ public class Dragon : MonoBehaviour
     {
         if (DevKey.Down(KeyCode.H)) Hop();
         if (DevKey.Down(KeyCode.T)) Nudge();
+        if (DevKey.Down(KeyCode.S)) Sit();
         if (DevKey.Down(KeyCode.D)) Tutorial.Clear();
     }
 
@@ -109,6 +111,11 @@ public class Dragon : MonoBehaviour
     public void Flap()
     {
         anim.SetTrigger(FlapAnim);
+    }
+
+    public void Sit()
+    {
+        anim.SetTrigger(SitAnim);
     }
 }
 
