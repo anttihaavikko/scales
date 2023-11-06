@@ -12,6 +12,7 @@ public class Mountain : GameMode
 {
     [SerializeField] private TMP_Text helpText;
     [SerializeField] private Transform bg;
+    [SerializeField] private Appearer continueButton;
 
     private MountainOperator operation;
     private int target;
@@ -285,11 +286,16 @@ public class Mountain : GameMode
                 dragon.Hop();
             }
             
-            Invoke(nameof(RoundEnded), 1.5f);
+            Invoke(nameof(RoundEnded), 0.7f);
         }
     }
 
     private void RoundEnded()
+    {
+        continueButton.Show();
+    }
+
+    public void ToRewards()
     {
         State.Instance.RoundEnded(scoreDisplay.Total);
     }

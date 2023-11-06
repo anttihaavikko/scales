@@ -409,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -790,6 +790,7 @@ MonoBehaviour:
   slots: []
   cam: {fileID: 0}
   scoreDisplay: {fileID: 0}
+  dragon: {fileID: 0}
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   pageText: {fileID: 1634324694}
   countText: {fileID: 56669366}
