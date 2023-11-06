@@ -24,6 +24,11 @@ public class Mountain : GameMode
         SetupLevel();
         SetupSlots();
 
+        if (operation == MountainOperator.Minus)
+        {
+            dragon.Tutorial.Show(TutorialMessage.Minus);
+        }
+
         var cards = deck.Cards.Reverse().ToList();
         
         cards.ForEach(c => c.Nudge());
@@ -339,6 +344,11 @@ public class Mountain : GameMode
         ShowScore(total, cards.Count, p);
         scoreDisplay.Add(cards.Count * total);
         scoreDisplay.AddMulti();
+
+        if (cards.Count > 2)
+        {
+            this.StartCoroutine(() => dragon.Tutorial.Show(TutorialMessage.BigScore), 1f);
+        }
     }
 }
 
