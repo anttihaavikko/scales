@@ -196,7 +196,6 @@ public class Card : Markable, IPointerClickHandler
     {
         if (!deck) return;
         var p = transform.position;
-        Debug.Log($"Finding preview from {targets.Count}");
         var nextMark = targets
             .Select(GetCardOrSlot)
             .Where(t => t.AcceptsCard(this))
