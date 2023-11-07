@@ -48,7 +48,7 @@ public class Dragon : MonoBehaviour
             TutorialMessage.ExtraWeights => "Notice that (extra weight) over there! It might make this a wee bit (trickier).",
             TutorialMessage.UnoInfo => "You're playing against my (evil twin brother) now. Just keep playing (bigger cards) than the previous.",
             TutorialMessage.UnoSame => "You can (always) also play a card of the (same value).",
-            TutorialMessage.UnoChoice => "Playing (same value) allows you to (reverse) the direction or (discard) the played stack.",
+            TutorialMessage.UnoChoice => "Playing (same value) allows you to (reverse) the direction or (discard) the whole played stack.",
             TutorialMessage.UnoFlip => "So now you gotta keep playing (smaller cards) than your opponent.",
             TutorialMessage.UnoTake => "If you (can't play) anything, you have to (take the stack) to your hand.",
             TutorialMessage.UnoWinner => "Whoever runs (out of cards) first (wins)!",

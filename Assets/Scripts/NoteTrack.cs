@@ -14,7 +14,7 @@ public class NoteTrack : MonoBehaviour
         for (var i = 0; i < 12; i++)
         {
             var note = Instantiate(notePrefab, transform);
-            note.transform.position = new Vector3(-6f + i, 0);
+            note.transform.position = new Vector3(-5f + i, 0);
             notes.Add(note);
             note.gameObject.SetActive(false);
         }

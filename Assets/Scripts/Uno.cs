@@ -13,7 +13,7 @@ public class Uno : GameMode
     [SerializeField] private Uno opponent;
     [SerializeField] private bool isPlayer;
     [SerializeField] private Transform turnIndicator, turnSpot;
-    [SerializeField] private GameObject sameOptions, takeButton;
+    [SerializeField] private Appearer sameOptions, takeButton;
     [SerializeField] private NoteTrack noteTrack;
 
     private bool descending;
@@ -126,7 +126,7 @@ public class Uno : GameMode
     {
         if (isPlayer)
         {
-            sameOptions.SetActive(true);
+            sameOptions.Show();
             return;
         }
         
@@ -137,13 +137,13 @@ public class Uno : GameMode
     {
         deck.Kill(Pile.Cards);
         Pile.Clear();
-        sameOptions.SetActive(false);
+        sameOptions.Hide();
         EndTurn();
     }
 
     public void Flip()
     {
-        sameOptions.SetActive(false);
+        sameOptions.Hide();
         descending = !descending;
         arrow.localScale = new Vector3(descending ? -1 : 1, 1, 1);
         opponent.descending = descending;
@@ -172,7 +172,7 @@ public class Uno : GameMode
             this.StartCoroutine(() =>
             {
                 helper.Tutorial.Show(TutorialMessage.UnoTake);
-                takeButton.SetActive(true);
+                takeButton.Show();
             }, 1f);
         }
     }
@@ -185,7 +185,7 @@ public class Uno : GameMode
 
     public void TakePile()
     {
-        takeButton.SetActive(false);
+        takeButton.Hide();
         hand.Add(Pile.Cards);
         Pile.Clear();
         Flip();
