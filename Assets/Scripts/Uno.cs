@@ -205,7 +205,7 @@ public class Uno : GameMode
         var options = GetOptions();
         if (options.Any())
         {
-            var pick = options.Random();
+            var pick = options.OrderBy(o => Mathf.Abs(PileValue - o.Number)).First();
             pick.MoveTo(pick.transform.position + Vector3.down * 0.5f);
             dragon.Nudge();
             this.StartCoroutine(() => Play(pick), 0.5f);
