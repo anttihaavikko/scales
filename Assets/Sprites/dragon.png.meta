@@ -4695,6 +4695,48 @@ TextureImporter:
         boneIndex[1]: 0
         boneIndex[2]: 0
         boneIndex[3]: 0
+    - serializedVersion: 2
+      name: lid_left
+      rect:
+        serializedVersion: 2
+        x: 2002
+        y: 1500
+        width: 160
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01ee638fa966e4365904c639f5dc339f
+      internalID: -1623534156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: lid_right
+      rect:
+        serializedVersion: 2
+        x: 2184
+        y: 1507
+        width: 151
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf055721a739c4346b345e04cded9c6d
+      internalID: 1799033623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -4716,11 +4758,13 @@ TextureImporter:
       ear_right: 1695841930
       horn_right: -1742421358
       head: -708073399
+      lid_left: -1623534156
       wing_left: 632338280
       eye_right: 2030286512
       horn_left: -448039263
       blush_left: 1114931251
       body: 1488869572
+      lid_right: 1799033623
       eye_left: -948664023
   spritePackingTag: 
   pSDRemoveMatte: 0
