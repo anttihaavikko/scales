@@ -73,4 +73,9 @@ public class Deck : MonoBehaviour
     {
         return gameMode.GetJokerValue();
     }
+
+    public bool CanPlay(Card card)
+    {
+        return gameMode.CanPlay(card);
+    }
 }

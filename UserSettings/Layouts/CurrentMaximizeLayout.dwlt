@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 58470
+  controlID: 62401
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 530.5
-    width: 854.5
-    height: 201.5
+    y: 657
+    width: 1138
+    height: 255
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 289, y: 180.5}
+  m_TargetSize: {x: 374, y: 234}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -75,10 +75,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -144.5
-    m_HBaseRangeMax: 144.5
-    m_VBaseRangeMin: -90.25
-    m_VBaseRangeMax: 90.25
+    m_HBaseRangeMin: -187
+    m_HBaseRangeMax: 187
+    m_VBaseRangeMin: -117
+    m_VBaseRangeMax: 117
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -96,23 +96,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 854.5
-      height: 180.5
+      width: 1138
+      height: 234
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 427.25, y: 90.25}
+    m_Translation: {x: 569, y: 117}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -427.25
-      y: -90.25
-      width: 854.5
-      height: 180.5
+      x: -569
+      y: -117
+      width: 1138
+      height: 234
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 854.5, y: 201.5}
+  m_LastWindowPixelSize: {x: 1138, y: 255}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000100000100000100
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 58471
+  controlID: 62381
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -420,9 +420,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.2732973, y: -1.2479917, z: -0.05971204}
+    m_Target: {x: -0.40591288, y: -0.3842892, z: -0.041596565}
     speed: 2
-    m_Value: {x: -1.2732973, y: -1.2479917, z: -0.05971204}
+    m_Value: {x: -0.40591288, y: -0.3842892, z: -0.041596565}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -473,9 +473,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 6.169832
+    m_Target: 5.5931168
     speed: 2
-    m_Value: 6.169832
+    m_Value: 5.5931168
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -783,7 +783,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -1158832
+  m_LastSelectedObjectID: -1179582
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 58320
+  controlID: 62402
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 58442
+  controlID: 62396
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52

@@ -223,6 +223,11 @@ public class Mountain : GameMode
         }
     }
 
+    public override bool CanPlay(Card card)
+    {
+        return true;
+    }
+
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
     {
         if (index < 0) return;

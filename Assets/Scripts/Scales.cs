@@ -134,7 +134,12 @@ public class Scales : GameMode
     public override void RightClick(Card card)
     {
     }
-    
+
+    public override bool CanPlay(Card card)
+    {
+        return true;
+    }
+
     public override int GetJokerValue()
     {
         return slots.Sum(s => s.TopCard && !s.TopCard.IsJoker ? s.TopCard.Number : 0) + hand.Cards.Where(c => !c.IsJoker).Sum(c => c.Number);

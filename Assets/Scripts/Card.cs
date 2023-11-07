@@ -202,7 +202,7 @@ public class Card : Markable, IPointerClickHandler
         var p = transform.position;
         var nextMark = targets
             .Select(GetCardOrSlot)
-            .Where(t => t.AcceptsCard(this))
+            .Where(t => t.AcceptsCard(this, deck))
             .OrderBy(c => Vector3.Distance(c.transform.position, p))
             .FirstOrDefault();
         if (marked && marked != nextMark) marked.Mark(false, false);
@@ -212,7 +212,7 @@ public class Card : Markable, IPointerClickHandler
         if(marked) marked.Mark(true, true);
     }
 
-    public override bool AcceptsCard(Card card)
+    public override bool AcceptsCard(Card card, Deck d)
     {
         return deck.CanCombine(card, this);
     }

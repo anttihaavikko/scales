@@ -50,9 +50,9 @@ public class Slot : Markable
         if(state) pulsater.Pulsate();
     }
 
-    public override bool AcceptsCard(Card card)
+    public override bool AcceptsCard(Card card, Deck deck)
     {
-        return Accepts;
+        return Accepts && deck.CanPlay(card);
     }
 
     public void Clear()
