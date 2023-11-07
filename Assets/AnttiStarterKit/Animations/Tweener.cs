@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AnttiStarterKit.Visuals;
 using UnityEngine;
 
 namespace AnttiStarterKit.Animations
@@ -48,6 +49,36 @@ namespace AnttiStarterKit.Animations
 					_actions.RemoveAt(i);
 				}
 			}
+		}
+
+		private TweenAction AddTween(Camera cam, float target, float duration, Func<float, float> ease)
+		{
+			// remove old ones of same object
+			for (int i = _actions.Count - 1; i >= 0; i--)
+			{
+				if (_actions[i].type == TweenAction.Type.Zoom)
+				{
+					_actions.RemoveAt(i);
+				}
+			}
+			
+			var act = new TweenAction
+			{
+				type = TweenAction.Type.Zoom,
+				camera = cam,
+				targetPos = new Vector3(target, 0, 0),
+				tweenPos = 0f,
+				tweenDuration = duration,
+				tweenDelay = 0,
+				customEasing = -1,
+				easeFunction = ease,
+				startPos = new Vector3(cam.orthographicSize, 0, 0)
+			};
+			
+			act.Init();
+			
+			_actions.Add(act);
+			return act;
 		}
 
 		private TweenAction AddTween(Transform obj, Vector3 target, TweenAction.Type type, float duration, float delay, System.Func<float, float> ease, int easeIndex = -1, bool removeOld = true) {
@@ -173,9 +204,20 @@ namespace AnttiStarterKit.Animations
 			Instance.ColorTo(obj, target, duration, delay, TweenEasings.QuadraticEaseInOut);
 		}
 
+		public static void ZoomTo(Camera cam, float target, float duration)
+		{
+			Instance.DoZoomTo(cam, target, duration);
+		}
+
+		private void DoZoomTo(Camera cam, float target, float duration, Func<float, float> ease = null)
+		{
+			ease ??= TweenEasings.QuadraticEaseInOut;
+			AddTween(cam, target, duration, ease);
+		}
+
 		public void ColorTo(SpriteRenderer obj, Color color, float duration, float delay, System.Func<float, float> ease = null, int easeIndex = -1, bool removeOld = true) {
 			ease ??= TweenEasings.LinearInterpolation;
-			var act = AddTween (obj.transform, Vector3.zero, TweenAction.Type.Color, duration, delay, ease, easeIndex, removeOld);
+			var act = AddTween(obj.transform, Vector3.zero, TweenAction.Type.Color, duration, delay, ease, easeIndex, removeOld);
 			act.sprite = obj;
 			act.startColor = act.sprite.color;
 			act.targetColor = color;

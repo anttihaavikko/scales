@@ -213,7 +213,8 @@ public class Uno : GameMode
         var ratio = Screen.width * 1f / Screen.height;
         var sample = 16f / 10f;
         var limit = 10 / sample * ratio;
-        cam.orthographicSize = 5 * max / limit;
+        // cam.orthographicSize = 5 * max / limit;
+        Tweener.ZoomTo(cam, Mathf.Clamp(5 * max / limit, 5, 12), 1f);
     }
 
     private void DoMove()

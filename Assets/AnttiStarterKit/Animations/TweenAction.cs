@@ -10,10 +10,12 @@ namespace AnttiStarterKit.Animations
 			LocalPosition,
 			Rotation,
 			Scale,
-			Color
+			Color,
+			Zoom
 		};
 
 		public Transform theObject;
+		public Camera camera;
 		public SpriteRenderer sprite;
 		public Vector3 startPos, targetPos;
 		public Quaternion startRot, targetRot;
@@ -92,9 +94,14 @@ namespace AnttiStarterKit.Animations
 			startColor = sprite.color;
 		}
 
+		public void Init()
+		{
+			hasBeenInit = true;
+		}
+
 		public bool Process() {
 
-			if (!theObject) {
+			if (!theObject && !camera) {
 				return true;
 			}
 
@@ -109,24 +116,29 @@ namespace AnttiStarterKit.Animations
 				tweenPos += Time.deltaTime / tweenDuration;
 
 				if (type == Type.Position) {
-					theObject.position = Lerp (startPos, targetPos, DoEase ());
+					theObject.position = Lerp(startPos, targetPos, DoEase());
 				}
 
 				if (type == Type.LocalPosition) {
-					theObject.localPosition = Lerp (startPos, targetPos, DoEase ());
+					theObject.localPosition = Lerp(startPos, targetPos, DoEase());
 				}
 
 				if (type == Type.Rotation) {
-					theObject.localRotation = Lerp (startRot, targetRot, DoEase ());
+					theObject.localRotation = Lerp(startRot, targetRot, DoEase());
 				}
 
 				if (type == Type.Scale) {
-					theObject.localScale = Lerp (startPos, targetPos, DoEase ());
+					theObject.localScale = Lerp(startPos, targetPos, DoEase());
 				}
 
 				if (type == Type.Color) {
-					sprite.color = Lerp (startColor, targetColor, DoEase ());
+					sprite.color = Lerp(startColor, targetColor, DoEase());
 				}
+
+				if (type == Type.Zoom)
+				{
+					camera.orthographicSize = Lerp(startPos, targetPos, DoEase()).x;
+				} 
 			}
 
 			return (tweenPos >= 1f);
