@@ -79,6 +79,8 @@ public class Uno : GameMode
     {
         var isSame = card.Number == PileValue;
         
+        dragon.Nudge();
+        
         card.transform.SetParent(null);
         card.Flatten();
         card.SetDepth(Pile.TopCard, 1);
@@ -90,7 +92,7 @@ public class Uno : GameMode
 
         if (noteTrack)
         {
-            noteTrack.Add(card.Number);
+            noteTrack.Add(card.Number, isSame && descending, isSame && !descending);
         }
 
         if (hand.HasRoom) hand.Draw();
@@ -173,6 +175,7 @@ public class Uno : GameMode
             {
                 helper.Tutorial.Show(TutorialMessage.UnoTake);
                 takeButton.Show();
+                opponent.dragon.Hop();
             }, 1f);
         }
     }
@@ -204,12 +207,14 @@ public class Uno : GameMode
         {
             var pick = options.Random();
             pick.MoveTo(pick.transform.position + Vector3.down * 0.5f);
+            dragon.Nudge();
             this.StartCoroutine(() => Play(pick), 0.5f);
             return;
         }
         
         TakePile();
         helper.Tutorial.Show(TutorialMessage.UnoTake);
+        opponent.dragon.Hop();
     }
 
     private List<Card> GetOptions()

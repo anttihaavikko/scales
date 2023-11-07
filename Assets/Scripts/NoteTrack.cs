@@ -20,10 +20,10 @@ public class NoteTrack : MonoBehaviour
         }
     }
 
-    public void Add(int number)
+    public void Add(int number, bool sharp, bool flat)
     {
         position = (position + 1) % notes.Count;
         notes[position].gameObject.SetActive(true);
-        notes[position].Show(number);
+        notes[position].Show(number, sharp, flat);
     }
 }
