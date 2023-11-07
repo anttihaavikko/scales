@@ -208,6 +208,12 @@ public class Uno : GameMode
             dodged = true;
             dragon.HopTo(dragon.transform.position.WhereY(-0.5f));
         }
+
+        var max = Mathf.Max(hand.Cards.ToList().Count, opponent.hand.Cards.ToList().Count);
+        var ratio = Screen.width * 1f / Screen.height;
+        var sample = 16f / 10f;
+        var limit = 10 / sample * ratio;
+        cam.orthographicSize = 5 * max / limit;
     }
 
     private void DoMove()
@@ -254,7 +260,7 @@ public class Uno : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return CanPlay(card.Number);
+        return !opponent.hand.IsEmpty && CanPlay(card.Number);
     }
 
     private void Score(IReadOnlyCollection<Card> cards)
