@@ -104,6 +104,7 @@ public class Uno : GameMode
         
         if (hand.IsEmpty)
         {
+            if (isPlayer) Score(opponent.hand.Cards.ToList());
             dragon.Hop();
             opponent.dragon.Sit();
             continueButton.Show();
@@ -112,6 +113,7 @@ public class Uno : GameMode
         
         if (isSame)
         {
+            if(isPlayer) scoreDisplay.AddMulti();
             helper.Tutorial.Mark(TutorialMessage.UnoSame);
             helper.Tutorial.Show(TutorialMessage.UnoChoice);
             HandleSame();
@@ -139,6 +141,7 @@ public class Uno : GameMode
 
     public void Discard()
     {
+        Score(Pile.Cards);
         deck.Kill(Pile.Cards);
         Pile.Clear();
         sameOptions.Hide();
@@ -190,6 +193,11 @@ public class Uno : GameMode
 
     public void TakePile()
     {
+        if (isPlayer)
+        {
+            scoreDisplay.ResetMulti();
+        }
+        
         takeButton.Hide();
         hand.Add(Pile.Cards);
         Pile.Clear();
@@ -247,5 +255,13 @@ public class Uno : GameMode
     public override bool CanPlay(Card card)
     {
         return CanPlay(card.Number);
+    }
+
+    private void Score(IReadOnlyCollection<Card> cards)
+    {
+        var total = cards.Where(c => c && !c.IsRemoved).Sum(c => c.ScoreValue);
+        var multi = cards.Count;
+        ShowScore(total, multi, Pile.transform.position);
+        scoreDisplay.Add(total * multi);
     }
 }
