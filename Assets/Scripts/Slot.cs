@@ -36,7 +36,8 @@ public class Slot : Markable
         {
             var t = TopCard.transform;
             TopCard.Nudge();
-            t.position = t.position.RandomOffset(0.1f);
+            // t.localScale *= 1.2f;
+            // t.position = t.position.RandomOffset(0.1f);
         }
         
         cards.Add(card);
