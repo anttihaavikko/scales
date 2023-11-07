@@ -147,7 +147,7 @@ public class Mountain : GameMode
     {
         operation = type.operation;
         target = type.target;
-        helpText.text = $"Select cards that {GetOperation()} to {target}...";
+        helpText.text = $"Select cards that <color=#CDE7B0>{GetOperation()}</color> to <color=#CDE7B0>{target}</color>...";
     }
 
     private string GetOperation()
