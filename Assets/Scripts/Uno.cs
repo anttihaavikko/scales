@@ -104,6 +104,8 @@ public class Uno : GameMode
         
         if (hand.IsEmpty)
         {
+            dragon.Hop();
+            opponent.dragon.Sit();
             continueButton.Show();
             return;
         }
