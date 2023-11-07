@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -12,9 +14,11 @@ public class Uno : GameMode
     [SerializeField] private bool isPlayer;
     [SerializeField] private Transform turnIndicator, turnSpot;
     [SerializeField] private GameObject sameOptions, takeButton;
+    [SerializeField] private NoteTrack noteTrack;
 
     private bool descending;
     private bool hasTurn;
+    private bool dodged;
 
     private Slot Pile => slots[0];
     private int EmptyValue => descending ? int.MaxValue : int.MinValue;
@@ -24,6 +28,14 @@ public class Uno : GameMode
     {
         hasTurn = isPlayer;
         this.StartCoroutine(() => hand.Fill(), 0.5f);
+    }
+
+    private void Update()
+    {
+        if (DevKey.Down(KeyCode.J))
+        {
+            dragon.HopTo(dragon.transform.position.WhereY(-0.4f));
+        }
     }
 
     public override void Select(Card card)
@@ -63,12 +75,17 @@ public class Uno : GameMode
         card.ChangeSelection(false);
         Pile.Add(card);
         card.MoveTo(Pile.GetPosition(), isPlayer ? 1f : 0.5f);
+
+        if (noteTrack)
+        {
+            noteTrack.Add(card.Number);
+        }
         
         if (hand.HasRoom) hand.Draw();
         
         if (hand.IsEmpty)
         {
-            State.Instance.RoundEnded(scoreDisplay.Total);
+            continueButton.Show();
             return;
         }
         
@@ -79,6 +96,11 @@ public class Uno : GameMode
         }
         
         EndTurn();
+    }
+    
+    private void RoundEnded()
+    {
+        State.Instance.RoundEnded(scoreDisplay.Total);
     }
 
     private void HandleSame()
@@ -138,6 +160,12 @@ public class Uno : GameMode
         hand.Add(Pile.Cards);
         Pile.Clear();
         Flip();
+
+        if (isPlayer && hand.Cards.ToList().Count >= 8 && !dodged)
+        {
+            dodged = true;
+            dragon.HopTo(dragon.transform.position.WhereY(-0.5f));
+        }
     }
 
     private void DoMove()

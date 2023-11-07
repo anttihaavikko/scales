@@ -100,6 +100,13 @@ public class Dragon : MonoBehaviour
         anim.SetTrigger(HopAnim);
     }
 
+    public void HopTo(Vector3 pos)
+    {
+        Tweener.MoveToQuad(transform, pos, 5f / 6f * 0.5f);
+        // Tweener.MoveToBounceOut(head, start, 0.4f);
+        anim.SetTrigger(HopAnim);
+    }
+
     public void DoubleFlap()
     {
         anim.SetTrigger(FlapTwiceAnim);
