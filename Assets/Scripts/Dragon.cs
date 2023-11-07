@@ -21,6 +21,8 @@ public class Dragon : MonoBehaviour
 
     public Tutorial<TutorialMessage> Tutorial { get; private set; }
 
+    private Vector3 GlobalStart => transform.TransformPoint(start);
+
     private void Awake()
     {
         Tutorial = new Tutorial<TutorialMessage>("ScaleTutorials");
@@ -29,7 +31,7 @@ public class Dragon : MonoBehaviour
 
     private void Start()
     {
-        start = head.transform.position;
+        start = head.transform.localPosition;
         Invoke(nameof(WingFlaps), 5f);
         
         speechBubble.onWord += Speak;
@@ -85,7 +87,7 @@ public class Dragon : MonoBehaviour
         snout.AddForce(Vector3.zero.RandomOffset(100f * amount));
         var x = Random.Range(-1f, 1f) * 0.5f * amount;
         var y = Random.Range(-1f, 1f) * 0.3f * amount;
-        var pos = start + x * Vector3.right + Vector3.up * y;
+        var pos = GlobalStart + x * Vector3.right + Vector3.up * y;
         Tweener.MoveToBounceOut(head, pos, 0.3f);
     }
 
@@ -102,14 +104,13 @@ public class Dragon : MonoBehaviour
 
     public void Hop()
     {
-        Tweener.MoveToBounceOut(head, start, 0.4f);
+        Tweener.MoveToBounceOut(head, GlobalStart, 0.4f);
         anim.SetTrigger(HopAnim);
     }
 
     public void HopTo(Vector3 pos)
     {
         Tweener.MoveToQuad(transform, pos, 5f / 6f * 0.5f);
-        // Tweener.MoveToBounceOut(head, start, 0.4f);
         anim.SetTrigger(HopAnim);
     }
 
