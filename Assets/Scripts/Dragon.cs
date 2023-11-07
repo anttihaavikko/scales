@@ -46,6 +46,12 @@ public class Dragon : MonoBehaviour
             TutorialMessage.ScaleIntro => "Now you need to (balance) these (scales) by loading the same amount of weight on (both sides).",
             TutorialMessage.Overloaded => "Try to (avoid) letting the (scales tip) too much to one side as that will (reset) your (multiplier).",
             TutorialMessage.ExtraWeights => "Notice that (extra weight) over there! It might make this a wee bit (trickier).",
+            TutorialMessage.UnoInfo => "You're playing against my (evil twin brother) now. Just keep playing (bigger cards) than the previous.",
+            TutorialMessage.UnoSame => "You can (always) also play a card of the (same value).",
+            TutorialMessage.UnoChoice => "Playing (same value) allows you to (reverse) the direction or (discard) the played stack.",
+            TutorialMessage.UnoFlip => "So now you gotta keep playing (smaller cards) than your opponent.",
+            TutorialMessage.UnoTake => "If you (can't play) anything, you have to (take the stack) to your hand.",
+            TutorialMessage.UnoWinner => "Whoever runs (out of cards) first (wins)!",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -130,5 +136,11 @@ public enum TutorialMessage
     BigScore,
     ScaleIntro,
     Overloaded,
-    ExtraWeights
+    ExtraWeights,
+    UnoInfo,
+    UnoSame,
+    UnoChoice,
+    UnoFlip,
+    UnoTake,
+    UnoWinner
 }

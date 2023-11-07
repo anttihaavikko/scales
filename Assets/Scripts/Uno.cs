@@ -24,10 +24,22 @@ public class Uno : GameMode
     private int EmptyValue => descending ? int.MaxValue : int.MinValue;
     private int PileValue => Pile.TopCard ? Pile.TopCard.Number : EmptyValue;
 
+    private Dragon helper => isPlayer ? dragon : opponent.dragon;
+
     public override void Setup()
     {
         hasTurn = isPlayer;
         this.StartCoroutine(() => hand.Fill(), 0.5f);
+
+        if (isPlayer)
+        {
+            Invoke(nameof(ShowIntro), 1f);
+        }
+    }
+    
+    private void ShowIntro()
+    {
+        dragon.Tutorial.Show(TutorialMessage.UnoInfo);
     }
 
     private void Update()
@@ -80,8 +92,13 @@ public class Uno : GameMode
         {
             noteTrack.Add(card.Number);
         }
-        
+
         if (hand.HasRoom) hand.Draw();
+
+        if (hand.HasRoom)
+        {
+            helper.Tutorial.Show(TutorialMessage.UnoWinner);
+        }
         
         if (hand.IsEmpty)
         {
@@ -91,6 +108,8 @@ public class Uno : GameMode
         
         if (isSame)
         {
+            helper.Tutorial.Mark(TutorialMessage.UnoSame);
+            helper.Tutorial.Show(TutorialMessage.UnoChoice);
             HandleSame();
             return;
         }
@@ -129,11 +148,17 @@ public class Uno : GameMode
         arrow.localScale = new Vector3(descending ? -1 : 1, 1, 1);
         opponent.descending = descending;
         EndTurn();
+        helper.Tutorial.Show(TutorialMessage.UnoFlip);
     }
 
     private void StartTurn()
     {
         Tweener.MoveToBounceOut(turnIndicator, turnSpot.position, 0.2f);
+
+        if (isPlayer && GetOptions().Any(c => c.Number == PileValue))
+        {
+            helper.Tutorial.Show(TutorialMessage.UnoSame);
+        }
 
         hasTurn = true;
         if (!isPlayer)
@@ -144,7 +169,11 @@ public class Uno : GameMode
 
         if (!GetOptions().Any())
         {
-            this.StartCoroutine(() => takeButton.SetActive(true), 1f);
+            this.StartCoroutine(() =>
+            {
+                helper.Tutorial.Show(TutorialMessage.UnoTake);
+                takeButton.SetActive(true);
+            }, 1f);
         }
     }
 
@@ -180,6 +209,7 @@ public class Uno : GameMode
         }
         
         TakePile();
+        helper.Tutorial.Show(TutorialMessage.UnoTake);
     }
 
     private List<Card> GetOptions()
