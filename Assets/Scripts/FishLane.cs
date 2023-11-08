@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FishLane : MonoBehaviour
 {
+    [SerializeField] private float delay;
+    
     private readonly List<Card> cards = new();
 
     private const float RowHeight = 1.5f;
@@ -14,23 +16,26 @@ public class FishLane : MonoBehaviour
 
     public void Fill(Deck deck)
     {
-        if (cards.Count >= 4) return;
+        this.StartCoroutine(() =>
+        {
+            if (cards.Count >= 4) return;
 
-        var card = deck.Draw();
-        if (!card) return;
-        var pos = transform.position;
-        var reserve = cards.Count == 3;
-        card.MoveTo(pos + Vector3.up * 5f * RowHeight);
-        cards.Add(card);
-        
-        if (!reserve)
-        {
-            this.StartCoroutine(() => DropCard(card), 0.15f);
-        }
-        else
-        {
-            card.Lock();
-        }
+            var card = deck.Draw();
+            if (!card) return;
+            var pos = transform.position;
+            var reserve = cards.Count == 3;
+            card.MoveTo(pos + Vector3.up * (5f * RowHeight));
+            cards.Add(card);
+
+            if (!reserve)
+            {
+                this.StartCoroutine(() => DropCard(card), 0.3f - delay);
+            }
+            else
+            {
+                card.Lock();
+            }
+        }, delay);
     }
 
     public void Deselect()

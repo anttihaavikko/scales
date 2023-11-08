@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
@@ -19,13 +20,18 @@ public class Fish : GameMode
     private void Fill()
     {
         lanes.ForEach(l => l.Fill(deck));
-        if(lanes.Any(l => !l.IsFull)) Invoke(nameof(Fill), 0.3f);
+        if(lanes.Any(l => !l.IsFull) && !deck.IsEmpty)
+        {
+            Invoke(nameof(Fill), 0.6f);
+            return;
+        }
+        
         Invoke(nameof(Evaluate), 1f);
     }
 
     private void Evaluate()
     {
-        var all = lanes.SelectMany(l => l.Cards).ToList();
+        var all = lanes.SelectMany(l => l.Cards).Where(c => c.IsOpen).ToList();
         var available = all.Any(c => Check(c, all));
 
         if (!available)
