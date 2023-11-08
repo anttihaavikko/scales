@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Reward.unity
     guid: 4fd1584ca131145e7adffc46862f38ad
+  - enabled: 1
+    path: Assets/Scenes/Fish.unity
+    guid: 941f2a1b6e4fe4c3b881a30e3f2bb96a
   m_configObjects: {}

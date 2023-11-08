@@ -282,10 +282,10 @@ public class Card : Markable, IPointerClickHandler
         deck.Select(this);
     }
     
-    public void ChangeSelection(bool state)
+    public void ChangeSelection(bool state, bool dark = false)
     {
         selected = state;
-        Mark(selected, false);
+        Mark(selected, dark);
     }
 
     public void OnPointerClick(PointerEventData eventData)

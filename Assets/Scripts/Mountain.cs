@@ -304,38 +304,6 @@ public class Mountain : GameMode
             CanAddTo(set, sum, exact) : 
             CanSubTo(set, sum, exact);
     }
-    
-    private bool CanSubTo(IList<int> set, int sum, bool exact = false)
-    {
-        return set.Any(num =>
-        {
-            var left = num - sum;
-            if (left == 0 && (!exact || set.Count == 1))
-            {
-                return true;
-            }
-
-            var index = set.IndexOf(num);
-            var possible = set.Where((n, i) => i != index).ToList();
-            return possible.Any() && CanAddTo(possible, left, exact);
-        });
-    }
-
-    private static bool CanAddTo(IList<int> set, int sum, bool exact = false)
-    {
-        return set.Any(num =>
-        {
-            var left = sum - num;
-            if (left == 0 && (!exact || set.Count == 1))
-            {
-                return true;
-            }
-
-            var index = set.IndexOf(num);
-            var possible = set.Where((n, i) => n <= sum && i != index).ToList();
-            return possible.Any() && CanAddTo(possible, left, exact);
-        });
-    }
 
     private void Score(ICollection<Card> cards)
     {

@@ -33,6 +33,7 @@ public class State : Manager<State>
         if (DevKey.Down(KeyCode.Alpha1)) SceneChanger.Instance.ChangeScene("Mountain");
         if (DevKey.Down(KeyCode.Alpha2)) SceneChanger.Instance.ChangeScene("Scale");
         if (DevKey.Down(KeyCode.Alpha3)) SceneChanger.Instance.ChangeScene("Uno");
+        if (DevKey.Down(KeyCode.Alpha4)) SceneChanger.Instance.ChangeScene("Fish");
     }
 
     public void Add(CardData card)
@@ -43,7 +44,7 @@ public class State : Manager<State>
     public void NextLevel()
     {
         Level++;
-        var scene = new List<string> { "Mountain", "Scale", "Uno" }.Random();
+        var scene = new List<string> { "Mountain", "Scale", "Uno", "Fish" }.Random();
         SceneChanger.Instance.ChangeScene(scene);
     }
 

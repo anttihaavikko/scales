@@ -68,6 +68,7 @@ public class Dragon : MonoBehaviour
             TutorialMessage.UnoWinner => "Whoever runs (out of cards) first (wins)!",
             TutorialMessage.RewardIntro => "You can (pick three) new (additions) or (modifications) to your deck.",
             TutorialMessage.ModInfo => "Pick (which card) you want to be (affected) by this (modification).",
+            TutorialMessage.FishIntro => "Pick (a card) and its (surrounding cards) that (add) or (subtract) to the (same value).",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -160,5 +161,6 @@ public enum TutorialMessage
     UnoTake,
     UnoWinner,
     RewardIntro,
-    ModInfo
+    ModInfo,
+    FishIntro
 }
