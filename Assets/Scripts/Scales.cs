@@ -18,12 +18,6 @@ public class Scales : GameMode
     {
         this.StartCoroutine(() => hand.Fill(), 0.5f);
         SetupWeights();
-        Invoke(nameof(ShowIntro), 1f);
-    }
-
-    private void ShowIntro()
-    {
-        dragon.Tutorial.Show(TutorialMessage.ScaleIntro);
     }
 
     private void SetupWeights()

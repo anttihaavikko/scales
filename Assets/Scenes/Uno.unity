@@ -278,6 +278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon
       objectReference: {fileID: 0}
+    - target: {fileID: 6357250262859026770, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
+      propertyPath: intro
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6357250262939695255, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
       propertyPath: m_Positions.Array.data[0].x
       value: 5.8620687

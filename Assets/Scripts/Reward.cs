@@ -35,6 +35,7 @@ public class Reward : GameMode
             {
                 if (option.IsModifier)
                 {
+                    dragon.Tutorial.Show(TutorialMessage.ModInfo);
                     var wasSelected = option.IsSelected;
                     DeselectAll();
                     if (wasSelected) return;

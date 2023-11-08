@@ -30,16 +30,6 @@ public class Uno : GameMode
     {
         hasTurn = isPlayer;
         this.StartCoroutine(() => hand.Fill(), 0.5f);
-
-        if (isPlayer)
-        {
-            Invoke(nameof(ShowIntro), 1f);
-        }
-    }
-    
-    private void ShowIntro()
-    {
-        dragon.Tutorial.Show(TutorialMessage.UnoInfo);
     }
 
     private void Update()

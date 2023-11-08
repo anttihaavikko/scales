@@ -17,6 +17,8 @@ public abstract class GameMode : MonoBehaviour
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 
+    public Dragon Dragon => dragon;
+
     private void Start()
     {
         slots.ForEach(slot => slot.click += SlotClicked);
@@ -26,7 +28,7 @@ public abstract class GameMode : MonoBehaviour
             scoreDisplay.Set(State.Instance.Score);
         }
     }
-    
+
     public void ToRewards()
     {
         State.Instance.RoundEnded(scoreDisplay.Total);

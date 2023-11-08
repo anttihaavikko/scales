@@ -13,6 +13,7 @@ public class Deck : MonoBehaviour
     private readonly List<Card> cards = new();
 
     public IEnumerable<Card> Cards => cards;
+    public Dragon Dragon => gameMode.Dragon;
 
     public bool IsEmpty => cards.All(c => c.IsRemoved);
 

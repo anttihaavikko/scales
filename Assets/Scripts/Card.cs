@@ -259,6 +259,10 @@ public class Card : Markable, IPointerClickHandler
 
     private void OnPick()
     {
+        if (IsModifier)
+        {
+            this.StartCoroutine(() => deck.Dragon.Tutorial.Show(TutorialMessage.ModInfo), 0.5f);
+        }
         Nudge();
         wasSelected = selected;
         UpdateSelection(false);

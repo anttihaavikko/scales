@@ -11,6 +11,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private Rigidbody2D snout;
     [SerializeField] private Transform head;
     [SerializeField] private SpeechBubble speechBubble;
+    [SerializeField] private TutorialMessage intro;
 
     private Vector3 start;
 
@@ -36,12 +37,23 @@ public class Dragon : MonoBehaviour
         
         speechBubble.onWord += Speak;
         speechBubble.onHide += () => Nudge();
+        
+        Invoke(nameof(ShowIntro), 1f);
+    }
+    
+    private void ShowIntro()
+    {
+        if (intro != TutorialMessage.None)
+        {
+            Tutorial.Show(intro);   
+        }
     }
 
     private string GetTutorialMessage(TutorialMessage message)
     {
         return message switch
         {
+            TutorialMessage.None => "WHAT?",
             TutorialMessage.Intro => "Combine cards that (total up to 10) to remove them. You can also store any cards on (empty spots).",
             TutorialMessage.Minus => "It's time to do some (subtractions) now. How's your (minus game)?",
             TutorialMessage.BigScore => "Oh yeah! The (more cards) you use, (bigger) the (score) you're awarded...",
@@ -54,6 +66,8 @@ public class Dragon : MonoBehaviour
             TutorialMessage.UnoFlip => "So now you gotta keep playing (smaller cards) than your opponent.",
             TutorialMessage.UnoTake => "If you (can't play) anything, you have to (take the stack) to your hand.",
             TutorialMessage.UnoWinner => "Whoever runs (out of cards) first (wins)!",
+            TutorialMessage.RewardIntro => "You can (pick three) new (additions) or (modifications) to your deck.",
+            TutorialMessage.ModInfo => "Pick (which card) you want to be (affected) by this (modification).",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -132,6 +146,7 @@ public class Dragon : MonoBehaviour
 
 public enum TutorialMessage
 {
+    None,
     Intro,
     Minus,
     BigScore,
@@ -143,5 +158,7 @@ public enum TutorialMessage
     UnoChoice,
     UnoFlip,
     UnoTake,
-    UnoWinner
+    UnoWinner,
+    RewardIntro,
+    ModInfo
 }

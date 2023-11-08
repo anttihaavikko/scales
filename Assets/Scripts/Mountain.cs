@@ -77,13 +77,6 @@ public class Mountain : GameMode
         });
 
         FlipCards();
-        
-        Invoke(nameof(ShowIntro), 1f);
-    }
-    
-    private void ShowIntro()
-    {
-        dragon.Tutorial.Show(TutorialMessage.Intro);
     }
 
     private void SetupSlots()
