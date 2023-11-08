@@ -86,6 +86,7 @@ public class Fish : GameMode
 
         if (CanAddTo(numbers, target, true) || CanSubTo(numbers, target, true))
         {
+            Score(selected);
             lanes.ForEach(l => l.Remove(selected));
             selected.ForEach(c =>
             {
@@ -99,9 +100,22 @@ public class Fish : GameMode
             Invoke(nameof(Fill), 1f);
         }
     }
+    
+    private void Score(ICollection<Card> cards)
+    {
+        dragon.Acknowledge(cards.Count > 3);
+        var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
+        var x = cards.Average(c => c.transform.position.x);
+        var y = cards.Average(c => c.transform.position.y);
+        var p = new Vector3(x, y);
+        ShowScore(total, cards.Count, p);
+        scoreDisplay.Add(cards.Count * total);
+        scoreDisplay.AddMulti();
+    }
 
     private void ClearSelection()
     {
+        scoreDisplay.ResetMulti();
         selected.Clear();
         lanes.ForEach(l => l.Deselect());
         root = null;
