@@ -42,7 +42,8 @@ public class Fish : GameMode
 
     public override int GetJokerValue()
     {
-        return 0;
+        var all = lanes.SelectMany(l => l.Cards).Where(c => !c.IsJoker && !c.IsRemoved && c.IsOpen).ToList();
+        return all.Sum(c => c.Number);
     }
 
     protected override void Combine(Card first, Card second)
