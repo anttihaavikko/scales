@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="2160.2896"
-     inkscape:cy="710.45836"
+     inkscape:zoom="0.35"
+     inkscape:cx="3260.2896"
+     inkscape:cy="-12.398783"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -139,5 +139,21 @@
        inkscape:export-ydpi="93"
        inkscape:export-filename="/Users/anttih/card-lined.png"
        d="m 496.01758,68.462891 c -7.75179,97.331679 -0.0201,146.564019 47.08008,146.580079 49.48466,0.0169 55.61126,-48.47137 49.46484,-146.580079 z" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:15;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:23;paint-order:fill markers stroke"
+       id="rect833-6-3"
+       width="92.252914"
+       height="92.247047"
+       x="773.81067"
+       y="-188.5648"
+       ry="9.0825214"
+       inkscape:export-xdpi="93"
+       inkscape:export-ydpi="93" />
+    <path
+       id="rect867"
+       style="fill:#ffffff;stroke:none;stroke-width:11.0811;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:86.9292;paint-order:fill markers stroke"
+       d="m 991.04301,-186.52084 -9.47695,9.47694 22.31074,22.3113 -22.31074,22.31078 9.47695,9.47746 22.31129,-22.31078 22.3108,22.31078 9.4774,-9.47746 -22.3107,-22.31078 22.3107,-22.31078 -9.4774,-9.47746 -22.3108,22.31078 z"
+       inkscape:export-xdpi="93"
+       inkscape:export-ydpi="93" />
   </g>
 </svg>

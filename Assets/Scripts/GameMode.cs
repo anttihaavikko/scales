@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
+using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Game;
 using AnttiStarterKit.Managers;
 using UnityEngine;
@@ -14,6 +15,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected ScoreDisplay scoreDisplay;
     [SerializeField] protected Dragon dragon;
     [SerializeField] protected Appearer continueButton;
+    [SerializeField] protected StrikeDisplay strikeDisplay;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 
@@ -31,7 +33,7 @@ public abstract class GameMode : MonoBehaviour
 
     public void ToRewards()
     {
-        State.Instance.RoundEnded(scoreDisplay.Total);
+        this.StartCoroutine(() => State.Instance.RoundEnded(scoreDisplay.Total), AddStrikes() * 0.3f);
     }
 
     protected void DeselectAll()
@@ -106,4 +108,5 @@ public abstract class GameMode : MonoBehaviour
     public abstract bool CanCombine(Card first, Card second);
     public abstract void RightClick(Card card);
     public abstract bool CanPlay(Card card);
+    public abstract int AddStrikes();
 }

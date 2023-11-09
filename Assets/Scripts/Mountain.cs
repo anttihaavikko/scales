@@ -221,6 +221,11 @@ public class Mountain : GameMode
         return true;
     }
 
+    public override int AddStrikes()
+    {
+        return 0;
+    }
+
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
     {
         if (index < 0) return;

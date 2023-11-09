@@ -135,6 +135,11 @@ public class Reward : GameMode
         return true;
     }
 
+    public override int AddStrikes()
+    {
+        return 0;
+    }
+
     public override int GetJokerValue()
     {
         return deck.Cards.Where(c => !c.IsJoker && c.IsOpen).Sum(c => c.Number);

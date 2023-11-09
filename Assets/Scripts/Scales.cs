@@ -138,4 +138,9 @@ public class Scales : GameMode
     {
         return slots.Sum(s => s.TopCard && !s.TopCard.IsJoker ? s.TopCard.Number : 0) + hand.Cards.Where(c => !c.IsJoker).Sum(c => c.Number);
     }
+    
+    public override int AddStrikes()
+    {
+        return 0;
+    }
 }

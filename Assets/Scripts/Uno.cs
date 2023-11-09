@@ -254,6 +254,11 @@ public class Uno : GameMode
         return !opponent.hand.IsEmpty && CanPlay(card.Number);
     }
 
+    public override int AddStrikes()
+    {
+        return 0;
+    }
+
     private void Score(IReadOnlyCollection<Card> cards)
     {
         var total = cards.Where(c => c && !c.IsRemoved).Sum(c => c.ScoreValue);
