@@ -86,7 +86,8 @@ public class CardData
             new CardData(CardModifier.Multiply, 2),
             GetCheat(),
             new CardData(CardModifier.Favourite, 0) { icon = 1 },
-            new CardData(CardModifier.Scorer, 2) { icon = 2 }
+            new CardData(CardModifier.Scorer, 2) { icon = 2 },
+            new CardData(CardModifier.Multiply, 0)
         }.Random();
     }
 
