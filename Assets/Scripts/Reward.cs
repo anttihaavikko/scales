@@ -5,6 +5,7 @@ using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using Random = UnityEngine.Random;
 
 public class Reward : GameMode
@@ -83,6 +84,13 @@ public class Reward : GameMode
                     if (wasSelected) return;
                     option.ChangeSelection(true);
                     modifier = option;
+                    return;
+                }
+
+                if (modifier != default)
+                {
+                    modifier = default;
+                    DeselectAll();
                     return;
                 }
 
@@ -179,7 +187,6 @@ public class Reward : GameMode
             Combine(modifier, card);
         }
         
-        modifier = default;
         DeselectAll();
     }
 
