@@ -32,7 +32,9 @@ public enum Effect
     Fiver,
     JokerHeal,
     HandSize,
-    MoreOptions
+    MoreOptions,
+    Modifiers,
+    Basics
 }
 
 [Serializable]

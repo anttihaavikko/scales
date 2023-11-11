@@ -5,6 +5,7 @@ using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Reward : GameMode
 {
@@ -33,17 +34,41 @@ public class Reward : GameMode
         }
     }
 
+    private List<CardData> GetFixedOptions()
+    {
+        var list = new List<CardData>();
+        
+        if (State.Instance.Has(Effect.Cheater))
+        {
+            list.Add(CardData.GetCheat());
+        }
+        
+        if (State.Instance.Has(Effect.Modifiers))
+        {
+            list.Add(CardData.GetRandomModifier());
+        }
+        
+        if (State.Instance.Has(Effect.Basics))
+        {
+            list.Add(new CardData(Random.Range(1, 11)));
+        }
+
+        return list;
+    }
+
     private void ShowCards(int amount)
     {
         if (picks <= 0) return;
         
         var options = new List<Card>();
+        var fixedOptions = GetFixedOptions();
         for (var i = 0; i < amount; i++)
         {
             var option = Instantiate(cardPrefab, transform);
             option.Detach();
             options.Add(option);
-            var data = i == 0 && State.Instance.Has(Effect.Cheater) ? CardData.GetCheat() : CardData.GetRandom();
+            var data = fixedOptions.Any() ? fixedOptions.FirstOrDefault() : CardData.GetRandom();
+            fixedOptions.Remove(data);
             option.Setup(data, deck);
             option.Nudge();
             option.Flip();

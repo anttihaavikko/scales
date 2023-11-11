@@ -78,7 +78,7 @@ public class CardData
         };
     }
 
-    private static CardData GetRandomModifier()
+    public static CardData GetRandomModifier()
     {
         return new []
         {
