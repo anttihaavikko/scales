@@ -92,6 +92,8 @@ public class Reward : GameMode
                 {
                     strikeDisplay.AddStrikes(-1);
                 }
+                
+                skillIcons.Add(skill);
             };
         });
         

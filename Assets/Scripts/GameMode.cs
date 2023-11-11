@@ -21,6 +21,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Appearer continueButton;
     [SerializeField] protected StrikeDisplay strikeDisplay;
     [SerializeField] private DevMenu devMenu;
+    [SerializeField] protected SkillIcons skillIcons;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
@@ -36,12 +37,14 @@ public abstract class GameMode : MonoBehaviour
             scoreDisplay.Set(State.Instance.Score);
         }
 
-        if (skillPool)
+        if (skillPool && devMenu && skillIcons)
         {
-            if (devMenu)
+            devMenu.Setup(skillPool.All.Select(s => new DevMenuOption(s.Title, () =>
             {
-                devMenu.Setup(skillPool.All.Select(s => new DevMenuOption(s.Title, () => State.Instance.Add(s.Spawn()))));
-            }
+                var skill = s.Spawn();
+                State.Instance.Add(skill);
+                skillIcons.Add(skill);
+            })));
         }
     }
 
