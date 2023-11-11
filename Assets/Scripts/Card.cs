@@ -356,8 +356,9 @@ public class Card : Markable, IPointerClickHandler
         Tweener.RotateToBounceOut(transform, rot, 0.1f);
     }
 
-    public void Pop()
+    public void Pop(bool shake = true)
     {
+        if (shake && deck) deck.Shake(0.1f);
         EffectManager.AddEffects(new []{ 0, 1, 2 }, transform.position);
     }
 }

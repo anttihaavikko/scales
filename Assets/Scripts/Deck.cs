@@ -89,4 +89,9 @@ public class Deck : MonoBehaviour
     {
         return gameMode.CanPlay(card);
     }
+
+    public void Shake(float amount)
+    {
+        gameMode.Shake(amount);
+    }
 }

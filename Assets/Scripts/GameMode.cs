@@ -7,6 +7,7 @@ using AnttiStarterKit.Game;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Utils.DevMenu;
+using AnttiStarterKit.Visuals;
 using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
@@ -25,8 +26,14 @@ public abstract class GameMode : MonoBehaviour
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
+    private EffectCamera effectCamera;
 
     public Dragon Dragon => dragon;
+
+    private void Awake()
+    {
+        effectCamera = cam.GetComponent<EffectCamera>();
+    }
 
     private void Start()
     {
@@ -84,8 +91,9 @@ public abstract class GameMode : MonoBehaviour
         return true;
     }
     
-    protected static void ShowScore(int total, int multi, Vector3 p)
+    protected void ShowScore(int total, int multi, Vector3 p)
     {
+        Shake(0.2f);
         var multiText = $"<color=#CDE7B0><size=5>x{multi}</size></color>";
         if (multi > 1)
         {
@@ -150,4 +158,9 @@ public abstract class GameMode : MonoBehaviour
     public abstract int AddStrikes();
     public abstract void PlayInstant(Card card);
     public abstract IReadOnlyCollection<Card> GetVisibleCards();
+
+    public void Shake(float amount)
+    {
+        effectCamera.BaseEffect(amount);
+    }
 }
