@@ -56,6 +56,7 @@ public class Scales : GameMode
         hand.Remove(card);
         card.ChangeSelection(false);
         slot.Add(card);
+        card.Flatten();
         var pos = slot.GetPosition();
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
         
