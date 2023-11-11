@@ -31,6 +31,11 @@ public class State : Manager<State>
         return skills.Any(s => s.effect == skill);
     }
 
+    public int GetCount(Effect skill)
+    {
+        return skills.Count(s => s.effect == skill);
+    }
+
     public void Add(Skill skill)
     {
         skills.Add(skill);

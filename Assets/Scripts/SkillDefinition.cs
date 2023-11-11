@@ -22,7 +22,7 @@ public class SkillDefinition : ScriptableObject
 
     public bool CanGet(IEnumerable<Skill> existing)
     {
-        return data.repeatable || existing.All(s => s.id != id);
+        return existing.Count(s => s.id == id) <= data.allowedRepeats;
     }
 }
 
@@ -46,7 +46,8 @@ public enum Effect
 {
     None,
     Cheater,
-    Heal
+    Heal,
+    Shield
 }
 
 [Serializable]
@@ -57,5 +58,5 @@ public struct Skill
     public string title;
     [TextArea] public string description;
     public Sprite icon;
-    public bool repeatable;
+    public int allowedRepeats;
 }

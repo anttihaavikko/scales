@@ -12,7 +12,6 @@ public class StrikeDisplay : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log($"Strikes {State.Instance.Strikes}/{State.Instance.MaxStrikes}");
         AddMax(State.Instance.MaxStrikes);
     }
 
@@ -29,6 +28,10 @@ public class StrikeDisplay : MonoBehaviour
 
     public void AddStrikes(int amount)
     {
+        amount = amount > 0 ? 
+            amount - State.Instance.GetCount(Effect.Shield) : 
+            amount;
+        
         if (amount == 0) return;
         
         State.Instance.Strikes = Mathf.Clamp(State.Instance.Strikes + amount, 0, State.Instance.MaxStrikes);

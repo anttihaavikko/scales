@@ -283,7 +283,7 @@ public class Mountain : GameMode
         var noOpenSlots = slots.All(s => !s.IsEmpty || !s.gameObject.activeSelf);
 
         var canCalc = CanCalcTo(numbers, target);
-        Debug.Log($"Calc: {string.Join(",", numbers)} => {canCalc}, all: {allOpen}, slots used: {noOpenSlots}");
+        // Debug.Log($"Calc: {string.Join(",", numbers)} => {canCalc}, all: {allOpen}, slots used: {noOpenSlots}");
         
         if ((allOpen || noOpenSlots) && !canCalc)
         {
