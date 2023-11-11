@@ -141,6 +141,11 @@ public class Scales : GameMode
     
     public override int AddStrikes()
     {
-        return 0;
+        var leftSum = slots[0].Sum * leftMass;
+        var rightSum = slots[1].Sum * rightMass;
+        var difference = leftSum - rightSum;
+        var total = Mathf.Abs(difference);
+        strikeDisplay.AddStrikes(total);
+        return total;
     }
 }

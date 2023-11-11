@@ -29,7 +29,7 @@ public class StrikeDisplay : MonoBehaviour
     public void AddStrikes(int amount)
     {
         amount = amount > 0 ? 
-            amount - State.Instance.GetCount(Effect.Shield) : 
+            Mathf.Clamp(amount - State.Instance.GetCount(Effect.Shield), 0, State.Instance.MaxStrikes) : 
             amount;
         
         if (amount == 0) return;

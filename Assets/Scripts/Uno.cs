@@ -256,7 +256,9 @@ public class Uno : GameMode
 
     public override int AddStrikes()
     {
-        return 0;
+        var total = hand.Cards.Count();
+        strikeDisplay.AddStrikes(total);
+        return total;
     }
 
     private void Score(IReadOnlyCollection<Card> cards)
