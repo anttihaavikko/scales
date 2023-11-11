@@ -880,7 +880,7 @@ TextureImporter:
         width: 229
         height: 260
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -888,6 +888,27 @@ TextureImporter:
       bones: []
       spriteID: dd5be8daf45e844588d40464bcd42d62
       internalID: -1436638539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fiver
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 15
+        width: 197
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f569f0b6444604a72afaca8c1a5c72ba
+      internalID: -2107381420
       vertices: []
       indices: 
       edges: []
@@ -926,6 +947,7 @@ TextureImporter:
       nerv: -118810763
       chalice: -1380937603
       hand: -1633731881
+      fiver: -2107381420
       flower: -1577891070
       sign: -289700742
       fav: -1434366877

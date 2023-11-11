@@ -47,7 +47,8 @@ public enum Effect
     None,
     Cheater,
     Heal,
-    Shield
+    Shield,
+    Fiver
 }
 
 [Serializable]
