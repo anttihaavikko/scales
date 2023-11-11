@@ -7,9 +7,11 @@ public class Reward : GameMode
 {
     [SerializeField] private Card cardPrefab;
     [SerializeField] private TMP_Text pageText, countText;
+    [SerializeField] private Transform contentStart;
 
     private Card modifier;
     private int picks = 3;
+    private bool picked;
     
     private const int PerRow = 12;
     private const int PageSize = PerRow * 3;
@@ -17,17 +19,15 @@ public class Reward : GameMode
     public override void Setup()
     {
         MoveDeck();
-
-        var optionCount = 5;
+        
         var options = new List<Card>();
-        for (var i = 0; i < optionCount; i++)
+        for (var i = 0; i < 5; i++)
         {
             var option = Instantiate(cardPrefab, transform);
             option.Detach();
             options.Add(option);
-            var data = CardData.GetRandom();
+            var data = i == 0 && State.Instance.Has(Effect.Cheater) ? CardData.GetCheat() : CardData.GetRandom();
             option.Setup(data, deck);
-            option.transform.position += Vector3.right * 1.2f * (i - (optionCount - 1) * 0.5f);
             option.Nudge();
             option.Flip();
 
@@ -53,6 +53,46 @@ public class Reward : GameMode
                 CheckEnd();
             };
         }
+
+        hand.Add(options);
+    }
+
+    private void ShowSkills()
+    {
+        if (picked) return;
+        
+        hand.Clear();
+        var options = new List<Card>();
+        
+        dragon.Tutorial.Show(TutorialMessage.SkillPick);
+        
+        var skills = skillPool.Get(2, State.Instance.Skills).ToList();
+        skills.ForEach(skill =>
+        {
+            var option = Instantiate(cardPrefab, transform);
+            option.Detach();
+            options.Add(option);
+            option.Setup(skill, deck);
+            option.Nudge();
+            option.Flip();
+
+            option.click += () =>
+            {
+                picked = true;
+                State.Instance.Add(skill);
+                option.Pop();
+                hand.Remove(option);
+                option.Kill();
+                MoveDeck();
+                
+                State.Instance.NextLevel();
+
+                if (skill.effect == Effect.Heal)
+                {
+                    strikeDisplay.AddStrikes(-1);
+                }
+            };
+        });
         
         hand.Add(options);
     }
@@ -68,7 +108,7 @@ public class Reward : GameMode
             c.Nudge();
             var x = index % PerRow;
             var y = Mathf.FloorToInt(index * 1f / PerRow);
-            c.transform.position = new Vector3((-(PerRow - 1) * 0.5f + x) * 1.2f, (1.25f - y) * 1.5f * 1.2f, 0);
+            c.transform.position = new Vector3((-(PerRow - 1) * 0.5f + x) * 1.2f, contentStart.transform.position.y - y * 1.5f * 1.2f, 0);
             index++;
         });
 
@@ -83,7 +123,7 @@ public class Reward : GameMode
         
         if (picks == 0)
         {
-            State.Instance.NextLevel();
+            ShowSkills();
         }
     }
 

@@ -152,7 +152,7 @@ public class Fish : GameMode
         var deckCards = deck.Cards.Count(c => !c.IsRemoved);
         var laneCards = lanes.SelectMany(l => l.Cards).Count(c => !c.IsOpen);
         var total = deckCards + laneCards;
-        if(total > 0) strikeDisplay.AddStrikes(total);
+        strikeDisplay.AddStrikes(total);
         return total;
     }
 }

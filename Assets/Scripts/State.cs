@@ -9,17 +9,31 @@ using UnityEngine;
 public class State : Manager<State>
 {
     private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
+    private readonly List<Skill> skills = new();
 
     public int Level { get; private set; }
     public int Score { get; private set; }
+    public int Strikes { get; set; }
+    public int MaxStrikes { get; set; } = 3;
 
     public int LevelMulti => Level + 1;
 
     public IEnumerable<CardData> Cards => cards;
+    public IEnumerable<Skill> Skills => skills;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public bool Has(Effect skill)
+    {
+        return skills.Any(s => s.effect == skill);
+    }
+
+    public void Add(Skill skill)
+    {
+        skills.Add(skill);
     }
 
     private void Update()

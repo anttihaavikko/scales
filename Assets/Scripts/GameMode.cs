@@ -1,13 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Game;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.Utils;
+using AnttiStarterKit.Utils.DevMenu;
 using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
 {
+    [SerializeField] protected SkillPool skillPool;
     [SerializeField] protected Deck deck;
     [SerializeField] protected Hand hand;
     [SerializeField] protected List<Slot> slots;
@@ -16,6 +20,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Dragon dragon;
     [SerializeField] protected Appearer continueButton;
     [SerializeField] protected StrikeDisplay strikeDisplay;
+    [SerializeField] private DevMenu devMenu;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
 
@@ -29,11 +34,25 @@ public abstract class GameMode : MonoBehaviour
         {
             scoreDisplay.Set(State.Instance.Score);
         }
+
+        if (skillPool)
+        {
+            if (devMenu)
+            {
+                devMenu.Setup(skillPool.All.Select(s => new DevMenuOption(s.Title, () => State.Instance.Add(s.Spawn()))));
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(DevKey.Down(KeyCode.C)) continueButton.Show();
     }
 
     public void ToRewards()
     {
-        this.StartCoroutine(() => State.Instance.RoundEnded(scoreDisplay.Total), AddStrikes() * 0.3f);
+        var delay = Mathf.Clamp(AddStrikes(), 0, State.Instance.MaxStrikes) * 0.3f;
+        this.StartCoroutine(() => State.Instance.RoundEnded(scoreDisplay.Total), delay);
     }
 
     protected void DeselectAll()

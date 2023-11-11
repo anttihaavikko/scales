@@ -9,13 +9,11 @@ public class StrikeDisplay : MonoBehaviour
     [SerializeField] private StrikeBox prefab;
 
     private readonly List<StrikeBox> strikes = new();
-    
-    private int cur;
-    private int max;
 
     private void Start()
     {
-        AddMax(3);   
+        Debug.Log($"Strikes {State.Instance.Strikes}/{State.Instance.MaxStrikes}");
+        AddMax(State.Instance.MaxStrikes);
     }
 
     public void AddMax(int count)
@@ -24,21 +22,23 @@ public class StrikeDisplay : MonoBehaviour
         {
             var strike = Instantiate(prefab, transform);
             strikes.Add(strike);
-            this.StartCoroutine(() => strike.Show(), 0.1f * i);
-            max++;
+            var filled = State.Instance.Strikes > i;
+            this.StartCoroutine(() => strike.Show(filled), 0.1f * i);
         }
     }
 
     public void AddStrikes(int amount)
     {
-        cur = Mathf.Min(cur + amount, max);
+        if (amount == 0) return;
+        
+        State.Instance.Strikes = Mathf.Clamp(State.Instance.Strikes + amount, 0, State.Instance.MaxStrikes);
         
         if (amount > 0)
         {
-            strikes.Skip(cur - amount).Take(amount).ToList().ForEach(s => s.Fill());
+            strikes.Skip(State.Instance.Strikes - amount).Take(amount).ToList().ForEach(s => s.Fill());
             return;
         }
         
-        strikes.Skip(cur).ToList().ForEach(s => s.Clear());
+        strikes.Skip(State.Instance.Strikes).ToList().ForEach(s => s.Clear());
     }
 }

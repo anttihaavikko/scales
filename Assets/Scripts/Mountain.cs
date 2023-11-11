@@ -223,7 +223,9 @@ public class Mountain : GameMode
 
     public override int AddStrikes()
     {
-        return 0;
+        var total = deck.Cards.Count(c => c.IsCovered);
+        strikeDisplay.AddStrikes(total);
+        return total;
     }
 
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)

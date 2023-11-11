@@ -63,6 +63,7 @@ namespace AnttiStarterKit.Animations
 		{
 			yield return new WaitForSeconds(tweenDelay);
 			hasBeenInit = true;
+			if (!theObject) yield break;
 			startPos = theObject.transform.position;
 		}
 

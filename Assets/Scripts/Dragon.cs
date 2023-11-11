@@ -69,6 +69,7 @@ public class Dragon : MonoBehaviour
             TutorialMessage.RewardIntro => "You can (pick three) new (additions) or (modifications) to your deck.",
             TutorialMessage.ModInfo => "Pick (which card) you want to be (affected) by this (modification).",
             TutorialMessage.FishIntro => "Pick (a card) and its (surrounding cards) that (add) or (subtract) to the (same value).",
+            TutorialMessage.SkillPick => "Also pick (a new skill) to (enhance) your abilities to survive.",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -162,5 +163,6 @@ public enum TutorialMessage
     UnoWinner,
     RewardIntro,
     ModInfo,
-    FishIntro
+    FishIntro,
+    SkillPick
 }

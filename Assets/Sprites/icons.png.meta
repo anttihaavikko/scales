@@ -859,7 +859,7 @@ TextureImporter:
         width: 275
         height: 269
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -867,6 +867,27 @@ TextureImporter:
       bones: []
       spriteID: d31bbe52a33254d20a34f5ee62606498
       internalID: -1456075619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: knives
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 704
+        width: 229
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd5be8daf45e844588d40464bcd42d62
+      internalID: -1436638539
       vertices: []
       indices: 
       edges: []
@@ -916,6 +937,7 @@ TextureImporter:
       paint: 926605811
       dragon: 1117955114
       meat: 444648132
+      knives: -1436638539
       turnip: 1270725112
       nokia: -781666841
   spritePackingTag: 

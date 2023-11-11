@@ -107,6 +107,14 @@ public class Card : Markable, IPointerClickHandler
 
         StartTimer();
     }
+    
+    public void Setup(Skill skill, Deck d)
+    {
+        Setup(new CardData(0), d);
+        icon.sprite = skill.icon;
+        icon.gameObject.SetActive(true);
+        numberLabel.text = "";
+    }
 
     private void StartTimer()
     {
@@ -155,7 +163,7 @@ public class Card : Markable, IPointerClickHandler
     {
         covers.Remove(other);
     }
-
+    
     public void Flip()
     {
         if (draggable.CanDrag) return;

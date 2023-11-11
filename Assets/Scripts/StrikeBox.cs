@@ -5,9 +5,10 @@ public class StrikeBox : MonoBehaviour
 {
     [SerializeField] private Appearer box, cross;
 
-    public void Show()
+    public void Show(bool filled = false)
     {
         box.Show();
+        if (filled) Fill();
     }
 
     public void Fill()

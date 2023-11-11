@@ -79,4 +79,10 @@ public class Hand : MonoBehaviour
         }
         handCards.ForEach(c => Reposition(c, p++));
     }
+
+    public void Clear()
+    {
+        deck.Kill(cards);
+        cards.Clear();
+    }
 }

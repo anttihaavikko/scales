@@ -80,10 +80,15 @@ public class CardData
             new CardData(CardModifier.Plus, 2),
             new CardData(CardModifier.Minus, 1),
             new CardData(CardModifier.Multiply, 2),
-            new CardData(CardModifier.Cheat, 0) { icon = 0 },
+            GetCheat(),
             new CardData(CardModifier.Favourite, 0) { icon = 1 },
             new CardData(CardModifier.Scorer, 2) { icon = 2 }
         }.Random();
+    }
+
+    public static CardData GetCheat()
+    {
+        return new CardData(CardModifier.Cheat, 0) { icon = 0 };
     }
 
     private static CardData GetRandomSpecial()
@@ -98,7 +103,7 @@ public class CardData
             new CardData(CardType.Timer) { icon = 3 }
         }.Random();
     }
-    
+
     public static CardData GetRandom()
     {
         if (Random.value < 0.5f) return new CardData(Random.Range(1, 11));
