@@ -13,6 +13,8 @@ public class CardData
     public int icon;
     public int multiplier;
     public bool favourite;
+    public bool playable;
+    public int sort;
 
     public bool isInitialized;
     public Vector2 cheatPos;
@@ -38,6 +40,8 @@ public class CardData
         icon = from.icon;
         multiplier = from.multiplier;
         favourite = from.favourite;
+        playable = from.playable;
+        sort = from.sort;
     }
 
     public void Init()
@@ -99,8 +103,9 @@ public class CardData
             new CardData(99),
             new CardData(Random.Range(1, 99)),
             new CardData(Random.Range(1, 20)),
-            new CardData(CardType.Joker),
-            new CardData(CardType.Timer) { icon = 3 }
+            new CardData(CardType.Joker) { sort = 998 },
+            new CardData(CardType.Timer) { icon = 3 },
+            new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 }
         }.Random();
     }
 
@@ -137,6 +142,11 @@ public class CardData
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
+        }
+
+        if (type == CardType.Recall)
+        {
+            number = 0;
         }
     }
 }

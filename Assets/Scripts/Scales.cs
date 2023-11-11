@@ -148,4 +148,20 @@ public class Scales : GameMode
         strikeDisplay.AddStrikes(total);
         return total;
     }
+
+    public override void PlayInstant(Card card)
+    {
+        card.Pop();
+        hand.Remove(card);
+        
+        if (card.Is(CardType.Recall))
+        {
+            scoreDisplay.ResetMulti();
+            hand.Draw();
+            hand.Draw();
+            hand.Draw();
+        }
+        
+        card.gameObject.SetActive(false);
+    }
 }

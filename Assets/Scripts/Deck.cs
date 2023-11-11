@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
+using UnityEngine.Playables;
 using Random = UnityEngine.Random;
 
 public class Deck : MonoBehaviour
@@ -25,7 +26,7 @@ public class Deck : MonoBehaviour
 
     public Card Draw()
     {
-        var card = cards.LastOrDefault();
+        var card = cards.FirstOrDefault();
         cards.Remove(card);
         return card;
     }
@@ -45,8 +46,17 @@ public class Deck : MonoBehaviour
         cards.RemoveAll(targets.Contains);
     }
 
+    public void PlayInstant(Card card)
+    {
+        if (card.IsPlayable)
+        {
+            gameMode.PlayInstant(card);
+        }
+    }
+
     public void Select(Card card)
     {
+        if (card.IsPlayable) return;
         gameMode.Select(card);
     }
 

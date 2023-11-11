@@ -64,13 +64,16 @@ public class Card : Markable, IPointerClickHandler
     public bool IsOpen => open;
     public int SortValue => GetSortValue();
     public bool NeedsFlattening => stats.type is CardType.Timer or CardType.Joker;
+    public bool IsPlayable => stats.playable;
+    public bool Is(CardType type) => stats.type == type;
+    public bool IsUsed { get; set; }
 
     private int GetSortValue()
     {
-        var val = IsJoker ? 999 : stats.multiplier * number;
+        var val = stats.sort > 0 ? stats.sort : stats.multiplier * number;
         if (cardType == CardType.Timer) val = 60;
-        if (stats.favourite) val += 999;
-        if (stats.cheat) val += 999;
+        if (stats.favourite) val += 200;
+        if (stats.cheat) val += 200;
         return val;
     }
 
@@ -280,6 +283,7 @@ public class Card : Markable, IPointerClickHandler
     private void OnClick()
     {
         UpdateSelection(!wasSelected);
+        deck.PlayInstant(this);
         click?.Invoke();
     }
 
@@ -366,5 +370,6 @@ public enum CardType
 {
     Normal,
     Joker,
-    Timer
+    Timer,
+    Recall
 }

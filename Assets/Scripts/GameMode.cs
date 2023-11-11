@@ -135,4 +135,5 @@ public abstract class GameMode : MonoBehaviour
     public abstract void RightClick(Card card);
     public abstract bool CanPlay(Card card);
     public abstract int AddStrikes();
+    public abstract void PlayInstant(Card card);
 }

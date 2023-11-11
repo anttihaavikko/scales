@@ -20,9 +20,15 @@ public class Reward : GameMode
     public override void Setup()
     {
         MoveDeck();
+        ShowCards(5);
+    }
+
+    private void ShowCards(int amount)
+    {
+        if (picks <= 0) return;
         
         var options = new List<Card>();
-        for (var i = 0; i < 5; i++)
+        for (var i = 0; i < amount; i++)
         {
             var option = Instantiate(cardPrefab, transform);
             option.Detach();
@@ -44,7 +50,7 @@ public class Reward : GameMode
                     modifier = option;
                     return;
                 }
-                
+
                 option.Pop();
                 hand.Remove(option);
                 deck.AddCard(data);
@@ -103,7 +109,7 @@ public class Reward : GameMode
     private void MoveDeck()
     {
         var index = 0;
-        var cards = deck.Cards.OrderByDescending(c => c.SortValue).ToList();
+        var cards = deck.Cards.Where(c => !c.IsUsed).OrderByDescending(c => c.SortValue).ToList();
         cards.ForEach(c =>
         {
             c.Flip();
@@ -181,6 +187,24 @@ public class Reward : GameMode
     public override int AddStrikes()
     {
         return 0;
+    }
+
+    public override void PlayInstant(Card card)
+    {
+        if (!State.Instance.Has(card.Id)) return;
+        
+        card.IsUsed = true;
+        card.Pop();
+
+        if (card.Is(CardType.Recall) && picks > 0)
+        {
+            hand.Clear();
+            ShowCards(3);
+            scoreDisplay.ResetMulti();
+        }
+        
+        card.gameObject.SetActive(false);
+        MoveDeck();
     }
 
     public override int GetJokerValue()

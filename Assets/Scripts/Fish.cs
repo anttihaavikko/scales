@@ -31,7 +31,7 @@ public class Fish : GameMode
 
     private void Evaluate()
     {
-        var all = lanes.SelectMany(l => l.Cards).Where(c => c.IsOpen).ToList();
+        var all = lanes.SelectMany(l => l.Cards).Where(c => c.IsOpen && !c.IsUsed).ToList();
         var available = all.Any(c => Check(c, all));
 
         if (!available)
@@ -103,11 +103,16 @@ public class Fish : GameMode
             selected.Clear();
             root = null;
 
-            this.StartCoroutine(() => lanes.ForEach(l => l.Drop()), 0.3f);
-            Invoke(nameof(Fill), 1f);
+            DropAndFill();
         }
     }
-    
+
+    private void DropAndFill()
+    {
+        this.StartCoroutine(() => lanes.ForEach(l => l.Drop()), 0.3f);
+        Invoke(nameof(Fill), 1f);
+    }
+
     private void Score(ICollection<Card> cards)
     {
         dragon.Acknowledge(cards.Count > 3);
@@ -154,5 +159,20 @@ public class Fish : GameMode
         var total = deckCards + laneCards;
         strikeDisplay.AddStrikes(total);
         return total;
+    }
+
+    public override void PlayInstant(Card card)
+    {
+        card.IsUsed = true;
+        card.Pop();
+        card.Kill();
+        lanes.ForEach(l => l.Remove(new List<Card>{ card }));
+        
+        if (card.Is(CardType.Recall))
+        {
+            scoreDisplay.ResetMulti();
+        }
+        
+        DropAndFill();
     }
 }

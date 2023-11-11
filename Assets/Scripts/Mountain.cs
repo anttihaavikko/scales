@@ -234,6 +234,19 @@ public class Mountain : GameMode
         return total;
     }
 
+    public override void PlayInstant(Card card)
+    {
+        card.Pop();
+        deck.Kill(new List<Card>{ card });
+        
+        if (card.Is(CardType.Recall))
+        {
+            scoreDisplay.ResetMulti();
+        }
+        
+        FlipCards();
+    }
+
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
     {
         if (index < 0) return;
