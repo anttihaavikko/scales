@@ -52,7 +52,7 @@ public enum Effect
 [Serializable]
 public struct Skill
 {
-    public string id;
+    [HideInInspector] public string id;
     public Effect effect;
     public string title;
     [TextArea] public string description;
