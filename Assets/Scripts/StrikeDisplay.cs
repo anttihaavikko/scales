@@ -32,10 +32,15 @@ public class StrikeDisplay : MonoBehaviour
         if (amount == 0) return;
         
         State.Instance.Strikes = Mathf.Clamp(State.Instance.Strikes + amount, 0, State.Instance.MaxStrikes);
-        
+
+        var i = 0;
         if (amount > 0)
         {
-            strikes.Skip(State.Instance.Strikes - amount).Take(amount).ToList().ForEach(s => s.Fill());
+            strikes.Skip(State.Instance.Strikes - amount).Take(amount).ToList().ForEach(s =>
+            {
+                this.StartCoroutine(s.Fill, i * 0.1f);
+                i++;
+            });
             return;
         }
         

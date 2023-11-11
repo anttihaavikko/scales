@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Extensions;
 using TMPro;
 using UnityEngine;
 
@@ -59,8 +60,6 @@ public class Reward : GameMode
 
     private void ShowSkills()
     {
-        if (picked) return;
-        
         hand.Clear();
         var options = new List<Card>();
         
@@ -78,14 +77,16 @@ public class Reward : GameMode
 
             option.click += () =>
             {
+                if (picked) return;
                 picked = true;
                 State.Instance.Add(skill);
                 option.Pop();
                 hand.Remove(option);
                 option.Kill();
                 MoveDeck();
-                
-                State.Instance.NextLevel();
+
+                hand.Clear();
+                this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
 
                 if (skill.effect == Effect.Heal)
                 {

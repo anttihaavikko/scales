@@ -23,6 +23,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] private DevMenu devMenu;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
+    private bool continued;
 
     public Dragon Dragon => dragon;
 
@@ -51,6 +52,9 @@ public abstract class GameMode : MonoBehaviour
 
     public void ToRewards()
     {
+        if (continued) return;
+        continued = true;
+        continueButton.Hide();
         var delay = Mathf.Clamp(AddStrikes(), 0, State.Instance.MaxStrikes) * 0.3f;
         this.StartCoroutine(() => State.Instance.RoundEnded(scoreDisplay.Total), delay);
     }
