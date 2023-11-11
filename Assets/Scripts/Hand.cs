@@ -15,7 +15,7 @@ public class Hand : MonoBehaviour
     public IEnumerable<Card> Cards => cards.Where(c => c && !c.IsRemoved);
 
     public bool IsEmpty => !Cards.Any();
-    public bool HasRoom => Cards.ToList().Count < size;
+    public bool HasRoom => Cards.ToList().Count < size + State.Instance.GetCount(Effect.HandSize);
 
     public void Fill()
     {

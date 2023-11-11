@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
 
@@ -21,7 +22,15 @@ public class Reward : GameMode
     public override void Setup()
     {
         MoveDeck();
-        ShowCards(5);
+        ShowCards(5 + State.Instance.GetCount(Effect.MoreOptions));
+    }
+
+    private void LateUpdate()
+    {
+        if (DevKey.Down(KeyCode.S))
+        {
+            ShowSkills();
+        }
     }
 
     private void ShowCards(int amount)

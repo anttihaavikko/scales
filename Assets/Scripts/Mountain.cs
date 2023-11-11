@@ -340,6 +340,8 @@ public class Mountain : GameMode
 
     private void Score(ICollection<Card> cards)
     {
+        cards.ToList().ForEach(AfterPlay);
+        
         dragon.Acknowledge(cards.Count > 2);
         var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
         var x = cards.Average(c => c.transform.position.x);

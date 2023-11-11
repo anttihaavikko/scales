@@ -91,6 +91,11 @@ public class Uno : GameMode
         {
             helper.Tutorial.Show(TutorialMessage.UnoWinner);
         }
+
+        if (isPlayer)
+        {
+            AfterPlay(card);
+        }
         
         if (TryEnd())
         {

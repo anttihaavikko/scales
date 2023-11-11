@@ -29,7 +29,10 @@ public enum Effect
     Cheater,
     Heal,
     Shield,
-    Fiver
+    Fiver,
+    JokerHeal,
+    HandSize,
+    MoreOptions
 }
 
 [Serializable]

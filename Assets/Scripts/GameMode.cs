@@ -130,6 +130,15 @@ public abstract class GameMode : MonoBehaviour
     {
         return GetVisibleCards().Where(c => !c.IsJoker).Sum(c => c.Number);
     }
+
+    protected void AfterPlay(Card card)
+    {
+        var heals = State.Instance.GetCount(Effect.JokerHeal);
+        if (card.IsJoker && heals > 0)
+        {
+            strikeDisplay.AddStrikes(-heals);
+        }
+    }
     
     protected abstract void Combine(Card first, Card second);
     public abstract void Setup();

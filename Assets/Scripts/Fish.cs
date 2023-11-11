@@ -109,6 +109,8 @@ public class Fish : GameMode
 
     private void Score(ICollection<Card> cards)
     {
+        cards.ToList().ForEach(AfterPlay);
+        
         dragon.Acknowledge(cards.Count > 3);
         var total = cards.Sum(c => c.ScoreValue) * State.Instance.LevelMulti;
         var x = cards.Average(c => c.transform.position.x);

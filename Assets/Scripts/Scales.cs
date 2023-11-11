@@ -64,6 +64,8 @@ public class Scales : GameMode
         var abs = UpdateScales();
         Score(card, slot, abs, pos);
         hand.Draw();
+        
+        AfterPlay(card);
 
         EndCheck();
     }
