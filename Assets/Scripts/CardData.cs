@@ -85,10 +85,10 @@ public class CardData
             new CardData(CardModifier.Plus, 1),
             new CardData(CardModifier.Plus, 2),
             new CardData(CardModifier.Minus, 1),
-            new CardData(CardModifier.Multiply, Random.Range(2, 4)),
+            new CardData(CardModifier.Multiply, 2),
             GetCheat(),
             new CardData(CardModifier.Favourite, 0) { icon = 1 },
-            new CardData(CardModifier.Scorer, 2) { icon = 2 },
+            new CardData(CardModifier.Scorer, Random.Range(2, 4)) { icon = 2 },
             new CardData(CardModifier.Multiply, 0)
         }.Random();
     }
