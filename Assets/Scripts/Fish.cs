@@ -46,12 +46,6 @@ public class Fish : GameMode
         return CanAddTo(numbers, card.Number) || CanSubTo(numbers, card.Number);
     }
 
-    public override int GetJokerValue()
-    {
-        var all = lanes.SelectMany(l => l.Cards).Where(c => !c.IsJoker && !c.IsRemoved && c.IsOpen).ToList();
-        return all.Sum(c => c.Number);
-    }
-
     protected override void Combine(Card first, Card second)
     {
     }
@@ -173,6 +167,18 @@ public class Fish : GameMode
             scoreDisplay.ResetMulti();
         }
         
+        if (card.Is(CardType.Averager))
+        {
+            var list = GetVisibleCards().ToList();
+            var sum = list.Average(c => c.Number);
+            list.ForEach(c => c.ChangeNumber((int)sum));
+        }
+        
         DropAndFill();
+    }
+
+    public override IReadOnlyCollection<Card> GetVisibleCards()
+    {
+        return lanes.SelectMany(l => l.Cards).Where(c => !c.IsRemoved && c.IsOpen).ToList();
     }
 }

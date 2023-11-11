@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
@@ -202,13 +203,21 @@ public class Reward : GameMode
             ShowCards(3);
             scoreDisplay.ResetMulti();
         }
+
+        if (card.Is(CardType.Averager) && picks > 0)
+        {
+            var sum = Math.Floor(hand.Cards.Average(c => c.Number));
+            hand.Cards.ToList().ForEach(c => c.ChangeNumber((int)sum));
+        }
         
         card.gameObject.SetActive(false);
         MoveDeck();
     }
 
-    public override int GetJokerValue()
+    public override IReadOnlyCollection<Card> GetVisibleCards()
     {
-        return deck.Cards.Where(c => !c.IsJoker && c.IsOpen).Sum(c => c.Number);
+        var list = deck.Cards.ToList();
+        list.AddRange(hand.Cards);
+        return list;
     }
 }

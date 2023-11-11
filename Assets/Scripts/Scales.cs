@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
@@ -57,15 +58,22 @@ public class Scales : GameMode
         slot.Add(card);
         var pos = slot.GetPosition();
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
+        
+        card.transform.SetParent(slot.transform);
 
+        var abs = UpdateScales();
+        Score(card, slot, abs, pos);
+        hand.Draw();
+
+        EndCheck();
+    }
+
+    private int UpdateScales()
+    {
         var leftSum = slots[0].Sum * leftMass;
         var rightSum = slots[1].Sum * rightMass;
         var difference = leftSum - rightSum;
         var abs = Mathf.Abs(difference);
-        
-        Score(card, slot, abs, pos);
-
-        card.transform.SetParent(slot.transform);
 
         this.StartCoroutine(() =>
         {
@@ -75,13 +83,15 @@ public class Scales : GameMode
             Tweener.RotateToQuad(rightBasket, Quaternion.Euler(new Vector3(0, 0, -angle)), 0.5f);
         }, 0.2f);
 
-        hand.Draw();
-
         left.text = leftSum.ToString();
         right.text = rightSum.ToString();
 
         diff.text = abs.ToString();
+        return abs;
+    }
 
+    private void EndCheck()
+    {
         if (hand.IsEmpty)
         {
             continueButton.Show();
@@ -134,11 +144,6 @@ public class Scales : GameMode
         return true;
     }
 
-    public override int GetJokerValue()
-    {
-        return slots.Sum(s => s.TopCard && !s.TopCard.IsJoker ? s.TopCard.Number : 0) + hand.Cards.Where(c => !c.IsJoker).Sum(c => c.Number);
-    }
-    
     public override int AddStrikes()
     {
         var leftSum = slots[0].Sum * leftMass;
@@ -159,9 +164,25 @@ public class Scales : GameMode
             scoreDisplay.ResetMulti();
             hand.Draw();
             hand.Draw();
-            hand.Draw();
         }
         
+        if (card.Is(CardType.Averager))
+        {
+            var list = GetVisibleCards().ToList();
+            var sum = list.Average(c => c.Number);
+            list.ForEach(c => c.ChangeNumber((int)sum));
+        }
+        
+        hand.Draw();
         card.gameObject.SetActive(false);
+        UpdateScales();
+        EndCheck();
+    }
+
+    public override IReadOnlyCollection<Card> GetVisibleCards()
+    {
+        var list = hand.Cards.ToList();
+        list.AddRange(slots.Select(s => s.TopCard));
+        return list.Where(c => c).ToList();
     }
 }

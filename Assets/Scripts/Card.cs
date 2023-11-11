@@ -97,10 +97,8 @@ public class Card : Markable, IPointerClickHandler
         cheatLabels.ForEach(t => t.text = data.cheat ? numberLabel.text : "");
         cheatIcon.SetActive(stats.cheat);
         favourite.SetActive(stats.favourite);
-        if (stats.multiplier > 1)
-        {
-            multiTexts.ForEach(t => t.text = $"x{stats.multiplier}");
-        }
+        var multiText = stats.multiplier > 1 ? $"x{stats.multiplier}" : "";
+        multiTexts.ForEach(t => t.text = multiText);
         modifier.SetActive(IsModifier);
         deck = d;
         numberLabel.gameObject.SetActive(false);
@@ -117,6 +115,15 @@ public class Card : Markable, IPointerClickHandler
         icon.sprite = skill.icon;
         icon.gameObject.SetActive(true);
         numberLabel.text = "";
+    }
+
+    public void ChangeNumber(int value)
+    {
+        var d = GetData();
+        if (!d.CanBeModified) return;
+        d.number = value;
+        Setup(d, deck);
+        Flip();
     }
 
     private void StartTimer()
@@ -371,5 +378,7 @@ public enum CardType
     Normal,
     Joker,
     Timer,
-    Recall
+    Recall,
+    Averager,
+    Kill
 }

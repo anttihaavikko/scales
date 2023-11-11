@@ -92,12 +92,8 @@ public class Uno : GameMode
             helper.Tutorial.Show(TutorialMessage.UnoWinner);
         }
         
-        if (hand.IsEmpty)
+        if (TryEnd())
         {
-            if (isPlayer) Score(opponent.hand.Cards.ToList());
-            dragon.Hop();
-            opponent.dragon.Sit();
-            continueButton.Show();
             return;
         }
         
@@ -111,6 +107,17 @@ public class Uno : GameMode
         }
         
         EndTurn();
+    }
+
+    private bool TryEnd()
+    {
+        if (!hand.IsEmpty) return false;
+        if (isPlayer) Score(opponent.hand.Cards.ToList());
+        dragon.Hop();
+        opponent.dragon.Sit();
+        continueButton.Show();
+        return true;
+
     }
     
     private void RoundEnded()
@@ -243,11 +250,6 @@ public class Uno : GameMode
     {
         DropToSlot(card, Pile);
     }
-    
-    public override int GetJokerValue()
-    {
-        return slots.Sum(s => s.TopCard && !s.TopCard.IsJoker ? s.TopCard.Number : 0) + hand.Cards.Where(c => !c.IsJoker).Sum(c => c.Number);
-    }
 
     public override bool CanPlay(Card card)
     {
@@ -271,10 +273,26 @@ public class Uno : GameMode
             scoreDisplay.ResetMulti();
             hand.Draw();
             hand.Draw();
-            hand.Draw();
         }
         
+        if (card.Is(CardType.Averager))
+        {
+            var list = GetVisibleCards().ToList();
+            var sum = list.Average(c => c.Number);
+            list.ForEach(c => c.ChangeNumber((int)sum));
+        }
+        
+        hand.Draw();
+        TryEnd();
         card.gameObject.SetActive(false);
+    }
+
+    public override IReadOnlyCollection<Card> GetVisibleCards()
+    {
+        var list = hand.Cards.ToList();
+        list.AddRange(opponent.hand.Cards);
+        list.AddRange(slots.Select(s => s.TopCard));
+        return list.Where(c => c).ToList();
     }
 
     private void Score(IReadOnlyCollection<Card> cards)

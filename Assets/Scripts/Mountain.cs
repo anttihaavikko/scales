@@ -187,11 +187,6 @@ public class Mountain : GameMode
         return Operate(first.Number, second.Number);
     }
 
-    public override int GetJokerValue()
-    {
-        return deck.Cards.Where(c => !c.IsJoker && c.IsOpen).Sum(c => c.Number);
-    }
-
     protected override void Combine(Card first, Card second)
     {
         var both = new List<Card> { first, second };
@@ -243,8 +238,20 @@ public class Mountain : GameMode
         {
             scoreDisplay.ResetMulti();
         }
+
+        if (card.Is(CardType.Averager))
+        {
+            var list = GetVisibleCards().ToList();
+            var sum = list.Average(c => c.Number);
+            list.ForEach(c => c.ChangeNumber((int)sum));
+        }
         
         FlipCards();
+    }
+
+    public override IReadOnlyCollection<Card> GetVisibleCards()
+    {
+        return deck.Cards.Where(c => c.IsOpen).ToList();
     }
 
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)

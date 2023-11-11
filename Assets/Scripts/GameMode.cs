@@ -126,7 +126,11 @@ public abstract class GameMode : MonoBehaviour
         });
     }
 
-    public abstract int GetJokerValue();
+    public int GetJokerValue()
+    {
+        return GetVisibleCards().Where(c => !c.IsJoker).Sum(c => c.Number);
+    }
+    
     protected abstract void Combine(Card first, Card second);
     public abstract void Setup();
     public abstract void Select(Card card);
@@ -136,4 +140,5 @@ public abstract class GameMode : MonoBehaviour
     public abstract bool CanPlay(Card card);
     public abstract int AddStrikes();
     public abstract void PlayInstant(Card card);
+    public abstract IReadOnlyCollection<Card> GetVisibleCards();
 }

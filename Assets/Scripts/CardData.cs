@@ -19,6 +19,8 @@ public class CardData
     public bool isInitialized;
     public Vector2 cheatPos;
 
+    public bool CanBeModified => type is not CardType.Recall or CardType.Averager or CardType.Kill;
+
     public CardData(int value)
     {
         id = Guid.NewGuid();
@@ -106,7 +108,8 @@ public class CardData
             new CardData(Random.Range(1, 20)),
             new CardData(CardType.Joker) { sort = 998 },
             new CardData(CardType.Timer) { icon = 3 },
-            new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 }
+            new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 },
+            new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 }
         }.Random();
     }
 
@@ -145,7 +148,16 @@ public class CardData
                 throw new ArgumentOutOfRangeException();
         }
 
-        if (type == CardType.Recall)
+        if (multiplier > 99)
+        {
+            multiplier = 1;
+            number = 0;
+            icon = 6;
+            type = CardType.Kill;
+            playable = true;
+        }
+
+        if (!CanBeModified)
         {
             number = 0;
         }
