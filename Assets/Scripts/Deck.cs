@@ -20,13 +20,13 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
-        State.Instance.Cards.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).ToList().ForEach(AddCard);
+        State.Instance.Cards.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).Reverse().ToList().ForEach(AddCard);
         gameMode.Setup();
     }
 
     public Card Draw()
     {
-        var card = cards.FirstOrDefault();
+        var card = cards.LastOrDefault();
         cards.Remove(card);
         return card;
     }
