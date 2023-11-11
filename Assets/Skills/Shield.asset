@@ -19,4 +19,4 @@ MonoBehaviour:
     title: Shield
     description: 
     icon: {fileID: -1155410211, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
-    allowedRepeats: 4
+    allowedRepeats: 2

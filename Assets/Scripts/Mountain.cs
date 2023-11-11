@@ -29,7 +29,7 @@ public class Mountain : GameMode
         cards.ForEach(c => c.Nudge());
 
         var slotCount = slots.Count(s => s.gameObject.activeSelf);
-        var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * (cards.Count - slotCount) + 1)));
+        var rows = GetRowCount(cards.Count - slotCount);
         var top = (rows - 1) * 0.5f;
 
         var scale = Mathf.Max(1f, rows / 4f * Overlap);
@@ -77,6 +77,12 @@ public class Mountain : GameMode
         });
 
         FlipCards();
+    }
+
+    private static int GetRowCount(int count)
+    {
+        var rows = Mathf.CeilToInt(0.5f * (-1 + Mathf.Sqrt(8 * count + 1)));
+        return rows;
     }
 
     private void SetupSlots()
@@ -223,7 +229,7 @@ public class Mountain : GameMode
 
     public override int AddStrikes()
     {
-        var total = deck.Cards.Count(c => c.IsCovered);
+        var total = GetRowCount(deck.Cards.Count(c => c.IsCovered));
         strikeDisplay.AddStrikes(total);
         return total;
     }
