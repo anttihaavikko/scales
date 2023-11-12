@@ -17,5 +17,5 @@ MonoBehaviour:
     title: Greed
     description: Increases the allowed (reward card) picks by (one).
     icon: {fileID: -1854114559, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
-    allowedRepeats: 0
+    allowedRepeats: 2
     extras: 

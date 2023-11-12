@@ -193,7 +193,7 @@ public class Reward : GameMode
     {
         picks--;
         
-        if (picks == 0)
+        if (picks == 0 || hand.IsEmpty)
         {
             if (picked)
             {
