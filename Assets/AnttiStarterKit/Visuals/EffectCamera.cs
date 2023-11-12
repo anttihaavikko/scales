@@ -105,7 +105,7 @@ namespace AnttiStarterKit.Visuals
 
                 var rot = Quaternion.Euler(0, 0, Random.Range(-shakeAmount, shakeAmount) * mod * 1.5f);
 
-                cameraRig.position = originalPos + diff * 0.075f;
+                cameraRig.position = originalPos + diff * 0.1f;
                 cameraRig.rotation = rot;
             }
             else

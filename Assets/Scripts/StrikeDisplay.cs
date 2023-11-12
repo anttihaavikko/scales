@@ -43,7 +43,7 @@ public class StrikeDisplay : MonoBehaviour
         {
             strikes.Skip(State.Instance.Strikes - amount).Take(amount).ToList().ForEach(s =>
             {
-                this.StartCoroutine(s.Fill, i * 0.1f);
+                this.StartCoroutine(s.FillAndShake, i * 0.1f);
                 i++;
             });
             return;
