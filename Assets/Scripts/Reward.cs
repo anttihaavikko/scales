@@ -27,6 +27,7 @@ public class Reward : GameMode
     public override void Setup()
     {
         MoveDeck();
+        picks = 3 + State.Instance.GetCount(Effect.Greed);
         ShowCards(5 + State.Instance.GetCount(Effect.MoreOptions));
     }
 
@@ -141,7 +142,7 @@ public class Reward : GameMode
 
                 if (skill.effect == Effect.CardInstead)
                 {
-                    picks = 3;
+                    picks = 3 + State.Instance.GetCount(Effect.Greed);
                     ShowCards(5);
                     return;
                 }

@@ -35,7 +35,8 @@ public enum Effect
     MoreOptions,
     Modifiers,
     Basics,
-    CardInstead
+    CardInstead,
+    Greed
 }
 
 [Serializable]
