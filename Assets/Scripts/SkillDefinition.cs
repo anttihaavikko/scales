@@ -37,7 +37,8 @@ public enum Effect
     Basics,
     CardInstead,
     Greed,
-    Pestilence
+    Pestilence,
+    ExtraSlot
 }
 
 [Serializable]

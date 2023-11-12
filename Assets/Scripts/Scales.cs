@@ -19,6 +19,11 @@ public class Scales : GameMode
     {
         this.StartCoroutine(() => hand.Fill(), 0.5f);
         SetupWeights();
+        
+        if (State.Instance.Has(Effect.ExtraSlot))
+        {
+            slots[2].gameObject.SetActive(true);
+        }
     }
 
     private void SetupWeights()

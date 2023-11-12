@@ -15,6 +15,20 @@ public class Fish : GameMode
     public override void Setup()
     {
         Fill();
+        slots.ForEach(slot => slot.click += ClickSlot);
+
+        if (State.Instance.Has(Effect.ExtraSlot))
+        {
+            slots[0].gameObject.SetActive(true);
+        }
+    }
+
+    private void ClickSlot(Slot slot)
+    {
+        if (selected.Any())
+        {
+            DropToSlot(selected.First(), slot);
+        }
     }
 
     private void Fill()
@@ -131,6 +145,13 @@ public class Fish : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        card.ChangeSelection(false);
+        lanes.ForEach(l => l.Remove(new List<Card>{ card }));
+        ClearSelection();
+        DropAndFill();
+        slot.Add(card);
+        card.MoveTo(slot.GetPosition());
+        card.Lift();
     }
 
     public override bool CanCombine(Card first, Card second)
@@ -145,7 +166,7 @@ public class Fish : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return false;
+        return slots[0].IsEmpty;
     }
 
     public override int AddStrikes()

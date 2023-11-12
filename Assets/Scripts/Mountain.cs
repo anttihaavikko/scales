@@ -6,6 +6,7 @@ using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using Random = UnityEngine.Random;
 
 public class Mountain : GameMode
@@ -85,23 +86,20 @@ public class Mountain : GameMode
         return rows;
     }
 
-    private void SetupSlots()
+    private int GetSlotCount()
     {
         var level = State.Instance.Level;
-        if(level == 0)
-        {
-            slots[4].gameObject.SetActive(false);
-            return;
-        }
+        if (level == 0) return 4;
+        if (level < 5) return 3;
+        if (level >= 9) return 1;
+        return 2;
+    }
 
-        if (level < 5)
-        {
-            slots[2].gameObject.SetActive(false);
-            slots[3].gameObject.SetActive(false);
-            return;
-        }
-
-        if (level >= 9)
+    private void SetupSlots()
+    {
+        var amount = GetSlotCount() + State.Instance.GetCount(Effect.ExtraSlot);
+        
+        if(amount == 1)
         {
             slots[0].gameObject.SetActive(false);
             slots[1].gameObject.SetActive(false);
@@ -109,10 +107,26 @@ public class Mountain : GameMode
             slots[3].gameObject.SetActive(false);
             return;
         }
+
+        if (amount == 2)
+        {
+            slots[2].gameObject.SetActive(false);
+            slots[3].gameObject.SetActive(false);
+            slots[4].gameObject.SetActive(false);
+            return;
+        }
         
-        slots[2].gameObject.SetActive(false);
-        slots[3].gameObject.SetActive(false);
-        slots[4].gameObject.SetActive(false);
+        if (amount == 3)
+        {
+            slots[2].gameObject.SetActive(false);
+            slots[3].gameObject.SetActive(false);
+            return;
+        }
+
+        if (amount == 4)
+        {
+            slots[4].gameObject.SetActive(false);
+        }
     }
 
     private void SetupLevel()
