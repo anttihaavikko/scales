@@ -75,6 +75,7 @@ public class CardData
             CardModifier.Cheat => "!",
             CardModifier.Scorer => "!",
             CardModifier.Favourite => "!",
+            CardModifier.Swapper => "",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -90,7 +91,8 @@ public class CardData
             GetCheat(),
             new CardData(CardModifier.Favourite, 0) { icon = 1 },
             new CardData(CardModifier.Scorer, Random.Range(2, 4)) { icon = 2 },
-            new CardData(CardModifier.Multiply, 0)
+            new CardData(CardModifier.Multiply, 0),
+            new CardData(CardModifier.Swapper, 0) { icon = 7 }
         }.Random();
     }
 
@@ -145,6 +147,9 @@ public class CardData
             case CardModifier.Favourite:
                 favourite = true;
                 break;
+            case CardModifier.Swapper:
+                (multiplier, number) = (number, multiplier);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -177,6 +182,7 @@ public class CardData
                 CardModifier.Cheat => "Cheat",
                 CardModifier.Scorer => "Scorer",
                 CardModifier.Favourite => "Favourite",
+                CardModifier.Swapper => "Swapper",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -212,6 +218,7 @@ public class CardData
                 CardModifier.Cheat => ExtraInfo.GetDescription(TooltipExtra.Cheat),
                 CardModifier.Scorer => "Doubles the (score value) of the selected card.",
                 CardModifier.Favourite => "Mark the (selected card) as (favourite).",
+                CardModifier.Swapper => "Swap the (value) and (score multiplier) values of the selected card.",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

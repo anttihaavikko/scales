@@ -398,7 +398,8 @@ public enum CardModifier
     Multiply,
     Cheat,
     Scorer,
-    Favourite
+    Favourite,
+    Swapper
 }
 
 public enum CardType
