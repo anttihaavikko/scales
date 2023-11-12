@@ -10,7 +10,7 @@ public class ExtraInfo : MonoBehaviour
 
     public void Show(TooltipExtra extra)
     {
-        title.text = GetTitle(extra);
+        title.text = GetTitle(extra).ToUpper();
         description.text = Tooltip.Decorate(GetDescription(extra));
         LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
