@@ -204,7 +204,7 @@ public class CardData
                 CardModifier.Multiply => "(Multiplies) other (card value) with this value.",
                 CardModifier.Cheat => ExtraInfo.GetDescription(TooltipExtra.Cheat),
                 CardModifier.Scorer => "Doubles the (score value) of the selected card.",
-                CardModifier.Favourite => "Mark the selected card as (favourite).",
+                CardModifier.Favourite => "Mark the (selected card) as (favourite).",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using AnttiStarterKit.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private TMP_Text titleField, contentField;
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private List<ExtraInfo> extraFields;
+    [SerializeField] private Transform leftEdge, rightEdge;
     
     private object shown;
 
@@ -19,7 +21,7 @@ public class Tooltip : MonoBehaviour
         node.SetActive(true);
         Show(skill.title, skill.description);
         Fix();
-        transform.position = pos;
+        Reposition(pos);
 
         var i = 0;
         extraFields.ForEach(e =>
@@ -30,7 +32,16 @@ public class Tooltip : MonoBehaviour
             i++;
         });
     }
-    
+
+    private void Reposition(Vector3 pos)
+    {
+        var refPos = leftEdge.position;
+        var flipped = pos.y > refPos.y;
+        transform.position = pos.WhereX(Mathf.Clamp(pos.x, refPos.x, rightEdge.position.x));
+        rectTransform.pivot = new Vector2(0.5f, flipped ? 1 : 0);
+        rectTransform.anchoredPosition = new Vector2(0, flipped ? 20 : 100);
+    }
+
     public void Show(Card card, Vector3 pos)
     {
         if (!card.HasTooltip) return;
@@ -38,7 +49,7 @@ public class Tooltip : MonoBehaviour
         Show(card.Title, card.Description);
         node.SetActive(true);
         Fix();
-        transform.position = pos;
+        Reposition(pos);
     }
 
     private void Show(string title, string text)
