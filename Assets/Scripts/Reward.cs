@@ -135,6 +135,14 @@ public class Reward : GameMode
                 MoveDeck();
 
                 hand.Clear();
+
+                if (skill.effect == Effect.CardInstead)
+                {
+                    picks = 3;
+                    ShowCards(5);
+                    return;
+                }
+                
                 this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
 
                 if (skill.effect == Effect.Heal)
@@ -175,6 +183,12 @@ public class Reward : GameMode
         
         if (picks == 0)
         {
+            if (picked)
+            {
+                hand.Clear();
+                this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
+                return;
+            }
             ShowSkills();
         }
     }

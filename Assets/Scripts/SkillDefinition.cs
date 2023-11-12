@@ -34,7 +34,8 @@ public enum Effect
     HandSize,
     MoreOptions,
     Modifiers,
-    Basics
+    Basics,
+    CardInstead
 }
 
 [Serializable]
