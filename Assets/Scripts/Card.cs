@@ -372,6 +372,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (draggable.IsDragging) return;
+        
         if (linkedSkill.HasValue)
         {
             deck.Tooltip.Show(linkedSkill.Value, deck.Camera.WorldToScreenPoint(transform.position));
