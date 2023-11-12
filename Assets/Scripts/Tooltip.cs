@@ -20,15 +20,19 @@ public class Tooltip : MonoBehaviour
         shown = skill;
         node.SetActive(true);
         Show(skill.title, skill.description);
+        AddExtras(skill.extras);
         Fix();
         Reposition(pos);
+    }
 
+    private void AddExtras(List<TooltipExtra> extras)
+    {
         var i = 0;
         extraFields.ForEach(e =>
         {
-            var has = skill.extras.Count > i;
+            var has = extras.Count > i;
             e.gameObject.SetActive(has);
-            if (has) e.Show(skill.extras[i]);
+            if (has) e.Show(extras[i]);
             i++;
         });
     }
@@ -48,6 +52,7 @@ public class Tooltip : MonoBehaviour
         shown = card;
         Show(card.Title, card.Description);
         node.SetActive(true);
+        AddExtras(card.Extras);
         Fix();
         Reposition(pos);
     }

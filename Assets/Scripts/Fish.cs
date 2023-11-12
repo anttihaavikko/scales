@@ -159,6 +159,7 @@ public class Fish : GameMode
 
     public override void PlayInstant(Card card)
     {
+        var p = card.transform.position;
         card.IsUsed = true;
         card.Pop();
         card.Kill();
@@ -167,6 +168,11 @@ public class Fish : GameMode
         if (card.Is(CardType.Recall))
         {
             scoreDisplay.ResetMulti();
+        }
+
+        if (card.Is(CardType.Kill))
+        {
+            PlayDeath(p, card.Multiplier);
         }
         
         if (card.Is(CardType.Averager))

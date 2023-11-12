@@ -36,7 +36,8 @@ public enum Effect
     Modifiers,
     Basics,
     CardInstead,
-    Greed
+    Greed,
+    Pestilence
 }
 
 [Serializable]

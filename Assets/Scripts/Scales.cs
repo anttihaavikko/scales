@@ -159,6 +159,8 @@ public class Scales : GameMode
 
     public override void PlayInstant(Card card)
     {
+        var p = card.transform.position;
+        
         card.Pop();
         hand.Remove(card);
         
@@ -167,6 +169,11 @@ public class Scales : GameMode
             scoreDisplay.ResetMulti();
             hand.Draw();
             hand.Draw();
+        }
+        
+        if (card.Is(CardType.Kill))
+        {
+            PlayDeath(p, card.Multiplier);
         }
         
         if (card.Is(CardType.Averager))

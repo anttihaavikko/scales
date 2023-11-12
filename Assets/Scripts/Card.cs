@@ -71,6 +71,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public string Title => linkedSkill.HasValue ? linkedSkill.Value.title : stats.GetTitle();
     public string Description => linkedSkill.HasValue ? linkedSkill.Value.description : stats.GetDescription();
     public bool HasTooltip => linkedSkill.HasValue || stats.type != CardType.Normal || stats.modifier != CardModifier.None;
+    public List<TooltipExtra> Extras => stats.GetExtras();
+    public int Multiplier => stats.multiplier;
 
     private int GetSortValue()
     {

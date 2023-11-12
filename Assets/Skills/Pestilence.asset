@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
+  m_Name: Pestilence
+  m_EditorClassIdentifier: 
+  data:
+    effect: 12
+    title: Pestilence
+    description: Add a (death card) to your deck every time you receive a (new skill).
+      Score (1000 points) when playing any (death card).
+    icon: {fileID: -799156414, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
+    allowedRepeats: 2
+    extras: 0500000001000000

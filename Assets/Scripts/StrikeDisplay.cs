@@ -26,12 +26,13 @@ public class StrikeDisplay : MonoBehaviour
         }
     }
 
-    public void AddStrikes(int amount)
+    public void AddStrikes(int amount, bool ignoreShields = false)
     {
         if (amount == 5 && State.Instance.Has(Effect.Fiver)) return;
-        
+
+        var mod = ignoreShields ? 0 : 1;
         amount = amount > 0 ? 
-            Mathf.Clamp(amount - State.Instance.GetCount(Effect.Shield), 0, State.Instance.MaxStrikes) : 
+            Mathf.Clamp(amount - State.Instance.GetCount(Effect.Shield) * mod, 0, State.Instance.MaxStrikes) : 
             amount;
 
         if (amount == 0) return;

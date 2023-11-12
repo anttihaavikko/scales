@@ -231,12 +231,18 @@ public class Mountain : GameMode
 
     public override void PlayInstant(Card card)
     {
+        var p = card.transform.position;
         card.Pop();
         deck.Kill(new List<Card>{ card });
         
         if (card.Is(CardType.Recall))
         {
             scoreDisplay.ResetMulti();
+        }
+        
+        if (card.Is(CardType.Kill))
+        {
+            PlayDeath(p, card.Multiplier);
         }
 
         if (card.Is(CardType.Averager))

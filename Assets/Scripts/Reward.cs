@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 using Random = UnityEngine.Random;
@@ -133,6 +134,7 @@ public class Reward : GameMode
                 if (picked) return;
                 picked = true;
                 State.Instance.Add(skill);
+                State.Instance.Add(new CardData(0) { type = CardType.Kill, icon = 6, playable = true });
                 option.Pop();
                 hand.Remove(option);
                 option.Kill();
@@ -260,6 +262,8 @@ public class Reward : GameMode
     public override void PlayInstant(Card card)
     {
         if (!State.Instance.Has(card.Id)) return;
+
+        var p = card.transform.position;
         
         card.IsUsed = true;
         card.Pop();
@@ -269,6 +273,11 @@ public class Reward : GameMode
             hand.Clear();
             ShowCards(3);
             scoreDisplay.ResetMulti();
+        }
+        
+        if (card.Is(CardType.Kill))
+        {
+            PlayDeath(p, card.Multiplier);
         }
 
         if (card.Is(CardType.Averager) && picks > 0)

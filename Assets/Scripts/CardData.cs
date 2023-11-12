@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AnttiStarterKit.Extensions;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -191,6 +192,12 @@ public class CardData
             _ => throw new ArgumentOutOfRangeException()
         };
     }
+
+    public List<TooltipExtra> GetExtras()
+    {
+        if (type == CardType.Kill) return new List<TooltipExtra> { TooltipExtra.Strike };
+        return new List<TooltipExtra>();
+    }
     
     public string GetDescription()
     {
@@ -216,7 +223,7 @@ public class CardData
             CardType.Timer => "Changes the (value) of the card to reflect the (current time).",
             CardType.Recall => "Draw (three extra) cards. Resets the multiplier.",
             CardType.Averager => "Change (all visible) card values to their (total average).",
-            CardType.Kill => "Instantly adds one (strike).",
+            CardType.Kill => ExtraInfo.GetDescription(TooltipExtra.Death),
             _ => throw new ArgumentOutOfRangeException()
         };
     }

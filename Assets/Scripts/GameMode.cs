@@ -93,6 +93,17 @@ public abstract class GameMode : MonoBehaviour
         Combine(first, second);
         return true;
     }
+
+    protected void PlayDeath(Vector3 pos, int multi)
+    {
+        strikeDisplay.AddStrikes(1, true);
+        var amt = State.Instance.GetCount(Effect.Pestilence);
+        if (amt > 0)
+        {
+            scoreDisplay.Add(1000 * amt * multi);
+            ShowScore(1000, amt * multi, pos);
+        }
+    }
     
     protected void ShowScore(int total, int multi, Vector3 p)
     {
