@@ -282,10 +282,7 @@ public class Reward : GameMode
             scoreDisplay.ResetMulti();
         }
         
-        if (card.Is(CardType.Kill))
-        {
-            PlayDeath(p, card.Multiplier);
-        }
+        PlayGenericInstant(card);
 
         if (card.Is(CardType.Averager) && picks > 0)
         {
@@ -302,5 +299,10 @@ public class Reward : GameMode
         var list = deck.Cards.ToList();
         list.AddRange(hand.Cards);
         return list;
+    }
+
+    public override int GetHandSize()
+    {
+        return hand.Cards.ToList().Count;
     }
 }

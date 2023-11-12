@@ -8,6 +8,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Utils.DevMenu;
 using AnttiStarterKit.Visuals;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class GameMode : MonoBehaviour
@@ -94,17 +95,30 @@ public abstract class GameMode : MonoBehaviour
         return true;
     }
 
-    protected void PlayDeath(Vector3 pos, int multi)
+    protected void PlayGenericInstant(Card card)
     {
-        strikeDisplay.AddStrikes(1, true);
-        var amt = State.Instance.GetCount(Effect.Pestilence);
-        if (amt > 0)
+        var p = card.transform.position;
+        
+        if (card.Is(CardType.Kill))
         {
-            scoreDisplay.Add(1000 * amt * multi);
-            ShowScore(1000, amt * multi, pos);
+            strikeDisplay.AddStrikes(1, true);
+            var amt = State.Instance.GetCount(Effect.Pestilence);
+            if (amt > 0)
+            {
+                scoreDisplay.Add(1000 * amt * card.Multiplier);
+                ShowScore(1000, amt * card.Multiplier, p);
+            }
+        }
+
+        if (card.Is(CardType.Lotus))
+        {
+            var size = GetHandSize();
+            scoreDisplay.Add(30 * card.Multiplier * size);
+            ShowScore(30 * size, card.Multiplier, p);
+            scoreDisplay.ResetMulti();
         }
     }
-    
+
     protected void ShowScore(int total, int multi, Vector3 p)
     {
         Shake(0.2f);
@@ -172,6 +186,7 @@ public abstract class GameMode : MonoBehaviour
     public abstract int AddStrikes();
     public abstract void PlayInstant(Card card);
     public abstract IReadOnlyCollection<Card> GetVisibleCards();
+    public abstract int GetHandSize(); 
 
     public void Shake(float amount)
     {

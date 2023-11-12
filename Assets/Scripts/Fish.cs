@@ -191,10 +191,7 @@ public class Fish : GameMode
             scoreDisplay.ResetMulti();
         }
 
-        if (card.Is(CardType.Kill))
-        {
-            PlayDeath(p, card.Multiplier);
-        }
+        PlayGenericInstant(card);
         
         if (card.Is(CardType.Averager))
         {
@@ -209,5 +206,10 @@ public class Fish : GameMode
     public override IReadOnlyCollection<Card> GetVisibleCards()
     {
         return lanes.SelectMany(l => l.Cards).Where(c => !c.IsRemoved && c.IsOpen).ToList();
+    }
+
+    public override int GetHandSize()
+    {
+        return 0;
     }
 }

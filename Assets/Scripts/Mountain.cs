@@ -254,10 +254,7 @@ public class Mountain : GameMode
             scoreDisplay.ResetMulti();
         }
         
-        if (card.Is(CardType.Kill))
-        {
-            PlayDeath(p, card.Multiplier);
-        }
+        PlayGenericInstant(card);
 
         if (card.Is(CardType.Averager))
         {
@@ -272,6 +269,11 @@ public class Mountain : GameMode
     public override IReadOnlyCollection<Card> GetVisibleCards()
     {
         return deck.Cards.Where(c => c.IsOpen).ToList();
+    }
+
+    public override int GetHandSize()
+    {
+        return 0;
     }
 
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)

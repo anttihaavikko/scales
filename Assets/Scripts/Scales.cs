@@ -176,10 +176,7 @@ public class Scales : GameMode
             hand.Draw();
         }
         
-        if (card.Is(CardType.Kill))
-        {
-            PlayDeath(p, card.Multiplier);
-        }
+        PlayGenericInstant(card);
         
         if (card.Is(CardType.Averager))
         {
@@ -199,5 +196,10 @@ public class Scales : GameMode
         var list = hand.Cards.ToList();
         list.AddRange(slots.Select(s => s.TopCard));
         return list.Where(c => c).ToList();
+    }
+
+    public override int GetHandSize()
+    {
+        return hand.Cards.ToList().Count;
     }
 }

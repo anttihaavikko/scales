@@ -112,7 +112,8 @@ public class CardData
             new CardData(CardType.Joker) { sort = 998 },
             new CardData(CardType.Timer) { icon = 3 },
             new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 },
-            new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 }
+            new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 },
+            new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 996 },
         }.Random();
     }
 
@@ -195,6 +196,7 @@ public class CardData
             CardType.Recall => "Forebear's Memory",
             CardType.Averager => "Averager",
             CardType.Kill => "Death",
+            CardType.Lotus => "Dark Blossom",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -228,9 +230,10 @@ public class CardData
             CardType.Normal => "",
             CardType.Joker => ExtraInfo.GetDescription(TooltipExtra.Joker),
             CardType.Timer => "Changes the (value) of the card to reflect the (current time).",
-            CardType.Recall => "Draw (three extra) cards. Resets the multiplier.",
+            CardType.Recall => "Draw (three extra) cards. Resets the (multiplier) afterwards.",
             CardType.Averager => "Change (all visible) card values to their (total average).",
             CardType.Kill => ExtraInfo.GetDescription(TooltipExtra.Death),
+            CardType.Lotus => "Instantly gain (30 points) for each card in your hand. Resets the (multiplier) afterwards.",
             _ => throw new ArgumentOutOfRangeException()
         };
     }

@@ -409,5 +409,6 @@ public enum CardType
     Timer,
     Recall,
     Averager,
-    Kill
+    Kill,
+    Lotus
 }

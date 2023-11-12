@@ -204,6 +204,7 @@ MonoBehaviour:
   - {fileID: 926605811, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
   - {fileID: -799156414, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
   - {fileID: -436722339, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
+  - {fileID: -1577891070, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
   cheatIcon: {fileID: 2879242572603771339}
   multiTexts:
   - {fileID: 7612694322063748666}
