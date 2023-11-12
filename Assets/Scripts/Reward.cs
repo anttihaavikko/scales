@@ -134,7 +134,14 @@ public class Reward : GameMode
                 if (picked) return;
                 picked = true;
                 State.Instance.Add(skill);
-                State.Instance.Add(new CardData(0) { type = CardType.Kill, icon = 6, playable = true });
+                
+                for (var i = 0; i < State.Instance.GetCount(Effect.Pestilence); i++)
+                {
+                    var data = new CardData(0) { type = CardType.Kill, icon = 6, playable = true };
+                    State.Instance.Add(data);
+                    deck.AddCard(data);
+                }
+                
                 option.Pop();
                 hand.Remove(option);
                 option.Kill();
