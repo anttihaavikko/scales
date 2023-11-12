@@ -17,9 +17,12 @@ public class Reward : GameMode
     private Card modifier;
     private int picks = 3;
     private bool picked;
+    private int page;
     
     private const int PerRow = 12;
-    private const int PageSize = PerRow * 3;
+    private const int PageSize = PerRow * 2;
+
+    private int MaxPage => Mathf.CeilToInt(deck.Cards.Count(c => !c.IsUsed) * 1f / PageSize);
 
     public override void Setup()
     {
@@ -157,24 +160,32 @@ public class Reward : GameMode
         hand.Add(options);
     }
 
+    public void ChangePage(int dir)
+    {
+        page = Mathf.Clamp(page + dir, 0, MaxPage - 1);
+        MoveDeck();
+    }
+
     private void MoveDeck()
     {
         var index = 0;
         var cards = deck.Cards.Where(c => !c.IsUsed).OrderByDescending(c => c.SortValue).ToList();
         cards.ForEach(c =>
         {
+            var shown = index >= page * PageSize && index < (page + 1) * PageSize;
             c.Flip();
             c.Detach();
             c.Nudge();
             var x = index % PerRow;
-            var y = Mathf.FloorToInt(index * 1f / PerRow);
-            c.transform.position = new Vector3((-(PerRow - 1) * 0.5f + x) * 1.2f, contentStart.transform.position.y - y * 1.5f * 1.2f, 0);
+            var y = Mathf.FloorToInt((index - 2 * page * PerRow) * 1f / PerRow);
+            c.transform.position = shown ? 
+                new Vector3((-(PerRow - 1) * 0.5f + x) * 1.2f, contentStart.transform.position.y - y * 1.5f * 1.2f, 0) : 
+                Vector3.up * 999;
             index++;
         });
-
-        var count = cards.Count;
-        pageText.text = $"{1}/{Mathf.CeilToInt(count * 1f / PageSize)}";
-        countText.text = $"{count} cards";
+        
+        pageText.text = $"{page + 1}/{MaxPage}";
+        countText.text = $"{deck.Cards.ToList().Count} cards";
     }
 
     private void CheckEnd()

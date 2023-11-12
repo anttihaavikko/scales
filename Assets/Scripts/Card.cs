@@ -283,6 +283,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnPick()
     {
+        deck.Tooltip.Hide();
         if (IsModifier)
         {
             this.StartCoroutine(() => deck.Dragon.Tutorial.Show(TutorialMessage.ModInfo), 0.5f);
