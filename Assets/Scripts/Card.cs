@@ -59,7 +59,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
     public bool IsModifier => stats.modifier != CardModifier.None;
-    public bool IsValueModifier => stats.modifier is CardModifier.Minus or CardModifier.Multiply or CardModifier.Plus; 
+    public bool IsValueModifier => stats.modifier is CardModifier.Minus or CardModifier.Multiply or CardModifier.Plus or CardModifier.Swapper; 
     public Guid Id => id;
     public bool IsJoker => stats.type == CardType.Joker;
     public bool IsOpen => open;
@@ -85,6 +85,10 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void Setup(CardData data, Deck d)
     {
+        numberLabel.fontSize = 7f;
+        numberLabel.enableAutoSizing = true;
+        numberLabel.transform.localPosition = new Vector3(0, 0.1f);
+        
         stats = new CardData(data);
         cardType = data.type;
         id = data.id;
@@ -98,6 +102,10 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
             icon.gameObject.SetActive(true);
             cheatMarkIcon.sprite = icon.sprite;
             cheatMarkBg.SetActive(stats.cheat);
+        }
+        else
+        {
+            icon.sprite = null;
         }
 
         if (stats.type == CardType.Mox)
