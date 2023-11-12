@@ -158,13 +158,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: favourite
+      name: mox
       rect:
         serializedVersion: 2
-        x: 874
+        x: 852
         y: 1037
-        width: 207
-        height: 316
+        width: 226
+        height: 410
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -930,9 +930,9 @@ TextureImporter:
       fish: -350000091
       ghost-baby: 477116835
       greed: -1854114559
+      mox: 1002963949
       poseidon: 816288694
       cheat: 1408530074
-      favourite: 1002963949
       knife: -868754077
       disguise: -436722339
       message: -1456075619

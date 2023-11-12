@@ -25,7 +25,7 @@ public class Mountain : GameMode
         SetupLevel();
         SetupSlots();
 
-        var cards = deck.Cards.Reverse().ToList();
+        var cards = deck.Cards.ToList();
         
         cards.ForEach(c => c.Nudge());
 

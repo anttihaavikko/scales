@@ -99,6 +99,14 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
             cheatMarkIcon.sprite = icon.sprite;
             cheatMarkBg.SetActive(stats.cheat);
         }
+
+        if (stats.type == CardType.Mox)
+        {
+            numberLabel.fontSize = 2.5f;
+            numberLabel.enableAutoSizing = false;
+            numberLabel.transform.localPosition = new Vector3(0, 0.075f, 0);
+            numberLabel.text = data.GetPrefix() + number;
+        }
         cheatLabels[0].transform.localPosition = data.cheatPos;
         cheatLabels.ForEach(t => t.text = data.cheat ? numberLabel.text : "");
         cheatIcon.SetActive(stats.cheat);
@@ -410,5 +418,6 @@ public enum CardType
     Recall,
     Averager,
     Kill,
-    Lotus
+    Lotus,
+    Mox
 }

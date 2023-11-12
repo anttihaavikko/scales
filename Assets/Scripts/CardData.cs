@@ -114,6 +114,7 @@ public class CardData
             new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 },
             new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 },
             new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 996 },
+            new CardData(Random.Range(1, 6)) { icon = 9, multiplier = Random.Range(2, 6), type = CardType.Mox },
         }.Random();
     }
 
@@ -197,8 +198,15 @@ public class CardData
             CardType.Averager => "Averager",
             CardType.Kill => "Death",
             CardType.Lotus => "Dark Blossom",
+            CardType.Mox => $"Mox {GetNameSuffix()}",
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    private string GetNameSuffix()
+    {
+        var names = new[] { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
+        return number is >= 0 and <= 10 ? names[number] : "Thing";
     }
 
     public List<TooltipExtra> GetExtras()
@@ -234,6 +242,7 @@ public class CardData
             CardType.Averager => "Change (all visible) card values to their (total average).",
             CardType.Kill => ExtraInfo.GetDescription(TooltipExtra.Death),
             CardType.Lotus => "Instantly gain (30 points) for each card in your hand. Resets the (multiplier) afterwards.",
+            CardType.Mox => "Starts with an extra (score multiplier).",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
