@@ -12,7 +12,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private List<ExtraInfo> extraFields;
     [SerializeField] private Transform leftEdge, rightEdge;
-    
+
     private object shown;
 
     public void Show(Skill skill, Vector3 pos)
