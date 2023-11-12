@@ -5,6 +5,7 @@ using UnityEngine;
 public class SkillIcons : MonoBehaviour
 {
     [SerializeField] private SkillIcon prefab;
+    [SerializeField] private Tooltip tooltip;
 
     private void Start()
     {
@@ -14,6 +15,6 @@ public class SkillIcons : MonoBehaviour
     public void Add(Skill skill)
     {
         var icon = Instantiate(prefab, transform);
-        icon.Setup(skill);
+        icon.Setup(skill, tooltip);
     }
 }

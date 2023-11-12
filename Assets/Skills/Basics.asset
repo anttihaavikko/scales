@@ -15,6 +15,7 @@ MonoBehaviour:
   data:
     effect: 9
     title: Basics
-    description: 
+    description: Always include one (basic card) in the (reward options).
     icon: {fileID: 1270725112, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 0
+    extras: 03000000

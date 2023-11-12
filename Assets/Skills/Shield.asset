@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
   m_Name: Shield
   m_EditorClassIdentifier: 
-  id: b1dddf5e-2742-4cd1-a78b-961167cc4be2
   data:
-    id: 0
     effect: 3
     title: Shield
-    description: 
+    description: Always (ignore) one given (strike) per level.
     icon: {fileID: -1155410211, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 2
+    extras: 01000000

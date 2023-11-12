@@ -15,6 +15,6 @@ MonoBehaviour:
   data:
     effect: 7
     title: Options
-    description: 
+    description: Increase the presented (reward options) by one.
     icon: {fileID: 743800477, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 2

@@ -162,4 +162,62 @@ public class CardData
             number = 0;
         }
     }
+
+    public string GetTitle()
+    {
+        if (modifier != CardModifier.None)
+        {
+            return modifier switch
+            {
+                CardModifier.None => "",
+                CardModifier.Plus => "Plus",
+                CardModifier.Minus => "Minus",
+                CardModifier.Multiply => "Multiply",
+                CardModifier.Cheat => "Cheat",
+                CardModifier.Scorer => "Scorer",
+                CardModifier.Favourite => "Favourite",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        return type switch
+        {
+            CardType.Normal => "",
+            CardType.Joker => "Joker",
+            CardType.Timer => "Timer",
+            CardType.Recall => "Forebear's Memory",
+            CardType.Averager => "Averager",
+            CardType.Kill => "Death",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
+    
+    public string GetDescription()
+    {
+        if (modifier != CardModifier.None)
+        {
+            return modifier switch
+            {
+                CardModifier.None => "",
+                CardModifier.Plus => "(Adds) the value to (other card).",
+                CardModifier.Minus => "(Subtracts) the value from (other card).",
+                CardModifier.Multiply => "(Multiplies) other (card value) with this value.",
+                CardModifier.Cheat => ExtraInfo.GetDescription(TooltipExtra.Cheat),
+                CardModifier.Scorer => "Doubles the (score value) of the selected card.",
+                CardModifier.Favourite => "Mark the selected card as (favourite).",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
+        return type switch
+        {
+            CardType.Normal => "",
+            CardType.Joker => ExtraInfo.GetDescription(TooltipExtra.Joker),
+            CardType.Timer => "Changes the (value) of the card to reflect the (current time).",
+            CardType.Recall => "Draw (three extra) cards. Resets the multiplier.",
+            CardType.Averager => "Change (all visible) card values to their (total average).",
+            CardType.Kill => "Instantly adds one (strike).",
+            _ => throw new ArgumentOutOfRangeException()
+        };
+    }
 }

@@ -17,6 +17,8 @@ public class Deck : MonoBehaviour
     public Dragon Dragon => gameMode.Dragon;
 
     public bool IsEmpty => cards.All(c => c.IsRemoved);
+    public Tooltip Tooltip => gameMode.Tooltip;
+    public Camera Camera => gameMode.Camera;
 
     private void Start()
     {

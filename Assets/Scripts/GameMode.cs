@@ -23,12 +23,15 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected StrikeDisplay strikeDisplay;
     [SerializeField] private DevMenu devMenu;
     [SerializeField] protected SkillIcons skillIcons;
+    [SerializeField] private Tooltip tooltip;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
     private EffectCamera effectCamera;
 
     public Dragon Dragon => dragon;
+    public Tooltip Tooltip => tooltip;
+    public Camera Camera => cam;
 
     private void Awake()
     {

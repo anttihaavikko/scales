@@ -15,6 +15,6 @@ MonoBehaviour:
   data:
     effect: 6
     title: Hand Size
-    description: 
+    description: Increase your (maximum hand capacity) by one.
     icon: {fileID: -1633731881, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 2

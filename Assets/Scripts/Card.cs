@@ -13,7 +13,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Card : Markable, IPointerClickHandler
+public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Draggable draggable;
     [SerializeField] private SpriteRenderer backSprite;
@@ -49,6 +49,7 @@ public class Card : Markable, IPointerClickHandler
     
     private readonly List<Card> covers = new();
     private Markable marked;
+    private Skill? linkedSkill;
 
     public Action click;
 
@@ -67,6 +68,9 @@ public class Card : Markable, IPointerClickHandler
     public bool IsPlayable => stats.playable;
     public bool Is(CardType type) => stats.type == type;
     public bool IsUsed { get; set; }
+    public string Title => linkedSkill.HasValue ? linkedSkill.Value.title : stats.GetTitle();
+    public string Description => linkedSkill.HasValue ? linkedSkill.Value.description : stats.GetDescription();
+    public bool HasTooltip => linkedSkill.HasValue || stats.type != CardType.Normal || stats.modifier != CardModifier.None;
 
     private int GetSortValue()
     {
@@ -111,6 +115,7 @@ public class Card : Markable, IPointerClickHandler
     
     public void Setup(Skill skill, Deck d)
     {
+        linkedSkill = skill;
         Setup(new CardData(0), d);
         icon.sprite = skill.icon;
         icon.gameObject.SetActive(true);
@@ -188,6 +193,7 @@ public class Card : Markable, IPointerClickHandler
 
     public void Kill()
     {
+        deck.Tooltip.Hide(this);
         removed = true;
         Destroy(gameObject);
     }
@@ -330,6 +336,7 @@ public class Card : Markable, IPointerClickHandler
 
     public void MoveTo(Vector3 pos, float speed = 1f)
     {
+        deck.Tooltip.Hide(this);
         Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
         Nudge();
     }
@@ -360,6 +367,21 @@ public class Card : Markable, IPointerClickHandler
     {
         if (shake && deck) deck.Shake(0.1f);
         EffectManager.AddEffects(new []{ 0, 1, 2 }, transform.position);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (linkedSkill.HasValue)
+        {
+            deck.Tooltip.Show(linkedSkill.Value, deck.Camera.WorldToScreenPoint(transform.position));
+            return;
+        }
+        deck.Tooltip.Show(this, deck.Camera.WorldToScreenPoint(transform.position));
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        deck.Tooltip.Hide();
     }
 }
 

@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
   m_Name: Absolve
   m_EditorClassIdentifier: 
-  id: 31f8dd86-e761-4db0-8b1c-9feead5eecfa
   data:
-    id: 0
     effect: 2
     title: Absolve
-    description: 
+    description: Immediately (remove) one (strike).
     icon: {fileID: 2066746198, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 999
+    extras: 01000000

@@ -15,6 +15,7 @@ MonoBehaviour:
   data:
     effect: 5
     title: Laughter Medicine
-    description: 
+    description: Remove one (strike) when using a (joker) card.
     icon: {fileID: 2072882246, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 2
+    extras: 0200000001000000

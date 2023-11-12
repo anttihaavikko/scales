@@ -45,4 +45,5 @@ public struct Skill
     [TextArea] public string description;
     public Sprite icon;
     public int allowedRepeats;
+    public List<TooltipExtra> extras;
 }

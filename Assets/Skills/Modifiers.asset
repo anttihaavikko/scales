@@ -15,6 +15,7 @@ MonoBehaviour:
   data:
     effect: 8
     title: Modifiers
-    description: 
+    description: Always include one (modifier card) in the (reward options).
     icon: {fileID: 477116835, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 0
+    extras: 04000000
