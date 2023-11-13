@@ -392,6 +392,9 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     {
         if (draggable.IsDragging) return;
         
+        Nudge();
+        transform.localScale = Vector3.one * 1.1f; 
+        
         if (linkedSkill.HasValue)
         {
             deck.Tooltip.Show(linkedSkill.Value, deck.Camera.WorldToScreenPoint(transform.position));
@@ -402,6 +405,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        transform.localScale = Vector3.one;
         deck.Tooltip.Hide();
     }
 }
