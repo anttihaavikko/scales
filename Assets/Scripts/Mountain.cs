@@ -175,6 +175,7 @@ public class Mountain : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        dragon.Tutorial.Show(TutorialMessage.Slotting);
         scoreDisplay.ResetMulti();
         DeselectAll();
         slots.ForEach(s => s.Remove(card));
