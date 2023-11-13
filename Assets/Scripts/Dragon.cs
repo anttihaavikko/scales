@@ -38,7 +38,7 @@ public class Dragon : MonoBehaviour
         speechBubble.onWord += Speak;
         speechBubble.onHide += () => Nudge();
         
-        Invoke(nameof(ShowIntro), 1f);
+        Invoke(nameof(ShowIntro), 3f);
     }
     
     private void ShowIntro()
