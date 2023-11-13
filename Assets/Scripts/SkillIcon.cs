@@ -18,11 +18,13 @@ public class SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        transform.localScale = Vector3.one * 1.2f;
         tooltip.Show(skill, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        transform.localScale = Vector3.one;
         tooltip.Hide();
     }
 }
