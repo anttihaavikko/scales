@@ -13,6 +13,7 @@ public class Mountain : GameMode
 {
     [SerializeField] private TMP_Text helpText;
     [SerializeField] private Transform bg;
+    [SerializeField] private GameObject ascent, descent;
 
     private MountainOperator operation;
     private int target;
@@ -35,6 +36,11 @@ public class Mountain : GameMode
 
         var scale = Mathf.Max(1f, rows / 4f * Overlap);
         bg.localScale = new Vector3(operation == MountainOperator.Plus ? 1 : -1, 1, 1) * scale;
+        if (operation == MountainOperator.Minus)
+        {
+            ascent.SetActive(false);
+            descent.SetActive(true);
+        }
         cam.orthographicSize *= scale;
 
         var index = 0;
