@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
 using TMPro;
@@ -14,6 +15,7 @@ public class Reward : GameMode
     [SerializeField] private Card cardPrefab;
     [SerializeField] private TMP_Text pageText, countText;
     [SerializeField] private Transform contentStart;
+    [SerializeField] private Appearer phoneButton;
 
     private Card modifier;
     private int picks = 3;
@@ -30,6 +32,11 @@ public class Reward : GameMode
         MoveDeck();
         picks = 3 + State.Instance.GetCount(Effect.Greed);
         ShowCards(5 + State.Instance.GetCount(Effect.MoreOptions));
+
+        if (State.Instance.Has(Effect.Phone))
+        {
+            this.StartCoroutine(() => phoneButton.Show(), 0.5f);
+        }
     }
 
     private void LateUpdate()
@@ -134,6 +141,11 @@ public class Reward : GameMode
                 if (picked) return;
                 picked = true;
                 State.Instance.Add(skill);
+
+                if (skill.effect == Effect.Phone)
+                {
+                    phoneButton.Show();
+                }
                 
                 for (var i = 0; i < State.Instance.GetCount(Effect.Pestilence); i++)
                 {
@@ -304,5 +316,11 @@ public class Reward : GameMode
     public override int GetHandSize()
     {
         return hand.Cards.ToList().Count;
+    }
+
+    public void PhoneScore()
+    {
+        scoreDisplay.Add(1000 * State.Instance.LevelMulti);
+        ShowScore(1000, State.Instance.LevelMulti, new Vector3(4, -2));
     }
 }

@@ -105,7 +105,7 @@ public abstract class GameMode : MonoBehaviour
             var amt = State.Instance.GetCount(Effect.Pestilence);
             if (amt > 0)
             {
-                scoreDisplay.Add(1000 * amt * card.Multiplier);
+                scoreDisplay.Add(1000 * amt * card.Multiplier * State.Instance.LevelMulti);
                 ShowScore(1000, amt * card.Multiplier, p);
             }
         }
@@ -113,7 +113,7 @@ public abstract class GameMode : MonoBehaviour
         if (card.Is(CardType.Lotus))
         {
             var size = GetHandSize();
-            scoreDisplay.Add(30 * card.Multiplier * size);
+            scoreDisplay.Add(30 * card.Multiplier * size * State.Instance.LevelMulti);
             ShowScore(30 * size, card.Multiplier, p);
             scoreDisplay.ResetMulti();
         }

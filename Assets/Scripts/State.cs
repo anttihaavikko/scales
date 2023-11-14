@@ -10,6 +10,8 @@ public class State : Manager<State>
 {
     private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
     private readonly List<Skill> skills = new();
+    private MessageHistory messageHistory;
+    private List<HistoryMessage> messages;
 
     public int Level { get; private set; }
     public int Score { get; private set; }
@@ -24,6 +26,14 @@ public class State : Manager<State>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public List<HistoryMessage> GetMessages()
+    {
+        if (messageHistory == default) messageHistory = new MessageHistory();
+        if (messages == default) messages = new List<HistoryMessage>();
+        messages.Add(messageHistory.Get());
+        return messages;
     }
 
     public bool Has(Effect skill)

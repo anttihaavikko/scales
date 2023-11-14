@@ -40,7 +40,8 @@ public enum Effect
     Pestilence,
     ExtraSlot,
     Gemology,
-    Miner
+    Miner,
+    Phone
 }
 
 [Serializable]
