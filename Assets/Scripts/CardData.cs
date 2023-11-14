@@ -90,7 +90,10 @@ public class CardData
             new CardData(CardModifier.Multiply, 2),
             GetCheat(),
             new CardData(CardModifier.Favourite, 0) { icon = 1 },
-            new CardData(CardModifier.Scorer, Random.Range(2, 4)) { icon = 2 },
+            new CardData(CardModifier.Scorer, 2) { icon = 2 },
+            new CardData(CardModifier.Scorer, 2) { icon = 2 },
+            new CardData(CardModifier.Scorer, 3) { icon = 10 },
+            new CardData(CardModifier.Scorer, 3) { icon = 10 },
             new CardData(CardModifier.Multiply, 0),
             new CardData(CardModifier.Swapper, 0) { icon = 7 }
         }.Random();
@@ -182,7 +185,7 @@ public class CardData
                 CardModifier.Minus => "Minus",
                 CardModifier.Multiply => "Multiply",
                 CardModifier.Cheat => "Cheat",
-                CardModifier.Scorer => "Scorer",
+                CardModifier.Scorer => number == 2 ? "Doubler" : "Tripler",
                 CardModifier.Favourite => "Favourite",
                 CardModifier.Swapper => "Swapper",
                 _ => throw new ArgumentOutOfRangeException()
@@ -219,6 +222,8 @@ public class CardData
     {
         if (modifier != CardModifier.None)
         {
+            var scoreVerb = number == 2 ? "Doubles" : "Triples";
+            
             return modifier switch
             {
                 CardModifier.None => "",
@@ -226,7 +231,7 @@ public class CardData
                 CardModifier.Minus => "(Subtracts) the value from (other card).",
                 CardModifier.Multiply => "(Multiplies) other (card value) with this value.",
                 CardModifier.Cheat => ExtraInfo.GetDescription(TooltipExtra.Cheat),
-                CardModifier.Scorer => "Doubles the (score value) of the selected card.",
+                CardModifier.Scorer => $"{scoreVerb} the (score value) of the selected card." ,
                 CardModifier.Favourite => "Mark the (selected card) as (favourite).",
                 CardModifier.Swapper => "Swap the (value) and (score multiplier) values of the selected card.",
                 _ => throw new ArgumentOutOfRangeException()
