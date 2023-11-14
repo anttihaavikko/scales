@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
+  m_Name: Gemology
+  m_EditorClassIdentifier: 
+  data:
+    effect: 14
+    title: Gemology
+    description: Replace all new (basic cards) with (mox cards).
+    icon: {fileID: 1875746777, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
+    allowedRepeats: 0
+    extras: 0600000003000000

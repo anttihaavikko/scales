@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
+  m_Name: Miner
+  m_EditorClassIdentifier: 
+  data:
+    effect: 15
+    title: Miner
+    description: Increase all new (mox card) multipliers by (one).
+    icon: {fileID: 2056179840, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
+    allowedRepeats: 4
+    extras: 0600000003000000

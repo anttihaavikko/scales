@@ -117,13 +117,13 @@ public class CardData
             new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 },
             new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 },
             new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 996 },
-            new CardData(Random.Range(1, 6)) { icon = 9, multiplier = Random.Range(2, 6), type = CardType.Mox },
+            GetRandomGem(),
         }.Random();
     }
 
     public static CardData GetRandom()
     {
-        if (Random.value < 0.5f) return new CardData(Random.Range(1, 11));
+        if (Random.value < 0.5f) return GetBasic();
         if (Random.value < 0.5f) return GetRandomModifier();
         return GetRandomSpecial();
     }
@@ -247,8 +247,23 @@ public class CardData
             CardType.Averager => "Change (all visible) card values to their (total average).",
             CardType.Kill => ExtraInfo.GetDescription(TooltipExtra.Death),
             CardType.Lotus => "Instantly gain (30 points) for each card in your hand. Resets the (multiplier) afterwards.",
-            CardType.Mox => "Starts with an extra (score multiplier).",
+            CardType.Mox => ExtraInfo.GetDescription(TooltipExtra.Gem),
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    public static CardData GetRandomGem()
+    {
+        return new CardData(Random.Range(1, 6))
+        {
+            icon = 9,
+            multiplier = Random.Range(2, 6) + State.Instance.GetCount(Effect.Miner),
+            type = CardType.Mox
+        };
+    }
+
+    public static CardData GetBasic()
+    {
+        return State.Instance.Has(Effect.Gemology) ? GetRandomGem() : new CardData(Random.Range(1, 11));
     }
 }

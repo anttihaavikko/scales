@@ -56,7 +56,7 @@ public class Reward : GameMode
         
         if (State.Instance.Has(Effect.Basics))
         {
-            list.Add(new CardData(Random.Range(1, 11)));
+            list.Add(CardData.GetBasic());
         }
 
         return list;

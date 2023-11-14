@@ -38,7 +38,9 @@ public enum Effect
     CardInstead,
     Greed,
     Pestilence,
-    ExtraSlot
+    ExtraSlot,
+    Gemology,
+    Miner
 }
 
 [Serializable]

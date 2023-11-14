@@ -25,6 +25,7 @@ public class ExtraInfo : MonoBehaviour
             TooltipExtra.Basic => "Basic cards",
             TooltipExtra.Modifier => "Modifiers",
             TooltipExtra.Death => "Death",
+            TooltipExtra.Gem => "Mox",
             _ => throw new ArgumentOutOfRangeException(nameof(extra), extra, null)
         };
     }
@@ -39,6 +40,7 @@ public class ExtraInfo : MonoBehaviour
             TooltipExtra.Basic => "The most (basic) of cards with (value ranging) from (0 to 10).",
             TooltipExtra.Modifier => "Cards that (manipulate) other (chosen cards).",
             TooltipExtra.Death => "Instantly adds one (strike).",
+            TooltipExtra.Gem => "Like (basic) cards but start with an extra (score multiplier).",
             _ => throw new ArgumentOutOfRangeException(nameof(extra), extra, null)
         };
     }
@@ -51,5 +53,6 @@ public enum TooltipExtra
     Joker,
     Basic,
     Modifier,
-    Death
+    Death,
+    Gem
 }
