@@ -15,7 +15,7 @@ MonoBehaviour:
   data:
     effect: 22
     title: Perfectionist
-    description: Receive 1000 bonus points if you perfect a level.
+    description: Receive (1000) bonus points if you (perfect) a level.
     icon: {fileID: 2090249495, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
     allowedRepeats: 4
     extras: 
