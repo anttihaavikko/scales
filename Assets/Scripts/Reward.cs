@@ -171,7 +171,7 @@ public class Reward : GameMode
                     return;
                 }
                 
-                this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
+                NextLevel();
 
                 if (skill.effect == Effect.Heal)
                 {
@@ -226,11 +226,17 @@ public class Reward : GameMode
             if (picked)
             {
                 hand.Clear();
-                this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
+                NextLevel();
                 return;
             }
             ShowSkills();
         }
+    }
+
+    private void NextLevel()
+    {
+        State.Instance.Score = scoreDisplay.Total;
+        this.StartCoroutine(() => State.Instance.NextLevel(), 0.5f);
     }
 
     public override void Select(Card card)

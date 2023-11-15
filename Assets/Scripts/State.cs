@@ -14,7 +14,7 @@ public class State : Manager<State>
     private List<HistoryMessage> messages;
 
     public int Level { get; private set; }
-    public int Score { get; private set; }
+    public int Score { get; set; }
     public int Strikes { get; set; }
     public int MaxStrikes { get; set; } = 3;
 
