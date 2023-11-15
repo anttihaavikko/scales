@@ -73,6 +73,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public bool HasTooltip => linkedSkill.HasValue || stats.type != CardType.Normal || stats.modifier != CardModifier.None;
     public List<TooltipExtra> Extras => stats.GetExtras();
     public int Multiplier => stats.multiplier;
+    public bool IsDuplicator => stats.modifier == CardModifier.Duplicator;
 
     private int GetSortValue()
     {
@@ -419,7 +420,8 @@ public enum CardModifier
     Cheat,
     Scorer,
     Favourite,
-    Swapper
+    Swapper,
+    Duplicator
 }
 
 public enum CardType

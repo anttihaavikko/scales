@@ -266,6 +266,13 @@ public class Reward : GameMode
             data.number = second.Number;
             data.icon = -1;
         }
+
+        if (first.IsDuplicator)
+        {
+            State.Instance.Add(data);
+            deck.AddCard(data);
+            MoveDeck();
+        }
         data.Modify(first.GetData());
         second.Setup(data, deck);
         second.Flip();

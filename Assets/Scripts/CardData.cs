@@ -76,6 +76,7 @@ public class CardData
             CardModifier.Scorer => "!",
             CardModifier.Favourite => "!",
             CardModifier.Swapper => "",
+            CardModifier.Duplicator => "",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -95,7 +96,8 @@ public class CardData
             new CardData(CardModifier.Scorer, 3) { icon = 10 },
             new CardData(CardModifier.Scorer, 3) { icon = 10 },
             new CardData(CardModifier.Multiply, 0),
-            new CardData(CardModifier.Swapper, 0) { icon = 7 }
+            new CardData(CardModifier.Swapper, 0) { icon = 7 },
+            new CardData(CardModifier.Duplicator, 0) { icon = 11 },
         }.Random();
     }
 
@@ -155,6 +157,8 @@ public class CardData
             case CardModifier.Swapper:
                 (multiplier, number) = (number, multiplier);
                 break;
+            case CardModifier.Duplicator:
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
@@ -188,6 +192,7 @@ public class CardData
                 CardModifier.Scorer => number == 2 ? "Doubler" : "Tripler",
                 CardModifier.Favourite => "Favourite",
                 CardModifier.Swapper => "Swapper",
+                CardModifier.Duplicator => "Duplicator",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -235,6 +240,7 @@ public class CardData
                 CardModifier.Scorer => $"{scoreVerb} the (score value) of the selected card." ,
                 CardModifier.Favourite => "Mark the (selected card) as (favourite). Favourite cards are placed on (the top) of the deck after (shuffling).",
                 CardModifier.Swapper => "Swap the (value) and (score multiplier) values of the selected card.",
+                CardModifier.Duplicator => "Add a (copy) of the selected (card) to your deck.",
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
