@@ -8,6 +8,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Utils.DevMenu;
 using AnttiStarterKit.Visuals;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 

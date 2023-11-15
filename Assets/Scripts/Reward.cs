@@ -16,6 +16,7 @@ public class Reward : GameMode
     [SerializeField] private TMP_Text pageText, countText;
     [SerializeField] private Transform contentStart;
     [SerializeField] private Appearer phoneButton;
+    [SerializeField] private TMP_Text pickLabel;
 
     private Card modifier;
     private int picks = 3;
@@ -37,6 +38,8 @@ public class Reward : GameMode
         {
             this.StartCoroutine(() => phoneButton.Show(), 0.5f);
         }
+        
+        pickLabel.text = $"Pick <color=#CDE7B0>{picks}</color> new cards...";
     }
 
     private void LateUpdate()
@@ -213,9 +216,13 @@ public class Reward : GameMode
     private void CheckEnd()
     {
         picks--;
+        var term = picks == 1 ? "card" : "cards";
+        pickLabel.text = $"Pick <color=#CDE7B0>{picks}</color> more {term}...";
         
         if (picks == 0 || hand.IsEmpty)
         {
+            pickLabel.text = $"Pick a <color=#CDE7B0>new skill</color>...";
+            
             if (picked)
             {
                 hand.Clear();
