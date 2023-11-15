@@ -32,7 +32,7 @@ public class Uno : GameMode
         this.StartCoroutine(() => hand.Fill(), 0.5f);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (DevKey.Down(KeyCode.J))
         {

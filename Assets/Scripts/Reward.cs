@@ -221,7 +221,7 @@ public class Reward : GameMode
         
         if (picks == 0 || hand.IsEmpty)
         {
-            pickLabel.text = $"Pick a <color=#CDE7B0>new skill</color>...";
+            pickLabel.text = $"Pick a <color=#CDE7B0>skill</color> addition...";
             
             if (picked)
             {

@@ -26,6 +26,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] private DevMenu devMenu;
     [SerializeField] protected SkillIcons skillIcons;
     [SerializeField] private Tooltip tooltip;
+    [SerializeField] protected Appearer splash;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
@@ -62,6 +63,8 @@ public abstract class GameMode : MonoBehaviour
 
     private void Update()
     {
+        if(Input.anyKeyDown && splash) splash.Hide();
+            
         if(DevKey.Down(KeyCode.C)) continueButton.Show();
         
         if (DevKey.Down(KeyCode.Z))

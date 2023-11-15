@@ -1074,6 +1074,7 @@ MonoBehaviour:
   devMenu: {fileID: 0}
   skillIcons: {fileID: 1868825149}
   tooltip: {fileID: 1669822542}
+  splash: {fileID: 0}
   arrow: {fileID: 1841243070}
   opponent: {fileID: 980671927}
   isPlayer: 0
@@ -1997,6 +1998,7 @@ MonoBehaviour:
   devMenu: {fileID: 0}
   skillIcons: {fileID: 1868825149}
   tooltip: {fileID: 1669822542}
+  splash: {fileID: 1566853933}
   arrow: {fileID: 1841243070}
   opponent: {fileID: 286923758}
   isPlayer: 1
@@ -2844,6 +2846,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4840936597095533648, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
   m_PrefabInstance: {fileID: 1566853931}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1566853933 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840936597095533655, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+  m_PrefabInstance: {fileID: 1566853931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894eaa5182eb64ca5afcfef91441454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1624697266
 GameObject:
   m_ObjectHideFlags: 0

@@ -2943,6 +2943,7 @@ MonoBehaviour:
   devMenu: {fileID: 1715093613}
   skillIcons: {fileID: 1838128901}
   tooltip: {fileID: 954880948}
+  splash: {fileID: 1663156678}
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   pageText: {fileID: 1634324694}
   countText: {fileID: 56669366}
@@ -3178,7 +3179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 8.085, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 1.7006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1169806290
@@ -3391,7 +3392,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 318232597}
   m_HandleRect: {fileID: 318232596}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -5016,6 +5017,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644381754}
   m_CullTransparentMesh: 1
+--- !u!114 &1663156678 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840936597095533655, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+  m_PrefabInstance: {fileID: 650983270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894eaa5182eb64ca5afcfef91441454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715093608
 GameObject:
   m_ObjectHideFlags: 0

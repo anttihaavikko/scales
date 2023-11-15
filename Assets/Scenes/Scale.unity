@@ -1219,6 +1219,7 @@ MonoBehaviour:
   devMenu: {fileID: 0}
   skillIcons: {fileID: 443024958}
   tooltip: {fileID: 1261470077}
+  splash: {fileID: 1388236322}
   left: {fileID: 1271846182}
   right: {fileID: 1203363014}
   diff: {fileID: 1581015532}
@@ -2592,6 +2593,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4840936597095533648, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
   m_PrefabInstance: {fileID: 1388236320}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1388236322 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840936597095533655, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+  m_PrefabInstance: {fileID: 1388236320}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894eaa5182eb64ca5afcfef91441454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1441100661
 GameObject:
   m_ObjectHideFlags: 0

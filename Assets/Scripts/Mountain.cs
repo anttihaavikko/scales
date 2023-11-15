@@ -40,6 +40,7 @@ public class Mountain : GameMode
         {
             ascent.SetActive(false);
             descent.SetActive(true);
+            splash = descent.GetComponent<Appearer>();
         }
         cam.orthographicSize *= scale;
 

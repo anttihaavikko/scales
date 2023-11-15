@@ -1059,6 +1059,7 @@ MonoBehaviour:
   devMenu: {fileID: 0}
   skillIcons: {fileID: 1526019267}
   tooltip: {fileID: 1602363341}
+  splash: {fileID: 4840936596492136211}
   helpText: {fileID: 289106337}
   bg: {fileID: 1642419817}
   ascent: {fileID: 1812685633}
@@ -2446,6 +2447,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+--- !u!114 &4840936596492136211 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840936597095533655, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+  m_PrefabInstance: {fileID: 4840936596492136210}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812685633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894eaa5182eb64ca5afcfef91441454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6357250263684740261
 PrefabInstance:
   m_ObjectHideFlags: 0

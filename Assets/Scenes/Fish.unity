@@ -623,6 +623,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4840936597095533648, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
   m_PrefabInstance: {fileID: 572040076}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &572040078 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4840936597095533655, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
+  m_PrefabInstance: {fileID: 572040076}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 894eaa5182eb64ca5afcfef91441454f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669437823
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,6 +836,7 @@ MonoBehaviour:
   devMenu: {fileID: 0}
   skillIcons: {fileID: 1881394957}
   tooltip: {fileID: 1236815420}
+  splash: {fileID: 572040078}
   lanes:
   - {fileID: 2794848}
   - {fileID: 2002839650}
