@@ -7,6 +7,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.Visuals;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
@@ -55,7 +56,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public bool IsSelected => selected;
     public int Number => IsJoker ? deck.GetTotal() : number;
-    public int ScoreValue => (IsJoker ? deck.GetTotal() : number) * stats.multiplier;
+    public int ScoreValue => (IsJoker ? deck.GetTotal() : number) * stats.multiplier * GetExtraMultipliers();
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
     public bool IsModifier => stats.modifier != CardModifier.None;
@@ -69,7 +70,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public bool Is(CardType type) => stats.type == type;
     public bool IsUsed { get; set; }
     public string Title => linkedSkill.HasValue ? linkedSkill.Value.title : stats.GetTitle();
-    public string Description => linkedSkill.HasValue ? linkedSkill.Value.description : stats.GetDescription();
+    public string Description => linkedSkill.HasValue ? linkedSkill.Value.description : stats.GetDescription(Number);
     public bool HasTooltip => linkedSkill.HasValue || stats.type != CardType.Normal || stats.modifier != CardModifier.None;
     public List<TooltipExtra> Extras => stats.GetExtras();
     public int Multiplier => stats.multiplier;
@@ -408,6 +409,11 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     {
         transform.localScale = Vector3.one;
         deck.Tooltip.Hide();
+    }
+    
+    private int GetExtraMultipliers()
+    {
+        return Number > 10 ? 1 + State.Instance.GetCount(Effect.BigMulti) * 2 : 1;
     }
 }
 

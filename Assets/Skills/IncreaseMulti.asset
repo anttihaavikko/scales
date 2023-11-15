@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
+  m_Name: IncreaseMulti
+  m_EditorClassIdentifier: 
+  data:
+    effect: 19
+    title: Stepping Stone
+    description: Increase your (multiplier) when playing a (card) with a (value)
+      of ([X]).
+    icon: {fileID: -529579555, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
+    allowedRepeats: 4
+    extras: 
+    minValue: 1
+    maxValue: 11
+    value: 2

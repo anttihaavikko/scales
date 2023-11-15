@@ -19,7 +19,7 @@ public class Tooltip : MonoBehaviour
     {
         shown = skill;
         node.SetActive(true);
-        Show(skill.title, skill.description);
+        Show(skill.title, Decorate(skill.description, skill.value.ToString()));
         AddExtras(skill.extras);
         Fix();
         Reposition(pos);
@@ -63,11 +63,12 @@ public class Tooltip : MonoBehaviour
         contentField.text = Decorate(text);
     }
 
-    public static string Decorate(string text)
+    public static string Decorate(string text, string value = "")
     {
         var sb = new StringBuilder(text);
         sb.Replace("(", "<color=#BE6E46>");
         sb.Replace(")", "</color>");
+        sb.Replace("[X]", value);
         return sb.ToString();
     }
 

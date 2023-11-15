@@ -224,7 +224,7 @@ public class CardData
         return new List<TooltipExtra>();
     }
     
-    public string GetDescription()
+    public string GetDescription(int value = 0)
     {
         if (modifier != CardModifier.None)
         {
@@ -245,10 +245,12 @@ public class CardData
             };
         }
 
+        var jokerAddition = State.Instance.Has(Effect.JokerSight) ? $"\n\nThe (value) is currently ({value})." : "";
+
         return type switch
         {
             CardType.Normal => "",
-            CardType.Joker => ExtraInfo.GetDescription(TooltipExtra.Joker),
+            CardType.Joker => ExtraInfo.GetDescription(TooltipExtra.Joker) + jokerAddition,
             CardType.Timer => "Changes the (value) of the card to reflect the (current time).",
             CardType.Recall => "Draw (three extra) cards. Resets the (multiplier) afterwards.",
             CardType.Averager => "Change (all visible) card values to their (total average).",

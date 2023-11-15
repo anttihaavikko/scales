@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "Skill", menuName = "Skill", order = 0)]
 public class SkillDefinition : ScriptableObject
@@ -14,6 +15,7 @@ public class SkillDefinition : ScriptableObject
 
     public Skill Spawn()
     {
+        data.value = Random.Range(data.minValue, data.maxValue);
         return data;
     }
 
@@ -41,7 +43,11 @@ public enum Effect
     ExtraSlot,
     Gemology,
     Miner,
-    Phone
+    Phone,
+    BigMulti,
+    RetainMulti,
+    IncreaseMultiOn,
+    JokerSight
 }
 
 [Serializable]
@@ -53,4 +59,6 @@ public struct Skill
     public Sprite icon;
     public int allowedRepeats;
     public List<TooltipExtra> extras;
+    public int minValue, maxValue;
+    [HideInInspector] public int value;
 }

@@ -47,7 +47,8 @@ public abstract class GameMode : MonoBehaviour
 
         if (scoreDisplay)
         {
-            scoreDisplay.Set(State.Instance.Score);
+            var multi = State.Instance.Has(Effect.RetainMulti) ? State.Instance.HeldMulti : 1;
+            scoreDisplay.Set(State.Instance.Score, multi);
         }
 
         if (skillPool && devMenu && skillIcons)
@@ -79,7 +80,11 @@ public abstract class GameMode : MonoBehaviour
         continued = true;
         continueButton.Hide();
         var delay = Mathf.Clamp(AddStrikes(), 0, State.Instance.MaxStrikes) * 0.3f;
-        this.StartCoroutine(() => State.Instance.RoundEnded(scoreDisplay.Total), delay);
+        this.StartCoroutine(() =>
+        {
+            State.Instance.HeldMulti = scoreDisplay.Multi;
+            State.Instance.RoundEnded(scoreDisplay.Total);
+        }, delay);
     }
 
     protected void DeselectAll()
@@ -182,6 +187,12 @@ public abstract class GameMode : MonoBehaviour
         if (card.IsJoker && heals > 0)
         {
             strikeDisplay.AddStrikes(-heals);
+        }
+
+        var increases = State.Instance.GetCount(Effect.IncreaseMultiOn, card.Number);
+        if (increases > 0)
+        {
+            scoreDisplay.AddMulti(increases);
         }
     }
     

@@ -17,8 +17,8 @@ public class State : Manager<State>
     public int Score { get; set; }
     public int Strikes { get; set; }
     public int MaxStrikes { get; set; } = 3;
-
     public int LevelMulti => Level + 1;
+    public int HeldMulti { get; set; } = 1;
 
     public IEnumerable<CardData> Cards => cards;
     public IEnumerable<Skill> Skills => skills;
@@ -41,9 +41,19 @@ public class State : Manager<State>
         return skills.Any(s => s.effect == skill);
     }
 
+    public bool Has(Effect skill, int value)
+    {
+        return skills.Any(s => s.effect == skill && s.value == value);
+    }
+
     public int GetCount(Effect skill)
     {
         return skills.Count(s => s.effect == skill);
+    }
+    
+    public int GetCount(Effect skill, int value)
+    {
+        return skills.Count(s => s.effect == skill && s.value == value);
     }
 
     public void Add(Skill skill)
