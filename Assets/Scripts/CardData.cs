@@ -215,6 +215,7 @@ public class CardData
     public List<TooltipExtra> GetExtras()
     {
         if (type == CardType.Kill) return new List<TooltipExtra> { TooltipExtra.Strike };
+        if (type == CardType.Mox) return new List<TooltipExtra> { TooltipExtra.Basic };
         return new List<TooltipExtra>();
     }
     
@@ -232,7 +233,7 @@ public class CardData
                 CardModifier.Multiply => "(Multiplies) other (card value) with this value.",
                 CardModifier.Cheat => ExtraInfo.GetDescription(TooltipExtra.Cheat),
                 CardModifier.Scorer => $"{scoreVerb} the (score value) of the selected card." ,
-                CardModifier.Favourite => "Mark the (selected card) as (favourite). Favourite cards are (always) in your (starting hand).",
+                CardModifier.Favourite => "Mark the (selected card) as (favourite). Favourite cards are placed on (the top) of the deck after (shuffling).",
                 CardModifier.Swapper => "Swap the (value) and (score multiplier) values of the selected card.",
                 _ => throw new ArgumentOutOfRangeException()
             };
