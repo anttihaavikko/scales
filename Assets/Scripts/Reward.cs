@@ -81,6 +81,7 @@ public class Reward : GameMode
         for (var i = 0; i < amount; i++)
         {
             var option = Instantiate(cardPrefab, transform);
+            option.transform.position = new Vector3(0, -5, 0);
             option.Detach();
             options.Add(option);
             var data = fixedOptions.Any() ? fixedOptions.FirstOrDefault() : CardData.GetRandom();
@@ -133,6 +134,7 @@ public class Reward : GameMode
         skills.ForEach(skill =>
         {
             var option = Instantiate(cardPrefab, transform);
+            option.transform.position = new Vector3(0, -5, 0);
             option.Detach();
             options.Add(option);
             option.Setup(skill, deck);
