@@ -62,6 +62,11 @@ public abstract class GameMode : MonoBehaviour
     private void Update()
     {
         if(DevKey.Down(KeyCode.C)) continueButton.Show();
+        
+        if (DevKey.Down(KeyCode.Z))
+        {
+            Tweener.ZoomTo(cam, 12, 1f);
+        }
     }
 
     public void ToRewards()

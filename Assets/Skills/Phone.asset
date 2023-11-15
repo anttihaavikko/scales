@@ -15,7 +15,7 @@ MonoBehaviour:
   data:
     effect: 16
     title: Lost phone
-    description: I found this (old phone). Wonder who it belongs to...
+    description: I found this (old phone). Wonder (who) it belongs to...
     icon: {fileID: -781666841, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
     allowedRepeats: 0
     extras: 
