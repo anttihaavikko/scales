@@ -246,6 +246,7 @@ public class Mountain : GameMode
 
     public override int AddStrikes()
     {
+        if(deck.Cards.Count(c => !c || !c.IsRemoved) == 0) Perfect();
         var total = GetRowCount(deck.Cards.Count(c => c.IsCovered));
         strikeDisplay.AddStrikes(total);
         return total;

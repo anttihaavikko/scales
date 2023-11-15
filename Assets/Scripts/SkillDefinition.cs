@@ -48,7 +48,8 @@ public enum Effect
     RetainMulti,
     IncreaseMultiOn,
     JokerSight,
-    EvenScorer
+    EvenScorer,
+    PerfectGame
 }
 
 [Serializable]

@@ -181,6 +181,16 @@ public abstract class GameMode : MonoBehaviour
         return GetVisibleCards().Where(c => !c.IsJoker).Sum(c => c.Number);
     }
 
+    protected void Perfect()
+    {
+        var levels = State.Instance.GetCount(Effect.PerfectGame);
+        if (levels > 0)
+        {
+            scoreDisplay.Add(1000 * levels * State.Instance.LevelMulti);
+            ShowScore(1000 * levels, State.Instance.LevelMulti, Vector3.zero);
+        }
+    }
+
     protected void AfterPlay(Card card)
     {
         var heals = State.Instance.GetCount(Effect.JokerHeal);

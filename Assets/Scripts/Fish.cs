@@ -172,8 +172,10 @@ public class Fish : GameMode
     public override int AddStrikes()
     {
         var deckCards = deck.Cards.Count(c => !c.IsRemoved);
-        var laneCards = lanes.SelectMany(l => l.Cards).Count(c => !c.IsOpen);
-        var total = deckCards + laneCards;
+        var laneCards = lanes.SelectMany(l => l.Cards).ToList();
+        var laneTopCards = laneCards.Count(c => !c.IsOpen);
+        var total = deckCards + laneTopCards;
+        if(!laneCards.Any()) Perfect();
         strikeDisplay.AddStrikes(total);
         return total;
     }

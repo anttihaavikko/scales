@@ -2741,11 +2741,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4840936596819298982, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
       propertyPath: m_text
-      value: Running Scales
+      value: Running the Scales
       objectReference: {fileID: 0}
     - target: {fileID: 4840936596964659079, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -86.8
+      value: -159
       objectReference: {fileID: 0}
     - target: {fileID: 4840936597095533648, guid: a03f2d15b727d4ce9b6a1bbb48bf1bf6, type: 3}
       propertyPath: m_Pivot.x
