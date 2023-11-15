@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
-  m_Name: BigValue
+  m_Name: EvenScorer
   m_EditorClassIdentifier: 
   data:
-    effect: 17
-    title: Big Boys
-    description: Gain (triple the score) for playing (cards) with value (greater
-      than 10).
-    icon: {fileID: -953957912, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
-    allowedRepeats: 4
+    effect: 21
+    title: Parity
+    description: Gain (double the score) for playing (cards) with (even) value.
+    icon: {fileID: -681816807, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
+    allowedRepeats: 9
     extras: 
     minValue: 0
     maxValue: 0

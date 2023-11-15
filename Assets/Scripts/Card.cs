@@ -413,7 +413,10 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     
     private int GetExtraMultipliers()
     {
-        return Number > 10 ? 1 + State.Instance.GetCount(Effect.BigMulti) * 2 : 1;
+        var multi = 1;
+        if (Number > 10) multi *= 1 + State.Instance.GetCount(Effect.BigMulti) * 2;
+        if (Number % 2 == 0) multi *= 1 + State.Instance.GetCount(Effect.EvenScorer);
+        return multi;
     }
 }
 
