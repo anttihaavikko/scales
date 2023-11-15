@@ -17,6 +17,7 @@ public class Uno : GameMode
     [SerializeField] private NoteTrack noteTrack;
     [SerializeField] private TMP_Text tickDisplay;
     [SerializeField] private Appearer tickLine;
+    [SerializeField] private Pulsater tickPulsater;
 
     private bool descending;
     private bool hasTurn;
@@ -97,6 +98,7 @@ public class Uno : GameMode
 
         if (isPlayer)
         {
+            Score(card);
             AfterPlay(card);
         }
         
@@ -119,13 +121,25 @@ public class Uno : GameMode
 
     private bool TryEnd()
     {
-        if (!hand.IsEmpty) return false;
-        if (isPlayer) Score(opponent.hand.Cards.ToList());
-        dragon.Hop();
-        opponent.dragon.Sit();
+        if (!hand.IsEmpty && ticks < 5 && opponent.ticks < 5) return false;
+        HopOrSit();
+        opponent.HopOrSit();
         continueButton.Show();
         return true;
+    }
 
+    private void HopOrSit()
+    {
+        if (ticks < opponent.ticks)
+        {
+            dragon.Sit();
+            return;
+        }
+
+        if (isPlayer || ticks > opponent.ticks)
+        {
+            dragon.Hop();
+        }
     }
     
     private void RoundEnded()
@@ -140,7 +154,6 @@ public class Uno : GameMode
 
     public void Discard()
     {
-        Score(Pile.Cards);
         deck.Kill(Pile.Cards);
         Pile.Clear();
         sameOptions.Hide();
@@ -263,8 +276,8 @@ public class Uno : GameMode
 
     public override int AddStrikes()
     {
-        var total = hand.Cards.Count();
-        if(total == 0) Perfect();
+        var total = Mathf.Max(opponent.ticks - ticks, 0);
+        if(opponent.ticks == 0) Perfect();
         strikeDisplay.AddStrikes(total);
         return total;
     }
@@ -310,21 +323,25 @@ public class Uno : GameMode
         return hand.Cards.ToList().Count;
     }
 
-    private void Score(IReadOnlyCollection<Card> cards)
+    private void Score(Card card)
     {
-        var total = cards.Where(c => c && !c.IsRemoved).Sum(c => c.ScoreValue);
-        var multi = cards.Count;
-        ShowScore(total, multi, Pile.transform.position);
-        scoreDisplay.Add(total * multi);
+        var tickMulti = Mathf.Max(ticks - opponent.ticks, 0) + 1;
+        var total = card.ScoreValue * tickMulti * State.Instance.LevelMulti;
+        ShowScore(total, tickMulti, Pile.transform.position);
+        scoreDisplay.Add(total * tickMulti);
     }
 
     private void AddTick()
     {
         ticks++;
+        tickPulsater.Pulsate();
+        
+        if(!isPlayer) Shake(0.3f);
 
         if (ticks == 5)
         {
             tickLine.Show();
+            TryEnd();
             return;
         }
         
