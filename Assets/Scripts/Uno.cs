@@ -15,10 +15,13 @@ public class Uno : GameMode
     [SerializeField] private Transform turnIndicator, turnSpot;
     [SerializeField] private Appearer sameOptions, takeButton;
     [SerializeField] private NoteTrack noteTrack;
+    [SerializeField] private TMP_Text tickDisplay;
+    [SerializeField] private Appearer tickLine;
 
     private bool descending;
     private bool hasTurn;
     private bool dodged;
+    private int ticks;
 
     private Slot Pile => slots[0];
     private int EmptyValue => descending ? int.MaxValue : int.MinValue;
@@ -132,12 +135,6 @@ public class Uno : GameMode
 
     private void HandleSame()
     {
-        if (isPlayer)
-        {
-            sameOptions.Show();
-            return;
-        }
-        
         Flip();
     }
 
@@ -181,7 +178,9 @@ public class Uno : GameMode
             this.StartCoroutine(() =>
             {
                 helper.Tutorial.Show(TutorialMessage.UnoTake);
-                takeButton.Show();
+                helper.Tutorial.Show(TutorialMessage.UnoFlipped);
+                // takeButton.Show();
+                opponent.AddTick();
                 opponent.dragon.Hop();
             }, 1f);
         }
@@ -231,9 +230,10 @@ public class Uno : GameMode
             return;
         }
         
-        TakePile();
+        // TakePile();
         helper.Tutorial.Show(TutorialMessage.UnoTake);
         opponent.dragon.Hop();
+        opponent.AddTick();
     }
 
     private List<Card> GetOptions()
@@ -316,5 +316,19 @@ public class Uno : GameMode
         var multi = cards.Count;
         ShowScore(total, multi, Pile.transform.position);
         scoreDisplay.Add(total * multi);
+    }
+
+    private void AddTick()
+    {
+        ticks++;
+
+        if (ticks == 5)
+        {
+            tickLine.Show();
+            return;
+        }
+        
+        tickDisplay.text = new string('I', ticks);
+        Flip();
     }
 }

@@ -62,10 +62,11 @@ public class Dragon : MonoBehaviour
             TutorialMessage.ExtraWeights => "Notice that (extra weight) over there! It might make this a wee bit (trickier).",
             TutorialMessage.UnoInfo => "You're playing against my (evil twin brother) now. Just keep playing (bigger cards) than the previous.",
             TutorialMessage.UnoSame => "You can (always) also play a card of the (same value).",
-            TutorialMessage.UnoChoice => "Playing (same value) allows you to (reverse) the direction or (discard) the whole played stack.",
+            TutorialMessage.UnoChoice => "Playing the (same value) card reverses the playing (direction).",
             TutorialMessage.UnoFlip => "So now you gotta keep playing (smaller cards) than your opponent.",
-            TutorialMessage.UnoTake => "If you (can't play) anything, you have to (take the stack) to your hand.",
-            TutorialMessage.UnoWinner => "Whoever runs (out of cards) first (wins)!",
+            TutorialMessage.UnoTake => "If you (can't play) anything, your opponent gains a (tick).",
+            TutorialMessage.UnoFlipped => "Then the playing (direction) is (reversed) and you go again.",
+            TutorialMessage.UnoWinner => "Try to gain more (ticks) than your opponent before either deck ends to (win)!",
             TutorialMessage.RewardIntro => "You can (pick three) new (additions) or (modifications) to your deck.",
             TutorialMessage.ModInfo => "Pick (which card) you want to be (affected) by this (modification).",
             TutorialMessage.FishIntro => "Pick (a card) and its (surrounding cards) that (add) or (subtract) to the (same value).",
@@ -166,5 +167,6 @@ public enum TutorialMessage
     ModInfo,
     FishIntro,
     SkillPick,
-    Slotting
+    Slotting,
+    UnoFlipped
 }
