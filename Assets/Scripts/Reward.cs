@@ -8,6 +8,7 @@ using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Reward : GameMode
@@ -17,6 +18,7 @@ public class Reward : GameMode
     [SerializeField] private Transform contentStart;
     [SerializeField] private Appearer phoneButton;
     [SerializeField] private TMP_Text pickLabel;
+    [SerializeField] private RectTransform pickBg;
 
     private Card modifier;
     private int picks = 3;
@@ -39,7 +41,7 @@ public class Reward : GameMode
             this.StartCoroutine(() => phoneButton.Show(), 0.5f);
         }
         
-        pickLabel.text = $"Pick <color=#CDE7B0>{picks}</color> new cards...";
+        SetPickText($"Pick <color=#CDE7B0>{picks}</color> new cards...");
     }
 
     private void LateUpdate()
@@ -165,6 +167,7 @@ public class Reward : GameMode
                 MoveDeck();
 
                 hand.Clear();
+                pickBg.gameObject.SetActive(false);
 
                 if (skill.effect == Effect.CardInstead)
                 {
@@ -219,12 +222,12 @@ public class Reward : GameMode
     {
         picks--;
         var term = picks == 1 ? "card" : "cards";
-        pickLabel.text = $"Pick <color=#CDE7B0>{picks}</color> more {term}...";
+        SetPickText($"Pick <color=#CDE7B0>{picks}</color> more {term}...");
         
         if (picks == 0 || hand.IsEmpty)
         {
-            pickLabel.text = $"Pick a <color=#CDE7B0>skill</color> addition...";
-            
+            SetPickText("Pick a <color=#CDE7B0>skill</color> addition...");
+
             if (picked)
             {
                 hand.Clear();
@@ -233,6 +236,12 @@ public class Reward : GameMode
             }
             ShowSkills();
         }
+    }
+
+    private void SetPickText(string text)
+    {
+        pickLabel.text = text;
+        LayoutRebuilder.ForceRebuildLayoutImmediate(pickBg);
     }
 
     private void NextLevel()

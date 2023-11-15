@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 52615
+  controlID: 53875
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52688
+  controlID: 53992
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,8 +162,8 @@ MonoBehaviour:
     y: 0
     width: 1141
     height: 615
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 5}
   m_Panes:
   - {fileID: 5}
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52616
+  controlID: 53876
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -869,7 +869,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f832eeffa2fef0ff4605f1ff100cf1ffae11f1ff06edf1ff824df4ff864df4ff8a4df4ff4253f4ffce5bf4ff6a61f4ffc608f6ff76cbf6ff78cbf6ff7ccbf6ff80cbf6ff48d3f6ff00d5f6ff0ed5f6ff52d7f6ff60d7f6ff68d7f6ffdcd7f6ff16d8f6ff58d8f6ff5ed8f6ff62d8f6ff68d8f6ffb6d8f6ffc4d8f6ffccd8f6ff7ad9f6ff44dff6ff50dff6ff98dff6ff84ebf6ff86ebf6ff8aebf6ff8eebf6ff64f1f6ff6401f7ff7201f7ff7a01f7ff8601f7ffce01f7ff6a07f7ff640df7ff1c06f9ff382ff9ff1635f9ff483df9ff1c57f9ffec5cf9ff0867f9ff046ef9ff10adf9ffceb2f9ff8217faff4e57fbffd4f6ffff0ef7ffff50f7ffff56f7ffff5af7ffff80f7ffffacf7ffff06f8ffff04fbffff8e700000ea7000001671000050710000cc710000b4840200e88402008eed0200cced0200feee020032ef0200ceef02000cf002008af10200dcf1020090f60200cef60200eef7020004f8020038f8020044f80200faf8020046f90200781803003c190300d48f030024900300de900300ac9103004a0a0400de0a0400a60d04003c3b04007a3b0400b03c0400e43c04006a3e0400bc3e040076400400c6400400
+      m_ExpandedIDs: f832eeffa2fef0ff4605f1ff100cf1ffae11f1ff06edf1ff824df4ff864df4ff8a4df4ff4253f4ffce5bf4ff6a61f4ffc608f6ff76cbf6ff78cbf6ff7ccbf6ff80cbf6ff48d3f6ff00d5f6ff0ed5f6ff52d7f6ff60d7f6ff68d7f6ffdcd7f6ff16d8f6ff58d8f6ff5ed8f6ff62d8f6ff68d8f6ffb6d8f6ffc4d8f6ffccd8f6ff7ad9f6ff44dff6ff50dff6ff98dff6ff84ebf6ff86ebf6ff8aebf6ff8eebf6ff64f1f6ff6401f7ff7201f7ff7a01f7ff8601f7ffce01f7ff6a07f7ff640df7ff1c06f9ff382ff9ff1635f9ff483df9ff1c57f9ffec5cf9ff0867f9ff046ef9ff10adf9ffceb2f9ff8217faff4e57fbffd4f6ffff0ef7ffff50f7ffff56f7ffff5af7ffff80f7ffffacf7ffff06f8ffff04fbffff8e700000ea7000001671000050710000cc710000b4840200e88402008eed0200cced0200feee020032ef0200ceef02000cf002008af10200dcf1020090f60200cef60200eef7020004f8020038f8020044f80200faf8020046f90200781803003c190300d48f030024900300de900300ac9103004a0a0400de0a0400a60d04003c3b04007a3b0400b03c0400e43c04006a3e0400bc3e040076400400c640040082bc040010bd040056bd0400b4bd0400
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1035,8 +1035,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 1113.7473}
-    m_SelectedIDs: 6e420700
-    m_LastClickedID: 475758
+    m_SelectedIDs: 
+    m_LastClickedID: 0
     m_ExpandedIDs: ffffffff00000000827a0000847a0000867a0000887a00008c7a00008e7a0000907a0000947a0000967a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1062,8 +1062,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 6e420700
-    m_LastClickedInstanceID: 475758
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52593
+  controlID: 53962
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1232,7 +1232,7 @@ MonoBehaviour:
     m_CachedPref: -252
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 475758
+  m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

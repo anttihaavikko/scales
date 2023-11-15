@@ -2950,6 +2950,7 @@ MonoBehaviour:
   contentStart: {fileID: 1889173589}
   phoneButton: {fileID: 519607859}
   pickLabel: {fileID: 1169806290}
+  pickBg: {fileID: 1723804057}
 --- !u!1 &986473510
 GameObject:
   m_ObjectHideFlags: 0
