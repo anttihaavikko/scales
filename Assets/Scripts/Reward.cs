@@ -24,6 +24,7 @@ public class Reward : GameMode
     private int picks = 3;
     private bool picked;
     private int page;
+    private List<Card> cardOptions = new();
     
     private const int PerRow = 12;
     private const int PageSize = PerRow * 2;
@@ -86,6 +87,7 @@ public class Reward : GameMode
             option.transform.position = new Vector3(0, -5, 0);
             option.Detach();
             options.Add(option);
+            cardOptions.Add(option);
             var data = fixedOptions.Any() ? fixedOptions.FirstOrDefault() : CardData.GetRandom();
             fixedOptions.Remove(data);
             option.Setup(data, deck);
@@ -112,6 +114,7 @@ public class Reward : GameMode
                     return;
                 }
 
+                cardOptions.Remove(option);
                 option.Pop();
                 hand.Remove(option);
                 deck.AddCard(data);
@@ -226,6 +229,7 @@ public class Reward : GameMode
         
         if (picks == 0 || hand.IsEmpty)
         {
+            cardOptions.ForEach(c => State.Instance.AddForOpponent(c.GetData()));
             SetPickText("Pick a <color=#CDE7B0>skill</color> addition...");
 
             if (picked)

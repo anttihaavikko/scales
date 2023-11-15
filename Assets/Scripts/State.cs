@@ -9,6 +9,7 @@ using UnityEngine;
 public class State : Manager<State>
 {
     private readonly List<CardData> cards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
+    private readonly List<CardData> opponentCards = new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList();
     private readonly List<Skill> skills = new();
     private MessageHistory messageHistory;
     private List<HistoryMessage> messages;
@@ -21,6 +22,7 @@ public class State : Manager<State>
     public int HeldMulti { get; set; } = 1;
 
     public IEnumerable<CardData> Cards => cards;
+    public IEnumerable<CardData> OpponentCards => opponentCards;
     public IEnumerable<Skill> Skills => skills;
 
     private void Start()
@@ -73,6 +75,20 @@ public class State : Manager<State>
         if (DevKey.Down(KeyCode.Alpha2)) SceneChanger.Instance.ChangeScene("Scale");
         if (DevKey.Down(KeyCode.Alpha3)) SceneChanger.Instance.ChangeScene("Uno");
         if (DevKey.Down(KeyCode.Alpha4)) SceneChanger.Instance.ChangeScene("Fish");
+    }
+
+    public void AddForOpponent(CardData card)
+    {
+        if (card.modifier == CardModifier.None)
+        {
+            opponentCards.Add(card);
+            return;
+        }
+
+        var target = opponentCards.Where(c => c.CanBeModified).ToList().Random();
+        opponentCards.Remove(target);
+        target.Modify(card);
+        opponentCards.Add(target);
     }
 
     public void Add(CardData card)

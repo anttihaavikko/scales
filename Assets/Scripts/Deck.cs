@@ -10,6 +10,7 @@ public class Deck : MonoBehaviour
 {
     [SerializeField] private Card cardPrefab;
     [SerializeField] private GameMode gameMode;
+    [SerializeField] private bool isEnemy;
 
     private readonly List<Card> cards = new();
 
@@ -22,7 +23,8 @@ public class Deck : MonoBehaviour
 
     private void Start()
     {
-        State.Instance.Cards.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).Reverse().ToList().ForEach(AddCard);
+        var deck = isEnemy ? State.Instance.OpponentCards : State.Instance.Cards;
+        deck.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).Reverse().ToList().ForEach(AddCard);
         gameMode.Setup();
     }
 

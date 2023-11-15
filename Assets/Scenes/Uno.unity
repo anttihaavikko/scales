@@ -1034,6 +1034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   gameMode: {fileID: 286923758}
+  isEnemy: 1
 --- !u!4 &286923757
 Transform:
   m_ObjectHideFlags: 0
@@ -2376,6 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   gameMode: {fileID: 980671927}
+  isEnemy: 0
 --- !u!114 &980671927
 MonoBehaviour:
   m_ObjectHideFlags: 0
