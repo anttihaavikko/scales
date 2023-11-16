@@ -119,7 +119,7 @@ public abstract class GameMode : MonoBehaviour
         return true;
     }
 
-    protected void PlayGenericInstant(Card card)
+    protected void PlayGenericInstant(Card card, bool isPlayer = true)
     {
         var p = card.transform.position;
         
@@ -136,7 +136,8 @@ public abstract class GameMode : MonoBehaviour
 
         if (card.Is(CardType.Lotus))
         {
-            var size = GetHandSize();
+            var multi = isPlayer ? 1 : -1;
+            var size = GetHandSize() * multi;
             scoreDisplay.Add(30 * card.Multiplier * size * State.Instance.LevelMulti);
             ShowScore(30 * size, card.Multiplier, p);
             scoreDisplay.ResetMulti();

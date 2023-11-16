@@ -233,6 +233,16 @@ public class Uno : GameMode
 
     private void DoMove()
     {
+        if (hand.Cards.Any(c => c.IsPlayable))
+        {
+            var pick = hand.Cards.First(c => c.IsPlayable);
+            pick.MoveTo(pick.transform.position + Vector3.down * 0.5f);
+            dragon.Nudge();
+            this.StartCoroutine(() => PlayInstant(pick), 0.5f);
+            Invoke(nameof(DoMove), 1.5f);
+            return;
+        }
+        
         var options = GetOptions();
         if (options.Any())
         {
@@ -296,7 +306,7 @@ public class Uno : GameMode
             hand.Draw();
         }
         
-        PlayGenericInstant(card);
+        PlayGenericInstant(card, isPlayer);
         
         if (card.Is(CardType.Averager))
         {
