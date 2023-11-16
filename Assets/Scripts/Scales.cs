@@ -14,6 +14,7 @@ public class Scales : GameMode
 
     private int leftMass = 1;
     private int rightMass = 1;
+    private int trueJokerValue;
 
     public override void Setup()
     {
@@ -51,8 +52,17 @@ public class Scales : GameMode
         card.ChangeSelection(state);
     }
 
+    private void UpdateTrueJokerFor(Slot slot)
+    {
+        var isLeft = slot == slots[0];
+        var leftSum = slots[0].Sum * leftMass;
+        var rightSum = slots[1].Sum * rightMass;
+        trueJokerValue = isLeft ? (rightSum - leftSum) / leftMass : (leftSum - rightSum) / rightMass;
+    }
+
     public override void DropToSlot(Card card, Slot slot)
     {
+        UpdateTrueJokerFor(slot);
         card.transform.SetParent(null);
         card.Flatten();
         
@@ -202,6 +212,11 @@ public class Scales : GameMode
     public override int GetHandSize()
     {
         return hand.Cards.ToList().Count;
+    }
+
+    public override int GetTrueJokerValue()
+    {
+        return trueJokerValue;
     }
 
     protected override void ReSelect()

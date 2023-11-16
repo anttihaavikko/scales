@@ -207,6 +207,7 @@ public class Mountain : GameMode
     
     public override bool CanCombine(Card first, Card second)
     {
+        if (first.IsTrueJoker || second.IsTrueJoker) return true;
         return Operate(first.Number, second.Number);
     }
 
@@ -286,6 +287,11 @@ public class Mountain : GameMode
         return 0;
     }
 
+    public override int GetTrueJokerValue()
+    {
+        return target;
+    }
+
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
     {
         if (index < 0) return;
@@ -306,9 +312,8 @@ public class Mountain : GameMode
     {
         var selected = deck.Cards.Where(c => c.IsSelected && !c.IsRemoved).ToList();
         var numbers = selected.Select(c => c.Number).ToList();
-        var sum = numbers.Sum();
-        
-        if (CanCalcTo(numbers, target, true))
+
+        if (selected.Any(c => c.IsTrueJoker) || CanCalcTo(numbers, target, true))
         {
             selected.ForEach(c => c.Pop());
             Score(selected);
@@ -324,7 +329,7 @@ public class Mountain : GameMode
         var numbers = selected.Select(c => c.Number).ToList();
         var sum = numbers.Sum();
         
-        if (CanCalcTo(numbers, target, true))
+        if (selected.Any(c => c.IsTrueJoker) || CanCalcTo(numbers, target, true))
         {
             selected.ForEach(c => c.Pop());
             Score(selected);

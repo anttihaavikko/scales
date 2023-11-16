@@ -353,6 +353,11 @@ public class Reward : GameMode
         return hand.Cards.ToList().Count;
     }
 
+    public override int GetTrueJokerValue()
+    {
+        return 0;
+    }
+
     protected override void ReSelect()
     {
     }

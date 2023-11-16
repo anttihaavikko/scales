@@ -55,8 +55,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public Action click;
 
     public bool IsSelected => selected;
-    public int Number => IsJoker ? deck.GetTotal() : number;
-    public int ScoreValue => (IsJoker ? deck.GetTotal() : number) * stats.multiplier * GetExtraMultipliers();
+    public int Number => GetNumberValue();
+    public int ScoreValue => Mathf.Abs(GetScoreValue());
     public bool IsRemoved => removed;
     public bool IsCovered => covers.Any(c => c != default && !c.removed);
     public bool IsModifier => stats.modifier != CardModifier.None;
@@ -76,6 +76,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public int Multiplier => stats.multiplier;
     public bool IsDuplicator => stats.modifier == CardModifier.Duplicator;
     public bool IsTimer => stats.type == CardType.Timer;
+    public bool IsTrueJoker => cardType == CardType.TrueJoker;
 
     private int GetSortValue()
     {
@@ -419,6 +420,19 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
         if (Number % 2 == 0) multi *= 1 + State.Instance.GetCount(Effect.EvenScorer);
         return multi;
     }
+    
+    private int GetScoreValue()
+    {
+        var baseValue = IsJoker ? deck.GetTotal() : number;
+        if (IsTrueJoker) baseValue = deck.GetTrueJokerValue();
+        return baseValue * stats.multiplier * GetExtraMultipliers();
+    }
+    
+    private int GetNumberValue()
+    {
+        if (IsTrueJoker) return deck.GetTrueJokerValue();
+        return IsJoker ? deck.GetTotal() : number;
+    }
 }
 
 public enum CardModifier
@@ -443,5 +457,6 @@ public enum CardType
     Averager,
     Kill,
     Lotus,
-    Mox
+    Mox,
+    TrueJoker
 }

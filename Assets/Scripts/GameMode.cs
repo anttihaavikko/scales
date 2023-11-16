@@ -188,7 +188,7 @@ public abstract class GameMode : MonoBehaviour
 
     public int GetJokerValue()
     {
-        return GetVisibleCards().Where(c => !c.IsJoker).Sum(c => c.Number);
+        return GetVisibleCards().Where(c => !c.IsJoker && !c.IsTrueJoker).Sum(c => c.Number);
     }
 
     protected void Perfect()
@@ -226,7 +226,8 @@ public abstract class GameMode : MonoBehaviour
     public abstract int AddStrikes();
     public abstract void PlayInstant(Card card);
     public abstract IReadOnlyCollection<Card> GetVisibleCards();
-    public abstract int GetHandSize(); 
+    public abstract int GetHandSize();
+    public abstract int GetTrueJokerValue();
 
     public void Shake(float amount)
     {

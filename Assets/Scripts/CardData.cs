@@ -20,7 +20,7 @@ public class CardData
     public bool isInitialized;
     public Vector2 cheatPos;
 
-    public bool CanBeModified => type is not CardType.Recall or CardType.Averager or CardType.Kill;
+    public bool CanBeModified => type is not CardType.Recall or CardType.Averager or CardType.Kill or CardType.TrueJoker;
 
     public CardData(int value)
     {
@@ -114,12 +114,13 @@ public class CardData
             new CardData(99),
             new CardData(Random.Range(1, 99)),
             new CardData(Random.Range(1, 20)),
-            new CardData(CardType.Joker) { sort = 998 },
+            new CardData(CardType.Joker) { sort = 994 },
             new CardData(CardType.Timer) { icon = 3 },
             new CardData(CardType.Recall) { icon = 4, playable = true, sort = 999 },
-            new CardData(CardType.Averager) { icon = 5, playable = true, sort = 997 },
-            new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 996 },
+            new CardData(CardType.Averager) { icon = 5, playable = true, sort = 998 },
+            new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 997 },
             GetRandomGem(),
+            new CardData(CardType.TrueJoker) { icon = 12, sort = 995 },
         }.Random();
     }
 
@@ -207,6 +208,7 @@ public class CardData
             CardType.Kill => "Death",
             CardType.Lotus => "Dark Blossom",
             CardType.Mox => $"Mox {GetNameSuffix()}",
+            CardType.TrueJoker => "True Joker",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -219,9 +221,13 @@ public class CardData
 
     public List<TooltipExtra> GetExtras()
     {
-        if (type == CardType.Kill) return new List<TooltipExtra> { TooltipExtra.Strike };
-        if (type == CardType.Mox) return new List<TooltipExtra> { TooltipExtra.Basic };
-        return new List<TooltipExtra>();
+        return type switch
+        {
+            CardType.Kill => new List<TooltipExtra> { TooltipExtra.Strike },
+            CardType.Mox => new List<TooltipExtra> { TooltipExtra.Basic },
+            CardType.TrueJoker => new List<TooltipExtra> { TooltipExtra.Joker },
+            _ => new List<TooltipExtra>()
+        };
     }
     
     public string GetDescription(int value = 0)
@@ -257,11 +263,12 @@ public class CardData
             CardType.Kill => ExtraInfo.GetDescription(TooltipExtra.Death),
             CardType.Lotus => "Instantly gain (30 points) for each card in your hand. Resets the (multiplier) afterwards.",
             CardType.Mox => ExtraInfo.GetDescription(TooltipExtra.Gem),
+            CardType.TrueJoker => "Not like other (jokers). The (value) is always what it (needs to be).",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
-    public static CardData GetRandomGem()
+    private static CardData GetRandomGem()
     {
         return new CardData(Random.Range(1, 6))
         {

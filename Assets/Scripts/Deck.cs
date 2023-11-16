@@ -98,4 +98,9 @@ public class Deck : MonoBehaviour
     {
         gameMode.Shake(amount);
     }
+
+    public int GetTrueJokerValue()
+    {
+        return gameMode.GetTrueJokerValue();
+    }
 }

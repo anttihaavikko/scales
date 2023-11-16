@@ -71,7 +71,7 @@ public class Uno : GameMode
 
     private void Play(Card card)
     {
-        var isSame = card.Number == PileValue;
+        var isSame = card.IsTrueJoker || card.Number == PileValue;
         
         dragon.Nudge();
         
@@ -271,7 +271,7 @@ public class Uno : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return !opponent.hand.IsEmpty && CanPlay(card.Number);
+        return !opponent.hand.IsEmpty && (card.IsTrueJoker || CanPlay(card.Number));
     }
 
     public override int AddStrikes()
@@ -321,6 +321,15 @@ public class Uno : GameMode
     public override int GetHandSize()
     {
         return hand.Cards.ToList().Count;
+    }
+
+    public override int GetTrueJokerValue()
+    {
+        var values = GetVisibleCards()
+            .Where(c => !c.IsTrueJoker && !c.IsJoker)
+            .Select(c => c.Number)
+            .Concat(new []{ 0 }).ToArray();
+        return Mathf.Clamp(PileValue, Mathf.Min(values), Mathf.Max(values));
     }
 
     protected override void ReSelect()

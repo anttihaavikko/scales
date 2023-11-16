@@ -106,7 +106,7 @@ public class Fish : GameMode
         var target = root.Number;
         var numbers = others.Select(c => c.Number).ToList();
 
-        if (CanAddTo(numbers, target, true) || CanSubTo(numbers, target, true))
+        if (selected.Any(c => c.IsTrueJoker) || CanAddTo(numbers, target, true) || CanSubTo(numbers, target, true))
         {
             Score(selected);
             lanes.ForEach(l => l.Remove(selected));
@@ -220,5 +220,10 @@ public class Fish : GameMode
     public override int GetHandSize()
     {
         return 0;
+    }
+
+    public override int GetTrueJokerValue()
+    {
+        return selected.Where(c => !c.IsTrueJoker && !c.IsJoker).Sum(c => c.Number);
     }
 }
