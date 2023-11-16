@@ -119,6 +119,14 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
             numberLabel.transform.localPosition = new Vector3(0, 0.075f, 0);
             numberLabel.text = data.GetPrefix() + number;
         }
+        
+        if (stats.type == CardType.Pedometer)
+        {
+            numberLabel.fontSizeMax = 2.5f;
+            numberLabel.transform.localPosition = new Vector3(0, 0.35f, 0);
+            numberLabel.text = data.GetPrefix() + number;
+        }
+        
         cheatLabels[0].transform.localPosition = data.cheatPos;
         cheatLabels.ForEach(t => t.text = data.cheat ? numberLabel.text : "");
         cheatIcon.SetActive(stats.cheat);
@@ -133,6 +141,15 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
         back.gameObject.SetActive(true);
 
         StartTimer();
+    }
+
+    public void IncreaseNumber()
+    {
+        if (cardType != CardType.Pedometer) return;
+        var data = State.Instance.GetCard(Id);
+        data.number++;
+        Setup(data, deck);
+        Flip();
     }
     
     public void Setup(Skill skill, Deck d)
@@ -430,6 +447,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     
     private int GetNumberValue()
     {
+        if (cardType == CardType.MultiValue) return deck.GetMultiplier();
         if (IsTrueJoker) return deck.GetTrueJokerValue();
         return IsJoker ? deck.GetTotal() : number;
     }
@@ -458,5 +476,7 @@ public enum CardType
     Kill,
     Lotus,
     Mox,
-    TrueJoker
+    TrueJoker,
+    Pedometer,
+    MultiValue
 }

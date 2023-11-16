@@ -103,4 +103,9 @@ public class Deck : MonoBehaviour
     {
         return gameMode.GetTrueJokerValue();
     }
+
+    public int GetMultiplier()
+    {
+        return gameMode.GetMultiplier();
+    }
 }

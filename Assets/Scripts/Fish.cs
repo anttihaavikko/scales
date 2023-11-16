@@ -159,6 +159,7 @@ public class Fish : GameMode
         slot.Add(card);
         card.MoveTo(slot.GetPosition());
         card.Lift();
+        card.IncreaseNumber();
     }
 
     public override bool CanCombine(Card first, Card second)

@@ -203,6 +203,8 @@ public abstract class GameMode : MonoBehaviour
 
     protected void AfterPlay(Card card)
     {
+        card.IncreaseNumber();
+        
         var heals = State.Instance.GetCount(Effect.JokerHeal);
         if (card.IsJoker && heals > 0)
         {
@@ -235,4 +237,9 @@ public abstract class GameMode : MonoBehaviour
     }
 
     protected abstract void ReSelect();
+
+    public int GetMultiplier()
+    {
+        return scoreDisplay.Multi;
+    }
 }

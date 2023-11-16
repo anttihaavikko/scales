@@ -282,8 +282,9 @@ public class Reward : GameMode
 
         if (first.IsDuplicator)
         {
-            State.Instance.Add(data);
-            deck.AddCard(data);
+            var dupe = new CardData(data) { id = Guid.NewGuid() };
+            State.Instance.Add(dupe);
+            deck.AddCard(dupe);
             MoveDeck();
         }
         data.Modify(first.GetData());

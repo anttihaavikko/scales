@@ -193,6 +193,7 @@ public class Mountain : GameMode
         card.Lift();
         deck.Cards.ToList().ForEach(c => c.RemoveCover(card));
         FlipCards();
+        card.IncreaseNumber();
     }
 
     private bool Operate(int a, int b)

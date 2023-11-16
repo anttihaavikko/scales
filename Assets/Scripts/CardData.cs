@@ -20,7 +20,7 @@ public class CardData
     public bool isInitialized;
     public Vector2 cheatPos;
 
-    public bool CanBeModified => type is not CardType.Recall or CardType.Averager or CardType.Kill or CardType.TrueJoker;
+    public bool CanBeModified => type is not CardType.Recall or CardType.Averager or CardType.Kill;
 
     public CardData(int value)
     {
@@ -121,6 +121,8 @@ public class CardData
             new CardData(CardType.Lotus) { icon = 8, playable = true, sort = 997 },
             GetRandomGem(),
             new CardData(CardType.TrueJoker) { icon = 12, sort = 995 },
+            new CardData(CardType.Pedometer) { icon = 13, sort = 99, number = 1 },
+            new CardData(CardType.MultiValue) { icon = 14, sort = 993 },
         }.Random();
     }
 
@@ -209,6 +211,8 @@ public class CardData
             CardType.Lotus => "Dark Blossom",
             CardType.Mox => $"Mox {GetNameSuffix()}",
             CardType.TrueJoker => "True Joker",
+            CardType.Pedometer => "Pedometer",
+            CardType.MultiValue => "Valuenator",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
@@ -264,6 +268,8 @@ public class CardData
             CardType.Lotus => "Instantly gain (30 points) for each card in your hand. Resets the (multiplier) afterwards.",
             CardType.Mox => ExtraInfo.GetDescription(TooltipExtra.Gem),
             CardType.TrueJoker => "Not like other (jokers). The (value) is always what it (needs to be).",
+            CardType.Pedometer => "Permanently (increase the value) of this (card) by one every time you (play) it.",
+            CardType.MultiValue => "The (value) of this (card) is always equal to your (multiplier).",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
