@@ -17,5 +17,8 @@ MonoBehaviour:
     title: Shield
     description: Always (ignore) one given (strike) per level.
     icon: {fileID: -1155410211, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
-    allowedRepeats: 2
+    allowedRepeats: 1
     extras: 01000000
+    minValue: 0
+    maxValue: 0
+    value: 0
