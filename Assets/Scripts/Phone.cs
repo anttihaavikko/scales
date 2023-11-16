@@ -15,7 +15,8 @@ public class Phone : MonoBehaviour
     [SerializeField] private RectTransform container;
     [SerializeField] private ScrollRect scrollView;
     [SerializeField] private Reward reward;
-    
+    [SerializeField] private Dragon dragon;
+
     private bool loaded;
 
     private void Start()
@@ -30,6 +31,8 @@ public class Phone : MonoBehaviour
 
     public void Show()
     {
+        dragon.Tutorial.Show(TutorialMessage.Phone);
+        
         if (!loaded)
         {
             loaded = true;

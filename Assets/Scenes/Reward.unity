@@ -2254,6 +2254,7 @@ MonoBehaviour:
   container: {fileID: 1639899564}
   scrollView: {fileID: 573924314}
   reward: {fileID: 980671927}
+  dragon: {fileID: 1745293635}
 --- !u!1001 &650983270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2919,6 +2920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   gameMode: {fileID: 980671927}
+  isEnemy: 0
 --- !u!114 &980671927
 MonoBehaviour:
   m_ObjectHideFlags: 0

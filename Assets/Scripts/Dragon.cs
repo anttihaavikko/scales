@@ -72,6 +72,7 @@ public class Dragon : MonoBehaviour
             TutorialMessage.FishIntro => "Pick (a card) and its (surrounding cards) that (add) or (subtract) to the (same value).",
             TutorialMessage.SkillPick => "Also pick (a new skill) to (enhance) your abilities to survive.",
             TutorialMessage.Slotting => "Moving cards to (empty slots) resets your (multiplier) so don't do it all (willy-nilly).",
+            TutorialMessage.Phone => "Are you (sure) you should be (reading) other peoples (messages)?",
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
@@ -168,5 +169,6 @@ public enum TutorialMessage
     FishIntro,
     SkillPick,
     Slotting,
-    UnoFlipped
+    UnoFlipped,
+    Phone
 }
