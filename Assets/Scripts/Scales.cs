@@ -203,4 +203,8 @@ public class Scales : GameMode
     {
         return hand.Cards.ToList().Count;
     }
+
+    protected override void ReSelect()
+    {
+    }
 }

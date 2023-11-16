@@ -85,6 +85,7 @@ public class Mountain : GameMode
         });
 
         FlipCards();
+        TriggerSelect();
     }
 
     private static int GetRowCount(int count)
@@ -299,6 +300,22 @@ public class Mountain : GameMode
     private static int GetRow(int index)
     {
         return Mathf.FloorToInt((-1 + Mathf.Sqrt(1 + 8 * index)) / 2);
+    }
+    
+    protected override void ReSelect()
+    {
+        var selected = deck.Cards.Where(c => c.IsSelected && !c.IsRemoved).ToList();
+        var numbers = selected.Select(c => c.Number).ToList();
+        var sum = numbers.Sum();
+        
+        if (CanCalcTo(numbers, target, true))
+        {
+            selected.ForEach(c => c.Pop());
+            Score(selected);
+            deck.Kill(selected);
+        }
+
+        FlipCards();
     }
     
     public override void Select(Card card)

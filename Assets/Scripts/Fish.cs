@@ -21,6 +21,8 @@ public class Fish : GameMode
         {
             slots[0].gameObject.SetActive(true);
         }
+        
+        TriggerSelect();
     }
 
     private void ClickSlot(Slot slot)
@@ -93,6 +95,11 @@ public class Fish : GameMode
         }
         selected.Add(card);
 
+        ReSelect();
+    }
+
+    protected override void ReSelect()
+    {
         if (!root) return;
 
         var others = selected.Where(c => c != root).ToList();

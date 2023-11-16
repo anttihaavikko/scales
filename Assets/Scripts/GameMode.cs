@@ -86,6 +86,16 @@ public abstract class GameMode : MonoBehaviour
             State.Instance.RoundEnded(scoreDisplay.Total);
         }, delay);
     }
+    
+    protected void TriggerSelect()
+    {
+        var selected = GetVisibleCards().Where(c => c.IsSelected).ToList();
+        if (selected.Any(c => c.IsTimer))
+        {
+            ReSelect();
+        }
+        Invoke(nameof(TriggerSelect), 1f);
+    }
 
     protected void DeselectAll()
     {
@@ -222,4 +232,6 @@ public abstract class GameMode : MonoBehaviour
     {
         effectCamera.BaseEffect(amount);
     }
+
+    protected abstract void ReSelect();
 }

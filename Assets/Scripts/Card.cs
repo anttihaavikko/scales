@@ -75,6 +75,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public List<TooltipExtra> Extras => stats.GetExtras();
     public int Multiplier => stats.multiplier;
     public bool IsDuplicator => stats.modifier == CardModifier.Duplicator;
+    public bool IsTimer => stats.type == CardType.Timer;
 
     private int GetSortValue()
     {

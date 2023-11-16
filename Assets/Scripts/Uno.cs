@@ -323,6 +323,10 @@ public class Uno : GameMode
         return hand.Cards.ToList().Count;
     }
 
+    protected override void ReSelect()
+    {
+    }
+
     private void Score(Card card)
     {
         var tickMulti = Mathf.Max(ticks - opponent.ticks, 0) + 1;

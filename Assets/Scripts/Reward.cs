@@ -353,6 +353,10 @@ public class Reward : GameMode
         return hand.Cards.ToList().Count;
     }
 
+    protected override void ReSelect()
+    {
+    }
+
     public void PhoneScore()
     {
         scoreDisplay.Add(1000 * State.Instance.LevelMulti);
