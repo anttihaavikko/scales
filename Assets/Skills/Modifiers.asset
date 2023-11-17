@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
     effect: 8
-    title: Modifiers
+    title: Tinkerer
     description: Always include one (modifier card) in the (reward options).
-    icon: {fileID: 477116835, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
+    icon: {fileID: 1468604142, guid: 729a8cc29866240d29c9a75f3b044085, type: 3}
     allowedRepeats: 0
     extras: 04000000
+    minValue: 0
+    maxValue: 0
+    value: 0
