@@ -3395,7 +3395,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 318232597}
   m_HandleRect: {fileID: 318232596}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -6296,6 +6296,10 @@ PrefabInstance:
       propertyPath: tooltip
       value: 
       objectReference: {fileID: 954880948}
+    - target: {fileID: 104256246121729305, guid: b9e356657de634ec8a5ffab943aa44ee, type: 3}
+      propertyPath: zoomLimit
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 104256246121729308, guid: b9e356657de634ec8a5ffab943aa44ee, type: 3}
       propertyPath: m_Name
       value: Skills

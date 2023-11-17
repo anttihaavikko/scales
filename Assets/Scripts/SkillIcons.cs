@@ -6,6 +6,9 @@ public class SkillIcons : MonoBehaviour
 {
     [SerializeField] private SkillIcon prefab;
     [SerializeField] private Tooltip tooltip;
+    [SerializeField] private int zoomLimit = 32;
+    
+    private int count;
 
     private void Start()
     {
@@ -16,5 +19,11 @@ public class SkillIcons : MonoBehaviour
     {
         var icon = Instantiate(prefab, transform);
         icon.Setup(skill, tooltip);
+        count++;
+
+        if (count > zoomLimit)
+        {
+            transform.localScale = Vector3.one * 0.5f;
+        }
     }
 }
