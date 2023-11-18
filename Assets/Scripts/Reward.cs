@@ -95,7 +95,7 @@ public class Reward : GameMode
             option.Nudge();
             option.Flip();
 
-            option.picked += () => deckBorders.enabled = true;
+            option.picked += () => deckBorders.enabled = !option.IsModifier;
             option.dropped += () => deckBorders.enabled = false;
 
             option.click += () =>
