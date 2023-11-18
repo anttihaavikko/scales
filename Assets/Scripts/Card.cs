@@ -36,6 +36,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     [SerializeField] private GameObject modifier;
     [SerializeField] private SpriteRenderer cheatMarkIcon;
     [SerializeField] private GameObject cheatMarkBg;
+    [SerializeField] private GameObject trail;
 
     private Guid id;
     private bool wasSelected;
@@ -458,6 +459,11 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
         if (cardType == CardType.MultiValue) return deck.GetMultiplier();
         if (IsTrueJoker) return deck.GetTrueJokerValue();
         return IsJoker ? deck.GetTotal() : number;
+    }
+
+    public void ToggleTrail(bool state)
+    {
+        trail.SetActive(state);
     }
 }
 

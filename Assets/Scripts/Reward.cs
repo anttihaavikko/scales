@@ -223,6 +223,7 @@ public class Reward : GameMode
         var cards = deck.Cards.Where(c => !c.IsUsed).OrderByDescending(c => c.SortValue).ToList();
         cards.ForEach(c =>
         {
+            c.ToggleTrail(false);
             var shown = index >= page * PageSize && index < (page + 1) * PageSize;
             c.Flip();
             c.Detach();

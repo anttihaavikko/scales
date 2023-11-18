@@ -220,6 +220,7 @@ MonoBehaviour:
   modifier: {fileID: 1658665145729226744}
   cheatMarkIcon: {fileID: 4195071486641643832}
   cheatMarkBg: {fileID: 5820892263807858253}
+  trail: {fileID: 7857732036290487819}
 --- !u!210 &7145405230318917625
 SortingGroup:
   m_ObjectHideFlags: 0
