@@ -379,6 +379,11 @@ public class Reward : GameMode
         return 0;
     }
 
+    public override void AddExtras(List<CardData> cards)
+    {
+        throw new NotImplementedException();
+    }
+
     protected override void ReSelect()
     {
     }

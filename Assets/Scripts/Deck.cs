@@ -24,7 +24,7 @@ public class Deck : MonoBehaviour
     private void Start()
     {
         var deck = isEnemy ? State.Instance.OpponentCards : State.Instance.Cards;
-        deck.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).Reverse().ToList().ForEach(AddCard);
+        deck.OrderBy(c => c.favourite ? 0 : 1).ThenBy(_ => Random.value).Reverse().ToList().ForEach(c => AddCard(c));
         gameMode.Setup();
     }
 
@@ -35,13 +35,21 @@ public class Deck : MonoBehaviour
         return card;
     }
 
-    public void AddCard(CardData data)
+    public Card Create(CardData data)
     {
         data.Init();
         var card = Instantiate(cardPrefab, transform);
         card.transform.position += Vector3.up * 0.2f * cards.Count;
         card.Setup(data, this);
+        return card;
+    }
+
+    public Card AddCard(CardData data)
+    {
+        var card = Create(data);
+        card.transform.position += Vector3.up * 0.2f * cards.Count;
         cards.Add(card);
+        return card;
     }
 
     public void Kill(List<Card> targets)

@@ -147,6 +147,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public void IncreaseNumber()
     {
         if (cardType != CardType.Pedometer) return;
+        if (!State.Instance.Has(Id)) return;
         var data = State.Instance.GetCard(Id);
         data.number++;
         Setup(data, deck);

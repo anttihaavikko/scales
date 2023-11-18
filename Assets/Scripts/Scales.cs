@@ -86,9 +86,7 @@ public class Scales : GameMode
 
     private int UpdateScales()
     {
-        var leftSum = slots[0].Sum * leftMass;
-        var rightSum = slots[1].Sum * rightMass;
-        var difference = leftSum - rightSum;
+        var difference = GetDifference();
         var abs = Mathf.Abs(difference);
 
         this.StartCoroutine(() =>
@@ -99,17 +97,31 @@ public class Scales : GameMode
             Tweener.RotateToQuad(rightBasket, Quaternion.Euler(new Vector3(0, 0, -angle)), 0.5f);
         }, 0.2f);
 
-        left.text = leftSum.ToString();
-        right.text = rightSum.ToString();
-
         diff.text = abs.ToString();
         return abs;
+    }
+
+    private int GetDifference()
+    {
+        var leftSum = slots[0].Sum * leftMass;
+        var rightSum = slots[1].Sum * rightMass;
+        var difference = leftSum - rightSum;
+        left.text = leftSum.ToString();
+        right.text = rightSum.ToString();
+        return difference;
     }
 
     private void EndCheck()
     {
         if (hand.IsEmpty)
         {
+            if (GetDifference() != 0 && hasExtras)
+            {
+                Invoke(nameof(BecameStuck), 1f);
+                Invoke(nameof(EndCheck), 2f);
+                return;
+            }
+            
             continueButton.Show();
         }
     }
@@ -165,7 +177,10 @@ public class Scales : GameMode
         var leftSum = slots[0].Sum * leftMass;
         var rightSum = slots[1].Sum * rightMass;
         var difference = leftSum - rightSum;
-        if(difference == 0) Perfect();
+        if(difference == 0)
+        {
+            Perfect();
+        }
         var total = Mathf.Min(State.Instance.Level, Mathf.Abs(difference));
         strikeDisplay.AddStrikes(total);
         return total;
@@ -215,6 +230,16 @@ public class Scales : GameMode
     public override int GetTrueJokerValue()
     {
         return trueJokerValue;
+    }
+
+    public override void AddExtras(List<CardData> cards)
+    {
+        hand.Add(cards.Select(c =>
+        {
+            var card = deck.Create(c);
+            card.Flip();
+            return card;
+        }).ToList());
     }
 
     protected override void ReSelect()

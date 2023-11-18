@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
@@ -32,6 +33,8 @@ public abstract class GameMode : MonoBehaviour
     private bool continued;
     private EffectCamera effectCamera;
 
+    protected bool hasExtras;
+
     public Dragon Dragon => dragon;
     public Tooltip Tooltip => tooltip;
     public Camera Camera => cam;
@@ -43,6 +46,8 @@ public abstract class GameMode : MonoBehaviour
 
     private void Start()
     {
+        hasExtras = State.Instance.Has(Effect.Backbag);
+        
         slots.ForEach(slot => slot.click += SlotClicked);
 
         if (scoreDisplay)
@@ -226,6 +231,22 @@ public abstract class GameMode : MonoBehaviour
             scoreDisplay.AddMulti(increases);
         }
     }
+
+    protected void BecameStuck()
+    {
+        hasExtras = false;
+        
+        var lvl = State.Instance.GetCount(Effect.Backbag);
+        if (lvl > 0)
+        {
+            var cards = new List<CardData>();
+            for (var i = 0; i < lvl; i++)
+            {
+                cards.Add(CardData.GetRandomNonModifier());
+            }
+            AddExtras(cards);
+        }
+    }
     
     protected abstract void Combine(Card first, Card second);
     public abstract void Setup();
@@ -239,6 +260,7 @@ public abstract class GameMode : MonoBehaviour
     public abstract IReadOnlyCollection<Card> GetVisibleCards();
     public abstract int GetHandSize();
     public abstract int GetTrueJokerValue();
+    public abstract void AddExtras(List<CardData> cards);
 
     public void Shake(float amount)
     {

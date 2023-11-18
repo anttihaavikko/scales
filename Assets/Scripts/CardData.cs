@@ -125,6 +125,12 @@ public class CardData
             new CardData(CardType.MultiValue) { icon = 14, sort = 993 },
         }.Random();
     }
+    
+    public static CardData GetRandomNonModifier()
+    {
+        if (Random.value < 0.7f) return GetBasic();
+        return GetRandomSpecial();
+    }
 
     public static CardData GetRandom()
     {

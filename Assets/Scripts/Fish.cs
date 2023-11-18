@@ -52,6 +52,11 @@ public class Fish : GameMode
 
         if (!available)
         {
+            if (lanes.Any(lane => lane.Cards.Any()) && hasExtras)
+            {
+                Invoke(nameof(BecameStuck), 1f);
+            }
+            
             continueButton.Show();
         }
     }
@@ -226,5 +231,11 @@ public class Fish : GameMode
     public override int GetTrueJokerValue()
     {
         return selected.Where(c => !c.IsTrueJoker && !c.IsJoker).Sum(c => c.Number);
+    }
+
+    public override void AddExtras(List<CardData> cards)
+    {
+        cards.ForEach(c => deck.AddCard(c));
+        Fill();
     }
 }

@@ -293,6 +293,20 @@ public class Mountain : GameMode
         return target;
     }
 
+    public override void AddExtras(List<CardData> cards)
+    {
+        cards.ForEach(data =>
+        {
+            var slot = slots.FirstOrDefault(s => s.IsEmpty && s.gameObject.activeSelf);
+            if (!slot) return;
+            var card = deck.AddCard(data);
+            card.transform.position = new Vector3(0, -5, 0);
+            card.Flip();
+            slot.Add(card);
+            card.MoveTo(slot.GetPosition());
+        });
+    }
+
     private void ApplyCover(IReadOnlyList<Card> list, Card cur, int index, int row)
     {
         if (index < 0) return;
@@ -382,6 +396,11 @@ public class Mountain : GameMode
 
     private void RoundEnded()
     {
+        if (deck.Cards.Any(c => c && !c.IsRemoved) && hasExtras)
+        {
+            Invoke(nameof(BecameStuck), 1f);
+        }
+        
         continueButton.Show();
     }
 

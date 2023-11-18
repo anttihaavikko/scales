@@ -51,7 +51,8 @@ public enum Effect
     EvenScorer,
     PerfectGame,
     PerfectHeal,
-    ScoreDoubler
+    ScoreDoubler,
+    Backbag
 }
 
 [Serializable]

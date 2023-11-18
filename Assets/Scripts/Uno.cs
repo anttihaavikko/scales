@@ -191,6 +191,13 @@ public class Uno : GameMode
 
         if (!GetOptions().Any())
         {
+            if (isPlayer && hasExtras)
+            {
+                Invoke(nameof(BecameStuck), 1f);
+                Invoke(nameof(StartTurn), 2f);
+                return;
+            }
+            
             this.StartCoroutine(() =>
             {
                 helper.Tutorial.Show(TutorialMessage.UnoTake);
@@ -345,6 +352,16 @@ public class Uno : GameMode
             .Select(c => c.Number)
             .Concat(new []{ 0 }).ToArray();
         return Mathf.Clamp(PileValue, Mathf.Min(values), Mathf.Max(values));
+    }
+
+    public override void AddExtras(List<CardData> cards)
+    {
+        hand.Add(cards.Select(c =>
+        {
+            var card = deck.Create(c);
+            card.Flip();
+            return card;
+        }).ToList());
     }
 
     protected override void ReSelect()
