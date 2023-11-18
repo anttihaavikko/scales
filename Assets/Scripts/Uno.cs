@@ -359,7 +359,11 @@ public class Uno : GameMode
         ticks++;
         tickPulsater.Pulsate();
         
-        if(!isPlayer) Shake(0.3f);
+        if(!isPlayer)
+        {
+            Shake(0.3f);
+            scoreDisplay.ResetMulti();
+        }
 
         if (ticks == 5)
         {
