@@ -93,7 +93,11 @@ public class Dragon : MonoBehaviour
             "I'm the greatest!",
             "I've never lost at this!",
             "You activated my trap card!",
-            "Haha, it was a trap!"
+            "Haha, it was a trap!",
+            "Are you even trying?",
+            "Did you not understand the rules?",
+            "Just give up!",
+            "You can never beat me!"
         }.Random(), true), delay);
 
         AutoHide(delay);
@@ -129,7 +133,11 @@ public class Dragon : MonoBehaviour
             "What do you think about this...",
             "Lets see...",
             "Umm...",
-            "Hmm..."
+            "Hmm...",
+            "Lets go...",
+            "Uno reverse card...",
+            "I get it now...",
+            "Just you wait..."
         }.Random(), true), delay);
         
         AutoHide(delay);
