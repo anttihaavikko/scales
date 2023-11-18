@@ -77,6 +77,63 @@ public class Dragon : MonoBehaviour
             _ => throw new ArgumentOutOfRangeException(nameof(message), message, null)
         };
     }
+    
+    private void AutoHide(float delay)
+    {
+        speechBubble.HideAfter(delay + 1.5f);
+    }
+
+    public void Taunt(float delay = 0.3f)
+    {
+        this.StartCoroutine(() => speechBubble.Show(new[]
+        {
+            "Haha, take that!",
+            "Learn to play!",
+            "I'm so good at this!",
+            "I'm the greatest!",
+            "I've never lost at this!",
+            "You activated my trap card!",
+            "Haha, it was a trap!"
+        }.Random(), true), delay);
+
+        AutoHide(delay);
+    }
+
+    public void Compliment(float delay = 0.3f)
+    {
+        this.StartCoroutine(() => speechBubble.Show(new[]
+        {
+            "Dang, you're good!",
+            "You're decent at this!",
+            "Good move!",
+            "Playing dirty, eh?",
+            "Didn't see that coming...",
+            "You just got lucky...",
+            "Meh, I can still win...",
+            "I see, I see..."
+        }.Random(), true), delay);
+        
+        AutoHide(delay);
+    }
+    
+    public void Ponder(float delay = 0.3f)
+    {
+        this.StartCoroutine(() => speechBubble.Show(new[]
+        {
+            "How's this...",
+            "How's this then...",
+            "How about this...",
+            "How about this then...",
+            "Maybe this...",
+            "Try to keep up...",
+            "What do you think about this...",
+            "Lets see...",
+            "Umm...",
+            "Hmm..."
+        }.Random(), true), delay);
+        
+        AutoHide(delay);
+    }
 
     private void ShowTutorial(TutorialMessage message)
     {
@@ -152,6 +209,11 @@ public class Dragon : MonoBehaviour
     {
         this.StartCoroutine(() => face.Emote(Face.Emotion.Sad), 0.5f);
         anim.SetTrigger(SitAnim);
+    }
+
+    public void Talk(string message)
+    {
+        speechBubble.Show(message, true);
     }
 }
 

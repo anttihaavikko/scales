@@ -113,6 +113,12 @@ namespace AnttiStarterKit.Animations
             PlaySound();
         }
 
+        public void HideAfter(float delay)
+        {
+            CancelInvoke(nameof(Hide));
+            Invoke(nameof(Hide), delay);
+        }
+
         private void Hide()
         {
             showing = false;

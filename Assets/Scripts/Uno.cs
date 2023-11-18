@@ -109,6 +109,7 @@ public class Uno : GameMode
         
         if (isSame)
         {
+            if(!isPlayer) dragon.Ponder();
             if(isPlayer) scoreDisplay.AddMulti();
             helper.Tutorial.Mark(TutorialMessage.UnoSame);
             helper.Tutorial.Show(TutorialMessage.UnoChoice);
@@ -132,12 +133,14 @@ public class Uno : GameMode
     {
         if (ticks < opponent.ticks)
         {
+            if(!isPlayer) dragon.Compliment(1);
             dragon.Sit();
             return;
         }
 
         if (isPlayer || ticks > opponent.ticks)
         {
+            if(!isPlayer) dragon.Taunt(1);
             dragon.Hop();
         }
     }
@@ -296,6 +299,8 @@ public class Uno : GameMode
     {
         var p = card.transform.position;
         
+        if(!isPlayer) dragon.Ponder(0);
+        
         card.Pop();
         hand.Remove(card);
         
@@ -361,8 +366,13 @@ public class Uno : GameMode
         
         if(!isPlayer)
         {
+            dragon.Taunt();
             Shake(0.3f);
             scoreDisplay.ResetMulti();
+        }
+        else
+        {
+            opponent.dragon.Compliment();
         }
 
         if (ticks == 5)
