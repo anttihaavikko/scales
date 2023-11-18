@@ -19,6 +19,7 @@ public class Reward : GameMode
     [SerializeField] private Appearer phoneButton;
     [SerializeField] private TMP_Text pickLabel;
     [SerializeField] private RectTransform pickBg;
+    [SerializeField] private SpriteRenderer deckBorders;
 
     private Card modifier;
     private int picks = 3;
@@ -94,8 +95,13 @@ public class Reward : GameMode
             option.Nudge();
             option.Flip();
 
+            option.picked += () => deckBorders.enabled = true;
+            option.dropped += () => deckBorders.enabled = false;
+
             option.click += () =>
             {
+                deckBorders.enabled = false;
+                    
                 dragon.Nudge();
                 
                 if (option.IsModifier)
@@ -279,6 +285,7 @@ public class Reward : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        card.click?.Invoke();
     }
 
     protected override void Combine(Card first, Card second)
@@ -318,7 +325,7 @@ public class Reward : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return true;
+        return !State.Instance.Has(card.Id) && !card.IsModifier;
     }
 
     public override int AddStrikes()

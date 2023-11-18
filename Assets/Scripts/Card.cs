@@ -52,7 +52,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     private Markable marked;
     private Skill? linkedSkill;
 
-    public Action click;
+    public Action click, picked, dropped;
 
     public bool IsSelected => selected;
     public int Number => GetNumberValue();
@@ -249,6 +249,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnDropCancel()
     {
+        dropped?.Invoke();
         shadow.SetActive(false);
     }
 
@@ -290,6 +291,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnDrop(List<Collider2D> objects)
     {
+        dropped?.Invoke();
+        
         shadow.SetActive(false);
 
         var markedSlot = marked as Slot;
@@ -322,6 +325,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnPick()
     {
+        picked?.Invoke();
         deck.Tooltip.Hide();
         if (IsModifier)
         {
