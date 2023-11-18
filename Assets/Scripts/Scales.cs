@@ -64,13 +64,13 @@ public class Scales : GameMode
     {
         UpdateTrueJokerFor(slot);
         card.transform.SetParent(null);
-        card.Flatten();
-        
+
         card.SetDepth(slot.TopCard, 1);
         card.Lock();
         hand.Remove(card);
         card.ChangeSelection(false);
         slot.Add(card);
+        AfterPlay(card);
         card.Flatten();
         var pos = slot.GetPosition();
         Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
@@ -80,8 +80,6 @@ public class Scales : GameMode
         var abs = UpdateScales();
         Score(card, slot, abs, pos);
         hand.Draw();
-        
-        AfterPlay(card);
 
         EndCheck();
     }

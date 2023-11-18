@@ -75,6 +75,12 @@ public class Uno : GameMode
         
         dragon.Nudge();
         
+        if (isPlayer)
+        {
+            Score(card);
+            AfterPlay(card);
+        }
+        
         card.transform.SetParent(null);
         card.Flatten();
         card.SetDepth(Pile.TopCard, 1);
@@ -96,12 +102,6 @@ public class Uno : GameMode
             helper.Tutorial.Show(TutorialMessage.UnoWinner);
         }
 
-        if (isPlayer)
-        {
-            Score(card);
-            AfterPlay(card);
-        }
-        
         if (TryEnd())
         {
             return;
