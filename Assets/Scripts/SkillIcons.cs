@@ -11,7 +11,7 @@ public class SkillIcons : MonoBehaviour
     
     private readonly List<SkillIcon> icons = new();
 
-    private void Start()
+    private void Awake()
     {
         State.Instance.SkillIcons = this;
         State.Instance.Skills.ToList().ForEach(Add);
