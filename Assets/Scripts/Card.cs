@@ -409,7 +409,11 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void Pop(bool shake = true)
     {
-        if (shake && deck) deck.Shake(0.1f);
+        if (shake && deck)
+        {
+            deck.Shake(0.1f);
+            EffectManager.AddEffect(3, transform.position);
+        }
         EffectManager.AddEffects(new []{ 0, 1, 2 }, transform.position);
     }
 

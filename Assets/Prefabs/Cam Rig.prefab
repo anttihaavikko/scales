@@ -80,6 +80,7 @@ Transform:
   - {fileID: 8714302033584269297}
   - {fileID: 8714302032680298883}
   - {fileID: 8714302031794187436}
+  - {fileID: 7958478681414578218}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -261,7 +262,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1015
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -348,3 +349,93 @@ MonoBehaviour:
   returnSpeed: 0.6
   shakeChance: 0.3
   timeResumeSpeed: 1
+--- !u!1001 &6094592109655023766
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8714302032137083499}
+    m_Modifications:
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238077, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_Name
+      value: Displace Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244190793891238081, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 9216
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+--- !u!4 &7958478681414578218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4244190793891238076, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+  m_PrefabInstance: {fileID: 6094592109655023766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7958478681414578219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4244190793891238077, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+  m_PrefabInstance: {fileID: 6094592109655023766}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &728082854310594172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7958478681414578219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab7c1b44b324439ab5066a44dfafd1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8714302033584269070}
+  self: {fileID: 7958478681414578263}
+--- !u!20 &7958478681414578263 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4244190793891238081, guid: 30408895cd6b24ae5865c7cfb49444be, type: 3}
+  m_PrefabInstance: {fileID: 6094592109655023766}
+  m_PrefabAsset: {fileID: 0}
