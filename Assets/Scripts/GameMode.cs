@@ -210,11 +210,14 @@ public abstract class GameMode : MonoBehaviour
     protected void AfterPlay(Card card)
     {
         card.IncreaseNumber();
-        
-        var heals = State.Instance.GetCount(Effect.JokerHeal);
-        if (card.IsJoker && heals > 0)
+
+        if (card.IsJoker)
         {
-            strikeDisplay.AddStrikes(-heals);
+            var heals = State.Instance.GetCount(Effect.JokerHeal);
+            if (heals > 0)
+            {
+                strikeDisplay.AddStrikes(-heals);
+            }   
         }
 
         var increases = State.Instance.GetCount(Effect.IncreaseMultiOn, card.Number);

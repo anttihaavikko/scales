@@ -21,6 +21,7 @@ public class State : Manager<State>
     public int MaxStrikes { get; set; } = 3;
     public int LevelMulti => Level + 1;
     public int HeldMulti { get; set; } = 1;
+    public SkillIcons SkillIcons { get; set; }
 
     public IEnumerable<CardData> Cards => cards;
     public IEnumerable<CardData> OpponentCards => opponentCards;
@@ -41,22 +42,30 @@ public class State : Manager<State>
 
     public bool Has(Effect skill)
     {
-        return skills.Any(s => s.effect == skill);
+        var val = skills.Any(s => s.effect == skill);
+        if (val && SkillIcons) SkillIcons.Trigger(skill);
+        return val;
     }
 
     public bool Has(Effect skill, int value)
     {
-        return skills.Any(s => s.effect == skill && s.value == value);
+        var val = skills.Any(s => s.effect == skill && s.value == value);
+        if (val && SkillIcons) SkillIcons.Trigger(skill, value);
+        return val;
     }
 
     public int GetCount(Effect skill)
     {
-        return skills.Count(s => s.effect == skill);
+        var val = skills.Count(s => s.effect == skill);
+        if (val > 0 && SkillIcons) SkillIcons.Trigger(skill);
+        return val;
     }
     
     public int GetCount(Effect skill, int value)
     {
-        return skills.Count(s => s.effect == skill && s.value == value);
+        var val = skills.Count(s => s.effect == skill && s.value == value);
+        if (val > 0 && SkillIcons) SkillIcons.Trigger(skill, value);
+        return val;
     }
 
     public void Add(Skill skill)

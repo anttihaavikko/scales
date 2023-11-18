@@ -255,7 +255,7 @@ public class CardData
             };
         }
 
-        var jokerAddition = State.Instance.Has(Effect.JokerSight) ? $"\n\nThe (value) is currently ({value})." : "";
+        var jokerAddition = type == CardType.Joker && State.Instance.Has(Effect.JokerSight) ? $"\n\nThe (value) is currently ({value})." : "";
 
         return type switch
         {

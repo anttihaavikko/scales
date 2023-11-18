@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image icon, shadow;
+    [SerializeField] private Pulsater pulsater;
 
     private Tooltip tooltip;
     private Skill skill;
@@ -26,5 +27,21 @@ public class SkillIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         transform.localScale = Vector3.one;
         tooltip.Hide();
+    }
+
+    public void Pulsate(Effect effect)
+    {
+        if (skill.effect == effect)
+        {
+            pulsater.Pulsate();
+        }
+    }
+    
+    public void Pulsate(Effect effect, int value)
+    {
+        if (skill.effect == effect && skill.value == value)
+        {
+            pulsater.Pulsate();
+        }
     }
 }
