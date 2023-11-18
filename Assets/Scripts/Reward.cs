@@ -161,6 +161,13 @@ public class Reward : GameMode
                 {
                     phoneButton.Show();
                 }
+
+                if (skill.effect == Effect.ScoreDoubler)
+                {
+                    var total = scoreDisplay.Total;
+                    scoreDisplay.Add(total, false);
+                    ShowScore(total, 1, Vector3.zero);
+                }
                 
                 for (var i = 0; i < State.Instance.GetCount(Effect.Pestilence); i++)
                 {

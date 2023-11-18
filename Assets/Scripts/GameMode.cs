@@ -200,6 +200,11 @@ public abstract class GameMode : MonoBehaviour
             scoreDisplay.Add(1000 * levels * State.Instance.LevelMulti);
             ShowScore(1000 * levels, State.Instance.LevelMulti, Vector3.zero);
         }
+
+        if (State.Instance.Has(Effect.PerfectHeal))
+        {
+            strikeDisplay.AddStrikes(-1);
+        }
     }
 
     protected void AfterPlay(Card card)
