@@ -96,6 +96,8 @@ public class Reward : GameMode
 
             option.click += () =>
             {
+                dragon.Nudge();
+                
                 if (option.IsModifier)
                 {
                     dragon.Tutorial.Show(TutorialMessage.ModInfo);
@@ -149,6 +151,9 @@ public class Reward : GameMode
             option.click += () =>
             {
                 if (picked) return;
+                
+                dragon.Nudge();
+                
                 picked = true;
                 State.Instance.Add(skill);
 

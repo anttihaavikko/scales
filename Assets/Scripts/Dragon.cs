@@ -12,6 +12,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private Transform head;
     [SerializeField] private SpeechBubble speechBubble;
     [SerializeField] private TutorialMessage intro;
+    [SerializeField] private Face face;
 
     private Vector3 start;
 
@@ -108,6 +109,8 @@ public class Dragon : MonoBehaviour
         var y = Random.Range(-1f, 1f) * 0.3f * amount;
         var pos = GlobalStart + x * Vector3.right + Vector3.up * y;
         Tweener.MoveToBounceOut(head, pos, 0.3f);
+        
+        face.Emote(Face.Emotion.Sneaky);
     }
 
     public void Acknowledge(bool hop)
@@ -123,12 +126,14 @@ public class Dragon : MonoBehaviour
 
     public void Hop()
     {
+        face.Emote(Face.Emotion.Brag);
         Tweener.MoveToBounceOut(head, GlobalStart, 0.4f);
         anim.SetTrigger(HopAnim);
     }
 
     public void HopTo(Vector3 pos)
     {
+        face.Emote(Face.Emotion.Happy);
         Tweener.MoveToQuad(transform, pos, 5f / 6f * 0.5f);
         anim.SetTrigger(HopAnim);
     }
@@ -145,6 +150,7 @@ public class Dragon : MonoBehaviour
 
     public void Sit()
     {
+        this.StartCoroutine(() => face.Emote(Face.Emotion.Sad), 0.5f);
         anim.SetTrigger(SitAnim);
     }
 }
