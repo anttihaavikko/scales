@@ -472,6 +472,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: bag
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 438
+        width: 198
+        height: 301
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5c2f3491f395416b9fe4b540d57823c
+      internalID: -1022508868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -496,6 +517,7 @@ TextureImporter:
       step: 2042329850
       multi_plus: -1404368216
       solo: -2091384470
+      bag: -1022508868
       true_joker: 1292797645
       dupe: -1456969795
       boulder: -953957912
