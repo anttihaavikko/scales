@@ -79,7 +79,7 @@ public class Tooltip : MonoBehaviour
 
     public void Hide(object sender = default)
     {
-        if (shown == sender || sender == default)
+        if (node && (shown == sender || sender == default))
         {
             node.SetActive(false);
             shown = default;
