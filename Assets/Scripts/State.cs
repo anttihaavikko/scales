@@ -13,6 +13,7 @@ public class State : Manager<State>
     private readonly List<Skill> skills = new();
     private MessageHistory messageHistory;
     private List<HistoryMessage> messages;
+    private string previousLevel;
 
     public int Level { get; private set; }
     public int Score { get; set; }
@@ -96,11 +97,19 @@ public class State : Manager<State>
         cards.Add(card);
     }
 
+    private string GetNextLevel()
+    {
+        if (Level == 1) return "Scale";
+        if (Level == 2) return "Uno";
+        if (Level == 3) return "Fish";
+        return new List<string> { "Mountain", "Scale", "Uno", "Fish" }.Where(lvl => lvl != previousLevel).ToList().Random();
+    }
+
     public void NextLevel()
     {
         Level++;
-        var scene = new List<string> { "Mountain", "Scale", "Uno", "Fish" }.Random();
-        SceneChanger.Instance.ChangeScene(scene);
+        previousLevel = GetNextLevel();
+        SceneChanger.Instance.ChangeScene(previousLevel);
     }
 
     public CardData GetCard(Guid id)

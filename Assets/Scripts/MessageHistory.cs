@@ -151,7 +151,7 @@ public class MessageHistory
         },
         new List<string>
         {
-            "Do you even want to talk again.",
+            "Do you ever want to talk again.",
             "I'm starting to give up.",
             "You're not going to forgive me."
         },
