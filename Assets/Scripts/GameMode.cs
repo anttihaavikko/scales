@@ -28,12 +28,14 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected SkillIcons skillIcons;
     [SerializeField] private Tooltip tooltip;
     [SerializeField] protected Appearer splash;
+    [SerializeField] protected GameObject gameOver;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
     private EffectCamera effectCamera;
 
     protected bool hasExtras;
+    protected bool hasEnded;
 
     public Dragon Dragon => dragon;
     public Tooltip Tooltip => tooltip;
@@ -42,6 +44,11 @@ public abstract class GameMode : MonoBehaviour
     private void Awake()
     {
         effectCamera = cam.GetComponent<EffectCamera>();
+
+        if (strikeDisplay)
+        {
+            strikeDisplay.onEnd += Ended;
+        }
     }
 
     private void Start()
@@ -79,6 +86,12 @@ public abstract class GameMode : MonoBehaviour
         }
     }
 
+    private void Ended()
+    {
+        hasEnded = true;
+        gameOver.SetActive(true);
+    }
+
     public void ToRewards()
     {
         if (continued) return;
@@ -87,6 +100,7 @@ public abstract class GameMode : MonoBehaviour
         var delay = Mathf.Clamp(AddStrikes(), 0, State.Instance.MaxStrikes) * 0.3f;
         this.StartCoroutine(() =>
         {
+            if (hasEnded) return;
             State.Instance.HeldMulti = scoreDisplay.Multi;
             State.Instance.RoundEnded(scoreDisplay.Total);
         }, delay);

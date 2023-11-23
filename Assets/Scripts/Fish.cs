@@ -27,6 +27,8 @@ public class Fish : GameMode
 
     private void ClickSlot(Slot slot)
     {
+        if (hasEnded) return;
+        
         if (selected.Any())
         {
             DropToSlot(selected.First(), slot);
@@ -47,6 +49,8 @@ public class Fish : GameMode
 
     private void Evaluate()
     {
+        if (hasEnded) return;
+        
         var all = lanes.SelectMany(l => l.Cards).Where(c => c.IsOpen && !c.IsUsed).ToList();
         var available = all.Any(c => Check(c, all));
 
@@ -78,6 +82,8 @@ public class Fish : GameMode
 
     public override void Select(Card card)
     {
+        if (hasEnded) return;
+        
         if (!card.IsSelected && !selected.Contains(card)) return;
 
         if (root && !AreNeighbours(root, card))
@@ -157,6 +163,8 @@ public class Fish : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        if (hasEnded) return;
+        
         card.ChangeSelection(false);
         lanes.ForEach(l => l.Remove(new List<Card>{ card }));
         ClearSelection();
@@ -169,7 +177,7 @@ public class Fish : GameMode
 
     public override bool CanCombine(Card first, Card second)
     {
-        return false;
+        return !hasEnded;
     }
 
     public override void RightClick(Card card)
@@ -179,7 +187,7 @@ public class Fish : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return slots[0].IsEmpty;
+        return slots[0].IsEmpty && !hasEnded;
     }
 
     public override int AddStrikes()
@@ -195,6 +203,8 @@ public class Fish : GameMode
 
     public override void PlayInstant(Card card)
     {
+        if (hasEnded) return;
+        
         var p = card.transform.position;
         card.IsUsed = true;
         card.Pop();

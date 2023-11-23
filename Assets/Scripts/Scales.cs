@@ -47,6 +47,7 @@ public class Scales : GameMode
 
     public override void Select(Card card)
     {
+        if (hasEnded) return;
         var state = card.IsSelected;
         DeselectAll();
         card.ChangeSelection(state);
@@ -62,6 +63,8 @@ public class Scales : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        if (hasEnded) return;
+        
         UpdateTrueJokerFor(slot);
         card.transform.SetParent(null);
 
@@ -113,6 +116,8 @@ public class Scales : GameMode
 
     private void EndCheck()
     {
+        if (hasEnded) return;
+        
         if (hand.IsEmpty)
         {
             if (GetDifference() != 0 && hasExtras)
@@ -169,7 +174,7 @@ public class Scales : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return true;
+        return !hasEnded;
     }
 
     public override int AddStrikes()
@@ -188,6 +193,8 @@ public class Scales : GameMode
 
     public override void PlayInstant(Card card)
     {
+        if (hasEnded) return;
+        
         var p = card.transform.position;
         
         card.Pop();

@@ -46,6 +46,7 @@ public class Uno : GameMode
 
     public override void Select(Card card)
     {
+        if (hasEnded) return;
         if (!hasTurn) return;
         var state = card.IsSelected;
         DeselectAll();
@@ -54,6 +55,8 @@ public class Uno : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        if (hasEnded) return;
+        
         if (!hasTurn || !CanPlay(card.Number))
         {
             card.ReturnToPrevious();
@@ -65,12 +68,15 @@ public class Uno : GameMode
 
     private bool CanPlay(int val)
     {
+        if (hasEnded) return false;
         var cur = PileValue;
         return !descending && val > cur || descending && val < cur || val == cur;
     }
 
     private void Play(Card card)
     {
+        if (hasEnded) return;
+        
         var isSame = card.IsTrueJoker || card.Number == PileValue;
         
         dragon.Nudge();
@@ -175,6 +181,8 @@ public class Uno : GameMode
 
     private void StartTurn()
     {
+        if (hasEnded) return;
+        
         Tweener.MoveToBounceOut(turnIndicator, turnSpot.position, 0.2f);
 
         if (isPlayer && GetOptions().Any(c => c.Number == PileValue))
@@ -281,16 +289,18 @@ public class Uno : GameMode
 
     public override bool CanCombine(Card first, Card second)
     {
-        return false;
+        return !hasEnded;
     }
 
     public override void RightClick(Card card)
     {
+        if (hasEnded) return;
         DropToSlot(card, Pile);
     }
 
     public override bool CanPlay(Card card)
     {
+        if (hasEnded) return false;
         return !opponent.hand.IsEmpty && (card.IsTrueJoker || CanPlay(card.Number));
     }
 
@@ -304,6 +314,8 @@ public class Uno : GameMode
 
     public override void PlayInstant(Card card)
     {
+        if (hasEnded) return;
+        
         var p = card.transform.position;
         
         if(!isPlayer) dragon.Ponder(0);

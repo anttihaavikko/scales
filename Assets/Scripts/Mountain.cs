@@ -183,6 +183,8 @@ public class Mountain : GameMode
 
     public override void DropToSlot(Card card, Slot slot)
     {
+        if (hasEnded) return;
+        
         dragon.Tutorial.Show(TutorialMessage.Slotting);
         scoreDisplay.ResetMulti();
         DeselectAll();
@@ -208,6 +210,7 @@ public class Mountain : GameMode
     
     public override bool CanCombine(Card first, Card second)
     {
+        if (hasEnded) return false;
         if (first.IsTrueJoker || second.IsTrueJoker) return true;
         return Operate(first.Number, second.Number);
     }
@@ -229,6 +232,8 @@ public class Mountain : GameMode
 
     public override void RightClick(Card card)
     {
+        if (hasEnded) return;
+        
         var cp = card.transform.position;
         DeselectAll();
         var slot = slots
@@ -244,7 +249,7 @@ public class Mountain : GameMode
 
     public override bool CanPlay(Card card)
     {
-        return true;
+        return !hasEnded;
     }
 
     public override int AddStrikes()
@@ -257,6 +262,8 @@ public class Mountain : GameMode
 
     public override void PlayInstant(Card card)
     {
+        if (hasEnded) return;
+        
         var p = card.transform.position;
         card.Pop();
         deck.Kill(new List<Card>{ card });
@@ -340,6 +347,8 @@ public class Mountain : GameMode
     
     public override void Select(Card card)
     {
+        if (hasEnded) return;
+        
         var selected = deck.Cards.Where(c => c.IsSelected && !c.IsRemoved).ToList();
         var numbers = selected.Select(c => c.Number).ToList();
         var sum = numbers.Sum();
@@ -396,6 +405,8 @@ public class Mountain : GameMode
 
     private void RoundEnded()
     {
+        if (hasEnded) return;
+        
         if (deck.Cards.Any(c => c && !c.IsRemoved) && hasExtras)
         {
             Invoke(nameof(BecameStuck), 1f);
