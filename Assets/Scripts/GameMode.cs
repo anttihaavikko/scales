@@ -29,6 +29,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] private Tooltip tooltip;
     [SerializeField] protected Appearer splash;
     [SerializeField] protected GameObject gameOver;
+    [SerializeField] protected int music;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
@@ -53,6 +54,11 @@ public abstract class GameMode : MonoBehaviour
 
     private void Start()
     {
+        if (music >= 0)
+        {
+            AudioManager.Instance.ChangeMusic(music, 0.75f, 0f, 0.25f);
+        }
+        
         hasExtras = State.Instance.Has(Effect.Backbag);
         
         slots.ForEach(slot => slot.click += SlotClicked);
