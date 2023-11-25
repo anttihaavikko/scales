@@ -68,7 +68,7 @@ public class Uno : GameMode
 
     private bool CanPlay(int val)
     {
-        if (hasEnded) return false;
+        if (hasEnded || !hasTurn) return false;
         var cur = PileValue;
         return !descending && val > cur || descending && val < cur || val == cur;
     }
@@ -294,7 +294,7 @@ public class Uno : GameMode
 
     public override void RightClick(Card card)
     {
-        if (hasEnded) return;
+        if (hasEnded || !CanPlay(card.Number)) return;
         DropToSlot(card, Pile);
     }
 
