@@ -100,6 +100,8 @@ public class Reward : GameMode
 
             option.click += () =>
             {
+                if (hasEnded) return;
+                
                 deckBorders.enabled = false;
                     
                 dragon.Nudge();
@@ -156,6 +158,7 @@ public class Reward : GameMode
 
             option.click += () =>
             {
+                if (hasEnded) return;
                 if (picked) return;
                 
                 dragon.Nudge();
