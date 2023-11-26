@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dragon Red
       objectReference: {fileID: 0}
+    - target: {fileID: 6357250262859026770, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
+      propertyPath: talks
+      value: 
+      objectReference: {fileID: 11400000, guid: 070afa98110c949feabc881836f70463, type: 2}
     - target: {fileID: 6357250262930247499, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
       propertyPath: m_Color.b
       value: 0.27450982

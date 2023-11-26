@@ -1348,6 +1348,10 @@ PrefabInstance:
       propertyPath: intro
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 6357250262859026770, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
+      propertyPath: talks
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c2e672a98d1b44e9b3e7c32850f6b1f, type: 2}
     - target: {fileID: 6357250262939695255, guid: 97239162cf9c04e6491bf6b64c9a7e46, type: 3}
       propertyPath: m_Positions.Array.data[0].x
       value: -5.6920686
@@ -2959,6 +2963,7 @@ MonoBehaviour:
   tooltip: {fileID: 954880948}
   splash: {fileID: 1663156678}
   gameOver: {fileID: 786750299}
+  music: 0
   cardPrefab: {fileID: 562345696741259792, guid: 6341b60384428421b9836f521b46ac0a, type: 3}
   pageText: {fileID: 1634324694}
   countText: {fileID: 56669366}

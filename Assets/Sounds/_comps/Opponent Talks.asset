@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ed6741a13249ff91a11647becccdea, type: 3}
+  m_Name: Opponent Talks
+  m_EditorClassIdentifier: 
+  volume: 1
+  clips:
+  - {fileID: 8300000, guid: 3684e395cd2d6437683527a57441e73e, type: 3}
+  - {fileID: 8300000, guid: 5b5eb0d724f5f461ebbfb7bd13e252f3, type: 3}
+  - {fileID: 8300000, guid: e0e8ac11a2b0f41edb2992f5b88644c6, type: 3}
+  - {fileID: 8300000, guid: 0074c7bd8e23d488787aeb77cff995a1, type: 3}
+  - {fileID: 8300000, guid: f580b6e9fcc32427ba541239a59942bf, type: 3}
+  - {fileID: 8300000, guid: 35df4afa2b2794929bd8669538d29907, type: 3}
+  - {fileID: 8300000, guid: 6c63493ed1d314ce187a03c73814b1ef, type: 3}
+  - {fileID: 8300000, guid: baf3dfbd73dca4af7b8de4fba5f1ce5f, type: 3}
+  - {fileID: 8300000, guid: e258951d06f404c8c818afb7d607ff8b, type: 3}
+  - {fileID: 8300000, guid: f992b574aa43b402f8ac7e9d162cf2e0, type: 3}
+  - {fileID: 8300000, guid: 9808a89d612d944b6a6086e4c2d24123, type: 3}
+  - {fileID: 8300000, guid: f21302fae167445e494f96045a39d010, type: 3}
+  - {fileID: 8300000, guid: e637fe80e3d1c402d8d5f57a61caba11, type: 3}
+  - {fileID: 8300000, guid: 40413fdc8fb2244de8ac18a2e3bd389c, type: 3}
+  - {fileID: 8300000, guid: 4052c556b957b4e5882747122fc032b6, type: 3}
+  - {fileID: 8300000, guid: 0142b36e1383b4cadbe399f83fa4c67b, type: 3}
+  - {fileID: 8300000, guid: e0feece0890a94479a4dbae3511dbe78, type: 3}
+  - {fileID: 8300000, guid: df55ac7b387e349899c17728b0a8887f, type: 3}
+  - {fileID: 8300000, guid: c8496f52b39a040b6a9cb36c6902370c, type: 3}
+  - {fileID: 8300000, guid: f9cf39fec5dc74cf18b90abb5b14d305, type: 3}
+  - {fileID: 8300000, guid: 69d04597fbead42528db320f4671e166, type: 3}

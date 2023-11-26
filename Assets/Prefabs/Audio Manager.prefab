@@ -185,7 +185,8 @@ MonoBehaviour:
   - {fileID: 4844067261292688657}
   volume: 0.5
   effects: []
-  soundCollections: []
+  soundCollections:
+  - {fileID: 11400000, guid: 070afa98110c949feabc881836f70463, type: 2}
 --- !u!1 &758351476271245072
 GameObject:
   m_ObjectHideFlags: 0

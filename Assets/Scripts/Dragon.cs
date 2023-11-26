@@ -1,6 +1,8 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,6 +15,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private SpeechBubble speechBubble;
     [SerializeField] private TutorialMessage intro;
     [SerializeField] private Face face;
+    [SerializeField] private SoundCollection talks;
 
     private Vector3 start;
 
@@ -29,6 +32,12 @@ public class Dragon : MonoBehaviour
     {
         Tutorial = new Tutorial<TutorialMessage>("ScaleTutorials");
         Tutorial.onShow += ShowTutorial;
+        speechBubble.onWord += WordSound;
+    }
+
+    private void WordSound()
+    {
+        AudioManager.Instance.PlayEffectFromCollection(talks, transform.position, 1.1f);
     }
 
     private void Start()
@@ -157,7 +166,10 @@ public class Dragon : MonoBehaviour
     private void Update()
     {
         if (DevKey.Down(KeyCode.H)) Hop();
-        if (DevKey.Down(KeyCode.T)) Nudge();
+        if (DevKey.Down(KeyCode.T))
+        {
+            speechBubble.Show(GetTutorialMessage(EnumUtils.Random<TutorialMessage>()));
+        }
         if (DevKey.Down(KeyCode.S)) Sit();
         if (DevKey.Down(KeyCode.D)) Tutorial.Clear();
     }
