@@ -1228,7 +1228,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980671924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -3.69, z: 0}
+  m_LocalPosition: {x: -5, y: -3.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1982,6 +1982,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1176571130}
   - component: {fileID: 1176571129}
+  - component: {fileID: 1176571131}
   m_Layer: 0
   m_Name: Mass
   m_TagString: Untagged
@@ -2058,6 +2059,17 @@ Transform:
   m_Father: {fileID: 2103922411}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!210 &1176571131
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176571128}
+  m_Enabled: 1
+  m_SortingLayerID: -1579701797
+  m_SortingLayer: -1
+  m_SortingOrder: 0
 --- !u!1 &1203363013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2674,6 +2686,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1441100662}
   - component: {fileID: 1441100663}
+  - component: {fileID: 1441100664}
   m_Layer: 0
   m_Name: Mass
   m_TagString: Untagged
@@ -2750,6 +2763,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!210 &1441100664
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441100661}
+  m_Enabled: 1
+  m_SortingLayerID: -1579701797
+  m_SortingLayer: -1
+  m_SortingOrder: 0
 --- !u!114 &1442721221 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7676871227263162674, guid: d09dd584f050440e0b1c792fce3618a1, type: 3}
@@ -4079,6 +4103,7 @@ MonoBehaviour:
   deck: {fileID: 980671926}
   locked: 0
   size: 5
+  deckPosLimit: -5
 --- !u!4 &1827458998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7676871227263162669, guid: d09dd584f050440e0b1c792fce3618a1, type: 3}

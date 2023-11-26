@@ -9,6 +9,7 @@ public class Hand : MonoBehaviour
     [SerializeField] private Deck deck;
     [SerializeField] private bool locked;
     [SerializeField] private int size;
+    [SerializeField] private float deckPosLimit = -2f;
 
     private readonly List<Card> cards = new();
 
@@ -75,7 +76,7 @@ public class Hand : MonoBehaviour
         var p = -(handCards.Count - 1) * 0.5f;
         if (deck)
         {
-            Tweener.MoveToBounceOut(deck.transform, transform.position + Vector3.right * Mathf.Min(-2f, 1.2f * (p - 1.2f)), 0.1f);   
+            Tweener.MoveToBounceOut(deck.transform, transform.position + Vector3.right * Mathf.Min(deckPosLimit, 1.2f * (p - 1.2f)), 0.1f);   
         }
         handCards.ForEach(c => Reposition(c, p++));
     }

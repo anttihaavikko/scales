@@ -151,10 +151,8 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 0, a: 1}
   frontColors:
   - {r: 1, g: 1, b: 1, a: 1}
-  clickSound: -1
-  hoverSound: -1
-  clickVolume: 1
-  hoverVolume: 1
+  clickSound: {fileID: 11400000, guid: 5f52958076d4849d9b91ef5fc9b81ad5, type: 2}
+  hoverSound: {fileID: 11400000, guid: 270c9819cceff42348508177d39d8814, type: 2}
 --- !u!1 &704884182319787878
 GameObject:
   m_ObjectHideFlags: 0

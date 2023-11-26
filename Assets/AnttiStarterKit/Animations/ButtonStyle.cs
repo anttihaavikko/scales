@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,9 +27,8 @@ namespace AnttiStarterKit.Animations
         [SerializeField] private List<Color> backColors = new() { Color.black };
         [SerializeField] private List<Color> frontColors = new() { Color.white };
 
-        [SerializeField] private int clickSound = -1, hoverSound = -1;
-        [SerializeField] private float clickVolume = 1f, hoverVolume = 1f;
-        
+        [SerializeField] private SoundCollection clickSound, hoverSound;
+        [SerializeField] private bool inScreenSpace;
 
         private Vector3 originalScale;
         private Color originalBackColor, originalFrontColor;
@@ -44,7 +44,7 @@ namespace AnttiStarterKit.Animations
 
         private Vector3 GetSoundPos()
         {
-            return cam.ScreenToWorldPoint(transform.position);
+            return inScreenSpace ? cam.ScreenToWorldPoint(transform.position) : transform.position;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -52,7 +52,7 @@ namespace AnttiStarterKit.Animations
             ApplyScaling(scaleAmount, TweenEasings.BounceEaseOut);
             ApplyRotation(Random.Range(-rotationAmount, rotationAmount), TweenEasings.BounceEaseOut);
             ApplyColors(backColors.Random(), frontColors.Random());
-            DoSound(hoverSound, hoverVolume);
+            DoSound(hoverSound);
         }
     
         private void ApplyScaling(float amount, Func<float, float> easing)
@@ -100,7 +100,7 @@ namespace AnttiStarterKit.Animations
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            DoSound(hoverSound, hoverVolume);
+            DoSound(hoverSound);
             Reset();
         }
 
@@ -113,15 +113,15 @@ namespace AnttiStarterKit.Animations
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            DoSound(clickSound, clickVolume);
+            DoSound(clickSound);
             Reset();
         }
 
-        private void DoSound(int index, float volume)
+        private void DoSound(SoundCollection sound)
         {
-            if (index < 0) return;
+            if (!sound) return;
             var pos = GetSoundPos();
-            AudioManager.Instance.PlayEffectAt(index, pos, volume);
+            AudioManager.Instance.PlayEffectFromCollection(sound, pos);
         }
     }
 }

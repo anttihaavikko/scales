@@ -205,16 +205,22 @@ public class Dragon : MonoBehaviour
 
     public void Hop()
     {
-        var p = transform.position;
-        AudioManager.Instance.PlayEffectFromCollection(8, p);
-        AudioManager.Instance.PlayEffectFromCollection(2, p, 0.9f);
+        JumpSound();
         face.Emote(Face.Emotion.Brag);
         Tweener.MoveToBounceOut(head, GlobalStart, 0.4f);
         anim.SetTrigger(HopAnim);
     }
 
+    private void JumpSound()
+    {
+        var p = transform.position;
+        AudioManager.Instance.PlayEffectFromCollection(8, p, 1.5f);
+        AudioManager.Instance.PlayEffectFromCollection(2, p, 1.3f);
+    }
+
     public void HopTo(Vector3 pos)
     {
+        JumpSound();
         face.Emote(Face.Emotion.Happy);
         Tweener.MoveToQuad(transform, pos, 5f / 6f * 0.5f);
         anim.SetTrigger(HopAnim);

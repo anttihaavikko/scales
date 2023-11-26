@@ -2840,6 +2840,7 @@ MonoBehaviour:
   deck: {fileID: 286923755}
   locked: 1
   size: 3
+  deckPosLimit: -3
 --- !u!4 &1232802781
 Transform:
   m_ObjectHideFlags: 0
@@ -4009,6 +4010,7 @@ MonoBehaviour:
   deck: {fileID: 980671926}
   locked: 0
   size: 3
+  deckPosLimit: -2
 --- !u!1 &1841243067
 GameObject:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class Deck : MonoBehaviour
     {
         data.Init();
         var card = Instantiate(cardPrefab, transform);
-        card.transform.position += Vector3.up * 0.2f * cards.Count;
+        card.transform.position += Vector3.up * 0.1f * cards.Count;
         card.Setup(data, this);
         return card;
     }
@@ -47,7 +47,7 @@ public class Deck : MonoBehaviour
     public Card AddCard(CardData data)
     {
         var card = Create(data);
-        card.transform.position += Vector3.up * 0.2f * cards.Count;
+        card.transform.position += Vector3.up * 0.1f * cards.Count;
         cards.Add(card);
         return card;
     }

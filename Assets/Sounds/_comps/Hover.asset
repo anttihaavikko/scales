@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ed6741a13249ff91a11647becccdea, type: 3}
+  m_Name: Hover
+  m_EditorClassIdentifier: 
+  volume: 0.5
+  clips:
+  - {fileID: 8300000, guid: 5486e176e1f674e83a73345180ae22ad, type: 3}
+  - {fileID: 8300000, guid: 63140b4e7cb0b480383f1c98cb71c5a7, type: 3}
+  - {fileID: 8300000, guid: 69f1773a10e914f90b47fdfe263a0e0d, type: 3}
+  - {fileID: 8300000, guid: 02c6d396e47254641a5e225c3e60edbc, type: 3}
+  - {fileID: 8300000, guid: 0c8b9bb0aa42f4dbb8434dd258701c76, type: 3}
