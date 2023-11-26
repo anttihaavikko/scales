@@ -177,7 +177,7 @@ public class Fish : GameMode
 
     public override bool CanCombine(Card first, Card second)
     {
-        return !hasEnded;
+        return false;
     }
 
     public override void RightClick(Card card)
