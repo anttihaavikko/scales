@@ -20,6 +20,7 @@ namespace AnttiStarterKit.Animations
         [SerializeField] private float delayBetweenWords = 0.05f;
         [SerializeField] private bool staticPlacing = true;
         [SerializeField] private SoundCollection toggleSound;
+        [SerializeField] private int talkEvery = 1;
 
         private Appearer appearer;
         private string hex;
@@ -29,6 +30,7 @@ namespace AnttiStarterKit.Animations
         private bool done = true;
         private bool showing;
         private Queue<string> queue;
+        private int wordCount;
 
         private void Awake()
         {
@@ -43,6 +45,8 @@ namespace AnttiStarterKit.Animations
 
         public void Show(string text, bool force = false)
         {
+            wordCount = 0;
+            
             if (force)
             {
                 queue.Clear();
@@ -178,7 +182,8 @@ namespace AnttiStarterKit.Animations
         {
             if (pos == 0 || current == " ")
             {
-                onWord?.Invoke();
+                if(wordCount % talkEvery == 0) onWord?.Invoke();
+                wordCount++;
             }
         }
 

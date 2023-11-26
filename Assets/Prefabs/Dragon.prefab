@@ -1125,7 +1125,7 @@ MonoBehaviour:
   speechBubble: {fileID: 6357250264344616626}
   intro: 0
   face: {fileID: 6357250263319385565}
-  talks: {fileID: 11400000, guid: 6c2e672a98d1b44e9b3e7c32850f6b1f, type: 2}
+  talks: {fileID: 11400000, guid: 070afa98110c949feabc881836f70463, type: 2}
 --- !u!114 &6357250262859026781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6162,6 +6162,7 @@ MonoBehaviour:
   delayBetweenWords: 0.05
   staticPlacing: 1
   toggleSound: {fileID: 0}
+  talkEvery: 1
 --- !u!114 &6357250264344616637
 MonoBehaviour:
   m_ObjectHideFlags: 0

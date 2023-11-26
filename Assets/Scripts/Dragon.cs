@@ -37,7 +37,9 @@ public class Dragon : MonoBehaviour
 
     private void WordSound()
     {
-        AudioManager.Instance.PlayEffectFromCollection(talks, transform.position, 1.1f);
+        var p = transform.position;
+        AudioManager.Instance.PlayEffectFromCollection(talks, p, 1.1f);
+        AudioManager.Instance.PlayEffectFromCollection(talks, p, 1.1f);
     }
 
     private void Start()

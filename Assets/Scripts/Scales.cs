@@ -76,7 +76,7 @@ public class Scales : GameMode
         AfterPlay(card);
         card.Flatten();
         var pos = slot.GetPosition();
-        Tweener.MoveToBounceOut(card.transform, pos, 0.1f);
+        card.MoveTo(pos);
         
         card.transform.SetParent(slot.transform);
 

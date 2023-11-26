@@ -327,6 +327,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnPick()
     {
+        AudioManager.Instance.PlayEffectFromCollection(1, transform.position, 0.6f);
+        
         picked?.Invoke();
         deck.Tooltip.Hide();
         if (IsModifier)
@@ -363,6 +365,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            AudioManager.Instance.PlayEffectFromCollection(1, transform.position, 0.6f);
             deck.RightClick(this);
         }
     }
@@ -382,6 +385,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void MoveTo(Vector3 pos, float speed = 1f)
     {
+        AudioManager.Instance.PlayEffectFromCollection(2, transform.position, 0.6f);
         deck.Tooltip.Hide(this);
         Tweener.MoveToBounceOut(transform, pos, 0.1f / speed);
         Nudge();
@@ -405,12 +409,15 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void Nudge()
     {
+        AudioManager.Instance.PlayEffectFromCollection(0, transform.position, 0.2f);
         var rot = Quaternion.Euler(new Vector3(0, 0, Random.Range(-3f, 3f)));
         Tweener.RotateToBounceOut(transform, rot, 0.1f);
     }
 
     public void Pop(bool shake = true)
     {
+        AudioManager.Instance.PlayEffectFromCollection(0, transform.position, 1f);
+        
         if (shake && deck)
         {
             deck.Shake(0.1f);
