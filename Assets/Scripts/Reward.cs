@@ -41,7 +41,11 @@ public class Reward : GameMode
 
         if (State.Instance.Has(Effect.Phone))
         {
-            this.StartCoroutine(() => phoneButton.Show(), 0.5f);
+            this.StartCoroutine(() =>
+            {
+                phoneButton.Show();
+                AudioManager.Instance.PlayEffectAt(0, Vector3.right * 3f, 0.3f);
+            }, 0.5f);
         }
         
         SetPickText($"Pick <color=#CDE7B0>{picks}</color> new cards...");

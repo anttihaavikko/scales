@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ public class Phone : MonoBehaviour
     public void Show()
     {
         dragon.Tutorial.Show(TutorialMessage.Phone);
+        AudioManager.Instance.PlayEffectFromCollection(2, Vector3.right * 3f, 1f);
         
         if (!loaded)
         {
@@ -70,11 +72,14 @@ public class Phone : MonoBehaviour
 
     public void Hide()
     {
+        AudioManager.Instance.PlayEffectFromCollection(2, Vector3.right * 3f, 1f);
+        AudioManager.Instance.PlayEffectFromCollection(1, Vector3.right * 3f, 0.5f);
         Tweener.MoveToBounceOut(phone, offPos.position, 0.3f);
     }
 
     public void Scroll(int dir)
     {
+        AudioManager.Instance.PlayEffectFromCollection(1, Vector3.right * 3f, 0.3f);
         var step = scrollView.viewport.rect.height / scrollView.content.rect.height * 0.5f;
         scrollView.normalizedPosition += Vector2.up * dir * step;
     }
