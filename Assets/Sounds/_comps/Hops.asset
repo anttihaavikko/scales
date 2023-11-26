@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ed6741a13249ff91a11647becccdea, type: 3}
+  m_Name: Hops
+  m_EditorClassIdentifier: 
+  volume: 1
+  clips:
+  - {fileID: 8300000, guid: 1ef39efc76b644c2e916fc6da322e3d2, type: 3}
+  - {fileID: 8300000, guid: eeac2c848a99742da871838884283f8e, type: 3}
+  - {fileID: 8300000, guid: 55525c86a9b9a4304b22602f85a19d7d, type: 3}
+  - {fileID: 8300000, guid: 1ec19506017114f39956212a770bd54a, type: 3}
+  - {fileID: 8300000, guid: c7d68ee5a8e494177a2fe506f938e44d, type: 3}

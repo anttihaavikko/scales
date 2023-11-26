@@ -109,7 +109,7 @@ namespace AnttiStarterKit.Managers
 			var targetHighpass = (doingHighpass) ? 400f : 10f;
 			var changeSpeed = Time.deltaTime * 60f;
 
-			curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, TargetPitch, 0.01f * changeSpeed);
+			curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, TargetPitch, 0.0075f * changeSpeed);
 			if(lowpass) lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);
 			if (highpass) highpass.cutoffFrequency = Mathf.MoveTowards (highpass.cutoffFrequency, targetHighpass, 50f * changeSpeed);
 		
@@ -129,9 +129,15 @@ namespace AnttiStarterKit.Managers
 
 		public void NudgePitch(float target, float duration)
 		{
+			if (TargetPitch < 0.5f) return;
 			TargetPitch = target;
 			CancelInvoke(nameof(NormalizePitch));
 			Invoke(nameof(NormalizePitch), duration);
+		}
+
+		public void CancelPitching()
+		{
+			CancelInvoke(nameof(NormalizePitch));
 		}
 
 		private void NormalizePitch()

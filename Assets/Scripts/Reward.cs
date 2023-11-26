@@ -316,6 +316,7 @@ public class Reward : GameMode
             deck.AddCard(dupe);
             MoveDeck();
         }
+        second.Pop();
         data.Modify(first.GetData());
         second.Setup(data, deck);
         second.Flip();

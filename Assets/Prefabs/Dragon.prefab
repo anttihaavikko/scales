@@ -2500,6 +2500,7 @@ MonoBehaviour:
   browRange: 0.05
   lookSpeed: 1
   emoteSpeed: 0.05
+  blinkSound: {fileID: 11400000, guid: fd839d52894784859bb7f62c93405375, type: 2}
   mouthSprite: {fileID: 0}
   mouthAngry: {fileID: 0}
   mouthSad: {fileID: 0}

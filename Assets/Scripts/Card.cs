@@ -416,9 +416,15 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void Pop(bool shake = true)
     {
-        AudioManager.Instance.PlayEffectFromCollection(0, transform.position, 1f);
+        var p = transform.position;
+        AudioManager.Instance.PlayEffectFromCollection(0, p, 1f);
+        AudioManager.Instance.PlayEffectFromCollection(5, p, 1.3f);
+        if (shake)
+        {
+            AudioManager.Instance.PlayEffectFromCollection(4, p, 1f);   
+        }
         AudioManager.Instance.NudgePitch(1.3f, 0.2f);
-        
+
         if (shake && deck)
         {
             deck.Shake(0.1f);

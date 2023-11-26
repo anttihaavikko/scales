@@ -205,6 +205,9 @@ public class Dragon : MonoBehaviour
 
     public void Hop()
     {
+        var p = transform.position;
+        AudioManager.Instance.PlayEffectFromCollection(8, p);
+        AudioManager.Instance.PlayEffectFromCollection(2, p, 0.9f);
         face.Emote(Face.Emotion.Brag);
         Tweener.MoveToBounceOut(head, GlobalStart, 0.4f);
         anim.SetTrigger(HopAnim);
@@ -219,11 +222,13 @@ public class Dragon : MonoBehaviour
 
     public void DoubleFlap()
     {
+        AudioManager.Instance.PlayEffectFromCollection(2, transform.position, 0.1f);
         anim.SetTrigger(FlapTwiceAnim);
     }
 
     public void Flap()
     {
+        AudioManager.Instance.PlayEffectFromCollection(2, transform.position, 0.1f);
         anim.SetTrigger(FlapAnim);
     }
 

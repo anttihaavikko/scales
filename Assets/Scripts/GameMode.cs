@@ -96,6 +96,7 @@ public abstract class GameMode : MonoBehaviour
     {
         hasEnded = true;
         gameOver.SetActive(true);
+        AudioManager.Instance.CancelPitching();
         AudioManager.Instance.TargetPitch = 0;
     }
 

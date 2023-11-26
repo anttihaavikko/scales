@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ed6741a13249ff91a11647becccdea, type: 3}
+  m_Name: Bong
+  m_EditorClassIdentifier: 
+  volume: 1
+  clips:
+  - {fileID: 8300000, guid: 2783c623bcbc6404c8b198aad1a7e7f9, type: 3}
+  - {fileID: 8300000, guid: 8d2c79ded4ebf4a0188bcf39f46df332, type: 3}
+  - {fileID: 8300000, guid: cd10b7f33d3d144f3ad9892f396c43f1, type: 3}
+  - {fileID: 8300000, guid: 2f22a576cd11d461c95c69e994c99a34, type: 3}

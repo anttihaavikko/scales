@@ -1,4 +1,6 @@
 ﻿using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using UnityEngine;
 
 namespace AnttiStarterKit.Animations
@@ -45,6 +47,8 @@ namespace AnttiStarterKit.Animations
 		public float lookSpeed = 1f;
 		public float emoteSpeed = 0.05f;
 
+		[SerializeField] private SoundCollection blinkSound;
+
 		public SpriteRenderer mouthSprite;
 		private Sprite mouthDefault;
 		public Sprite mouthAngry, mouthSad, mouthHappy, mouthOpen;
@@ -84,7 +88,7 @@ namespace AnttiStarterKit.Animations
 
 		private void Start()
 		{
-			Invoke("Blink", blinkDelay * Random.Range(0.8f, 1.2f));
+			Invoke(nameof(Blink), blinkDelay * Random.Range(0.8f, 1.2f));
 		}
 
 		// Update is called once per frame
@@ -191,11 +195,15 @@ namespace AnttiStarterKit.Animations
 			foreach(var e in eyes)
 			{
 				float delay = Random.Range(0f, derpiness);
+				if (blinkSound)
+				{
+					this.StartCoroutine(() => AudioManager.Instance.PlayEffectFromCollection(blinkSound, e.position), delay);	
+				}
 				Tweener.Instance.ScaleTo(e, new Vector3(e.localScale.x, e.localScale.x * 0.1f, e.localScale.z), blinkSpeed, delay, TweenEasings.QuarticEaseOut, -1);
 				Tweener.Instance.ScaleTo(e, new Vector3(e.localScale.x, e.localScale.x, e.localScale.z), blinkSpeed, blinkSpeed + delay, TweenEasings.QuarticEaseOut, -1, false);
 			}
 
-			Invoke("Blink", blinkDelay * Random.Range(0.8f, 1.2f));
+			Invoke(nameof(Blink), blinkDelay * Random.Range(0.8f, 1.2f));
 		}
 
 		void ChangeMouth(Sprite sprite) {
