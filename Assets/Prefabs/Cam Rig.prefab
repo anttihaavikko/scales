@@ -329,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 2147483647
+    m_Bits: 1527
   m_MaxRayIntersections: 0
 --- !u!114 &1026786659903803503
 MonoBehaviour:

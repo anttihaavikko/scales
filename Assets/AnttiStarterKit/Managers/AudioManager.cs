@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
+using AnttiStarterKit.Extensions;
 using AnttiStarterKit.ScriptableObjects;
 using UnityEngine;
 
@@ -108,7 +109,7 @@ namespace AnttiStarterKit.Managers
 			var targetHighpass = (doingHighpass) ? 400f : 10f;
 			var changeSpeed = Time.deltaTime * 60f;
 
-			curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, TargetPitch, 0.005f * changeSpeed);
+			curMusic.pitch = Mathf.MoveTowards (curMusic.pitch, TargetPitch, 0.01f * changeSpeed);
 			if(lowpass) lowpass.cutoffFrequency = Mathf.MoveTowards (lowpass.cutoffFrequency, targetLowpass, 750f * changeSpeed);
 			if (highpass) highpass.cutoffFrequency = Mathf.MoveTowards (highpass.cutoffFrequency, targetHighpass, 50f * changeSpeed);
 		
@@ -124,6 +125,18 @@ namespace AnttiStarterKit.Managers
 
 				if (prevMusic.volume <= 0f) prevMusic.Stop();
 			}
+		}
+
+		public void NudgePitch(float target, float duration)
+		{
+			TargetPitch = target;
+			CancelInvoke(nameof(NormalizePitch));
+			Invoke(nameof(NormalizePitch), duration);
+		}
+
+		private void NormalizePitch()
+		{
+			TargetPitch = 1f;
 		}
 
 		public void PlayEffectFromCollection(int collection, Vector3 pos, float v = 1f)

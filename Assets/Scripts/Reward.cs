@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -140,6 +141,9 @@ public class Reward : GameMode
 
     private void ShowSkills()
     {
+        AudioManager.Instance.NudgePitch(0.5f, 0.4f);
+        AudioManager.Instance.PlayEffectFromCollection(3, Vector3.zero, 0.7f);
+        
         hand.Clear();
         var options = new List<Card>();
         
@@ -160,6 +164,8 @@ public class Reward : GameMode
             {
                 if (hasEnded) return;
                 if (picked) return;
+                
+                AudioManager.Instance.PlayEffectFromCollection(3, Vector3.zero, 0.7f);
                 
                 dragon.Nudge();
                 
