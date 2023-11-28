@@ -69,8 +69,8 @@ public class MessageHistory
         {
             "Please think about it.",
             "Everything needs to be sorted out.",
-            "I was just too wasted day and night.",
-            "All high and didn't know what I was doing.",
+            "I was just too wasted all day and night.",
+            "All high too and didn't know what I was doing.",
             "I thought we didn't have any chance anymore.",
             "Please don't let it ruin everything.",
             "I'll get myself in a better condition and promise it will turn out better.",
