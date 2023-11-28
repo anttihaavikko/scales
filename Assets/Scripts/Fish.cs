@@ -95,6 +95,7 @@ public class Fish : GameMode
         {
             if (card == root) ClearSelection();
             selected.Remove(card);
+            ReSelect();
             return;
         }
         
@@ -151,6 +152,8 @@ public class Fish : GameMode
         ShowScore(total, cards.Count, p);
         scoreDisplay.Add(cards.Count * total);
         scoreDisplay.AddMulti();
+        
+        Shake(0.15f * cards.Count);
     }
 
     private void ClearSelection()

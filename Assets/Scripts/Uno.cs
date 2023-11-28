@@ -184,7 +184,7 @@ public class Uno : GameMode
         AudioManager.Instance.PlayEffectFromCollection(1, Vector3.zero, 1.5f);
         AudioManager.Instance.PlayEffectFromCollection(2, Vector3.zero, 1.5f);
         
-        deck.Shake(0.1f);
+        Shake(0.1f);
     }
 
     private void StartTurn()
@@ -426,9 +426,7 @@ public class Uno : GameMode
         AudioManager.Instance.PlayEffectFromCollection(5, p, 1.5f);
         
         EffectManager.AddEffect(4, p);
-        
-        deck.Shake(0.2f);
-        
+
         tickDisplay.text = new string('I', ticks);
         Invoke(nameof(Flip), 0.5f);
     }

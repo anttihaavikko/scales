@@ -439,6 +439,8 @@ public class Mountain : GameMode
         {
             this.StartCoroutine(() => dragon.Tutorial.Show(TutorialMessage.BigScore), 1f);
         }
+        
+        Shake(0.15f * cards.Count);
     }
 }
 
