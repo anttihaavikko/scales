@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
@@ -119,7 +120,7 @@ public class Uno : GameMode
             if(isPlayer) scoreDisplay.AddMulti();
             helper.Tutorial.Mark(TutorialMessage.UnoSame);
             helper.Tutorial.Show(TutorialMessage.UnoChoice);
-            HandleSame();
+            Invoke(nameof(Flip), 0.5f);
             return;
         }
         
@@ -177,6 +178,11 @@ public class Uno : GameMode
         opponent.descending = descending;
         EndTurn();
         helper.Tutorial.Show(TutorialMessage.UnoFlip);
+
+        EffectManager.AddEffect(4, arrow.transform.position);
+        
+        AudioManager.Instance.PlayEffectFromCollection(1, Vector3.zero, 1.5f);
+        AudioManager.Instance.PlayEffectFromCollection(2, Vector3.zero, 1.5f);
     }
 
     private void StartTurn()
@@ -410,8 +416,14 @@ public class Uno : GameMode
             TryEnd();
             return;
         }
+
+        var p = tickLine.transform.position;
+        AudioManager.Instance.PlayEffectFromCollection(4, p, 1.5f);
+        AudioManager.Instance.PlayEffectFromCollection(5, p, 1.5f);
+        
+        EffectManager.AddEffect(4, p);
         
         tickDisplay.text = new string('I', ticks);
-        Flip();
+        Invoke(nameof(Flip), 0.5f);
     }
 }

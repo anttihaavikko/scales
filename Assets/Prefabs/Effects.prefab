@@ -49,4 +49,5 @@ MonoBehaviour:
   - {fileID: 8914173635181715984, guid: 77c6032322e0d4cfaa4160c886690e7d, type: 3}
   - {fileID: 5901857389752271184, guid: 0de333698ebe8427ab8cfd0728e65e98, type: 3}
   - {fileID: 3622396811156792783, guid: 05c924f9b264e4c04b92b78f3fbb134b, type: 3}
+  - {fileID: 3622396811156792783, guid: d3bc2cd6540374f5fbf559f6dd74bf09, type: 3}
   textPopupPrefab: {fileID: 2058714445950480008, guid: 736a4fdeedbf743279baa9f147e5e9e3, type: 3}
