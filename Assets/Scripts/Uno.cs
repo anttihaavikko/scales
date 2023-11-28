@@ -285,7 +285,7 @@ public class Uno : GameMode
 
     private List<Card> GetOptions()
     {
-        return hand.Cards.Where(c => CanPlay(c.Number)).ToList();
+        return hand.Cards.Where(c => CanPlay(c.Number) || c.IsPlayable).ToList();
     }
 
     protected override void Combine(Card first, Card second)
@@ -348,6 +348,8 @@ public class Uno : GameMode
         hand.Draw();
         TryEnd();
         card.gameObject.SetActive(false);
+        
+        StartTurn();
     }
 
     public override IReadOnlyCollection<Card> GetVisibleCards()
