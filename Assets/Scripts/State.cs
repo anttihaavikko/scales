@@ -136,4 +136,23 @@ public class State : Manager<State>
         Score = score;
         SceneChanger.Instance.ChangeScene("Reward");
     }
+
+    public void Reset()
+    {
+        cards.Clear();
+        cards.AddRange(new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList());
+        opponentCards.Clear();
+        opponentCards.AddRange(new List<int> { 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 10 }.Select(num => new CardData(num)).ToList());
+        Level = 0;
+        previousLevel = null;
+        HeldMulti = 1;
+        skills.Clear();
+        Strikes = 0;
+        MaxStrikes = 3;
+        messageHistory = default;
+        messages = default;
+
+        AudioManager.Instance.TargetPitch = 1f;
+        SceneChanger.Instance.ChangeScene("Mountain");
+    }
 }

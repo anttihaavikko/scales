@@ -12,6 +12,20 @@ namespace AnttiStarterKit.Extensions
             return value.ToString("#,0", nfi);
         }
 
+        public static string AsScore(this long value)
+        {
+            var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            nfi.NumberGroupSeparator = " ";
+            return value.ToString("#,0", nfi);
+        }
+        
+        public static string AsScore(this ulong value)
+        {
+            var nfi = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
+            nfi.NumberGroupSeparator = " ";
+            return value.ToString("#,0", nfi);
+        }
+
         public static string WithSign(this int value)
         {
             return TextUtils.NumberWithSign(value);
