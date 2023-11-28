@@ -9,6 +9,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Utils.DevMenu;
 using AnttiStarterKit.Visuals;
+using Leaderboards;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,6 +31,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected Appearer splash;
     [SerializeField] protected GameObject gameOver;
     [SerializeField] protected int music;
+    [SerializeField] private ScoreManager scoreManager;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
@@ -98,6 +100,13 @@ public abstract class GameMode : MonoBehaviour
         gameOver.SetActive(true);
         AudioManager.Instance.CancelPitching();
         AudioManager.Instance.TargetPitch = 0;
+
+        if (scoreManager)
+        {
+            var plr = PlayerPrefs.GetString("PlayerName", "Anon");
+            var id = PlayerPrefs.GetString("PlayerId", "123");
+            scoreManager.SubmitScore(plr, scoreDisplay.Total, State.Instance.LevelMulti, id);   
+        }
     }
 
     public void ToRewards()
@@ -171,7 +180,7 @@ public abstract class GameMode : MonoBehaviour
         }
     }
 
-    protected void ShowScore(int total, int multi, Vector3 p)
+    protected void ShowScore(long total, int multi, Vector3 p)
     {
         Shake(0.2f);
         var multiText = $"<color=#CDE7B0><size=5>x{multi}</size></color>";

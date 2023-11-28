@@ -16,7 +16,7 @@ public class State : Manager<State>
     private string previousLevel;
 
     public int Level { get; private set; }
-    public int Score { get; set; }
+    public long Score { get; set; }
     public int Strikes { get; set; }
     public int MaxStrikes { get; set; } = 3;
     public int LevelMulti => Level + 1;
@@ -131,7 +131,7 @@ public class State : Manager<State>
         return GetCard(id) != default;
     }
 
-    public void RoundEnded(int score)
+    public void RoundEnded(long score)
     {
         Score = score;
         SceneChanger.Instance.ChangeScene("Reward");
@@ -153,6 +153,7 @@ public class State : Manager<State>
         messages = default;
 
         AudioManager.Instance.TargetPitch = 1f;
-        SceneChanger.Instance.ChangeScene("Mountain");
+        var scene = PlayerPrefs.HasKey("PlayerName") ? "Mountain" : "Name";
+        SceneChanger.Instance.ChangeScene(scene);
     }
 }

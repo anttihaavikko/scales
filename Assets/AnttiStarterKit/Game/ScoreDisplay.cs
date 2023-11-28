@@ -21,12 +21,12 @@ namespace AnttiStarterKit.Game
 
         private List<Pulsater> multiPulsates = new();
 
-        private int value;
+        private long value;
         private float shownValue;
-        private int addition;
+        private long addition;
         private int multiplier = 1;
 
-        public int Total => value;
+        public long Total => value;
         public int Multi => multiplier;
 
         private void Start()
@@ -37,7 +37,7 @@ namespace AnttiStarterKit.Game
             }
         }
 
-        public void Set(int amount, int multi = 1)
+        public void Set(long amount, int multi = 1)
         {
             value = amount;
             multiplier = multi;
@@ -46,7 +46,7 @@ namespace AnttiStarterKit.Game
             ShowMulti();
         }
 
-        private string Format(int number)
+        private string Format(long number)
         {
             return separateThousands ? number.AsScore() : number.ToString();
         }
@@ -68,7 +68,7 @@ namespace AnttiStarterKit.Game
             if (Mathf.Abs(shownValue - value) < 0.1f) return;
             var speed = Mathf.Max(Mathf.Abs(value - shownValue) * Time.deltaTime * maxSpeed, minSpeed);
             shownValue = Mathf.MoveTowards(shownValue, value, speed);
-            valueFields.ForEach(f => f.text = Format(Mathf.RoundToInt(shownValue)));
+            valueFields.ForEach(f => f.text = Format((long)Mathf.RoundToInt(shownValue)));
         }
 
         private string GetAdditionAsText()
@@ -77,9 +77,9 @@ namespace AnttiStarterKit.Game
             return addition > 0 ? $"+{number}" : number;
         }
 
-        public void Add(int amount, bool useMulti = true)
+        public void Add(long amount, bool useMulti = true)
         {
-            var amt = useMulti ? amount * multiplier : amount;
+            var amt = useMulti ? amount * (long)multiplier : amount;
 
             if (amt < 0 && value + amt < 0)
             {

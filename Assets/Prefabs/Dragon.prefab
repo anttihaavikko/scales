@@ -1126,6 +1126,7 @@ MonoBehaviour:
   intro: 0
   face: {fileID: 6357250263319385565}
   talks: {fileID: 11400000, guid: 070afa98110c949feabc881836f70463, type: 2}
+  isPlayer: 1
 --- !u!114 &6357250262859026781
 MonoBehaviour:
   m_ObjectHideFlags: 0

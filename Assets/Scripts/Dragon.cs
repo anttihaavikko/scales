@@ -16,6 +16,7 @@ public class Dragon : MonoBehaviour
     [SerializeField] private TutorialMessage intro;
     [SerializeField] private Face face;
     [SerializeField] private SoundCollection talks;
+    [SerializeField] private bool isPlayer;
 
     private Vector3 start;
 
@@ -240,7 +241,11 @@ public class Dragon : MonoBehaviour
 
     public void Sit()
     {
-        this.StartCoroutine(() => face.Emote(Face.Emotion.Sad), 0.5f);
+        this.StartCoroutine(() =>
+        {
+            face.Emote(Face.Emotion.Sad);
+            if(isPlayer) AudioManager.Instance.NudgePitch(0.1f, 0.3f);
+        }, 0.5f);
         anim.SetTrigger(SitAnim);
     }
 
