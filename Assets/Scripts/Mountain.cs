@@ -186,7 +186,7 @@ public class Mountain : GameMode
         if (hasEnded) return;
         
         dragon.Tutorial.Show(TutorialMessage.Slotting);
-        scoreDisplay.ResetMulti();
+        ResetMulti();
         DeselectAll();
         slots.ForEach(s => s.Remove(card));
         card.ChangeSelection(false);
@@ -270,7 +270,7 @@ public class Mountain : GameMode
         
         if (card.Is(CardType.Recall))
         {
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
         
         PlayGenericInstant(card);

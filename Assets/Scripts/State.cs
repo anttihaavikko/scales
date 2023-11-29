@@ -54,6 +54,11 @@ public class State : Manager<State>
         return val;
     }
 
+    public bool HasTrifecta()
+    {
+        return Has(Effect.UkkoMine) && Has(Effect.UkkoPowerPlant) && Has(Effect.UkkoTower);
+    }
+
     public int GetCount(Effect skill)
     {
         var val = skills.Count(s => s.effect == skill);

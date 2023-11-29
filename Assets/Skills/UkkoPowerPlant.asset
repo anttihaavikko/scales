@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a88bfb148be4c4d96fdcdfb513c59d0, type: 3}
+  m_Name: UkkoPowerPlant
+  m_EditorClassIdentifier: 
+  data:
+    effect: 28
+    title: Ukko's Power-Plant
+    description: Gain (x10) the (score) for playing (cards) with value (greater than
+      20). Unlocks (Ukko's Trifecta) if you also have (Ukko's Mine) and (Ukko's Tower).
+    icon: {fileID: 477116835, guid: 78889022a06b74580bc154b8bcacc3fd, type: 3}
+    allowedRepeats: 0
+    extras: 07000000
+    minValue: 0
+    maxValue: 0
+    value: 0

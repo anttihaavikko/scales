@@ -176,8 +176,19 @@ public abstract class GameMode : MonoBehaviour
             var size = GetHandSize() * multi;
             scoreDisplay.Add(30 * card.Multiplier * size * State.Instance.LevelMulti);
             ShowScore(30 * size, card.Multiplier, p);
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
+    }
+
+    protected void ResetMulti()
+    {
+        if (State.Instance.HasTrifecta())
+        {
+            scoreDisplay.DecreaseMulti();
+            return;
+        }
+        
+        scoreDisplay.ResetMulti();
     }
 
     protected void ShowScore(long total, int multi, Vector3 p)

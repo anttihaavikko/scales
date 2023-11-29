@@ -26,13 +26,13 @@ public class ExtraInfo : MonoBehaviour
             TooltipExtra.Modifier => "Modifiers",
             TooltipExtra.Death => "Death",
             TooltipExtra.Gem => "Mox",
+            TooltipExtra.UkkoTrifecta => "Ukko's Trifecta",
             _ => throw new ArgumentOutOfRangeException(nameof(extra), extra, null)
         };
     }
     
-    public static string GetDescription(TooltipExtra extra)
-    {
-        return extra switch
+    public static string GetDescription(TooltipExtra extra) =>
+        extra switch
         {
             TooltipExtra.Cheat => "Discreetly (mark) the value of the card on the (back side).",
             TooltipExtra.Strike => "Mark of a (failure). If you get (three), you lose.",
@@ -41,9 +41,9 @@ public class ExtraInfo : MonoBehaviour
             TooltipExtra.Modifier => "Cards that (manipulate) other (chosen cards).",
             TooltipExtra.Death => "Instantly adds one (strike).",
             TooltipExtra.Gem => "Like (basic) cards but start with an extra (score multiplier).",
+            TooltipExtra.UkkoTrifecta => "If your (multiplier) would (reset), it (decreases) by (one) instead.",
             _ => throw new ArgumentOutOfRangeException(nameof(extra), extra, null)
         };
-    }
 }
 
 public enum TooltipExtra
@@ -54,5 +54,6 @@ public enum TooltipExtra
     Basic,
     Modifier,
     Death,
-    Gem
+    Gem,
+    UkkoTrifecta
 }

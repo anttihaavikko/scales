@@ -148,7 +148,7 @@ public class Scales : GameMode
         if(difference > 10)
         {
             dragon.Tutorial.Show(TutorialMessage.Overloaded);
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
         
         dragon.Nudge();
@@ -202,7 +202,7 @@ public class Scales : GameMode
         
         if (card.Is(CardType.Recall))
         {
-            scoreDisplay.ResetMulti();
+            ResetMulti();
             hand.Draw();
             hand.Draw();
         }

@@ -153,7 +153,7 @@ public class Reward : GameMode
         
         dragon.Tutorial.Show(TutorialMessage.SkillPick);
         
-        var skills = skillPool.Get(2, State.Instance.Skills).ToList();
+        var skills = skillPool.Get(2 + State.Instance.GetCount(Effect.UkkoMine), State.Instance.Skills).ToList();
         skills.ForEach(skill =>
         {
             var option = Instantiate(cardPrefab, transform);
@@ -175,6 +175,12 @@ public class Reward : GameMode
                 
                 picked = true;
                 State.Instance.Add(skill);
+
+                if (skill.effect == Effect.UkkoTower)
+                {
+                    State.Instance.MaxStrikes++;
+                    strikeDisplay.AddMax(1);
+                }
 
                 if (skill.effect == Effect.Phone)
                 {
@@ -361,7 +367,7 @@ public class Reward : GameMode
         {
             hand.Clear();
             ShowCards(3);
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
         
         PlayGenericInstant(card);

@@ -52,7 +52,10 @@ public enum Effect
     PerfectGame,
     PerfectHeal,
     ScoreDoubler,
-    Backbag
+    Backbag,
+    UkkoTower,
+    UkkoMine,
+    UkkoPowerPlant
 }
 
 [Serializable]

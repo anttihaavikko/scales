@@ -235,7 +235,7 @@ public class Uno : GameMode
     {
         if (isPlayer)
         {
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
         
         takeButton.Hide();
@@ -333,7 +333,7 @@ public class Uno : GameMode
         
         if (card.Is(CardType.Recall))
         {
-            scoreDisplay.ResetMulti();
+            ResetMulti();
             hand.Draw();
             hand.Draw();
         }
@@ -407,7 +407,7 @@ public class Uno : GameMode
         {
             dragon.Taunt();
             Shake(0.3f);
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
         else
         {

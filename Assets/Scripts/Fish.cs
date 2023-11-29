@@ -158,7 +158,7 @@ public class Fish : GameMode
 
     private void ClearSelection()
     {
-        scoreDisplay.ResetMulti();
+        ResetMulti();
         selected.Clear();
         lanes.ForEach(l => l.Deselect());
         root = null;
@@ -216,7 +216,7 @@ public class Fish : GameMode
         
         if (card.Is(CardType.Recall))
         {
-            scoreDisplay.ResetMulti();
+            ResetMulti();
         }
 
         PlayGenericInstant(card);

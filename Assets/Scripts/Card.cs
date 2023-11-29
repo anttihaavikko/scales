@@ -459,6 +459,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
         var multi = 1;
         if (Number > 10) multi *= 1 + State.Instance.GetCount(Effect.BigMulti) * 2;
         if (Number % 2 == 0) multi *= 1 + State.Instance.GetCount(Effect.EvenScorer);
+        if (Number > 20) multi *= 1 + State.Instance.GetCount(Effect.UkkoPowerPlant) * 10;
         return multi;
     }
     
