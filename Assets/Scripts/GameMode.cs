@@ -258,6 +258,11 @@ public abstract class GameMode : MonoBehaviour
     {
         card.IncreaseNumber();
 
+        if (card.IsAce)
+        {
+            scoreDisplay.AddMulti();
+        }
+
         if (card.IsJoker)
         {
             var heals = State.Instance.GetCount(Effect.JokerHeal);

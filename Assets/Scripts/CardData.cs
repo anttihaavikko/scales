@@ -123,6 +123,7 @@ public class CardData
             new CardData(CardType.TrueJoker) { icon = 12, sort = 995 },
             new CardData(CardType.Pedometer) { icon = 13, sort = 99, number = 1 },
             new CardData(CardType.MultiValue) { icon = 14, sort = 993 },
+            new CardData(CardType.Ace) { number = 1 }
         }.Random();
     }
     
@@ -219,14 +220,20 @@ public class CardData
             CardType.TrueJoker => "True Joker",
             CardType.Pedometer => "Pedometer",
             CardType.MultiValue => "Valuenator",
+            CardType.Ace => "Ace",
             _ => throw new ArgumentOutOfRangeException()
         };
     }
 
     private string GetNameSuffix()
     {
+        return number is >= 0 and <= 10 ? GetNumberAsText() : "Thing";
+    }
+
+    private string GetNumberAsText()
+    {
         var names = new[] { "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-        return number is >= 0 and <= 10 ? names[number] : "Thing";
+        return number is >= 0 and <= 10 ? names[number] : number.ToString();
     }
 
     public List<TooltipExtra> GetExtras()
@@ -276,6 +283,7 @@ public class CardData
             CardType.TrueJoker => "Not like other (jokers). The (value) is always what it (needs to be).",
             CardType.Pedometer => "Permanently (increase the value) of this (card) by one every time you (play) it.",
             CardType.MultiValue => "The (value) of this (card) is always equal to your (multiplier).",
+            CardType.Ace => $"Just like a normal ({GetNumberAsText().ToLower()}) card but (increases) your (multiplier) when played.",
             _ => throw new ArgumentOutOfRangeException()
         };
     }

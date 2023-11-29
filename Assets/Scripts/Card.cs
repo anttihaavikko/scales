@@ -64,6 +64,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     public bool IsValueModifier => stats.modifier is CardModifier.Minus or CardModifier.Multiply or CardModifier.Plus or CardModifier.Swapper; 
     public Guid Id => id;
     public bool IsJoker => stats.type == CardType.Joker;
+    public bool IsAce => stats.type == CardType.Ace;
     public bool IsOpen => open;
     public int SortValue => GetSortValue();
     public bool NeedsFlattening => stats.type is CardType.Timer or CardType.Joker;
@@ -100,6 +101,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
         number = data.number;
         numberLabel.text = data.GetPrefix() + number;
         if (stats.type == CardType.Joker) numberLabel.text = "J";
+        if (stats.type == CardType.Ace) numberLabel.text = "A";
         if (stats.icon >= 0)
         {
             numberLabel.text = "";
@@ -508,5 +510,6 @@ public enum CardType
     Mox,
     TrueJoker,
     Pedometer,
-    MultiValue
+    MultiValue,
+    Ace
 }
