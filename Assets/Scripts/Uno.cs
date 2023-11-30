@@ -218,9 +218,10 @@ public class Uno : GameMode
             {
                 helper.Tutorial.Show(TutorialMessage.UnoTake);
                 helper.Tutorial.Show(TutorialMessage.UnoFlipped);
-                // takeButton.Show();
                 opponent.AddTick();
                 opponent.dragon.Hop();
+                // takeButton.Show();
+                
             }, 1f);
         }
     }
@@ -281,6 +282,7 @@ public class Uno : GameMode
         
         // TakePile();
         helper.Tutorial.Show(TutorialMessage.UnoTake);
+        helper.Tutorial.Show(TutorialMessage.UnoFlipped);
         opponent.dragon.Hop();
         opponent.AddTick();
     }
