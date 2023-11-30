@@ -14,16 +14,16 @@ public class StrikeDisplay : MonoBehaviour
 
     private void Start()
     {
-        AddMax(State.Instance.MaxStrikes);
+        AddMax(State.Instance.MaxStrikes, true);
     }
 
-    public void AddMax(int count)
+    public void AddMax(int count, bool fill = false)
     {
         for (var i = 0; i < count; i++)
         {
             var strike = Instantiate(prefab, transform);
             strikes.Add(strike);
-            var filled = State.Instance.Strikes > i;
+            var filled = fill && State.Instance.Strikes > i;
             this.StartCoroutine(() => strike.Show(filled), 0.1f * i);
         }
     }
