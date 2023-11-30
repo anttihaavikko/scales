@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.ScriptableObjects;
+using AnttiStarterKit.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,6 +31,11 @@ namespace AnttiStarterKit.Animations
         [SerializeField] private SoundCollection clickSound, hoverSound;
         [SerializeField] private bool inScreenSpace;
 
+        [SerializeField] private CursorChanger cursorChanger;
+        [SerializeField] private int normalCursor = -1;
+        [SerializeField] private int hoverCursor = -1;
+        
+
         private Vector3 originalScale;
         private Color originalBackColor, originalFrontColor;
 
@@ -53,6 +59,7 @@ namespace AnttiStarterKit.Animations
             ApplyRotation(Random.Range(-rotationAmount, rotationAmount), TweenEasings.BounceEaseOut);
             ApplyColors(backColors.Random(), frontColors.Random());
             DoSound(hoverSound);
+            if(hoverCursor >= 0) cursorChanger.Change(hoverCursor);
         }
     
         private void ApplyScaling(float amount, Func<float, float> easing)
@@ -109,6 +116,7 @@ namespace AnttiStarterKit.Animations
             ApplyScaling(0, TweenEasings.BounceEaseOut);
             ApplyRotation(0, TweenEasings.BounceEaseOut);
             ApplyColors(originalBackColor, originalFrontColor);
+            if(normalCursor >= 0) cursorChanger.Change(normalCursor);
         }
 
         public void OnPointerClick(PointerEventData eventData)

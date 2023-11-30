@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc026067960340a2bccbc977f93bc303, type: 3}
+  m_Name: Cursor Changer
+  m_EditorClassIdentifier: 
+  cursors:
+  - cursor: {fileID: 2800000, guid: 4f31899578f5d4fb0b77e642aaa91d65, type: 3}
+    hotspot: {x: 3, y: 3}
+  - cursor: {fileID: 2800000, guid: 3c8c91c435d824f6d9a8ebd1ec885e20, type: 3}
+    hotspot: {x: 16, y: 16}
+  - cursor: {fileID: 2800000, guid: 601334b0503674103b3ba25b0d42079d, type: 3}
+    hotspot: {x: 16, y: 16}
+  - cursor: {fileID: 2800000, guid: 87fe776d9b78d410d90813404771b776, type: 3}
+    hotspot: {x: 4, y: 0}

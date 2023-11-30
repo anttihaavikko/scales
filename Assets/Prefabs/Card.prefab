@@ -221,6 +221,7 @@ MonoBehaviour:
   cheatMarkIcon: {fileID: 4195071486641643832}
   cheatMarkBg: {fileID: 5820892263807858253}
   trail: {fileID: 7857732036290487819}
+  cursorChanger: {fileID: 11400000, guid: 99c788abece5548b8ac6b7c71767fa69, type: 2}
 --- !u!210 &7145405230318917625
 SortingGroup:
   m_ObjectHideFlags: 0

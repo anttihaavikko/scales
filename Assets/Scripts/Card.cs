@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using TMPro;
 using Unity.VisualScripting;
@@ -37,6 +38,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     [SerializeField] private SpriteRenderer cheatMarkIcon;
     [SerializeField] private GameObject cheatMarkBg;
     [SerializeField] private GameObject trail;
+    [SerializeField] private CursorChanger cursorChanger;
 
     private Guid id;
     private bool wasSelected;
@@ -253,6 +255,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnDropCancel()
     {
+        cursorChanger.Change(1);
         dropped?.Invoke();
         shadow.SetActive(false);
     }
@@ -295,6 +298,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     private void OnDrop(List<Collider2D> objects)
     {
+        cursorChanger.Change(1);
         dropped?.Invoke();
         
         shadow.SetActive(false);
@@ -330,6 +334,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     private void OnPick()
     {
         AudioManager.Instance.PlayEffectFromCollection(1, transform.position, 0.6f);
+        cursorChanger.Change(2);
         
         picked?.Invoke();
         deck.Tooltip.Hide();
@@ -418,6 +423,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
 
     public void Pop(bool shake = true)
     {
+        cursorChanger.Change(0);
+        
         var p = transform.position;
         AudioManager.Instance.PlayEffectFromCollection(0, p, 1f);
         AudioManager.Instance.PlayEffectFromCollection(5, p, 1.3f);
@@ -439,6 +446,8 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     {
         if (draggable.IsDragging) return;
         
+        cursorChanger.Change(1);
+        
         Nudge();
         transform.localScale = Vector3.one * 1.1f; 
         
@@ -454,6 +463,7 @@ public class Card : Markable, IPointerClickHandler, IPointerEnterHandler, IPoint
     {
         transform.localScale = Vector3.one;
         deck.Tooltip.Hide();
+        cursorChanger.Change(0);
     }
     
     private int GetExtraMultipliers()

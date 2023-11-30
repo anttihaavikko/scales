@@ -153,6 +153,10 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   clickSound: {fileID: 11400000, guid: 5f52958076d4849d9b91ef5fc9b81ad5, type: 2}
   hoverSound: {fileID: 11400000, guid: 270c9819cceff42348508177d39d8814, type: 2}
+  inScreenSpace: 0
+  cursorChanger: {fileID: 11400000, guid: 99c788abece5548b8ac6b7c71767fa69, type: 2}
+  normalCursor: 0
+  hoverCursor: 3
 --- !u!1 &704884182319787878
 GameObject:
   m_ObjectHideFlags: 0
