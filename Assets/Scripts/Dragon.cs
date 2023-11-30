@@ -78,7 +78,7 @@ public class Dragon : MonoBehaviour
             TutorialMessage.UnoChoice => "Playing the (same value) card reverses the playing (direction).",
             TutorialMessage.UnoFlip => "So now you gotta keep playing (smaller cards) than your opponent.",
             TutorialMessage.UnoTake => "If either player (can't play) anything, their opponent gains a (tick).",
-            TutorialMessage.UnoFlipped => "Then the playing (direction) is (reversed) and that (loser) goes again.",
+            TutorialMessage.UnoFlipped => "Then the playing (direction) is (reversed) and that (loser) tries again.",
             TutorialMessage.UnoWinner => "Try to gain more (ticks) than your opponent before either deck ends to (win)!",
             TutorialMessage.RewardIntro => "You can (pick three) new (additions) or (modifications) to your deck.",
             TutorialMessage.ModInfo => "Pick (which card) you want to be (affected) by this (modification).",
