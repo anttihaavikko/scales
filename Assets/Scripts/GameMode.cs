@@ -185,6 +185,7 @@ public abstract class GameMode : MonoBehaviour
         if (State.Instance.HasTrifecta())
         {
             scoreDisplay.DecreaseMulti();
+            scoreDisplay.Set(scoreDisplay.Total, Mathf.CeilToInt(scoreDisplay.Multi * 0.5f));
             return;
         }
         
@@ -199,7 +200,7 @@ public abstract class GameMode : MonoBehaviour
         {
             EffectManager.AddTextPopup(multiText, p + Vector3.down * 0.3f + Vector3.right * 0.3f, 1);
         }
-        EffectManager.AddTextPopup($"{total}", p);
+        EffectManager.AddTextPopup(total.AsScore(), p);
     }
     
     protected static bool CanSubTo(IList<int> set, int sum, bool exact = false)

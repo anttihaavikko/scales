@@ -41,7 +41,7 @@ public class ExtraInfo : MonoBehaviour
             TooltipExtra.Modifier => "Cards that (manipulate) other (chosen cards).",
             TooltipExtra.Death => "Instantly adds one (strike).",
             TooltipExtra.Gem => "Like (basic) cards but start with an extra (score multiplier).",
-            TooltipExtra.UkkoTrifecta => "If your (multiplier) would (reset), it (decreases) by (one) instead.",
+            TooltipExtra.UkkoTrifecta => "If your (multiplier) would (reset), it is only (halved) instead.",
             _ => throw new ArgumentOutOfRangeException(nameof(extra), extra, null)
         };
 }
