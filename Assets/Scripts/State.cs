@@ -156,6 +156,7 @@ public class State : Manager<State>
         MaxStrikes = 3;
         messageHistory = default;
         messages = default;
+        Score = 0;
 
         AudioManager.Instance.TargetPitch = 1f;
         var scene = PlayerPrefs.HasKey("PlayerName") ? "Mountain" : "Name";
