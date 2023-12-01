@@ -90,6 +90,7 @@ public class State : Manager<State>
         if (DevKey.Down(KeyCode.Alpha2)) SceneChanger.Instance.ChangeScene("Scale");
         if (DevKey.Down(KeyCode.Alpha3)) SceneChanger.Instance.ChangeScene("Uno");
         if (DevKey.Down(KeyCode.Alpha4)) SceneChanger.Instance.ChangeScene("Fish");
+        if (DevKey.Down(KeyCode.Alpha0)) SceneChanger.Instance.ChangeScene("Start");
     }
 
     public void AddForOpponent(CardData card)

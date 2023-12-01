@@ -24,6 +24,7 @@ namespace AnttiStarterKit.Visuals
         private float colorAmount, colorSpeed = 1f;
         private float shakeAmount, shakeTime;
         private float totalShakeTime;
+        private float screenShakeMod;
 
         private Vector3 originalPos;
 
@@ -33,6 +34,7 @@ namespace AnttiStarterKit.Visuals
         private static readonly int Amount = Shader.PropertyToID("_Amount");
         
         private static EffectCamera instance = null;
+        
         public static EffectCamera Instance {
             get { return instance; }
         }
@@ -43,6 +45,8 @@ namespace AnttiStarterKit.Visuals
                 Destroy (this.gameObject);
                 return;
             }
+
+            screenShakeMod = PlayerPrefs.GetFloat("ScreenShake", 1f);
 
             instance = this;
         }
@@ -142,6 +146,7 @@ namespace AnttiStarterKit.Visuals
 
         public void BaseEffect(float mod = 1f)
         {
+            mod *= screenShakeMod;
             if (0.8f * mod < shakeTime) return;
             Shake(2.5f * mod, 0.8f * mod);
             Chromate(0.5f * mod, 0.5f * mod);
