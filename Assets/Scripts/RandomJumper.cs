@@ -9,11 +9,18 @@ public class RandomJumper : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(Jump), Random.Range(1f, 10f));
+        Invoke(nameof(Nudge), Random.Range(1f, 5f));
     }
 
     private void Jump()
     {
         dragon.Hop();
         Invoke(nameof(Jump), Random.Range(1f, 10f));
+    }
+
+    private void Nudge()
+    {
+        dragon.Nudge();
+        Invoke(nameof(Nudge), Random.Range(1f, 5f));
     }
 }
