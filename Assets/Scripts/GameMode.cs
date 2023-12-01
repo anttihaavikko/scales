@@ -44,6 +44,7 @@ public abstract class GameMode : MonoBehaviour
     public Dragon Dragon => dragon;
     public Tooltip Tooltip => tooltip;
     public Camera Camera => cam;
+    public bool HasEnded => hasEnded;
 
     private void Awake()
     {
@@ -95,7 +96,7 @@ public abstract class GameMode : MonoBehaviour
         }
     }
 
-    private void Ended()
+    public void Ended()
     {
         hasEnded = true;
         gameOver.SetActive(true);
