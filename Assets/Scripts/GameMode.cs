@@ -32,6 +32,7 @@ public abstract class GameMode : MonoBehaviour
     [SerializeField] protected GameObject gameOver;
     [SerializeField] protected int music;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] protected float showContinueButtonAfter = -1f;
 
     private IEnumerable<Card> AllCards => deck.Cards.Concat(hand ? hand.Cards : new List<Card>());
     private bool continued;
@@ -194,6 +195,8 @@ public abstract class GameMode : MonoBehaviour
 
     protected void ShowScore(long total, int multi, Vector3 p)
     {
+        ResetInactivityTimer();
+        
         Shake(0.2f);
         var multiText = $"<color=#CDE7B0><size=5>x{multi}</size></color>";
         if (multi > 1)
@@ -320,5 +323,17 @@ public abstract class GameMode : MonoBehaviour
     public int GetMultiplier()
     {
         return scoreDisplay.Multi;
+    }
+
+    public void ResetInactivityTimer()
+    {
+        if (!(showContinueButtonAfter >= 0)) return;
+        CancelInvoke(nameof(ShowContinue));
+        Invoke(nameof(ShowContinue), showContinueButtonAfter);
+    }
+
+    private void ShowContinue()
+    {
+        continueButton.Show();
     }
 }

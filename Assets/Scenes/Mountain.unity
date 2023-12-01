@@ -1251,6 +1251,7 @@ MonoBehaviour:
   gameOver: {fileID: 16584876}
   music: 1
   scoreManager: {fileID: 438820606}
+  showContinueButtonAfter: 10
   helpText: {fileID: 289106337}
   bg: {fileID: 1642419817}
   ascent: {fileID: 1812685633}

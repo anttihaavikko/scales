@@ -1029,6 +1029,7 @@ MonoBehaviour:
   gameOver: {fileID: 574514732}
   music: 1
   scoreManager: {fileID: 861158740}
+  showContinueButtonAfter: 10
   lanes:
   - {fileID: 2794848}
   - {fileID: 2002839650}
