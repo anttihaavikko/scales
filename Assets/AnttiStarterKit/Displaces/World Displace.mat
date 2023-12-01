@@ -10,7 +10,8 @@ Material:
   m_Name: World Displace
   m_Shader: {fileID: 4800000, guid: 2ae9008c2ded64f24b4c614f0b2ee638, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _FLIP_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -94,7 +95,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Flip: 0
+    - _Flip: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

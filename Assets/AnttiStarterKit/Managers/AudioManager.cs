@@ -189,5 +189,11 @@ namespace AnttiStarterKit.Managers
 			PlayerPrefs.SetFloat("SoundVolume", vol);
 			volume = vol;
 		}
+
+		public void SaveVolumes()
+		{
+			PlayerPrefs.SetFloat("MusicVolume", musVolume);
+			PlayerPrefs.SetFloat("SoundVolume", volume);
+		}
 	}
 }
