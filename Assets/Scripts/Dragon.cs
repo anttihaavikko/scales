@@ -177,6 +177,11 @@ public class Dragon : MonoBehaviour
         if (DevKey.Down(KeyCode.D)) Tutorial.Clear();
     }
 
+    public void ResetTutorials()
+    {
+        Tutorial.Clear();
+    }
+
     private void Speak()
     {
         Nudge(Random.value);
